@@ -1,0 +1,37 @@
+<div class="rect p-d-flex p-jc-around p-flex-column">
+    <div class="p-d-flex p-flex-column p-ai-start top">
+        <div class="header">
+            Special<br>
+            Suggestion
+        </div>
+        <div class="p-pl-6">
+            <p style="color: #ACACAC;">Select your city to find out special announcement and advertisement on your city.
+            </p>
+        </div>
+    </div>
+    <div class="p-d-flex p-ai-center bottom">
+        <div class="p-grid">
+            <div class="p-col-2">
+                <div class="menu p-d-flex p-flex-column p-jc-evenly">
+                    <span>Istanbul</span>
+                    <div class="p-d-flex p-ai-lg-start">
+                        <div class="line"></div>
+                        <span>Ankara</span>
+                    </div>
+                    <span>Izmir</span>
+                    <span>Antalya</span>
+                    <span>Konya</span>
+                    <p-dropdown class="p-mx-2" placeholder="Other Cities"></p-dropdown>
+                </div>
+            </div>
+            <div class="p-col-10">
+                <p-carousel [value]="advs" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1"
+                    [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                    <ng-template let-product pTemplate="item">
+                        <sc-adv-card [product]="product"></sc-adv-card>
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
+    </div>
+</div>

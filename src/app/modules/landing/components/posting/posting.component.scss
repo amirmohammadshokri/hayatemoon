@@ -1,0 +1,21 @@
+.rect {
+    background-color: #E8E8E8;
+    width: 100%;
+    height: 25em;
+
+    .left {
+        height: 100%;
+
+        .header {
+            border-left: 4px #3548BF solid;
+            font-size: 3em;
+            padding-left: 1em;
+        }
+    }
+
+    .right {
+        img {
+            height: 29em;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ShareModule } from '../share/share.module';
+import { AdsRoutingModule } from './ads.routing.module';
+import { MainComponent } from './components/main/main.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { ListComponent } from './components/list/list.component';
+import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
+import { HttpClientModule } from '@angular/common/http';
+
+
+@NgModule({
+  declarations: [MainComponent, ListComponent
+  ],
+  imports: [
+    CommonModule,
+    ShareModule,
+    AdsRoutingModule,
+    DropdownModule,
+    RadioButtonModule,
+    ButtonModule,
+    CarouselModule,
+    HttpClientModule
+  ]
+})
+export class AdsModule { }

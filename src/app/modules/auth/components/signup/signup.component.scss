@@ -1,0 +1,69 @@
+.signup-form {
+    width:26em;
+    height:26em;
+    border-radius:26em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    animation-duration: 0.4s;
+
+    .signup-lbl {
+        font-size: 2.3em;
+        color: #3548BF;
+    }
+
+    .field {
+        width: 15em;
+    }
+
+    .mat-raised-button {
+        border-radius: 5em !important;
+        color: #ffffff !important;
+        background-color: #3548BF !important;
+    }
+}
+
+.signup:before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+    filter: blur(10px);
+    margin: -20px;
+}
+
+.signup-btn {
+    height: 15em;
+    width: 15em;
+    border-radius: 15em;
+    background-color: #243495;
+    z-index: 1;
+    margin-left: -20em;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    animation-duration: 0.4s;
+
+    div {
+        height: 11em;
+        width: 11em;
+        border-radius: 11em;
+        background-color: #3548BF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+
+        span {
+            font-size: 1.7em;
+        }
+    }
+}

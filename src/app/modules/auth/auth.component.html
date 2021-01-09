@@ -1,0 +1,18 @@
+<div class="container p-d-flex p-flex-column p-ai-center p-jc-center">
+  <sc-topbar style="width: 80%;"></sc-topbar>
+  <div class="component p-d-flex p-ai-center p-jc-center">
+
+    <sc-login *ngIf="!forgetPass && !resetPass" [active]="login" (changeState)="stateChanged($event)"
+      (forgetPass)="showForgetPass()">
+    </sc-login>
+
+    <sc-signup *ngIf="!forgetPass && !resetPass" [active]="!login" (changeState)="stateChanged($event)" class="signup">
+    </sc-signup>
+
+    <sc-forgetpass class="forget animate__animated animate__zoomIn" *ngIf="forgetPass" (login)="forgetPass=false"
+      (resetf)="resetPass=true;forgetPass=false">
+    </sc-forgetpass>
+
+    <sc-resetpass class="forget animate__animated animate__zoomIn" *ngIf="resetPass"></sc-resetpass>
+  </div>
+</div>

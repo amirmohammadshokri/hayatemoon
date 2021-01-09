@@ -1,0 +1,48 @@
+.container {
+  .content {
+    margin-top: 10em;
+    width: 80%;
+
+    .left {
+      .menus {
+        background-color: #ffffff;
+        width: 15em;
+        border-radius: 1em;
+        padding: 1em;
+        color: #ACACAC;
+
+        .dash {
+          border-bottom: 0.2em solid;
+          width: 1.5em;
+        }
+
+        .menu {
+          cursor: pointer;
+          outline: none;
+
+          h3 {
+            transition: 0.2s;
+          }
+        }
+
+        .menu:hover {
+          color: lightgray;
+        }
+
+        .active {
+          color: #3548BF;
+        }
+
+        .active:hover {
+          color: #3548BF;
+        }
+      }
+    }
+
+    .right {
+      margin-left: 1.5em;
+      width: 100%;
+
+    }
+  }
+}

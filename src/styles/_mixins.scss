@@ -1,0 +1,6 @@
+@mixin localFonts($font) {
+    @font-face {
+        font-family: $font;
+        src: url("./../assets/fonts/#{$font}/#{$font}.ttf");
+    }
+}

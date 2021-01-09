@@ -1,0 +1,17 @@
+@import "variables";
+
+.container {
+  height: 100vh;
+
+  .component {
+    height: 100%;
+
+    .signup {
+      margin-left: -19em;
+    }
+
+    .forget {
+      animation-duration: 0.4s;
+    }
+  }
+}

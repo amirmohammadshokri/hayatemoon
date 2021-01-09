@@ -1,0 +1,39 @@
+.color-text {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.p-dropdown {
+  border-color: rgba($color: #252525, $alpha: 0.5) !important;
+  border-radius: 25px !important;
+  padding: 0.4em;
+  min-width: 13em;
+
+  .p-dropdown-trigger {
+    color: rgba($color: #252525, $alpha: 0.5) !important;
+  }
+
+  .p-placeholder {
+    color: rgba($color: #252525, $alpha: 0.5) !important;
+  }
+}
+
+
+.p-button-icon-only {
+  width: 3.3rem !important;
+}
+
+.p-button-rounded {
+  height: 3.3rem !important;
+}
+
+// .p-button {
+//   background: #3548bf !important;
+//   border: none !important;
+// }
+
+.p-carousel {
+  .p-carousel-indicators {
+    display: none !important;
+  }
+}

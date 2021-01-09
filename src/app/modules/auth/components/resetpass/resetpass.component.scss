@@ -1,0 +1,46 @@
+.white-div {
+    position: absolute;
+    height: 26em;
+    width: 26em;
+    border-radius: 26em;
+    background-image: radial-gradient(circle, #6877d5, #6976c7, #606cc1, #5566cf, #5567ce, #6f76f1, #fbfbfb, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    box-shadow: 0 0 0.1em 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    flex-direction: column;
+
+    .resetpass-lbl {
+        font-size: 2.9em;
+        color: #252525;
+    }
+
+    .forgetpass-lbl {
+        font-size: 2.9em;
+        color: #252525;
+    }
+
+
+    .field {
+        width: 15em;
+    }
+
+    .enter-email {
+        color: #ffffff;
+        font-size: 0.8em;
+        width: 20em;
+    }
+
+    .mat-raised-button {
+        border-radius: 5em !important;
+        color: #ffffff !important;
+        background-color: #000000 !important;
+    }
+
+    .back {
+        cursor: pointer;
+    }
+
+}

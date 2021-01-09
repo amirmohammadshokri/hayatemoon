@@ -1,0 +1,77 @@
+.topbar {
+    width: 80%;
+    position: fixed;
+
+    .logo {
+        height: 4em;
+    }
+
+    .co-title {
+        span:nth-child(1) {
+            font-size: 2.2em;
+        }
+
+        span:nth-child(2) {
+            font-size: 1em;
+            letter-spacing: 8px;
+            color: #ACACAC;
+        }
+    }
+
+    .icons {
+        .icon {
+            height: 4em;
+            width: 4em;
+            border-radius: 4em;
+            cursor: pointer;
+            background-color: #ffffff;
+        }
+
+        #food {
+            path {
+                fill: #3548bf;
+            }
+        }
+
+        #glob {
+            path {
+                fill: #3548bf;
+            }
+        }
+
+        #menu {
+            path {
+                fill: #3548bf;
+            }
+        }
+
+        .signup {
+            height: 4em;
+            width: 7em;
+            border-radius: 4em;
+            background-color: #ffffff;
+            color: #3548bf;
+            cursor: pointer;
+
+            span {
+                font-size: 1.4em;
+                font-weight: lighter;
+            }
+        }
+
+        .icon:hover {
+            background-color: #3548bf;
+
+            svg {
+                path {
+                    fill: #ffffff !important;
+                }
+            }
+        }
+
+        .signup:hover {
+            color: #ffffff;
+            background-color: #3548bf;
+        }
+    }
+}

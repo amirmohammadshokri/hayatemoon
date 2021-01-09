@@ -1,0 +1,30 @@
+<div class="p-d-flex p-jc-center p-ai-center">
+    <div *ngIf="!active" class="login-btn animate__animated animate__fadeIn" (click)="btnClicked()">
+        <div>
+            <span>
+                Log in
+            </span>
+        </div>
+    </div>
+    <div *ngIf="active" class="login-form p-flex-column p-ai-center p-justify-center animate__animated animate__zoomIn">
+        <mat-label class="login-lbl p-mb-2">Log in</mat-label>
+        <mat-form-field class="field">
+            <mat-label>Username</mat-label>
+            <input type="email" matInput>
+            <mat-error>
+                Please enter a valid email address
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput>
+            <mat-error>
+                Please enter a valid email address
+            </mat-error>
+        </mat-form-field>
+        <button class="p-py-1" mat-raised-button>Log in</button>
+        <div class="field p-text-left p-mt-2 forget-pass">
+            <span (click)="forgetPassClicked()">Forgot password?</span>
+        </div>
+    </div>
+</div>
