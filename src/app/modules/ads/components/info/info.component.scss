@@ -1,0 +1,23 @@
+.container {
+    .publish-date {
+        border-radius: 1em;
+        background-color: #F3F3F3;
+        padding: 0.5em;
+        color: #ACACAC;
+
+        i {
+            margin-right: 0.5em;
+            font-size: 1.3em;
+        }
+    }
+
+    .content {
+        .left {
+            width: 45%;
+        }
+
+        .right {
+            width: 55%;
+        }
+    }
+}

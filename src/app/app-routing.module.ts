@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'ads', loadChildren: () => import('./modules/ads/ads.module').then(m => m.AdsModule) },
   { path: 'panel', loadChildren: () => import('./modules/panel/panel.module').then(m => m.PanelModule) },
   { path: 'landing', loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule) },
+  { path: 'posting', loadChildren: () => import('./modules/posting/posting.module').then(m => m.PostingModule) },
 ];
 
 @NgModule({

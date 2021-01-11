@@ -21,11 +21,11 @@
                     <span>Izmir</span>
                     <span>Antalya</span>
                     <span>Konya</span>
-                    <p-dropdown class="p-mx-2" placeholder="Other Cities"></p-dropdown>
+                    <p-dropdown [style]="{'minWidth':'100%'}" class="p-mx-2" placeholder="Other Cities"></p-dropdown>
                 </div>
             </div>
             <div class="p-col-10">
-                <p-carousel [value]="advs" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1"
+                <p-carousel [value]="advs" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
                     [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
                     <ng-template let-product pTemplate="item">
                         <sc-adv-card [product]="product"></sc-adv-card>

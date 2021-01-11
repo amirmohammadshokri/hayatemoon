@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'sc-adv-card',
@@ -8,10 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AdvCardComponent implements OnInit {
 
   @Input() product: any;
+  @Output() selectProduct = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selectPro(): void {
+    this.selectProduct.emit(this.product);
   }
 
 }

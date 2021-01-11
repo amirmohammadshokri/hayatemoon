@@ -6,6 +6,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RippleModule } from 'primeng/ripple';
+import { ShareModule } from './modules/share/share.module';
 
 
 
@@ -19,7 +20,8 @@ import { RippleModule } from 'primeng/ripple';
     BrowserAnimationsModule,
     RippleModule,
     TextFieldModule,
-    MatInputModule
+    MatInputModule,
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]

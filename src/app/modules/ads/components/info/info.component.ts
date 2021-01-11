@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'sc-info',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+  }
+
+  close(): void {
+    this.ref.close();
   }
 
 }

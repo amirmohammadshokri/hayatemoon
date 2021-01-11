@@ -37,3 +37,31 @@
     display: none !important;
   }
 }
+
+.p-carousel-item {
+  width: 4em;
+}
+
+.p-radiobutton {
+  .p-radiobutton-box {
+    border: none !important;
+    background: #ffffff;
+
+    .p-radiobutton-icon {
+      background-color: #3548BF !important;
+    }
+  }
+
+  .p-radiobutton-box.p-highlight {
+    border-color: none !important;
+    background: #ffffff !important;
+  }
+}
+
+.p-dialog {
+  border-radius: 1.5em !important;
+
+  .p-dialog-content {
+    border-radius: 1.5em !important;
+  }
+}

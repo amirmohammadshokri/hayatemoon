@@ -9,10 +9,13 @@ import { ListComponent } from './components/list/list.component';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
+import { AdverService } from 'src/app/services/adver.service';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { InfoComponent } from './components/info/info.component';
 
 @NgModule({
-  declarations: [MainComponent, ListComponent
+  declarations: [MainComponent, ListComponent, InfoComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,13 @@ import { HttpClientModule } from '@angular/common/http';
     RadioButtonModule,
     ButtonModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    DynamicDialogModule
+  ],
+  providers: [
+    AdverService,
+    DialogService
   ]
 })
 export class AdsModule { }

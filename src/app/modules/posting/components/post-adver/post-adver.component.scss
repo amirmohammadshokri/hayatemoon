@@ -1,0 +1,35 @@
+.container{
+    width: 80%;
+    margin-top: 10em;
+    .change{
+       background-color: #E8E8E8;
+       height: 5em;
+       border-radius: 1.5em;
+       .btnchange{
+           color: #3548BF;
+           
+            
+       }
+    }
+    .bottom{
+        background-color: #E8E8E8;
+       margin-top: 2em;
+       border-radius: 1.5em;
+       .city{
+           width: 80%;
+           margin: 0.5em;
+           
+       }
+       .form {
+        width:80%;
+        background-color: #E8E8E8;
+        border-radius: 1em;
+        padding: 1.5em;
+       
+
+        .field {
+            width: 100%;
+        }
+    }
+    }
+}
