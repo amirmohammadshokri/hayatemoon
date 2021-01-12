@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   @Output() changeState = new EventEmitter<boolean>();
   @Output() forgetPass = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
 
   forgetPassClicked(): void {
     this.forgetPass.emit(true);
+  }
+
+  login(): void {
+    this.router.navigate(['./panel']);
   }
 
 }

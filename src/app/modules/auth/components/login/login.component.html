@@ -22,7 +22,7 @@
                 Please enter a valid email address
             </mat-error>
         </mat-form-field>
-        <button class="p-py-1" mat-raised-button>Log in</button>
+        <button class="p-py-1" mat-raised-button (click)="login()">Log in</button>
         <div class="field p-text-left p-mt-2 forget-pass">
             <span (click)="forgetPassClicked()">Forgot password?</span>
         </div>

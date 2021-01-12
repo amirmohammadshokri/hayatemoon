@@ -7,20 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddcreditComponent implements OnInit {
 
-  city: string;
-
-  selectedCategory: any = null;
-
-  categories: any[] = [
-    {name: '$10', key: 'A'}, 
-  {name: '$15', key: 'M'},
-   {name: '$20', key: 'P'},
-   {name: '$25', key: 'P'},
-    {name: 'Optional  ( less than $100 )', key: 'R'}]; 
+  selectedPrice: number;
+  prices: any[] = [
+    { name: '$10', key: 10 },
+    { name: '$15', key: 15 },
+    { name: '$20', key: 20 },
+    { name: '$25', key: 25 },
+    { name: 'Optional  ( less than $100 )', key: 0 }];
 
   constructor() { }
 
   ngOnInit(): void {
-    this.selectedCategory = this.categories[1];
+    this.selectedPrice = this.prices[0].key;
   }
 }

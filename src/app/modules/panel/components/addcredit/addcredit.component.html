@@ -7,62 +7,56 @@
   </div>
   <div class="bottom p-d-flex p-flex-column p-ai-center p-jc-center">
     <div class="post p-d-flex p-ai-center">
-
     </div>
     <h1>$ 5.75</h1>
     <span>Your Current Credi</span>
-
     <div class="form p-d-flex p-flex-column">
       <div class="p-d-flex">
         <span>choose an option to increase your credit</span>
       </div>
-      <div class="radio p-d-flex p-ai-center p-jc-center">
-
-        <div *ngFor="let category of categories" class="radiod p-field-checkbox p-d-flex p-mx-6">
-          <p-radioButton [inputId]="category.key" name="category" [value]="category" [disabled]="category.key === 'R'">
+      <div class="radio p-d-flex p-ai-center p-jc-around">
+        <div *ngFor="let price of prices" class="p-field-checkbox">
+          <p-radioButton [inputId]="price.key" name="price" [value]="price.key" [(ngModel)]="selectedPrice">
           </p-radioButton>
-          <label [for]="category.key">{{category.name}}</label>
+          <label [for]="price.key">{{price.name}}</label>
         </div>
-
       </div>
-
     </div>
-
-
-
-
-
-    <div class="form p-d-flex p-flex-column">
-
-      <div class="p-d-flex p-ai-center p-ml-2">
-        <img src="../../../../../assets/images/panel/pay.png" alt="">
-        <h3 style="padding-left: 1em;"> Card detail</h3>
+    <div class="form p-grid p-fluid">
+      <div class="p-col-12">
+        <div class="p-d-flex p-ai-center">
+          <img src="assets/images/panel/pay.png" alt="">
+          <h3 style="padding-left: 1em;"> Card detail</h3>
+        </div>
       </div>
-      <mat-form-field class="fieldCard">
-        <mat-label>Card Number</mat-label>
-        <input type="text" matInput>
-        <mat-error>
-
-        </mat-error>
-      </mat-form-field>
-      <div>
+      <div class="p-col-12">
+        <mat-form-field class="field">
+          <mat-label>Card Number</mat-label>
+          <input type="text" matInput>
+          <mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="p-col-6">
         <mat-form-field class="field">
           <mat-label>MM/YY</mat-label>
           <input type="text" matInput>
           <mat-error>
-
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field style="margin-left: 1em;" class="field">
-          <mat-label>Cvc</mat-label>
-          <input type="text" matInput>
-          <mat-error>
-
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="p-d-flex p-flex-column p-ai-center p-jc-center"><button pButton label="Posting New Ad"
-          class="btn p-button-rounded p-button-raised"></button></div>
+      <div class="p-col-6">
+        <mat-form-field class="field">
+          <mat-label>Cvc</mat-label>
+          <input type="text" matInput>
+          <mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="p-col-12 p-field">
+        <button pButton [label]="'Pay $ ' + selectedPrice" class="p-button-rounded p-button-raised"
+          routerLink="/posting"></button>
+      </div>
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit {
   resetPass: boolean;
 
   constructor() {
-    this.login = true;
+    this.login = false;
   }
 
   ngOnInit(): void { }

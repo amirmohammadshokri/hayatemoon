@@ -1,5 +1,5 @@
 <div class="topbar p-d-flex p-ai-center p-mt-1">
-  <div class="p-d-flex p-ai-center">
+  <div style="cursor: pointer;" class="p-d-flex p-ai-center" (click)="navigate('./landing')">
     <img class="logo" src="assets/images/logo.svg" />
     <div class="co-title p-d-flex p-flex-column p-pl-3">
       <span>Hayatemoon</span>
@@ -30,7 +30,7 @@
           transform="translate(20 20)" />
       </svg>
     </div>
-    <div pRipple class="signup p-ml-3 p-d-flex p-ai-center p-jc-center">
+    <div pRipple class="signup p-ml-3 p-d-flex p-ai-center p-jc-center" (click)="navigate('./auth')">
       <span style="text-decoration: none">Sign Up</span>
     </div>
     <div pRipple class="icon p-ml-3 p-d-flex p-ai-center p-jc-center">

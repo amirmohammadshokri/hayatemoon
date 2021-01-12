@@ -39,3 +39,9 @@
         }
     }
 }
+
+:host::ng-deep .p-carousel {
+    .p-carousel-indicators {
+        display: none !important;
+    }
+}

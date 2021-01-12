@@ -13,7 +13,8 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { PanelComponent } from './components/panel/panel.component';
 import { ShareModule } from '../share/share.module';
 import { MyAdsComponent } from './components/my-ads/my-ads.component';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -35,7 +36,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     MatButtonModule,
     TieredMenuModule,
     ShareModule,
-    RadioButtonModule
+    RadioButtonModule,
+    FormsModule
   ]
 })
 export class PanelModule { }

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { AdverService } from 'src/app/services/adver.service';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InfoComponent } from './components/info/info.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [MainComponent, ListComponent, InfoComponent
@@ -27,7 +28,8 @@ import { InfoComponent } from './components/info/info.component';
     CarouselModule,
     HttpClientModule,
     FormsModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    TooltipModule
   ],
   providers: [
     AdverService,

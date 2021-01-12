@@ -9,9 +9,28 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 })
 export class InfoComponent implements OnInit {
 
+  advs: any[] = [];
+  showContactInfo: boolean;
+  marked: boolean;
+  details: any[] = [];
+
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+    this.advs.push({
+      id: '1000'
+    });
+    this.advs.push({
+      id: '100'
+    });
+
+    this.details = [
+      { title: 'Category', value: 'Job, Education' },
+      { title: 'Location', value: 'Istanbul, Kayaş' },
+      { title: 'Degree', value: 'Master' },
+      { title: 'Work Background', value: 'Teaching in English School' },
+      { title: 'Price', value: '$ 1,500' },
+    ];
   }
 
   close(): void {
