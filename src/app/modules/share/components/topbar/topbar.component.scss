@@ -84,3 +84,68 @@
     -webkit-backdrop-filter: blur(6px);
     border-radius: 0.5em;
 }
+
+.menu {
+    height: 60em;
+    width: 60em;
+    border-radius: 60em;
+    background-color: #000000;
+    position: fixed;
+    top: -25em;
+    right: -20em;
+    z-index: 3;
+    animation-duration: 0.2s;
+
+    .items {
+        position: fixed;
+        top: 0.7em;
+        right: 8em;
+        width: 20em;
+
+        .close {
+            height: 4em;
+            width: 4em;
+            border-radius: 4em;
+            background-color: #ffffff;
+            color: #3548BF;
+            cursor: pointer;
+
+            i {
+                font-size: 1.8em;
+            }
+        }
+
+        .close:hover {
+            background-color: #3548BF;
+
+            i {
+                color: #ffffff;
+            }
+        }
+
+        .profile {
+            background-color: #707070;
+            height: 4em;
+            border-radius: 2.5em;
+            color: #ffffff;
+            margin-right: 1em;
+        }
+
+        ul {
+            color: #5B6FEF;
+            margin-top: 4em;
+            list-style-type: none;
+
+            li {
+                text-align: right;
+                cursor: pointer;
+                transition: 0.4s;
+            }
+
+            li:hover {
+                color: #ffffff;
+                margin-right: 1em;
+            }
+        }
+    }
+}

@@ -9,6 +9,8 @@ import * as $ from 'jquery';
 })
 export class TopbarComponent implements OnInit {
 
+  showMenu: boolean;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {

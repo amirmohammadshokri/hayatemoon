@@ -33,7 +33,7 @@
     <div pRipple class="signup p-ml-3 p-d-flex p-ai-center p-jc-center" (click)="navigate('./auth')">
       <span style="text-decoration: none">Sign Up</span>
     </div>
-    <div pRipple class="icon p-ml-3 p-d-flex p-ai-center p-jc-center">
+    <div pRipple class="icon p-ml-3 p-d-flex p-ai-center p-jc-center" (click)="showMenu=true">
       <svg id="menu" width="10.017" height="40.068" viewBox="0 0 10.017 40.068">
         <path id="Path_236" data-name="Path 236"
           d="M197.008,192a5.008,5.008,0,1,0,5.008,5.008A5.014,5.014,0,0,0,197.008,192Zm0,8.348a3.339,3.339,0,1,1,3.339-3.339A3.343,3.343,0,0,1,197.008,200.348Z"
@@ -46,5 +46,34 @@
           transform="translate(-192)" fill="#3548bf" />
       </svg>
     </div>
+  </div>
+</div>
+<div *ngIf="showMenu" class="menu animate__animated animate__zoomIn">
+  <div class="items">
+    <div class="p-d-flex p-jc-end">
+      <div class="profile p-d-flex p-ai-center p-jc-center p-px-3">
+        Samuel Jackson
+      </div>
+      <div class="close p-d-flex p-ai-center p-jc-center" (click)="showMenu=false">
+        <i class="pi pi-times"></i>
+      </div>
+    </div>
+    <ul>
+      <li>
+        <h1>User Profile</h1>
+      </li>
+      <li>
+        <h1>Posting Ad</h1>
+      </li>
+      <li>
+        <h1>My Ads</h1>
+      </li>
+      <li>
+        <h1>Marked Ads</h1>
+      </li>
+      <li>
+        <h1>Log out</h1>
+      </li>
+    </ul>
   </div>
 </div>
