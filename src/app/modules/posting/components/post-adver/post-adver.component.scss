@@ -1,35 +1,74 @@
-.container{
-    width: 80%;
-    margin-top: 10em;
-    .change{
-       background-color: #E8E8E8;
-       height: 5em;
-       border-radius: 1.5em;
-       .btnchange{
-           color: #3548BF;
-           
-            
-       }
+.container {
+    .change {
+        background-color: #E8E8E8;
+        border-radius: 1.5em;
+        padding: 0.5em 1em;
     }
-    .bottom{
+
+    .bottom {
         background-color: #E8E8E8;
-       margin-top: 2em;
-       border-radius: 1.5em;
-       .city{
-           width: 80%;
-           margin: 0.5em;
-           
-       }
-       .form {
-        width:80%;
-        background-color: #E8E8E8;
-        border-radius: 1em;
-        padding: 1.5em;
-       
+        margin-top: 1em;
+        border-radius: 1.5em;
+        padding: 0.5em 0;
+
+        .img {
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 1.5em;
+            margin-right: 0.5em;
+
+            .main {
+                overflow: hidden;
+                height: 10em;
+                width: 10em;
+                border-radius: 2em;
+
+                img {
+                    height: 10em;
+                }
+            }
+
+            .circle {
+                height: 3em;
+                width: 3em;
+                border-radius: 3em;
+                position: absolute;
+                bottom: -1.5em;
+                background-color: #E8E8E8;
+
+                img {
+                    height: 1.5em;
+                }
+            }
+
+            .circle:hover {
+                background-color: #DEDEDE;
+            }
+        }
+
+        .add-img {
+            height: 10em;
+            width: 10em;
+            border-radius: 2em;
+            background-color: #F3F3F3;
+            cursor: pointer;
+            margin-bottom: 1.5em;
+            margin-right: 0.5em;
+
+            .add-circle {
+                height: 5em;
+                width: 5em;
+                border-radius: 5em;
+                background-color: #3548BF;
+
+                img {
+                    height: 2.5em;
+                }
+            }
+        }
 
         .field {
             width: 100%;
         }
-    }
     }
 }
