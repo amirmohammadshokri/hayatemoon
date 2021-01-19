@@ -1,0 +1,24 @@
+{
+    "auth": {
+        "login": "Log in",
+        "signup": "Sign Up",
+        "username": "UserName",
+        "email": "Email",
+        "password": "Password",
+        "repeatpassword": "Repeat Password",
+        "forgotpassword": "Forgot Password",
+        "hayatemoon": "Hayatemoon"
+    },
+    "ads": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "landing": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "panel": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "posting": {
+        "hayatemoon": "Hayatemoon"
+    }
+}

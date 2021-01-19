@@ -26,6 +26,18 @@
             border-radius: 4em;
             cursor: pointer;
             background-color: #ffffff;
+
+            .lngs {
+                display: none;
+
+                .lng {
+                    height: 4em;
+                    width: 4em;
+                    border-radius: 4em;
+                    cursor: pointer;
+                    background-color: #ffffff;
+                }
+            }
         }
 
         #food {
@@ -92,14 +104,12 @@
     background-color: #000000;
     position: fixed;
     top: -25em;
-    right: -20em;
     z-index: 3;
     animation-duration: 0.2s;
 
     .items {
         position: fixed;
         top: 0.7em;
-        right: 8em;
         width: 20em;
 
         .close {
@@ -128,7 +138,6 @@
             height: 4em;
             border-radius: 2.5em;
             color: #ffffff;
-            margin-right: 1em;
         }
 
         ul {
@@ -137,14 +146,92 @@
             list-style-type: none;
 
             li {
-                text-align: right;
                 cursor: pointer;
                 transition: 0.4s;
             }
 
             li:hover {
                 color: #ffffff;
+            }
+        }
+    }
+}
+
+::ng-deep .main-root-ltr {
+    .topbar {
+        .co-title {
+            padding-left: 0.5em;
+        }
+
+        .icons {
+            .icon {
+                margin-left: 1em;
+            }
+
+            .signup {
+                margin-left: 1em;
+            }
+        }
+    }
+
+    .menu {
+        right: -20em;
+
+        .items {
+            right: 8em;
+        }
+
+        .profile {
+            margin-right: 1em;
+        }
+
+        ul {
+            li {
+                text-align: right;
+            }
+
+            li:hover {
                 margin-right: 1em;
+            }
+        }
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .topbar {
+        .co-title {
+            padding-right: 0.5em;
+        }
+
+        .icons {
+            .icon {
+                margin-right: 1em;
+            }
+
+            .signup {
+                margin-right: 1em;
+            }
+        }
+    }
+
+    .menu {
+        left: -20em;
+
+        .items {
+            left: 8em;
+        }
+
+        .profile {
+            margin-left: 1em;
+        }
+
+        ul {
+            li {
+                text-align: left;
+            }
+
+            li:hover {
+                margin-left: 1em;
             }
         }
     }

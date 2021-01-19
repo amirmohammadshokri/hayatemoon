@@ -14,6 +14,7 @@ import { AdverService } from 'src/app/services/adver.service';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InfoComponent } from './components/info/info.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [MainComponent, ListComponent, InfoComponent
@@ -29,7 +30,8 @@ import { TooltipModule } from 'primeng/tooltip';
     HttpClientModule,
     FormsModule,
     DynamicDialogModule,
-    TooltipModule
+    TooltipModule,
+    TranslateModule
   ],
   providers: [
     AdverService,

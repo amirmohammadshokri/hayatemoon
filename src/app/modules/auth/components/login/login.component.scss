@@ -1,8 +1,8 @@
 .login-form {
-    width:26em;
-    height:26em;
+    width: 26em;
+    height: 26em;
     box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-    border-radius:26em;
+    border-radius: 26em;
     position: relative;
     z-index: 2;
     background: rgba(255, 255, 255, 0.5);
@@ -69,5 +69,9 @@
         justify-content: center;
         align-items: center;
         color: #ffffff;
+
+        span {
+            font-size: 1.7em;
+        }
     }
 }

@@ -1,0 +1,24 @@
+{
+    "auth": {
+        "login": "Oturum Aç",
+        "signup": "Kaydol",
+        "username": "Kullanıcı adı",
+        "email": "e-posta",
+        "password": "parola",
+        "repeatpassword": "repeatpassword",
+        "forgotpassword": "Parolanızı mı unuttunuz",
+        "hayatemoon": "222"
+    },
+    "ads": {
+        "hayatemoon": "حولی د"
+    },
+    "landing": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "panel": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "posting": {
+        "hayatemoon": "Hayatemoon"
+    }
+}

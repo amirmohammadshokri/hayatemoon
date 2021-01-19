@@ -15,6 +15,7 @@ import { ShareModule } from '../share/share.module';
 import { MyAdsComponent } from './components/my-ads/my-ads.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     TieredMenuModule,
     ShareModule,
     RadioButtonModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class PanelModule { }

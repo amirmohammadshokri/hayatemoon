@@ -14,6 +14,7 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { AdverService } from 'src/app/services/adver.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [MainComponent, DiscoverComponent, SpecialComponent, PostingComponent, DownloadComponent, AboutComponent, FooterComponent],
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     DropdownModule,
     ButtonModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule
   ],
   providers: [
     AdverService

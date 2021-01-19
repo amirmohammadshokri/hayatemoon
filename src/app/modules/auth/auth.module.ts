@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ShareModule } from '../share/share.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ShareModule } from '../share/share.module';
     ForgetpassComponent,
     ResetpassComponent,
     LoginComponent,
-    SignupComponent],
+    SignupComponent
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -28,7 +30,8 @@ import { ShareModule } from '../share/share.module';
     MatInputModule,
     MatButtonModule,
     TieredMenuModule,
-    ShareModule
+    ShareModule,
+    TranslateModule
   ]
 })
 export class AuthModule { }

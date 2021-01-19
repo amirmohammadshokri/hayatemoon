@@ -1,0 +1,24 @@
+{
+    "auth": {
+        "login": "ورود",
+        "signup": "ثبت نام",
+        "username": "نام کاربری",
+        "email": "ایمیل",
+        "password": "رمز ورود",
+        "repeatpassword": "تکرار رمز ورود",
+        "forgotpassword": "فراموشی رمز",
+        "hayatemoon": "333"
+    },
+    "ads": {
+        "hayatemoon": "حیاطمون"
+    },
+    "landing": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "panel": {
+        "hayatemoon": "Hayatemoon"
+    },
+    "posting": {
+        "hayatemoon": "Hayatemoon"
+    }
+}

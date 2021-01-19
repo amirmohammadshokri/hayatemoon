@@ -14,6 +14,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { EditAdComponent } from './components/edit-ad/edit-ad.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MenuComponent } from './components/menu/menu.component';
     MatInputModule,
     MatButtonModule,
     TieredMenuModule,
-    RadioButtonModule
+    RadioButtonModule,
+    TranslateModule
   ]
 })
 export class PostingModule {
