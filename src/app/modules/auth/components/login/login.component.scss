@@ -53,7 +53,6 @@
     border-radius: 15em;
     background-color: #252525;
     z-index: 1;
-    margin-right: -20em;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -73,5 +72,21 @@
         span {
             font-size: 1.7em;
         }
+    }
+}
+
+::ng-deep .main-root-ltr {
+    .login-btn {
+        margin-right: -20em;
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .login-form {
+        margin-left: -45em;
+    }
+
+    .login-btn {
+        margin-left: -57em;
     }
 }

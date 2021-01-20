@@ -1,4 +1,21 @@
 {
+    "share": {
+        "hayatemoon": "حیاطمون",
+        "announcement": "اعلامیه",
+        "signup": "ثبت نام",
+        "userProfile": "مشخصات کاربر",
+        "postingAd": "ارسال آگهی",
+        "myAds": "تبلیغات من",
+        "markedAds": "تبلیغات علامت گذاری شده",
+        "logout": "خروج",
+        "Hayatemoon magazine": "مجله حیاطمون",
+        "Terms of service": "شرایط استفاده از خدمات",
+        "Privacy policy": "سیاست حفظ حریم خصوصی",
+        "Support": "حمایت کردن",
+        "About": "درباره",
+        "Designed by Hayatemoon": "طراحی شده توسط حیاطمون",
+        "All-right": "© 2020 حیاطمون کاملاً محفوظ است"
+    },
     "auth": {
         "login": "ورود",
         "signup": "ثبت نام",
@@ -6,11 +23,29 @@
         "email": "ایمیل",
         "password": "رمز ورود",
         "repeatpassword": "تکرار رمز ورود",
-        "forgotpassword": "فراموشی رمز",
-        "hayatemoon": "333"
+        "forgotpassword": "فراموشی رمز"
     },
     "ads": {
-        "hayatemoon": "حیاطمون"
+        "allAds": "همه آگهی ها",
+        "all Announcements and buy advertisement in Istanbul.": "کلیه اطلاعیه ها و تبلیغات خرید در استانبول.",
+        "filter": "فیلتر",
+        "special suggestions": "پیشنهادات ویژه",
+        "a with photo": "تبلیغات با عکس",
+        "categories": "دسته بندی ها",
+        "load more": "بارگذاری بیشتر",
+        "city": "شهر",
+        "contact info": "اطلاعات تماس",
+        "mark": "نشان",
+        "unmark": "در آوردن از نشان",
+        "location": "محل",
+        "degree": "درجه",
+        "work Background": "سابقه کار",
+        "price": "قیمت",
+        "$": "نومان",
+        "similar Posts": "پست های مشابه",
+        "education in Hayatemoon": "تحضیلات در حیاطمون",
+        "education in Istanbul, Kayaş": "تحصیلات در استانبول،کیش",
+        "phone Number": "شماره تلفن"
     },
     "landing": {
         "hayatemoon": "Hayatemoon"

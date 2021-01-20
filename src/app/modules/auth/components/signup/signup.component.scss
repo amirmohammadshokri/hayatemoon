@@ -1,7 +1,7 @@
 .signup-form {
-    width:26em;
-    height:26em;
-    border-radius:26em;
+    width: 26em;
+    height: 26em;
+    border-radius: 26em;
     box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 2;
@@ -45,7 +45,6 @@
     border-radius: 15em;
     background-color: #243495;
     z-index: 1;
-    margin-left: -20em;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -65,5 +64,21 @@
         span {
             font-size: 1.7em;
         }
+    }
+}
+
+::ng-deep .main-root-ltr {
+    .signup-btn {
+        margin-left: -20em;
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .signup-form {
+        margin-left: 26em;
+    }
+
+    .signup-btn {
+        margin-left: 45em;
     }
 }

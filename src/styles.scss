@@ -4,11 +4,12 @@
 @import "mixins";
 @import "primes";
 
-@include localFonts($MainFont);
+@include localFonts('Heebo');
+@include localFonts('IRANSansWeb');
 
 body {
   background: #f3f3f3;
-  font-family: $MainFont;
+  font-family: 'Heebo';
   overflow-x: hidden;
   margin: 0 auto;
 }

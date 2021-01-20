@@ -1,20 +1,53 @@
 {
+    "share": {
+        "hayatemoon": "Hayatemoon",
+        "announcement": "Duyuru",
+        "signup": "Kaydol",
+        "userProfile": "Kullanıcı profili",
+        "postingAd": "İlan Verme",
+        "myAds": "Reklamlarım",
+        "markedAds": "İşaretli Reklamlar",
+        "logout": "Çıkış Yap",
+        "Hayatemoon magazine": "Hayatemoon dergisi",
+        "Terms of service": "Kullanım Şartları",
+        "Privacy policy": "Gizlilik Politikası",
+        "Support": "Destek",
+        "About": "hakkında",
+        "Designed by Hayatemoon": "Tasarım Hayatemoon",
+        "All-right": "© 2020 Hayatemoon Tüm hakları saklıdır"
+    },
     "auth": {
-        "login": "Oturum Aç",
+        "log in": "Oturum Aç",
         "signup": "Kaydol",
         "username": "Kullanıcı adı",
         "email": "e-posta",
         "password": "parola",
         "repeatpassword": "repeatpassword",
-        "forgotpassword": "Parolanızı mı unuttunuz",
-        "hayatemoon": "222"
+        "forgotpassword": "Parolanızı mı unuttunuz"
     },
     "ads": {
-        "hayatemoon": "حولی د"
+        "allAds": "All Ads",
+        "all Announcements and buy advertisement in Istanbul.": "Tüm Duyurular ve İstanbul'da ilan satın alın.",
+        "filter": "Filtrele",
+        "special suggestions": "özel öneriler",
+        "a with photo": "Fotoğraflı ilanlar",
+        "categories": "Kategoriler",
+        "load more": "Daha fazla yükle",
+        "city": "Kent",
+        "contact info": "İletişim bilgileri",
+        "mark": "işaret",
+        "unmark": "işareti kaldır",
+        "location": "yer",
+        "degree": "Derece",
+        "work Background": "İş Geçmişi",
+        "price": "Fiyat",
+        "$": "Lira",
+        "similar Posts": "Benzer Gönderiler",
+        "education in Hayatemoon": "Hayatemoon'da Eğitim",
+        "education in Istanbul, Kayaş": "Education in Istanbul, Kayaş",
+        "phone Number": "Telefon numarası"
     },
-    "landing": {
-        "hayatemoon": "Hayatemoon"
-    },
+    "landing": {},
     "panel": {
         "hayatemoon": "Hayatemoon"
     },

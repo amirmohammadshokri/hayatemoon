@@ -31,26 +31,28 @@ export class TopbarComponent implements OnInit {
         $('.topbar').removeClass('glass');
       }
     });
+  }
 
-    $('#glob').click(() => {
-      if (this.showLng) {
-        $('.lngs').css('display', 'inline');
-      } else {
-        $('.lngs').css('display', 'none');
-      }
-      this.showLng = !this.showLng;
-    });
+  showLangs(): void {
+    if (this.showLng) {
+      $('.lngs').css('display', 'inline');
+    } else {
+      $('.lngs').css('display', 'none');
+    }
+    this.showLng = !this.showLng;
   }
 
   selectedlang(lang: string): void {
     this.translateService.use(lang);
     $('.lngs').css('display', 'none');
-    this.showLng = true;
+    this.showLng = false;
     if (lang === 'fa') {
       $('body').css('direction', 'rtl');
+      $('body').css('font-family', 'IRANSansWeb');
       $('#main-root').addClass('main-root-rtl');
       $('#main-root').removeClass('main-root-ltr');
     } else {
+      $('body').css('font-family', 'Heebo');
       $('body').css('direction', 'ltr');
       $('#main-root').removeClass('main-root-rtl');
       $('#main-root').addClass('main-root-ltr');

@@ -1,4 +1,21 @@
 {
+    "share": {
+        "hayatemoon": "Hayatemoon",
+        "announcement": "Announcement",
+        "signup": "Sign Up",
+        "userProfile": "User Profile",
+        "postingAd": "Posting Ad",
+        "myAds": "My Ads",
+        "markedAds": "Marked Ads",
+        "logout": "Log out",
+        "Hayatemoon magazine": "Hayatemoon magazine",
+        "Terms of service": "Terms of service",
+        "Privacy policy": "Privacy policy",
+        "Support": "Support",
+        "About": "About",
+        "Designed by Hayatemoon": "Designed by Hayatemoon",
+        "All-right": "©2020 Hayatemoon All-right reserved"
+    },
     "auth": {
         "login": "Log in",
         "signup": "Sign Up",
@@ -6,19 +23,58 @@
         "email": "Email",
         "password": "Password",
         "repeatpassword": "Repeat Password",
-        "forgotpassword": "Forgot Password",
-        "hayatemoon": "Hayatemoon"
+        "forgotpassword": "Forgot Password"
     },
     "ads": {
-        "hayatemoon": "Hayatemoon"
+        "allAds": "All Ads",
+        "2hoursago": "2 hours ago",
+        "all Announcements and buy advertisement in Istanbul.": "All Announcements and buy advertisement in Istanbul.",
+        "filter": "Filter",
+        "special suggestions": "Special suggestions",
+        "a with photo": "Ads with photo",
+        "categories": "Categories",
+        "load more": "Load more",
+        "city": "City",
+        "contact info": "Contact Info",
+        "mark": "Mark",
+        "unmark": "Unmark",
+        "location": "Location",
+        "degree": "Degree",
+        "work Background": "Work Background",
+        "price": "Price",
+        "$": "$",
+        "similar Posts": "Similar Posts",
+        "education in Hayatemoon": "Education in Hayatemoon",
+        "education in Istanbul, Kayaş": "Education in Istanbul, Kayaş",
+        "phone Number": "Phone Number"
     },
     "landing": {
-        "hayatemoon": "Hayatemoon"
-    },
-    "panel": {
-        "hayatemoon": "Hayatemoon"
-    },
-    "posting": {
-        "hayatemoon": "Hayatemoon"
+        "discover": "Discover",
+        "announcement": "Announcement",
+        "& Buy Advertisements": "& Buy Advertisements",
+        "special": "Special",
+        "suggestion": "Suggestion",
+        "select your city to find out special announcement and advertisement on your city.": "Select your city to find out special announcement and advertisement on your city.",
+        "other Cities": "Other Cities",
+        "posting": "Posting",
+        "your Announcement": "Your Announcement",
+        "you can post your Announcements and advertisements too,": "You can post your Announcements and advertisements too,",
+        "sign up now to posting your anouncements.": "sign up now to posting your anouncements.",
+        "posting Ad": "Posting Ad",
+        "download": "Download",
+        "hayatemoon app": "Hayatemoon app",
+        "you can download our application from Google play, Café bazar and App store.": "You can download our application from Google play, Café bazar and App store.",
+        "we`re just a click away.": "We`re just a click away.",
+        "free advertise posting": "Free advertise posting",
+        "the first free advertisement": "The first free advertisement",
+        "registration platform for Iranians": "Registration platform for Iranians",
+        "abroad.": "abroad.",
+        "24/7 Support": "24/7 Support",
+        "we are ready to answer you at every": "We are ready to answer you at every",
+        "hour of the day and any day of the": "hour of the day and any day of the",
+        "week": "week",
+        "secure & safe payment": "Secure & safe payment",
+        "secure payment through all Visa": "Secure payment through all Visa",
+        "card and Master Card": "Card and Master Card"
     }
 }
