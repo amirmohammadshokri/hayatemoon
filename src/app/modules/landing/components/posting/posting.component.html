@@ -1,17 +1,18 @@
-<div class="rect p-d-flex p-jc-evenly">
+<div class="rectangle p-d-flex">
     <div class="p-d-flex p-flex-column p-ai-start p-jc-center left">
         <div class="header">
-            Posting<br>
-            Your Announcement
+            {{'landing.posting' | translate}}<br>
+            {{'landing.your Announcement' | translate}}
         </div>
-        <div class="p-pl-6">
-            <p style="color: #ACACAC;">You can post your Announcements and advertisements too,<br>
-                sign up now to posting your anouncements.</p>
+        <div>
+            <p style="color: #ACACAC;">{{'landing.postingDetail' | translate}}</p>
         </div>
-        <div class="p-pl-6">
-            <button pButton label="Posting Ad" class="p-button-rounded p-button-raised"></button>
+        <div>
+            <button pButton label="{{'landing.posting Ad' | translate}}"
+                class="p-button-rounded p-button-raised"></button>
         </div>
     </div>
+    <span style="flex:1 auto;"></span>
     <div class="right">
         <img src="assets/images/landing/girl.png" alt="">
     </div>

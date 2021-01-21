@@ -1,17 +1,18 @@
 <div class="p-d-flex p-ai-center p-jc-evenly">
     <div class="p-d-flex p-flex-column p-ai-start">
         <span style="font-size: 3em;">
-            Discover<br>
-            Announcement<br>
-            & Buy Advertisements
+            {{'landing.discover' | translate}}<br>
+            {{'landing.announcement' | translate}}<br>
+            {{'landing.& Buy Advertisements' | translate}}
         </span>
         <div class="search p-d-flex p-ai-center p-mt-2">
-            <p-dropdown placeholder="All Ads"></p-dropdown>
-            <p-dropdown placeholder="City" class="p-mx-2"></p-dropdown>
+            <p-dropdown placeholder="{{'landing.all Ads' | translate}}"></p-dropdown>
+            <p-dropdown placeholder="{{'landing.city' | translate}}" class="p-mx-2"></p-dropdown>
             <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search" routerLink="/ads"></button>
         </div>
     </div>
     <div class="p-d-flex p-ai-center p-jc-center right">
-        <img src="assets/images/landing/header banner.png" alt="">
+        <img class="ltr" src="assets/images/landing/header banner-ltr.png" alt="">
+        <img class="rtl" src="assets/images/landing/header banner-rtl.png" alt="">
     </div>
 </div>

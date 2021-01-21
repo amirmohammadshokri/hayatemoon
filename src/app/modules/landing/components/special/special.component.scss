@@ -5,36 +5,48 @@
     .top {
         height: 100%;
         width: 100%;
-        padding-left: 8em;
 
         .header {
-            border-left: 4px #3548BF solid;
             font-size: 3em;
-            padding-left: 1em;
         }
     }
 
     .bottom {
-        padding-left: 8em;
 
-        .menu {
-            height: 100%;
-            width: 14em;
-            border-radius: 2em;
+        .menus {
             background-color: #ffffff;
-            padding-left: 1em;
+            width: 15em;
+            border-radius: 1em;
+            padding: 1em;
+            color: #ACACAC;
+            height: 23rem;
 
-            span {
-                color: #ACACAC;
+            .dash {
+                border-bottom: 0.2em solid;
+                width: 1.5em;
             }
 
-            .line {
-                border-width: 1.1em;
-                height: 0.5em;
-                width: 2.5em;
-                background-color: #3548BF;
-                margin-top: 0.5em;
-                margin-right: 0.5em;
+            .menu {
+                cursor: pointer;
+                outline: none;
+                margin-bottom: 0.9em;
+
+                span {
+                    transition: 0.2s;
+                    font-size: 1.5em;
+                }
+            }
+
+            .menu:hover {
+                color: lightgray;
+            }
+
+            .active {
+                color: #3548BF;
+            }
+
+            .active:hover {
+                color: #3548BF;
             }
         }
     }
@@ -43,5 +55,47 @@
 :host::ng-deep .p-carousel {
     .p-carousel-indicators {
         display: none !important;
+    }
+
+    .p-carousel-item {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+::ng-deep .main-root-ltr {
+    .rect {
+
+        .top {
+            padding-left: 8em;
+
+            .header {
+                border-left: 4px #3548BF solid;
+                padding-left: 1em;
+            }
+        }
+
+        .bottom {
+            padding-left: 8em;
+        }
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .rect {
+
+        .top {
+            padding-right: 8em;
+
+            .header {
+                border-right: 4px #3548BF solid;
+                padding-right: 1em;
+            }
+        }
+
+        .bottom {
+            padding-right: 8em;
+        }
     }
 }

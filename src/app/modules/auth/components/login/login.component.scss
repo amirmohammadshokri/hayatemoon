@@ -76,6 +76,15 @@
 }
 
 ::ng-deep .main-root-ltr {
+    .login-form {
+
+        .forget-pass {
+            span {
+                text-align: left;
+            }
+        }
+    }
+
     .login-btn {
         margin-right: -20em;
     }
@@ -84,6 +93,12 @@
 ::ng-deep .main-root-rtl {
     .login-form {
         margin-left: -45em;
+
+        .forget-pass {
+            span {
+                text-align: right;
+            }
+        }
     }
 
     .login-btn {

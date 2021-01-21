@@ -1,15 +1,14 @@
-.rect {
+.rectangle {
     background-color: #E8E8E8;
     width: 100%;
     height: 25em;
+    padding: 0 8em;
 
     .left {
         height: 100%;
 
         .header {
-            border-left: 4px #3548BF solid;
             font-size: 3em;
-            padding-left: 1em;
         }
     }
 
@@ -17,5 +16,19 @@
         img {
             height: 29em;
         }
+    }
+}
+
+::ng-deep .main-root-ltr {
+    .header {
+        border-left: 4px #3548BF solid;
+        padding-left: 1em;
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .header {
+        border-right: 4px #3548BF solid;
+        padding-right: 1em;
     }
 }

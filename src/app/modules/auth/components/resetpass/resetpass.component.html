@@ -1,17 +1,17 @@
 <div class="p-d-flex p-ai-center p-jc-center">
     <div class="white-div">
-        <mat-label class="resetpass-lbl">Reset Pass</mat-label>
-        <mat-label class="choose">choose your password wisely.</mat-label>
+        <mat-label class="resetpass-lbl">{{'auth.ResetPass' | translate}}</mat-label>
+        <mat-label class="choose">{{'auth.choose your password wisely.' | translate}}</mat-label>
         <mat-form-field class="field">
-            <mat-label class="color-text">Password</mat-label>
+            <mat-label class="color-text">{{'auth.password' | translate}}</mat-label>
             <input type="text" matInput />
-            <mat-error> Please enter a valid Password </mat-error>
+            <mat-error> {{'auth.requiredError' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
-            <mat-label class="color-text">Repead Password</mat-label>
+            <mat-label class="color-text">{{'auth.repeatpassword' | translate}}</mat-label>
             <input type="password" matInput />
-            <mat-error> Please enter a valid Repead Password </mat-error>
+            <mat-error> {{'auth.requiredError' | translate}} </mat-error>
         </mat-form-field>
-        <button mat-raised-button>Reset Password</button>
+        <button mat-raised-button>{{'auth.ResetPassword' | translate}}</button>
     </div>
 </div>

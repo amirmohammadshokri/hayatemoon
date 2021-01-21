@@ -4,7 +4,19 @@
     background-color: #E8E8E8;
     position: absolute;
     top: 0;
-    right: 0;
-    border-bottom-left-radius: 7em;
     z-index: -1;
+}
+
+::ng-deep .main-root-ltr {
+    .rect {
+        right: 0;
+        border-bottom-left-radius: 7em;
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .rect {
+        left: 0;
+        border-bottom-right-radius: 7em;
+    }
 }

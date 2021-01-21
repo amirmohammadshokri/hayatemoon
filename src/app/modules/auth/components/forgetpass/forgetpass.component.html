@@ -1,18 +1,19 @@
 <div class="p-d-flex p-ai-center p-jc-center">
     <div class="white-div">
-        <mat-label class="forgetpass-lbl">Forget Pass</mat-label>
-        <mat-label class="enter-email p-mt-2">Enter your email you using for your account and we will send you a link to
-            reset your<br> password.</mat-label>
+        <mat-label class="forgetpass-lbl">{{'auth.forgotpassword' | translate}}</mat-label>
+        <mat-label class="enter-email p-mt-2">
+            {{'auth.enterEmail' | translate}}
+        </mat-label>
         <mat-form-field class="field">
-            <mat-label class="color-text">Email</mat-label>
+            <mat-label class="color-text">{{'auth.email' | translate}}</mat-label>
             <input type="text" matInput />
-            <mat-error> Please enter a valid Email </mat-error>
+            <mat-error> {{'auth.emailError' | translate}} </mat-error>
         </mat-form-field>
-        <button class="p-py-1" mat-raised-button (click)="showReset()">Request Reset Link</button>
+        <button class="p-py-1" mat-raised-button (click)="showReset()">{{'auth.RequestResetLink' | translate}}</button>
         <div class="p-my-3">
-            <mat-label style="color: #FEE8ED;font-size: 10px;">If email wasn't send</mat-label>
-            <a class="p-ml-2">Resend</a>
+            <mat-label style="color: #FEE8ED;font-size: 10px;">{{'auth.IfEmail' | translate}}</mat-label>
+            <a class="resend">{{'auth.Resend' | translate}}</a>
         </div>
-        <span class="back p-mt-3" (click)="showLogin()">Back to login</span>
+        <span class="back p-mt-3" (click)="showLogin()">{{'auth.Back to login' | translate}}</span>
     </div>
 </div>

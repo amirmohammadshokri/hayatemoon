@@ -1,0 +1,29 @@
+.main-root-ltr {
+    ::ng-deep .mat-button-wrapper {
+        font-family: 'Heebo';
+    }
+
+    ::ng-deep .mat-form-field-label {
+        text-align: left;
+        font-family: 'Heebo';
+    }
+
+    ::ng-deep .p-dropdown .p-dropdown-label {
+        font-family: 'Heebo';
+    }
+}
+
+.main-root-rtl {
+    ::ng-deep .mat-button-wrapper {
+        font-family: 'IRANSansWeb';
+    }
+
+    ::ng-deep .mat-form-field-label {
+        text-align: right;
+        font-family: 'IRANSansWeb';
+    }
+
+    ::ng-deep .p-dropdown .p-dropdown-label {
+        font-family: 'IRANSansWeb';
+    }
+}

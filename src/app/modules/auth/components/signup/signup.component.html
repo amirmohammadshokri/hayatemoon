@@ -1,41 +1,41 @@
 <div class="p-d-flex p-jc-center p-ai-center">
     <div *ngIf="active"
         class="signup-form p-flex-column p-ai-center p-justify-center animate__animated animate__zoomIn">
-        <mat-label class="signup-lbl">Sign up</mat-label>
+        <mat-label class="signup-lbl">{{'auth.signup' | translate}}</mat-label>
         <mat-form-field class="field">
-            <mat-label>Username</mat-label>
+            <mat-label>{{'auth.username' | translate}}</mat-label>
             <input type="text" matInput>
             <mat-error>
-                Please enter username
+                {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
-            <mat-label>Email</mat-label>
+            <mat-label>{{'auth.email' | translate}}</mat-label>
             <input type="email" matInput>
             <mat-error>
-                Please enter a valid email address
+                {{'auth.emailError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
-            <mat-label>Password</mat-label>
+            <mat-label>{{'auth.password' | translate}}</mat-label>
             <input type="password" matInput>
             <mat-error>
-                Please enter a password
+                {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
-            <mat-label>Repeat Password</mat-label>
+            <mat-label>{{'auth.repeatpassword' | translate}}</mat-label>
             <input type="password" matInput>
             <mat-error>
-                Password is not the same
+                {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
-        <button class="p-py-1" mat-raised-button>Sign up</button>
+        <button class="p-py-1" mat-raised-button>{{'auth.signup' | translate}}</button>
     </div>
     <div *ngIf="!active" class="signup-btn animate__animated animate__fadeIn" (click)="btnClicked()">
         <div>
             <span>
-                Sign Up
+                {{'auth.signup' | translate}}
             </span>
         </div>
     </div>
