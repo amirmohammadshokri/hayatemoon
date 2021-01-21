@@ -76,44 +76,7 @@
   }
 
   .bottom {
-    border-top-left-radius: 7em;
-    border-top-right-radius: 7em;
-    background-color: #e8e8e8;
     width: 100%;
     z-index: 3;
-
-    .links {
-      margin-top: 3em;
-      width: 70%;
-      color: #707070;
-
-      span {
-        cursor: pointer;
-      }
-    }
-
-    .footerlink {
-      width: 70%;
-      position: relative;
-      color: #ACACAC;
-
-      span {
-        position: absolute;
-        font-size: 0.8em;
-      }
-
-      span:nth-child(1) {
-        left: 0;
-      }
-
-      span:last-child {
-        right: 0;
-      }
-
-      i {
-        font-size: 2em;
-        cursor: pointer;
-      }
-    }
   }
 }

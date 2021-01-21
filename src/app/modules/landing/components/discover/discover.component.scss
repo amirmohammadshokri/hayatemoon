@@ -1,14 +1,21 @@
-.right {
-    img {
-        height: 39em;
+.rectangle {
+    width: 100%;
+    padding: 0 8em;
+
+    .right {
+        img {
+            height: 39em;
+        }
+    }
+
+    .search {
+        background-color: white;
+        padding: 0.9em;
+        border-radius: 4em;
     }
 }
 
-.search {
-    background-color: white;
-    padding: 0.9em;
-    border-radius: 4em;
-}
+
 
 
 ::ng-deep .main-root-ltr {
