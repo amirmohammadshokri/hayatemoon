@@ -24,16 +24,17 @@
         width: 100%;
 
         .publish-date {
-        
+
             position: absolute;
             background-color: #F3F3F3;
             padding: 0.5em;
             top: -1em;
             color: #ACACAC;
-             i {
-            
+
+            i {
+
                 font-size: 1.3em;
-             }
+            }
         }
 
         .title {
@@ -57,31 +58,31 @@
 
 
 ::ng-deep .main-root-ltr {
-    
     .container {
         .detail {
             .publish-date {
-              border-bottom-left-radius: 1em;
-              border-top-left-radius: 1em;  
-              right: 0;
-              i {
-                margin-right: 0.5em;
+                border-bottom-left-radius: 1em;
+                border-top-left-radius: 1em;
+                right: 0;
+
+                i {
+                    margin-right: 0.5em;
                 }
             }
         }
     }
-   
 }
 
 ::ng-deep .main-root-rtl {
     .container {
         .detail {
             .publish-date {
-              border-bottom-right-radius: 1em;
-              border-top-right-radius: 1em;   
-              left:  0;
-              i {
-                margin-left: 0.5em;
+                border-bottom-right-radius: 1em;
+                border-top-right-radius: 1em;
+                left: 0;
+
+                i {
+                    margin-left: 0.5em;
                 }
             }
         }

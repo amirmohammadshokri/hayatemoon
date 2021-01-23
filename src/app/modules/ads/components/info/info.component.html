@@ -1,73 +1,72 @@
-<div class="container p-d-flex p-flex-column">
-    <div class="header p-d-flex p-ai-center p-jc-center">
-        <div class="p-d-flex p-ai-center p-jc-center publish-date-ltr">
-            <i class="pi pi-clock"></i>
-            <span>2 روز قبل</span>
-        </div>
-        <div class="p-d-flex p-ai-center p-jc-center publish-date-rtl ">
-           
-            <span>2 روز قبل</span>
-            <i class="pi pi-clock"></i>
-        </div>
-        <span style="flex:1 auto;"></span>
-        <button pButton pRipple (click)="close()" class="p-button-rounded p-button-icon p-button-text"
-            icon="pi pi-times"></button>
-    </div>
-    <div class="content p-d-flex">
-        <div class="left">
-            <div class="slider">
-                <p-carousel [value]="advs" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1">
-                    <ng-template let-product pTemplate="item">
-                        <div class="img p-d-flex p-ai-center p-jc-center">
-                            <img src="assets/images/landing/NoPath - Copy (4).png" />
-                        </div>
-                    </ng-template>
-                </p-carousel>
-            </div> 
-             <div class="similar p-d-flex p-flex-column">
-                <span>{{'ads.similar Posts'|translate}}</span> -->
-               <a class="p-d-flex p-ai-center">
-                    <span>{{'ads.education in Hayatemoon'|translate}}</span> <i class="pi pi-angle-right"></i>
-                </a>
-                <a class="p-d-flex p-ai-center">
-                    <span>{{'ads.education in Istanbul, Kayaş'|translate}}</span> <i class="pi pi-angle-right"></i>
-                </a> 
+<div style="background-color: #fafafa;" class="p-d-flex p-flex-column p-ai-center">
+    <sc-topbar style="width: 100%"></sc-topbar>
+    <div class="container p-d-flex p-flex-column">
+        <div class="header p-d-flex p-ai-center p-jc-start">
+            <div class="p-d-flex p-ai-center p-jc-center publish-date">
+                <i class="pi pi-clock"></i>
+                <span>2 Day before</span>
             </div>
         </div>
-        <div class="right">
-            <h2>Teaching english and translate farsi to english</h2>
-            <div class="p-d-flex p-ai-center p-jc-center">
-                <button pButton pRipple label="Contact info" class="p-button-rounded"
-                    (click)="showContactInfo=!showContactInfo"></button>
-                <span style="flex:1 auto;"></span>
-                pTooltip="{{'ads.markD'|translate}}" 
-                <button pButton pRipple [label]="(marked?'Unmark':'Mark')" pTooltip="توضیحات " tooltipPosition="bottom" class="p-button-rounded p-button-text"
-                    (click)="marked=!marked"></button> -->
-            </div>
-            <div *ngIf="showContactInfo" class="contact-info p-d-flex p-flex-column p-mt-2">
-                <div class="detail p-d-flex p-ai-center p-jc-center">
-                    <span>{{'ads.phone Number'|translate}} </span>
-                    <span style="flex:1 auto;"></span>
-                    <div class="copy p-d-flex p-ai-center p-jc-center">
-                        <img src="assets/images/ads/copy.svg" alt="">
-                    </div>
-                    <span class="phone">05537752628</span>
+        <div class="content p-d-flex">
+            <div class="left">
+                <div class="slider">
+                    <p-carousel dir="ltr" [value]="advs" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1">
+                        <ng-template let-product pTemplate="item">
+                            <div class="img p-d-flex p-ai-center p-jc-center">
+                                <img src="assets/images/landing/NoPath - Copy (4).png" />
+                            </div>
+                        </ng-template>
+                    </p-carousel>
                 </div>
-                <span class="police-header">Police notification</span>
-                <p>Please Ensure the accuracy of the goods or services provided in person. before making
-                    any transaction
-                    or payment.</p>
+                <div class="similar p-d-flex p-flex-column">
+                    <span>{{'ads.similar Posts'|translate}}</span> -->
+                    <a class="p-d-flex p-ai-center">
+                        <span>{{'ads.education in Hayatemoon'|translate}}</span> <i class="pi pi-angle-right"></i>
+                    </a>
+                    <a class="p-d-flex p-ai-center">
+                        <span>{{'ads.education in Istanbul, Kayaş'|translate}}</span> <i class="pi pi-angle-right"></i>
+                    </a>
+                </div>
             </div>
-            <div class="detail p-d-flex p-ai-center p-jc-center" *ngFor="let detail of details">
-                <span>{{detail.title}}</span>
-                <span style="flex:1 auto;"></span>
-                <span>{{detail.value}}</span>
+            <div class="right">
+                <h2>Teaching english and translate farsi to english</h2>
+                <div class="p-d-flex p-ai-center p-jc-center">
+                    <button pButton pRipple label="Contact info" class="p-button-rounded"
+                        (click)="showContactInfo=!showContactInfo"></button>
+                    <span style="flex:1 auto;"></span>
+                    pTooltip="{{'ads.markD'|translate}}"
+                    <button pButton pRipple [label]="(marked?'Unmark':'Mark')" pTooltip="توضیحات "
+                        tooltipPosition="bottom" class="p-button-rounded p-button-text"
+                        (click)="marked=!marked"></button> -->
+                </div>
+                <div *ngIf="showContactInfo" class="contact-info p-d-flex p-flex-column p-mt-2">
+                    <div class="detail p-d-flex p-ai-center p-jc-center">
+                        <span>{{'ads.phone Number'|translate}} </span>
+                        <span style="flex:1 auto;"></span>
+                        <div class="copy p-d-flex p-ai-center p-jc-center">
+                            <img src="assets/images/ads/copy.svg" alt="">
+                        </div>
+                        <span class="phone">05537752628</span>
+                    </div>
+                    <span class="police-header">Police notification</span>
+                    <p>Please Ensure the accuracy of the goods or services provided in person. before making
+                        any transaction
+                        or payment.</p>
+                </div>
+                <div class="detail p-d-flex p-ai-center p-jc-center" *ngFor="let detail of details">
+                    <span>{{detail.title}}</span>
+                    <span style="flex:1 auto;"></span>
+                    <span>{{detail.value}}</span>
+                </div>
+                <p class="p-mt-2">International Translators is a translation office based in Vienna, Austria, working
+                    with
+                    professional
+                    translators from across Europe. On this page, you will find information about the translators we
+                    co-operate with. To learn more about a translator, please click on her or his name to follow the
+                    link to
+                    her or his biography page.</p>
             </div>
-            <p class="p-mt-2">International Translators is a translation office based in Vienna, Austria, working with
-                professional
-                translators from across Europe. On this page, you will find information about the translators we
-                co-operate with. To learn more about a translator, please click on her or his name to follow the link to
-                her or his biography page.</p>
         </div>
     </div>
+    <sc-main-footer class="p-mt-6" style="width: 100%;"></sc-main-footer>
 </div>

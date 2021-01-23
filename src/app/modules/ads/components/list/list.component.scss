@@ -1,6 +1,7 @@
-.rect {
+.rectangle {
     width: 100%;
     margin-top: 8em;
+    padding: 0 8em;
 
     .list {
         width: 75%;
@@ -14,12 +15,11 @@
 
     .filter {
         width: 25%;
-       
 
         .top {
             background-color: #E8E8E8;
             border-radius: 1em;
-         
+
             .clear-filter {
                 background-color: #ffffff;
                 border-radius: 50%;
@@ -39,6 +39,7 @@
                 background-color: #E8E8E8;
                 padding-bottom: 1.4em !important;
                 margin-bottom: -0.8em;
+
                 .menu-header-icon {
                     font-size: 1.5em;
                 }
@@ -54,6 +55,7 @@
 
             .menu-header:hover {
                 background-color: #F3F3F3;
+
                 .down-icon {
                     display: inline;
                 }
@@ -76,65 +78,72 @@
 
     }
 }
+
 ::ng-deep .main-root-ltr {
-  .rect{
     .filter {
-       
-        margin-left: 1.5em;
+
+        margin-right: 1.5em;
+
         .bottom {
             .menu-header {
                 border-top-left-radius: 1em;
                 border-top-right-radius: 1em;
-                .catlabel{
+
+                .catlabel {
                     margin-left: 0.5em;
                 }
-               .menu-item{
-                   .catlmenulabel{
-                       margin-left: 1em;
-                   }
-               }
-               
+
+                .menu-item {
+                    .catlmenulabel {
+                        margin-left: 1em;
+                    }
+                }
+
             }
-           
+
 
             .menu-header:last-child {
                 border-bottom-left-radius: 1em;
                 border-bottom-right-radius: 1em;
             }
-         
+
         }
-        .top{
-            .catlabel{
+
+        .top {
+            .catlabel {
                 margin-left: 0.5em;
             }
-            .p-field-checkbox{
-                .speciallabel{
+
+            .p-field-checkbox {
+                .speciallabel {
                     margin-left: 0.5em;
                 }
             }
         }
     }
-}
 }
 
 ::ng-deep .main-root-rtl {
     .filter {
-       
-        margin-right: 1.5em;
+
+        margin-left: 1.5em;
+
         .bottom {
             .menu-header {
                 border-top-right-radius: 1em;
                 border-top-left-radius: 1em;
-                .catlabel{
+
+                .catlabel {
                     margin-right: 0.5em;
                 }
-                .menu-item{
-                    .catlmenulabel{
+
+                .menu-item {
+                    .catlmenulabel {
                         margin-right: 1em;
                     }
                 }
-                
-                   
+
+
             }
 
             .menu-header:last-child {
@@ -142,16 +151,17 @@
                 border-bottom-left-radius: 1em;
             }
         }
-        .top{
-            .catlabel{
+
+        .top {
+            .catlabel {
                 margin-right: 0.5em;
             }
-          
-                .speciallabel{
-                    margin-right: 0.5em;
-                }
-           
+
+            .speciallabel {
+                margin-right: 0.5em;
+            }
+
         }
     }
- 
+
 }

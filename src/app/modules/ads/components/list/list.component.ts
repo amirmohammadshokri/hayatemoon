@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { MenuItem } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
 import { AdverService } from 'src/app/services/adver.service';
-import { InfoComponent } from '../info/info.component';
 
 @Component({
   selector: 'sc-list',
@@ -25,7 +24,6 @@ export class ListComponent implements OnInit {
         { label: 'Commercial for Sale' }
       ]
     },
-    { icon: 'pi pi-inbox', label: 'All Ads' },
     { icon: 'pi pi-inbox', label: 'Vehicle ( Buy )' },
     { icon: 'pi pi-inbox', label: 'Electronics' },
     { icon: 'pi pi-inbox', label: 'Home & Garden' },
@@ -34,7 +32,7 @@ export class ListComponent implements OnInit {
   ];
   products: any[] = [];
 
-  constructor(private sAdver: AdverService, public dialogService: DialogService) { }
+  constructor(private sAdver: AdverService, private router: Router) { }
 
   ngOnInit(): void {
     this.selectedCategory = this.categories[1];
@@ -56,11 +54,9 @@ export class ListComponent implements OnInit {
   }
 
   show(product: any): void {
-    const ref = this.dialogService.open(InfoComponent, {
-      width: '80%',
-      showHeader: false,
-      data: product
-    });
+    console.log(`/ads/info/${product.id}`);
+
+    this.router.navigate([`/ads/info/${product.id}`]);
   }
 
 }

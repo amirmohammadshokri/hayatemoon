@@ -8,6 +8,7 @@
   border-radius: 25px !important;
   padding: 0.4em;
   min-width: 13em;
+  width: 100% !important;
 
   .p-dropdown-trigger {
     color: rgba($color: #252525, $alpha: 0.5) !important;
@@ -26,11 +27,6 @@
 .p-button-rounded {
   height: 3.3rem !important;
 }
-
-// .p-button {
-//   background: #3548bf !important;
-//   border: none !important;
-// }
 
 .p-carousel-item {
   width: 4em;
@@ -58,4 +54,8 @@
   .p-dialog-content {
     border-radius: 1.5em !important;
   }
+}
+
+.p-button-label {
+  font-family: 'IRANSansWeb' !important;
 }

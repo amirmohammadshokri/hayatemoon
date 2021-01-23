@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
+import { InfoComponent } from './components/info/info.component';
+import { ListComponent } from './components/list/list.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'main' },
-  { path: 'main', component: MainComponent }
+  { path: '', pathMatch: 'full', redirectTo: 'list' },
+  { path: 'list', component: ListComponent },
+  { path: 'info/:id', component: InfoComponent }
 ];
 
 @NgModule({

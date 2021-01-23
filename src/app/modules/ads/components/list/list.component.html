@@ -1,56 +1,63 @@
-<div class="rect p-d-flex p-jc-center">
-    <div class="list p-d-flex p-flex-column p-ai-start">
-        <div class="search p-d-flex p-ai-center">
-            <p-dropdown placeholder="{{'ads.allAds' | translate}}"></p-dropdown>
-            <p-dropdown placeholder="{{'ads.city' | translate}}" class="p-mx-2"></p-dropdown>
-            <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search"></button>
-        </div>
-        <div class="content">
-            <h5>{{'ads.all Announcements and buy advertisement in Istanbul.'|translate}}</h5>
-            <div class="advs p-d-flex p-flex-wrap p-jc-between">
-                <sc-adv-card *ngFor="let pro of products" [product]="pro" (selectProduct)="show($event)"></sc-adv-card>
-            </div>
-            <button pButton pRipple label="{{'ads.load more' | translate}}" class="p-button-rounded"></button>
-        </div>
-    </div>
-    <div class="filter p-flex-column p-flex-column p-ai-center">
-        <div class="top p-d-flex p-flex-column p-p-4">
-            <div class="p-d-flex p-mb-2">
-                <div class="p-d-flex p-ai-center">
-                    <img src="assets/images/ads/filter.png.svg">
-                    <span class="catlabel">{{'ads.filter' | translate}}</span>
-                </div>
-                <span style="flex:1 auto;"></span>
-                <div class="clear-filter p-d-flex p-ai-center p-jc-center">
-                    <img src="assets/images/ads/filterNo.png.svg">
-                </div>
-            </div>
-            <div class="p-field-checkbox">
-                <p-radioButton name="filter" value="1" [(ngModel)]="selectedFilter" inputId="special"></p-radioButton>
-                <label class="speciallabel" for="special">{{'ads.special suggestions' | translate}}</label>
-            </div>
-            <div class="p-field-checkbox">
-                <p-radioButton name="filter" value="2" [(ngModel)]="selectedFilter" inputId="photos"></p-radioButton>
-                <label class="speciallabel" for="photos">{{'ads.a with photo' | translate}}</label>
-            </div>
-            <p-dropdown placeholder="{{'ads.neighborhood' | translate}}"></p-dropdown>
-        </div>
-        <div class="bottom p-d-flex p-flex-column">
-            <h3 style="margin: 1em;">{{'ads.categories' | translate}}</h3>
-            <div class="menu-header p-d-flex p-jc-center p-flex-column p-px-4 p-py-3"
-                *ngFor="let category of categories;let i = index" [id]="'headerMenu' + i">
-                <a class="p-d-flex p-jc-center p-ai-center" (click)="menuHeaderClick(i)">
-                    <i class="menu-header-icon {{category.icon}}"></i>
-                    <span class="catlabel">{{category.label}}</span>
+<div class="p-d-flex p-flex-column p-ai-center">
+    <sc-topbar style="width: 100%"></sc-topbar>
+    <div class="rectangle p-d-flex p-jc-center">
+        <div class="filter p-flex-column p-flex-column p-ai-center">
+            <div class="top p-d-flex p-flex-column p-p-4">
+                <div class="p-d-flex p-mb-2">
+                    <div class="p-d-flex p-ai-center">
+                        <img src="assets/images/ads/filter.png.svg">
+                        <span class="catlabel">{{'ads.filter' | translate}}</span>
+                    </div>
                     <span style="flex:1 auto;"></span>
-                    <i class="pi pi-angle-down down-icon"></i>
-                </a>
-                <div *ngIf="category.visible" class="p-d-flex p-flex-column p-ml-4 p-mt-2">
-                    <div class="menu-item" *ngFor="let item of category.items">
-                        <span class="catlmenulabel">تست</span>
+                    <div class="clear-filter p-d-flex p-ai-center p-jc-center">
+                        <img src="assets/images/ads/filterNo.png.svg">
+                    </div>
+                </div>
+                <div class="p-field-checkbox">
+                    <p-radioButton name="filter" value="1" [(ngModel)]="selectedFilter" inputId="special">
+                    </p-radioButton>
+                    <label class="speciallabel" for="special">{{'ads.special suggestions' | translate}}</label>
+                </div>
+                <div class="p-field-checkbox">
+                    <p-radioButton name="filter" value="2" [(ngModel)]="selectedFilter" inputId="photos">
+                    </p-radioButton>
+                    <label class="speciallabel" for="photos">{{'ads.a with photo' | translate}}</label>
+                </div>
+                <p-dropdown placeholder="{{'ads.neighborhood' | translate}}"></p-dropdown>
+            </div>
+            <div class="bottom p-d-flex p-flex-column">
+                <h3 style="margin: 1em;">{{'ads.categories' | translate}}</h3>
+                <div class="menu-header p-d-flex p-jc-center p-flex-column p-px-4 p-py-3"
+                    *ngFor="let category of categories;let i = index" [id]="'headerMenu' + i">
+                    <a class="p-d-flex p-jc-center p-ai-center" (click)="menuHeaderClick(i)">
+                        <i class="menu-header-icon {{category.icon}}"></i>
+                        <span class="catlabel">{{category.label}}</span>
+                        <span style="flex:1 auto;"></span>
+                        <i class="pi pi-angle-down down-icon"></i>
+                    </a>
+                    <div *ngIf="category.visible" class="p-d-flex p-flex-column p-ml-4 p-mt-2">
+                        <div class="menu-item p-mb-2" *ngFor="let item of category.items">
+                            <span class="catlmenulabel">{{item.label}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="list p-d-flex p-flex-column p-ai-start">
+            <div class="search p-d-flex p-ai-center">
+                <p-dropdown placeholder="{{'ads.allAds' | translate}}"></p-dropdown>
+                <p-dropdown placeholder="{{'ads.city' | translate}}" class="p-mx-2"></p-dropdown>
+                <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search"></button>
+            </div>
+            <div class="content">
+                <h5>{{'ads.all Announcements and buy advertisement in Istanbul.'|translate}}</h5>
+                <div class="advs p-d-flex p-flex-wrap p-jc-between">
+                    <sc-adv-card *ngFor="let pro of products" [product]="pro" (selectProduct)="show($event)">
+                    </sc-adv-card>
+                </div>
+                <button pButton pRipple label="{{'ads.load more' | translate}}" class="p-button-rounded"></button>
+            </div>
+        </div>
     </div>
+    <sc-main-footer class="p-mt-6" style="width: 100%;"></sc-main-footer>
 </div>
