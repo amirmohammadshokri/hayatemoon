@@ -23,11 +23,11 @@ export class InfoComponent implements OnInit {
     });
 
     this.details = [
-      { title: 'Category', value: 'Job, Education' },
-      { title: 'Location', value: 'Istanbul, Kayaş' },
-      { title: 'Degree', value: 'Master' },
-      { title: 'Work Background', value: 'Teaching in English School' },
-      { title: 'Price', value: '$ 1,500' },
+      { title: 'category', value: 'Job, Education' },
+      { title: 'location', value: 'Istanbul, Kayaş' },
+      { title: 'degree', value: 'Master' },
+      { title: 'work Background', value: 'Teaching in English School' },
+      { title: 'price', value: '$ 1,500' },
     ];
   }
 

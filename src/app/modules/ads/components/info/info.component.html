@@ -1,7 +1,7 @@
-<div style="background-color: #fafafa;" class="p-d-flex p-flex-column p-ai-center">
+<div style="background-color: #dddddd;" class="p-d-flex p-flex-column p-ai-center">
     <sc-topbar style="width: 100%"></sc-topbar>
     <div class="container p-d-flex p-flex-column">
-        <div class="header p-d-flex p-ai-center p-jc-start">
+        <div class="head p-d-flex p-ai-center p-jc-start">
             <div class="p-d-flex p-ai-center p-jc-center publish-date">
                 <i class="pi pi-clock"></i>
                 <span>2 Day before</span>
@@ -19,25 +19,28 @@
                     </p-carousel>
                 </div>
                 <div class="similar p-d-flex p-flex-column">
-                    <span>{{'ads.similar Posts'|translate}}</span> -->
+                    <span>{{'ads.similar Posts'|translate}}</span>
                     <a class="p-d-flex p-ai-center">
-                        <span>{{'ads.education in Hayatemoon'|translate}}</span> <i class="pi pi-angle-right"></i>
+                        <span>education in Hayatemoon</span>
+                        <i class="pi pi-angle-left i-left"></i>
+                        <i class="pi pi-angle-right i-right"></i>
                     </a>
                     <a class="p-d-flex p-ai-center">
-                        <span>{{'ads.education in Istanbul, Kayaş'|translate}}</span> <i class="pi pi-angle-right"></i>
+                        <span>education in Istanbul, Kayaş</span>
+                        <i class="pi pi-angle-left i-left"></i>
+                        <i class="pi pi-angle-right i-right"></i>
                     </a>
                 </div>
             </div>
             <div class="right">
                 <h2>Teaching english and translate farsi to english</h2>
                 <div class="p-d-flex p-ai-center p-jc-center">
-                    <button pButton pRipple label="Contact info" class="p-button-rounded"
+                    <button pButton pRipple label="{{'ads.contact info'|translate}}" class="p-button-rounded"
                         (click)="showContactInfo=!showContactInfo"></button>
                     <span style="flex:1 auto;"></span>
-                    pTooltip="{{'ads.markD'|translate}}"
-                    <button pButton pRipple [label]="(marked?'Unmark':'Mark')" pTooltip="توضیحات "
-                        tooltipPosition="bottom" class="p-button-rounded p-button-text"
-                        (click)="marked=!marked"></button> -->
+                    <button pButton pRipple [label]="(marked?'ads.unmark':'ads.mark')|translate"
+                        pTooltip="{{'ads.markD'|translate}}" tooltipPosition="bottom"
+                        class="p-button-rounded p-button-text" (click)="marked=!marked"></button>
                 </div>
                 <div *ngIf="showContactInfo" class="contact-info p-d-flex p-flex-column p-mt-2">
                     <div class="detail p-d-flex p-ai-center p-jc-center">
@@ -48,13 +51,11 @@
                         </div>
                         <span class="phone">05537752628</span>
                     </div>
-                    <span class="police-header">Police notification</span>
-                    <p>Please Ensure the accuracy of the goods or services provided in person. before making
-                        any transaction
-                        or payment.</p>
+                    <span class="police-header">{{'ads.police' | translate}}</span>
+                    <p>{{'ads.policeDetail' | translate}}</p>
                 </div>
                 <div class="detail p-d-flex p-ai-center p-jc-center" *ngFor="let detail of details">
-                    <span>{{detail.title}}</span>
+                    <span>{{'ads.'+detail.title+''|translate}}</span>
                     <span style="flex:1 auto;"></span>
                     <span>{{detail.value}}</span>
                 </div>
