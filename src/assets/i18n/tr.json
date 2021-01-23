@@ -15,6 +15,7 @@
         "About": "hakkında",
         "Designed by Hayatemoon": "Tasarım Hayatemoon",
         "All-right": "© 2020 Hayatemoon Tüm hakları saklıdır"
+       
     },
     "auth": {
         "log in": "Oturum Aç",
@@ -55,7 +56,11 @@
         "similar Posts": "Benzer Gönderiler",
         "education in Hayatemoon": "Hayatemoon'da Eğitim",
         "education in Istanbul, Kayaş": "Education in Istanbul, Kayaş",
-        "phone Number": "Telefon numarası"
+        "phone Number": "Telefon numarası",
+        "neighborhood": "Komşuluk",
+        "markD": "işaretlendi! İşaretli yayını görmek için kontrol paneline gidin"
+        
+
     },
     "landing": {
         "discover": "Keşfedin",
@@ -108,7 +113,7 @@
         "My Ads": "Reklamlarım",
         "Posting New Ad": "Yeni İlan Verme",
         "Deposite": "Deposite",
-        "Rent:": "Kira:",
+        "Rent": "Kira:",
         "Awaiting Approval": "Onay Bekleniyor",
         "Manage ad": "Reklamı yönet"
     },

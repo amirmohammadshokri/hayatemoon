@@ -95,7 +95,9 @@
         "similar Posts": "Similar Posts",
         "education in Hayatemoon": "Education in Hayatemoon",
         "education in Istanbul, Kayaş": "Education in Istanbul, Kayaş",
-        "phone Number": "Phone Number"
+        "phone Number": "Phone Number",
+        "neighborhood": "Neighborhood",
+        "markD": "marked!To see the marked post go to dashboard."
     },
     "landing": {
         "discover": "Discover",
@@ -148,7 +150,7 @@
         "My Ads": "My Ads",
         "Posting New Ad": "Posting New Ad",
         "Deposite": "Deposite",
-        "Rent:": "Rent:",
+        "Rent": "Rent",
         "Awaiting Approval": "Awaiting Approval",
         "Manage ad": "Manage ad"
     }

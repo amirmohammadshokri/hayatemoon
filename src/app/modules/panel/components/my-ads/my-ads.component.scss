@@ -61,3 +61,27 @@
         }
     }
 }
+::ng-deep .main-root-ltr {
+    .container {
+        .bottom {
+            .adspost {
+                .detail {
+                    margin-left: 1em;
+                }
+            }
+        }
+    }
+    
+  }
+  
+  ::ng-deep .main-root-rtl {
+    .container {
+        .bottom {
+            .adspost {
+                .detail {
+                    margin-right: 1em;
+                }
+            }
+        }
+    }
+  }

@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
- 
-import { ManageAdverComponent } from './components/manage-adver/manage-adver.component';
- 
+import { MainComponent } from '../posting/components/main/main.component';
 
 
 export const routes: Routes = [
-  { path: '', component: ManageAdverComponent }
+  { path: '', component: MainComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  declarations: []
+  exports: [RouterModule]
 })
 export class PostingRoutingModule { }

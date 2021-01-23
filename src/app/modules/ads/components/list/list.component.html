@@ -1,16 +1,16 @@
 <div class="rect p-d-flex p-jc-center">
     <div class="list p-d-flex p-flex-column p-ai-start">
         <div class="search p-d-flex p-ai-center">
-            <p-dropdown placeholder="All Ads"></p-dropdown>
-            <p-dropdown placeholder="City" class="p-mx-2"></p-dropdown>
+            <p-dropdown placeholder="{{'ads.allAds' | translate}}"></p-dropdown>
+            <p-dropdown placeholder="{{'ads.city' | translate}}" class="p-mx-2"></p-dropdown>
             <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search"></button>
         </div>
         <div class="content">
-            <h5>All Announcements and buy advertisement in Istanbul.</h5>
+            <h5>{{'ads.all Announcements and buy advertisement in Istanbul.'|translate}}</h5>
             <div class="advs p-d-flex p-flex-wrap p-jc-between">
                 <sc-adv-card *ngFor="let pro of products" [product]="pro" (selectProduct)="show($event)"></sc-adv-card>
             </div>
-            <button pButton pRipple label="Load more" class="p-button-rounded"></button>
+            <button pButton pRipple label="{{'ads.load more' | translate}}" class="p-button-rounded"></button>
         </div>
     </div>
     <div class="filter p-flex-column p-flex-column p-ai-center">
@@ -18,7 +18,7 @@
             <div class="p-d-flex p-mb-2">
                 <div class="p-d-flex p-ai-center">
                     <img src="assets/images/ads/filter.png.svg">
-                    <span class="p-ml-2">Filter</span>
+                    <span class="catlabel">{{'ads.filter' | translate}}</span>
                 </div>
                 <span style="flex:1 auto;"></span>
                 <div class="clear-filter p-d-flex p-ai-center p-jc-center">
@@ -27,27 +27,27 @@
             </div>
             <div class="p-field-checkbox">
                 <p-radioButton name="filter" value="1" [(ngModel)]="selectedFilter" inputId="special"></p-radioButton>
-                <label for="special">Special suggestions</label>
+                <label class="speciallabel" for="special">{{'ads.special suggestions' | translate}}</label>
             </div>
             <div class="p-field-checkbox">
                 <p-radioButton name="filter" value="2" [(ngModel)]="selectedFilter" inputId="photos"></p-radioButton>
-                <label for="photos">Ads with photo</label>
+                <label class="speciallabel" for="photos">{{'ads.a with photo' | translate}}</label>
             </div>
-            <p-dropdown placeholder="Neighborhood"></p-dropdown>
+            <p-dropdown placeholder="{{'ads.neighborhood' | translate}}"></p-dropdown>
         </div>
         <div class="bottom p-d-flex p-flex-column">
-            <h3 style="margin: 1em;">Categories</h3>
+            <h3 style="margin: 1em;">{{'ads.categories' | translate}}</h3>
             <div class="menu-header p-d-flex p-jc-center p-flex-column p-px-4 p-py-3"
                 *ngFor="let category of categories;let i = index" [id]="'headerMenu' + i">
                 <a class="p-d-flex p-jc-center p-ai-center" (click)="menuHeaderClick(i)">
                     <i class="menu-header-icon {{category.icon}}"></i>
-                    <span class="p-ml-2">{{category.label}}</span>
+                    <span class="catlabel">{{category.label}}</span>
                     <span style="flex:1 auto;"></span>
                     <i class="pi pi-angle-down down-icon"></i>
                 </a>
                 <div *ngIf="category.visible" class="p-d-flex p-flex-column p-ml-4 p-mt-2">
-                    <div class="p-my-1 menu-item" *ngFor="let item of category.items">
-                        <span class="p-ml-2">{{item.label}}</span>
+                    <div class="menu-item" *ngFor="let item of category.items">
+                        <span class="catlmenulabel">تست</span>
                     </div>
                 </div>
             </div>

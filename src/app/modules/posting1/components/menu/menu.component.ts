@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import * as $ from 'jquery';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -31,17 +29,7 @@ export class MenuComponent implements OnInit {
   ];
   @Output() selectCategory = new EventEmitter<number>();
 
-  suportlanguage=['En','فا','Tr'];
-
-  constructor(private router: Router,private TranslateService:TranslateService) {
-  this.TranslateService.addLangs(this.suportlanguage);
-   this.TranslateService.setDefaultLang('En');
-  const browserlang=this.TranslateService.getBrowserLang();
-  this.TranslateService.use(browserlang);
- }
-   selectedlang(lang:string){
-  this.TranslateService.use(lang);
-}
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -35,8 +35,7 @@
         background-color: #E8E8E8;
         border-radius: 1em;
         margin-top:2em ;
-        margin-left: 1.5em;
-        margin-right: 1.5em;
+       
          
         .imgads{
             width: 80%;
@@ -66,3 +65,33 @@
     
 
 }
+::ng-deep .main-root-ltr {
+    .container {
+        .contect{
+            .ff{
+                .ads {
+                    margin-left: 1.5em;
+                    margin-right: 1.5em;
+                    
+                      }
+            }
+
+        }
+    }
+  }
+  
+  ::ng-deep .main-root-rtl {
+    .container {
+        .contect{
+            .ff{
+                .ads {
+                    margin-left: 1.5em;
+                    margin-right: 1.5em;
+                    
+                      }
+            }
+
+        }
+    }
+   
+  }
