@@ -1,0 +1,80 @@
+.content {
+    width: 80%;
+    margin-top: 8em;
+    .button{
+        margin-top: 5em;
+       
+        padding: 2rm;
+        .preview{
+            background-color: #ffffff;
+            width: 100%;
+            padding: 1.5em;
+            border-radius: 2.5em;
+            :hover{
+                cursor: pointer;
+            }
+            
+        }
+        .preview:hover{
+            cursor: pointer;
+            background-color: #d6d6e2;
+        }
+        .upgrade{
+            background-color:#E8E8E8;
+            width: 100%;
+            padding: 1.5em;
+            margin-left: 2em;
+            margin-right: 2em;
+            border-radius: 2.5em;
+            
+            
+        }
+        .upgrade:hover{
+            cursor: pointer;
+            background-color: #d6d6e2;
+        }
+        .edit{
+            background-color: #E8E8E8;
+            width: 100%;
+            padding: 1.5em;
+            border-radius: 2.5em;
+             
+        }
+        .edit:hover{
+            cursor: pointer;
+            background-color: #d6d6e2;
+        }
+    }
+.left{
+ 
+    width: 100%;
+    padding-top: 1em;
+ 
+}
+.right{
+    background-color:#E8E8E8;
+    width: 100%;
+    margin-left: 1em;
+    border-radius: 1.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+     
+    .deletead{
+        background-color:#ffffff;
+        margin-right: 2em;
+        padding: 1em;
+        border-radius: 1em  ;
+        width: 13em;
+        
+        
+
+    }
+    .deletead:hover{
+        background-color: #E8E8E8;
+        cursor: pointer;
+    }
+   
+
+}
+}

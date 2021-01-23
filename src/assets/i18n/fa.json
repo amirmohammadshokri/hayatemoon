@@ -55,7 +55,11 @@
         "similar Posts": "پست های مشابه",
         "education in Hayatemoon": "تحضیلات در حیاطمون",
         "education in Istanbul, Kayaş": "تحصیلات در استانبول،کیش",
-        "phone Number": "شماره تلفن"
+        "phone Number": "شماره تلفن",
+        "neighborhood": "محله",
+        "markD": "مشخص شده! برای دیدن پست مشخص شده به داشبورد بروید"
+
+
     },
     "landing": {
         "discover": "كشف كردن",
@@ -108,7 +112,7 @@
         "My Ads": "تبلیغات من",
         "Posting New Ad": "ارسال آگهی جدید",
         "Deposite": "سپرده گذاری",
-        "Rent:": "اجاره دادن:",
+        "Rent": "اجاره دادن",
         "Awaiting Approval": "منتظر تایید",
         "Manage ad": "مدیریت آگهی"
     },

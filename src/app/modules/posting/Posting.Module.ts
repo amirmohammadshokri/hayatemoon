@@ -12,8 +12,12 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
-import { EditAdComponent } from './components/edit-ad/edit-ad.component';
+ 
 import { MenuComponent } from './components/menu/menu.component';
+import { ManageAdverComponent } from './components/manage-adver/manage-adver.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -22,8 +26,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MainComponent,
     PostAdverComponent,
     UpgradeComponent,
-    EditAdComponent,
-    MenuComponent
+     ManageAdverComponent,
+    MenuComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,14 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     TieredMenuModule,
     RadioButtonModule,
-    TranslateModule
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader:{
+        provide:TranslateLoader,
+        useFactory:(http:HttpClient)=>{return new TranslateHttpLoader(http,'./assets/i18n/','.json');},
+        deps:[HttpClient]
+      }
+    })
   ]
 })
 export class PostingModule {

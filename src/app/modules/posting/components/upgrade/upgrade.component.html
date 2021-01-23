@@ -4,9 +4,46 @@
         You can upgrade your ad with items below,<br>
 also you can choose both of them to affect more on viewers.
     </p>
+   
+<div class="postad p-d-flex p-jc-start ">
+    <div (click)="clickedleft()"  [style.background-color]="active ? 'blue' : ''"  class="left p-d-flex p-flex-column"> 
+        <div class="redio p-d-flex">
+            <p-radioButton  name="filter" value="1"></p-radioButton>
+            <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
+        </div>
+        <p style="margin-left: 0.5em;">  your ad will be added to the special suggestion by  <br>
+            choosing this option, it makes it easier to find this ad by <br>
+            viewers.</p>
+             <div *ngIf="active"  class=" active p-d-flex p-flex-column ttan">
+                <div class="redio p-d-flex">
+                    <p-radioButton  name="filter" value="1"></p-radioButton>
+                    <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
+                </div>
+                <div class="redio p-d-flex">
+                    <p-radioButton  name="filter" value="1"></p-radioButton>
+                    <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
+                </div>
+                <div class="redio p-d-flex">
+                    <p-radioButton  name="filter" value="1"></p-radioButton>
+                    <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
+                </div>
+            </div>
+         
+        
+    </div>
  
-<div class="postad p-d-flex ">
-    <div class="postspes p-field-checkbox p-d-flex p-jc-center  p-flex-column flex-wrap ">
+    <div (click)="clickedright()"  [style.background-color]="!active ? '#ffffff' : ''"  class="right p-d-flex p-flex-column"> 
+        <div class="redio p-d-flex">
+            <p-radioButton  name="filter" value="1"></p-radioButton>
+            <h3 style="margin-left: 0.5em;"> Post Ad as a Featured Ad</h3>
+        </div>
+        <p style="margin-left: 0.5em;">your ad will appear on the top of your city and category  <br>
+            announcements and it will be shown as the first ad till we<br>
+             get a new ad.</p>
+        
+    </div>
+  
+    <!-- <div class="postspes p-field-checkbox p-d-flex p-jc-center  p-flex-column flex-wrap ">
         <div class="p-flex-column">
            <div class=" p-d-flex">
             <p-radioButton  name="filter" value="1"></p-radioButton>
@@ -27,7 +64,7 @@ also you can choose both of them to affect more on viewers.
                 announcements and it will be shown as the first ad till we<br>
                  get a new ad.</p>
         </div> 
-     </div>
+     </div> -->
  
 </div>
 

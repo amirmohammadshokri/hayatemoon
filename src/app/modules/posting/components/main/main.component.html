@@ -3,7 +3,9 @@
 
     <div class="content p-d-flex p-flex-column">
         <h1>Posting Free Advertiesement</h1>
+        
         <sc-menu *ngIf="!selectedCategory" (selectCategory)="onSelectCategory($event)"></sc-menu>
         <sc-post-adver *ngIf="selectedCategory"></sc-post-adver>
+        <!-- <sc-edit-ad ></sc-edit-ad> -->
     </div>
 </div>
