@@ -82,8 +82,8 @@
 
                 .police-header {
                     font-size: 1.2em;
-                    margin-left: 1em;
                     margin-top: 0.5em;
+                
                 }
 
                 p {
@@ -171,6 +171,9 @@
                             margin-right: 1em;
                         }
                     }
+                    .police-header {
+                        margin-right: 1em;
+                    }
                 }
 
             }
@@ -201,6 +204,9 @@
                         .phone {
                             margin-left: 1em;
                         }
+                    }
+                    .police-header {
+                        margin-left: 1em;
                     }
                 }
 

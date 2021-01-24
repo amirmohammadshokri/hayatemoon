@@ -1,97 +1,89 @@
-
-
 .container {
-    
-    border-radius: 2em;
-    .contect{
-        background-color: #E8E8E8;
-        .ff{
-            background-color: #DEDEDE;
-              .post {
-            width: 95%;
-            height: 5em;
-            background-color: #DEDEDE;
-            }
-        .top{
-    width: 100%;
+  border-radius: 2em;
+  .contect {
+    background-color: #e8e8e8;
+    .ff {
+      background-color: #dedede;
+      .post {
+        width: 95%;
+        height: 5em;
+        background-color: #dedede;
+      }
+      .top {
+        width: 100%;
         height: 10em;
-        background-color: #E8E8E8;
+        background-color: #e8e8e8;
         .circle {
-            height: 10em;
-            width: 10em;
-            z-index: 1;
-            position: absolute;
-            border-radius: 10em;
-            margin-bottom: -10em;
-            background-color: #E8E8E8;
+          height: 10em;
+          width: 10em;
+          z-index: 1;
+          position: absolute;
+          border-radius: 10em;
+          margin-bottom: -10em;
+          background-color: #e8e8e8;
 
-            img {
-                height: 6em;
-            }
-
-}
-            }
-          .ads {
-        background-color: #E8E8E8;
-        border-radius: 1em;
-        margin-top:2em ;
-       
-         
-        .imgads{
-            width: 80%;
-            border-radius: 1em;
-            margin: 1.5em;
-        }
-       .circle{
-           height: 5em;
-           width: 5em;
-           background-color: #E8E8E8;
-           border-radius: 5em;
-           position:absolute;
-           margin-top: 10em;
-           z-index: 1;
-    
-          
-       }
-       .circle:hover{
-        background-color: #DEDEDE;
-           cursor: pointer;
-       }
+          img {
+            height: 6em;
           }
         }
-      
+      }
+      .ads {
+        background-color: #e8e8e8;
+        border-radius: 1em;
+        margin-top: 2em;
+        .right{
+            margin-top: 6em;
+        }
+        .imgads {
+          width: 80%;
+          border-radius: 1em;
+          margin-bottom: 1.5em;
+          margin-top: 1.5em;
+        }
+        .bottom {
+            padding-bottom: 3em;
+            padding-left: 1em;
+            padding-right: 1em;
+          .circlebotoom {
+            height: 5em;
+            width: 5em;
+            background-color: #e8e8e8;
+            border-radius: 5em;
+            position: absolute;
+            z-index: 111;
+          }
+          :hover{
+            background-color: #dedede;
+            cursor: pointer;
+          }
+        }
+         
+      }
     }
-
-    
-
+  }
 }
 ::ng-deep .main-root-ltr {
-    .container {
-        .contect{
-            .ff{
-                .ads {
-                    margin-left: 1.5em;
-                    margin-right: 1.5em;
-                    
-                      }
-            }
-
+  .container {
+    .contect {
+      .ff {
+        .ads {
+          margin-left: 1.5em;
+          margin-right: 1.5em;
         }
+      }
     }
   }
-  
-  ::ng-deep .main-root-rtl {
-    .container {
-        .contect{
-            .ff{
-                .ads {
-                    margin-left: 1.5em;
-                    margin-right: 1.5em;
-                    
-                      }
-            }
+}
 
+::ng-deep .main-root-rtl {
+  .container {
+    .contect {
+      .ff {
+        .ads {
+          margin-left: 1.5em;
+          margin-right: 1.5em;
         }
+      }
     }
-   
   }
+}
