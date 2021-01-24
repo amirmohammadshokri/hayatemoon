@@ -15,7 +15,6 @@
         "About": "hakkında",
         "Designed by Hayatemoon": "Tasarım Hayatemoon",
         "All-right": "© 2020 Hayatemoon Tüm hakları saklıdır"
-       
     },
     "auth": {
         "log in": "Oturum Aç",
@@ -48,20 +47,18 @@
         "contact info": "İletişim bilgileri",
         "mark": "işaret",
         "unmark": "işareti kaldır",
+        "police": "Polis bildirimi",
+        "policeDetail": "Lütfen şahsen sağlanan mal veya hizmetlerin doğruluğundan emin olun. herhangi bir işlem veya ödeme yapmadan önce.",
+        "category": "Kategori",
         "location": "yer",
         "degree": "Derece",
         "Category": "Kategori",
         "work Background": "İş Geçmişi",
         "price": "Fiyat",
-        "$": "Lira",
         "similar Posts": "Benzer Gönderiler",
-        "education in Hayatemoon": "Hayatemoon'da Eğitim",
-        "education in Istanbul, Kayaş": "Education in Istanbul, Kayaş",
         "phone Number": "Telefon numarası",
         "neighborhood": "Komşuluk",
         "markD": "işaretlendi! İşaretli yayını görmek için kontrol paneline gidin"
-        
-
     },
     "landing": {
         "discover": "Keşfedin",

@@ -47,20 +47,18 @@
         "contact info": "اطلاعات تماس",
         "mark": "نشان",
         "unmark": "در آوردن از نشان",
+        "police": "اطلاعیه پلیس",
+        "policeDetail": "لطفاً از صحت کالاها یا خدمات ارائه شده به صورت حضوری اطمینان حاصل کنید. قبل از انجام هرگونه معامله یا پرداخت.",
+        "category": "گروه",
         "location": "محل",
         "degree": "درجه",
         "Category": "دسته بندی",
         "work Background": "سابقه کار",
         "price": "قیمت",
-        "$": "نومان",
         "similar Posts": "پست های مشابه",
-        "education in Hayatemoon": "تحضیلات در حیاطمون",
-        "education in Istanbul, Kayaş": "تحصیلات در استانبول،کیش",
         "phone Number": "شماره تلفن",
         "neighborhood": "محله",
         "markD": "مشخص شده! برای دیدن پست مشخص شده به داشبورد بروید"
-
-
     },
     "landing": {
         "discover": "كشف كردن",
