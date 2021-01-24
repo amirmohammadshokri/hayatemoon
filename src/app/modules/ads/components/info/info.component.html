@@ -38,9 +38,16 @@
                     <button pButton pRipple label="{{'ads.contact info'|translate}}" class="p-button-rounded"
                         (click)="showContactInfo=!showContactInfo"></button>
                     <span style="flex:1 auto;"></span>
+<<<<<<< HEAD
+                    <!-- pTooltip="{{'ads.markD'|translate}}" -->
+                    <button pButton pRipple [label]="(marked?'Unmark':'Mark')" pTooltip="توضیحات "
+                        tooltipPosition="bottom" class="p-button-rounded p-button-text"
+                        (click)="marked=!marked"></button>  
+=======
                     <button pButton pRipple [label]="(marked?'ads.unmark':'ads.mark')|translate"
                         pTooltip="{{'ads.markD'|translate}}" tooltipPosition="bottom"
                         class="p-button-rounded p-button-text" (click)="marked=!marked"></button>
+>>>>>>> 030ba57676efcdb625e19f57957c8bb81c7e219a
                 </div>
                 <div *ngIf="showContactInfo" class="contact-info p-d-flex p-flex-column p-mt-2">
                     <div class="detail p-d-flex p-ai-center p-jc-center">
