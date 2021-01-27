@@ -1,33 +1,35 @@
 <div class="container">
     <div class="change p-d-flex p-ai-center p-jc-evenly">
-        <h3>Residental for Rent</h3>
+        <h3>{{'post.Residental for Rent'|translate}}</h3>
         <span style="flex: 1 auto;"></span>
-        <button pButton pRipple label="Change Category" class="p-button-rounded p-button-text"></button>
+        <button pButton pRipple label="{{'post.Change Category'|translate}}" class="p-button-rounded p-button-text"
+            (click)="onChangeCategory()"></button>
     </div>
     <div class="bottom p-grid">
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">City</label>
+            <label for="City">{{'post.City'|translate}}</label>
         </div>
         <div class="p-col-8">
-            <p-dropdown inputId="City" [style]="{'minWidth':'100%','background-color':'#e8e8e8'}" placeholder="City">
+            <p-dropdown inputId="City" [style]="{'minWidth':'100%','background-color':'#e8e8e8'}"
+                placeholder="{{'post.City'|translate}}">
             </p-dropdown>
         </div>
         <div class="p-col-2"></div>
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">Neighborhood</label>
+            <label for="Neighborhood">{{'post.Neighborhood'|translate}}</label>
         </div>
         <div class="p-col-8">
             <p-dropdown inputId="Neighborhood" [style]="{'minWidth':'100%','background-color':'#e8e8e8'}"
-                placeholder="Neighborhood"></p-dropdown>
+                placeholder="{{'post.Neighborhood'|translate}}"></p-dropdown>
         </div>
         <div class="p-col-2"></div>
         <div class="p-col-2 p-d-flex p-ai-start p-jc-end">
-            <label for="">Ad Image</label>
+            <label for="">{{'post.Ad Image'|translate}}</label>
         </div>
         <div class="p-col-8">
             <div class="p-d-flex p-ai-center">
-                <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle p-mr-2"></i>
-                <span>Adding Image Triple Your Advertise View, Pick Them All Once.</span>
+                <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle margin-i"></i>
+                <span>{{'post.Adding Image Triple Your Advertise View, Pick Them All Once.'|translate}}</span>
             </div>
             <div class="p-d-flex p-flex-wrap p-mt-2">
                 <div class="add-img p-d-flex p-ai-center p-jc-center">
@@ -59,16 +61,15 @@
                         <img src="assets/images/post/bin.svg">
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="p-col-2"></div>
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">Area</label>
+            <label for="">{{'post.Area'|translate}}</label>
         </div>
         <div class="p-col-8">
             <mat-form-field class="field">
-                <mat-label>Square Meters</mat-label>
+                <mat-label>{{'post.Square Meters'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
 
@@ -77,11 +78,11 @@
         </div>
         <div class="p-col-2"></div>
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">Age Of Building</label>
+            <label for="">{{'post.Age Of Building'|translate}}</label>
         </div>
         <div class="p-col-8">
             <mat-form-field class="field">
-                <mat-label>Age of Building</mat-label>
+                <mat-label>{{'post.Age Of Building'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
 
@@ -90,17 +91,17 @@
         </div>
         <div class="p-col-2"></div>
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">Number of Rooms</label>
+            <label for="">{{'post.Number of Rooms'|translate}}</label>
         </div>
         <div class="p-col-8">
             <p-dropdown [style]="{'minWidth':'100%','background-color':'#e8e8e8'}" autoWidth="false"
-                placeholder="Number of Rooms" class=" sp-mx-2"></p-dropdown>
+                placeholder="{{'post.Number of Rooms'|translate}}" class=" sp-mx-2"></p-dropdown>
         </div>
         <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">Rent</div>
+        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">{{'panel.Rent'|translate}}</div>
         <div class="p-col-8">
             <mat-form-field class="field">
-                <mat-label>Rent in Turkish Lira</mat-label>
+                <mat-label>{{'post.Rent in Turkish Lira'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
 
@@ -108,12 +109,11 @@
             </mat-form-field>
         </div>
         <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">Phone
-            Number</div>
+        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">{{'post.Phone Number'|translate}}</div>
         <div class="p-col-8">
             <div class="p-d-flex p-ai-center">
-                <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle p-mr-2"></i>
-                <span>Enter A Valid Phone Number So User Can Contact You.</span>
+                <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle margin-i"></i>
+                <span>{{'post.Enter A Valid Phone Number So User Can Contact You.'|translate}}</span>
             </div>
         </div>
         <div class="p-col-2"></div>
@@ -126,15 +126,16 @@
                 <mat-error>
 
                 </mat-error>
-            </mat-form-field> 
+            </mat-form-field>
         </div>
         <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">Title</div>
+        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">{{'post.Title'|translate}}</div>
         <div class="p-col-8">
             <div class="p-d-flex p-ai-center">
-                <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle p-mr-2"></i>
-                <span>Type Down Details And Significant Features In The Description So Users
-                    Can Exactly See What You Are Presenting.</span>
+                <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle margin-i"></i>
+                <span>
+                    {{'post.TypeDownDetails'|translate}}
+                </span>
             </div>
         </div>
         <div class="p-col-2"></div>
@@ -142,24 +143,21 @@
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end"></div>
         <div class="p-col-8">
             <mat-form-field class="field">
-                <mat-label>Description</mat-label>
+                <mat-label>{{'post.Description'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
 
                 </mat-error>
-            </mat-form-field> 
+            </mat-form-field>
         </div>
         <div class="p-col-2"></div>
         <div class="p-col-2 p-d-flex p-ai-center p-jc-end"></div>
         <div class="p-col-8">
             <div class="p-d-flex p-ai-center p-jc-center">
-                <!-- <button pButton pRipple label="Load more" class="p-button-rounded"></button> -->
-                <button pButton label="Post Ad" class="p-button-rounde p-button-raised p-button-raised"></button>
-        
+                <button pButton label="{{'post.Post Ad'|translate}}"
+                    class="p-button-rounde p-button-raised p-button-raised" (click)="post()"></button>
             </div>
         </div>
         <div class="p-col-2"></div>
     </div>
- 
-   
 </div>

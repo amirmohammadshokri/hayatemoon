@@ -1,6 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'sc-post-adver',
@@ -10,21 +8,21 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class PostAdverComponent implements OnInit {
 
+  @Output() changeCategory = new EventEmitter<boolean>();
+  @Output() postAd = new EventEmitter<boolean>();
 
-  suportlanguage=['En','فا','Tr'];
-
-  constructor(private router: Router,private TranslateService:TranslateService) {
-  this.TranslateService.addLangs(this.suportlanguage);
-   this.TranslateService.setDefaultLang('En');
-  const browserlang=this.TranslateService.getBrowserLang();
-  this.TranslateService.use(browserlang);
- }
-   selectedlang(lang:string){
-  this.TranslateService.use(lang);
-}
-
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  post(): void {
+    this.postAd.emit(true);
+  }
+
+  onChangeCategory(): void {
+    this.changeCategory.emit(true);
   }
 
 }

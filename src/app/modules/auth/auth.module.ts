@@ -13,6 +13,11 @@ import { MatInputModule } from '@angular/material/input';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ShareModule } from '../share/share.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 
 
 @NgModule({
@@ -31,7 +36,14 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     TieredMenuModule,
     ShareModule,
-    TranslateModule
+    TranslateModule,
+    HttpClientModule,
+    FormsModule
+  ],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class AuthModule { }

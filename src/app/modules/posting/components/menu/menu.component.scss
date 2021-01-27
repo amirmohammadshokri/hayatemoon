@@ -4,6 +4,7 @@
     background-color: #E8E8E8;
     padding-bottom: 1.4em !important;
     margin-bottom: -0.8em;
+    width: 100%;
 
     .menu-header-icon {
         font-size: 1.5em;
@@ -41,5 +42,17 @@
     .down-icon {
         display: inline;
         transform: rotate(180deg);
+    }
+}
+
+::ng-deep .main-root-ltr {
+    .margin-label {
+        margin-left: 0.5em;
+    }
+}
+
+::ng-deep .main-root-rtl {
+    .margin-label {
+        margin-right: 0.5em;
     }
 }

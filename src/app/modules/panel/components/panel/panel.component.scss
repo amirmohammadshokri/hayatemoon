@@ -40,7 +40,7 @@
     }
 
     .right {
-     
+
       width: 100%;
 
     }
@@ -49,32 +49,44 @@
 
 ::ng-deep .main-root-ltr {
   .container {
-      .content{
-        .left{
-          margin-right: 1em;
-        }
-        .right {
-          margin-left: 1.5em;
-       
-    
+    .content {
+      .left {
+        margin-right: 1em;
+
+        .menus {
+          .menu {
+            div {
+              margin-right: 0.5em;
+            }
+          }
         }
       }
-        
-      
-     }
+
+      .right {
+        margin-left: 1.5em;
+      }
+    }
+  }
 }
 
 ::ng-deep .main-root-rtl {
-    
   .container {
-    .content{
-      .left{
+    .content {
+      .left {
         margin-left: 1em;
+
+        .menus {
+          .menu {
+            div {
+              margin-left: 0.5em;
+            }
+          }
+        }
       }
+
       .right {
         margin-right: 1.5em;
       }
     }
-   
   }
 }

@@ -7,7 +7,8 @@
     </div>
     <div class="bottom p-d-flex p-flex-column p-ai-center p-jc-center">
         <div class="post p-d-flex p-ai-center">
-            <button pButton label="{{'panel.Posting New Ad'|translate}}" class="p-button-rounded p-button-raised"></button>
+            <button pButton label="{{'panel.Posting New Ad'|translate}}" class="p-button-rounded p-button-raised"
+                routerLink="/posting/new"></button>
         </div>
 
         <div class="adspost p-grid p-nogutter">
@@ -19,31 +20,36 @@
             <div class="p-col-7 p-nogutter">
                 <div class="p-grid detail p-nogutter">
                     <div class="p-col-12 p-nogutter">
-                        <span style="font-size: 1.4em;">دو تا دو تا میشه جهر تا</span>
+                        <span style="font-size: 1.4em;">Two room house for rent</span>
                     </div>
                     <div class="p-col-4 p-nogutter">
                         <span>{{'panel.Deposite'|translate}}:</span>
                     </div>
                     <div class="p-col-4 p-nogutter">
-                        <span>$ 1,500</span>
+                        <span>₺ 1,500</span>
                     </div>
-                    <div class="p-col-2"></div>
+                    <div class="p-col-4"></div>
                     <div class="p-col-4 p-nogutter">
                         <span>{{'panel.Rent'|translate}}:</span>
                     </div>
                     <div class="p-col-4 p-nogutter">
-                        <span>$ 1,00</span>
+                        <span>₺ 1,00</span>
                     </div>
-                    <div class="p-col-2"></div>
-                    <div class="p-col-12 p-nogutter">
-                        <i class="fa fa-clock-o"></i>
+                    <div class="p-col-4"></div>
+                    <div class="p-col-12 p-nogutter p-mt-2 p-d-flex p-ai-center">
+                        <i style="font-size: 1.4em;" class="fa fa-clock-o i-time"></i>
+                        <span>2 hours ago</span>
                     </div>
                 </div>
             </div>
             <div class="p-col-3 p-nogutter">
                 <div class="p-d-flex p-flex-column">
                     <span>{{'panel.Awaiting Approval'|translate}}</span>
-                    <button pButton label="{{'panel.Manage ad'|translate}}" class="p-button-text"></button>
+                    <div style="margin-top: 3.8em;" class="p-d-flex p-ai-center manage-btn">
+                        <span>{{'panel.Manage ad'|translate}}</span>
+                        <i style="font-size: 1.4em;" class="pi pi-angle-right p-mr-2 i-right"></i>
+                        <i style="font-size: 1.4em;" class="pi pi-angle-left p-ml-2 i-left"></i>
+                    </div>
                 </div>
             </div>
         </div>

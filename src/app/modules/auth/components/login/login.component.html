@@ -10,19 +10,20 @@
         <mat-label class="login-lbl p-mb-2">{{'auth.login' | translate}}</mat-label>
         <mat-form-field class="field">
             <mat-label>{{'auth.username' | translate}}</mat-label>
-            <input type="email" matInput>
+            <input type="email" matInput [(ngModel)]="user.identifier">
             <mat-error>
                 {{'auth.emailError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
             <mat-label>{{'auth.password' | translate}}</mat-label>
-            <input type="password" matInput>
+            <input type="password" matInput [(ngModel)]="user.password">
             <mat-error>
                 {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
-        <button class="p-py-1" mat-raised-button (click)="login()">{{'auth.login' | translate}}</button>
+        <button [disabled]="pressed" class="p-py-1 p-button-rounded p-button-secondary" pButton pRipple
+            (click)="login()" [label]="'auth.login' | translate" [icon]="(pressed?'pi pi-spin pi-spinner':'')"></button>
         <div class="field p-mt-2 forget-pass">
             <span (click)="forgetPassClicked()">{{'auth.forgotpassword' | translate}}</span>
         </div>

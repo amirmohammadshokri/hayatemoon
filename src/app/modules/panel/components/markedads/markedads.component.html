@@ -1,44 +1,38 @@
 <div class="container p-d-flex p-flex-column">
-    <div class="contect p-d-flex p-flex-column p-jc-center">
-        <div class="ff p-d-flex p-flex-column p-jc-center">
-
-            <div class="top p-d-flex p-flex-column p-ai-center p-jc-center">
-                <h1 style="padding-bottom: 1.5em">{{'panel.Marked Ads'|translate}}</h1>
-                <div class="circle p-d-flex p-ai-center p-jc-center">
-                    <img src="assets/images/panel/right.svg" alt="">
-                </div>
+    <div class="content p-d-flex p-flex-column p-jc-center">
+        <div class="top p-d-flex p-flex-column p-ai-center p-jc-center">
+            <h1 style="padding-bottom: 1.5em">{{'panel.Marked Ads'|translate}}</h1>
+            <div class="circle p-d-flex p-ai-center p-jc-center">
+                <img src="assets/images/panel/right.svg">
             </div>
-          
-            <div class="p-grid">
-                <div *ngFor="let ad of ads" class="p-col-6">
-                    <div class="ads p-flex-column p-jc-center">
-                        <div class="right p-d-flex  p-jc-center ">
-
-                            <div >
-                                <img class="imgads" src="assets/images/panel/imgads.png" alt="">
-                              
-                            </div>
-                            <div class="p-flex-column p-ai-center p-jc-center ">
-                                <h1>this a test</h1>
-                                <h3>Elvankent</h3>
-                                <div class="p-d-flex p-ai-center"> 
-                                    <i style="font-size: 2em;" class="fa fa-clock-o"></i>
-                                    <h4 style="margin-left: 0.5em;">2 hours ago</h4>
-                                </div>
-                            </div> 
-                        </div>
-                        <div class="bottom p-d-flex p-ai-center ">
-                            <div class="p-d-flex p-ai-center p-jc-center circlebotoom ">
-                                <img src="assets/images/panel/bin.png" alt="">
-                            </div>
-                            <span style="flex: 1 auto;"></span>
-                           <span>View Ad<i class="pi pi-angle-right"></i></span>
+        </div>
+        <div class="p-d-flex p-jc-around p-flex-wrap p-mt-6 p-pt-6">
+            <div *ngFor="let ad of ads" class="ads p-d-flex p-flex-column p-jc-center p-mb-2 p-mx-1">
+                <div class="p-d-flex p-jc-center">
+                    <div class="imgads p-d-flex p-ai-center p-jc-center">
+                        <img src="assets/images/panel/imgads.png">
+                    </div>
+                    <div class="p-d-flex p-flex-column">
+                        <span class="d-header" style="font-size: 1.6em;">this a test</span>
+                        <span class="d-summery p-my-4" style="font-size: 1.3em;">Elvankent</span>
+                        <div class="p-d-flex p-ai-center d-time">
+                            <i style="font-size: 2em;" class="fa fa-clock-o"></i>
+                            <span>2 hours ago</span>
                         </div>
                     </div>
                 </div>
-
+                <div class="p-d-flex p-ai-center p-mt-2">
+                    <div class="p-d-flex p-ai-center p-jc-center circlebotoom">
+                        <i class="pi pi-trash"></i>
+                    </div>
+                    <span style="flex: 1 auto;"></span>
+                    <div class="view p-d-flex p-ai-center">
+                        <span>{{'panel.View Ad'|translate}}</span>
+                        <i class="pi pi-angle-right i-right"></i>
+                        <i class="pi pi-angle-left i-left"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>

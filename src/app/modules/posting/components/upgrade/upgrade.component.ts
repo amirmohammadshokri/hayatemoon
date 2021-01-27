@@ -9,28 +9,24 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./upgrade.component.scss']
 })
 export class UpgradeComponent implements OnInit {
-  suportlanguage=['En','فا','Tr'];
 
-    constructor(private router: Router,private TranslateService:TranslateService) {
-    this.TranslateService.addLangs(this.suportlanguage);
-     this.TranslateService.setDefaultLang('En');
-    const browserlang=this.TranslateService.getBrowserLang();
-    this.TranslateService.use(browserlang);
-   }
-     selectedlang(lang:string){
-    this.TranslateService.use(lang);
+  active: boolean;
+  type: string;
+  typeDetail: number;
+
+  constructor() {
+    this.typeDetail = 1;
   }
-  
-active:boolean;
+
   ngOnInit(): void {
-  
   }
-  clickedleft()
-  {
-    this.active=!this.active;
+
+  clickedleft(): void {
+    this.active = !this.active;
   }
-  clickedright(){
-    this.active=!this.active;
+
+  clickedright(): void {
+    this.active = !this.active;
   }
 
 }

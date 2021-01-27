@@ -8,7 +8,7 @@
   <div class="bottom p-d-flex p-flex-column p-ai-center p-jc-center">
     <div class="post p-d-flex p-ai-center">
     </div>
-    <h1>$ 5.75</h1>
+    <h1>₺ 5.75</h1>
     <span>{{'panel.Your Current Credi'|translate}}</span>
     <div class="form p-d-flex p-flex-column">
       <div class="p-d-flex">
@@ -19,6 +19,11 @@
           <p-radioButton [inputId]="price.key" name="price" [value]="price.key" [(ngModel)]="selectedPrice">
           </p-radioButton>
           <label class="pricelabel" [for]="price.key">{{price.name}}</label>
+        </div>
+        <div class="p-field-checkbox">
+          <p-radioButton inputId="optional" name="price" [value]="0" [(ngModel)]="selectedPrice">
+          </p-radioButton>
+          <label class="pricelabel" for="optional">{{'panel.OptionalLessThan'|translate}}</label>
         </div>
       </div>
     </div>
@@ -39,7 +44,7 @@
       </div>
       <div class="p-col-6">
         <mat-form-field class="field">
-          <mat-label>MM/YY</mat-label>
+          <mat-label>{{'panel.MMYY'|translate}}</mat-label>
           <input type="text" matInput>
           <mat-error>
           </mat-error>
@@ -54,8 +59,8 @@
         </mat-form-field>
       </div>
       <div class="p-col-12 p-field">
-        <button pButton [label]="'Pay $ ' + selectedPrice" class="p-button-rounded p-button-raised"
-          routerLink="/posting/new"></button>
+        <button pButton [label]="('panel.Pay ₺'|translate) + selectedPrice"
+          class="p-button-rounded p-button-raised"></button>
       </div>
     </div>
   </div>

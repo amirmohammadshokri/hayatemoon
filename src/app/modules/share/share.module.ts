@@ -4,6 +4,10 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { AdvCardComponent } from './components/adv-card/adv-card.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { AdsInfoComponent } from './components/ads-info/ads-info.component';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -11,16 +15,21 @@ import { TranslateModule } from '@ngx-translate/core';
   declarations: [
     TopbarComponent,
     AdvCardComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    AdsInfoComponent
   ],
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    CarouselModule,
+    ButtonModule,
+    TooltipModule
   ],
   exports: [
     TopbarComponent,
     AdvCardComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    AdsInfoComponent
   ]
 })
 export class ShareModule { }

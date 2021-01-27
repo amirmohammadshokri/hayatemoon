@@ -1,32 +1,33 @@
-<div class="p-d-flex p-flex-column p-ai-center">
-    <sc-topbar style="width: 80%;"></sc-topbar>
-    <div class="content p-d-flex p-flex-column">
-        <h1>Manage Advertisement</h1>
-        <div class="delete p-d-flex  p-jc-evenly ">
-         <div class="left p-d-flex p-flex-column">
-           
-          <span>Awaiting Approval</span>
-          <span>Your ad is not approved yet, it will be approved as soon as <br>possible. Thanks for your patient.</span>
-
- 
-         </div>
-         <div class="right p-d-flex p-jc-start p-ai-center">
-            <span>You want to delete this Ad?</span>
+<div class="container p-d-flex p-flex-column">
+    <h1>{{'post.Manage Advertisement' | translate}}</h1>
+    <div class="p-grid">
+        <div class="status p-col-12 p-lg-6 p-d-flex p-flex-column">
+            <span style="font-size: 1.3em;">{{'post.StatusTitle' | translate}}</span>
+            <p>{{'post.StatusDetail' | translate}}</p>
+        </div>
+        <div class="p-col-12 p-lg-6 delete p-d-flex p-jc-start p-ai-center">
+            <span>{{'post.You want to delete this Ad?'|translate}}</span>
             <span style="flex: 1 auto;"></span>
-            <div class="deletead p-d-flex p-jc-centers p-ai-center">
-                <img src="../../../../../assets/images/panel/bin.png" alt="">
-                <span style="margin-left: 0.5em;">Delete Ad</span>
+            <div class="btn p-d-flex p-jc-center p-ai-center">
+                <i class="pi pi-trash"></i>
+                <span style="margin-left: 0.5em;">{{'post.Delete Ad'|translate}}</span>
             </div>
-            
-         </div>
-        
         </div>
-        <div class="button p-d-flex   p-jc-start ">
-            <div class="preview p-d-flex p-jc-center"><span>Preview</span></div>
-            <div class="upgrade p-d-flex p-jc-center"><span>Upgrade your Ad</span></div>
-            <div class="edit p-d-flex p-jc-center"><span>Edit Ad</span></div>
- 
+    </div>
+    <div class="buttons p-d-flex p-jc-start p-mt-6">
+        <div (click)="mode=1" [class]="'button p-d-flex p-jc-center p-ai-center ' +(mode===1?'active':'')">
+            <span>{{'post.Preview'|translate}}</span>
         </div>
-<sc-upgrade></sc-upgrade>
+        <div (click)="mode=2" [class]="'button p-d-flex p-jc-center p-ai-center p-mx-2 ' +(mode===2?'active':'')">
+            <span>{{'post.Upgrade your Ad'|translate}}</span>
+        </div>
+        <div (click)="mode=3" [class]="'button p-d-flex p-jc-center p-ai-center ' +(mode===3?'active':'')">
+            <span>{{'post.Edit Ad'|translate}}</span>
+        </div>
+    </div>
+    <div class="p-mt-6">
+        <sc-ads-info [className]="'special'" *ngIf="mode === 1"></sc-ads-info>
+        <sc-upgrade *ngIf="mode === 2"></sc-upgrade>
+        <sc-post-adver *ngIf="mode === 3"></sc-post-adver>
     </div>
 </div>

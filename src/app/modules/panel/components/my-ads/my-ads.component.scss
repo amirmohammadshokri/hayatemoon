@@ -49,39 +49,70 @@
                 }
             }
 
-            .detail {
-                margin-left: 1em;
-            }
-
             span,
             div {
                 color: #707070;
             }
 
+            .manage-btn {
+                color: #3548BF !important;
+                cursor: pointer;
+
+                span {
+                    color: #3548BF !important;
+
+                }
+            }
+
         }
     }
 }
+
 ::ng-deep .main-root-ltr {
     .container {
         .bottom {
             .adspost {
                 .detail {
                     margin-left: 1em;
+
+                    .i-time {
+                        margin-right: 0.5em;
+                    }
+                }
+
+                .i-right {
+                    display: inline;
+                }
+
+                .i-left {
+                    display: none;
                 }
             }
         }
     }
-    
-  }
-  
-  ::ng-deep .main-root-rtl {
+
+}
+
+::ng-deep .main-root-rtl {
     .container {
         .bottom {
             .adspost {
                 .detail {
                     margin-right: 1em;
+
+                    .i-time {
+                        margin-left: 0.5em;
+                    }
+                }
+
+                .i-right {
+                    display: none;
+                }
+
+                .i-left {
+                    display: inline;
                 }
             }
         }
     }
-  }
+}

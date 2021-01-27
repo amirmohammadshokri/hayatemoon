@@ -1,79 +1,123 @@
-<div class="container p-d-flex p-flex-column  ">
- 
-    <p class="p">
-        You can upgrade your ad with items below,<br>
-also you can choose both of them to affect more on viewers.
+<div class="container p-d-flex p-flex-column">
+    <p class="desc">
+        {{'post.You can upgrade your ad with items below,'|translate}}<br>
+        {{'post.also you can choose both of them to affect more on viewers.'|translate}}
     </p>
-   
-<div class="postad p-d-flex p-jc-start ">
-    <div (click)="clickedleft()"  [style.background-color]="active ? 'blue' : ''"  class="left p-d-flex p-flex-column"> 
-        <div class="redio p-d-flex">
-            <p-radioButton  name="filter" value="1"></p-radioButton>
-            <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
-        </div>
-        <p style="margin-left: 0.5em;">  your ad will be added to the special suggestion by  <br>
-            choosing this option, it makes it easier to find this ad by <br>
-            viewers.</p>
-             <div *ngIf="active"  class=" active p-d-flex p-flex-column ttan">
-                <div class="redio p-d-flex">
-                    <p-radioButton  name="filter" value="1"></p-radioButton>
-                    <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
+    <div class="p-grid">
+        <div class="p-col-6 p-lg-6">
+            <div [class]="'type ' + (type === '1'?'active':'')">
+                <div class="p-field-radiobutton">
+                    <p-radioButton inputId="special" value="1" [(ngModel)]="type"></p-radioButton>
+                    <label class="radio-label" for="special">
+                        {{'post.Post Ad as a special suggestion'|translate}}</label>
                 </div>
-                <div class="redio p-d-flex">
-                    <p-radioButton  name="filter" value="1"></p-radioButton>
-                    <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
-                </div>
-                <div class="redio p-d-flex">
-                    <p-radioButton  name="filter" value="1"></p-radioButton>
-                    <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
+                <p class="special-details"> {{'post.your ad will be added to the special suggestion by'|translate}}<br>
+                    {{'post.choosing this option, it makes it easier to find this ad by'|translate}} <br>
+                    {{'post.viewers.' |translate}}</p>
+                <div *ngIf="type === '1'" class="special-details p-d-flex p-flex-column">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton inputId="1day" value="1" [(ngModel)]="typeDetail"></p-radioButton>
+                        <label for="1day">{{'post.1 day ( ₺ 2 )'|translate}}</label>
+                    </div>
+                    <div class="p-field-radiobutton">
+                        <p-radioButton inputId="5day" value="2" [(ngModel)]="typeDetail"></p-radioButton>
+                        <label for="5day">{{'post.3 day ( ₺ 5 )'|translate}}</label>
+                    </div>
+                    <div class="p-field-radiobutton">
+                        <p-radioButton inputId="10day" value="3" [(ngModel)]="typeDetail"></p-radioButton>
+                        <label for="10day">{{'post.7 day ( ₺ 10 )'|translate}}</label>
+                    </div>
                 </div>
             </div>
-         
-        
-    </div>
- 
-    <div (click)="clickedright()"  [style.background-color]="!active ? '#ffffff' : ''"  class="right p-d-flex p-flex-column"> 
-        <div class="redio p-d-flex">
-            <p-radioButton  name="filter" value="1"></p-radioButton>
-            <h3 style="margin-left: 0.5em;"> Post Ad as a Featured Ad</h3>
         </div>
-        <p style="margin-left: 0.5em;">your ad will appear on the top of your city and category  <br>
-            announcements and it will be shown as the first ad till we<br>
-             get a new ad.</p>
-        
+        <div class="p-col-6 p-lg-6">
+            <div [class]="'type ' + (type === '2'?'active':'')">
+                <div class="p-field-radiobutton">
+                    <p-radioButton inputId="unSpecial" value="2" [(ngModel)]="type"></p-radioButton>
+                    <label class="radio-label" for="unSpecial"> {{'post.Post Ad as a Featured Ad'|translate}}</label>
+                </div>
+                <p class="special-details">{{'post.your ad will appear on the top of your city and category'|translate}}
+                    <br>
+                    {{'post.announcements and it will be shown as the first ad till we'|translate}}<br>
+                    {{'post.get a new ad.'|translate}}
+                </p>
+            </div>
+        </div>
     </div>
-  
-    <!-- <div class="postspes p-field-checkbox p-d-flex p-jc-center  p-flex-column flex-wrap ">
-        <div class="p-flex-column">
-           <div class=" p-d-flex">
-            <p-radioButton  name="filter" value="1"></p-radioButton>
-            <h3 style="margin-left: 0.5em;"> Post Ad as a special suggestion</h3>
-           </div>
-            <p style="margin-left: 0.5em;">your ad will be added to the special suggestion by <br>choosing this option, it makes it easier to find this ad<br>by viewers.</p>
-        </div> 
-     </div>
-    <span style="flex: 1 auto;"></span>
+    <div *ngIf="type" class="p-d-flex p-flex-column p-mt-4">
+        <div class="p-grid">
+            <div class="p-col-6 p-lg-6">
+                <div class="type">
+                    <div class="p-grid">
+                        <div class="p-col-12 p-d-flex p-ai-center">
+                            <i class="pi pi-credit-card margin-i"></i>
+                            <span>{{'panel.Card detail'|translate}}</span>
+                        </div>
+                        <div class="p-col-12">
+                            <mat-form-field class="field">
+                                <mat-label>{{'panel.Card Number'|translate}}</mat-label>
+                                <input type="text" matInput>
+                                <mat-error>
 
-    <div class="postspes p-field-checkbox p-d-flex p-jc-center  p-flex-column flex-wrap ">
-        <div class="p-flex-column">
-           <div class=" p-d-flex">
-            <p-radioButton  name="filter" value="1"></p-radioButton>
-            <h3 style="margin-left: 0.5em;"> Post Ad as a Featured Ad</h3>
-           </div>
-            <p style="margin-left: 0.5em;">your ad will appear on the top of your city and category <br>
-                announcements and it will be shown as the first ad till we<br>
-                 get a new ad.</p>
-        </div> 
-     </div> -->
- 
-</div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="p-col-6">
+                            <mat-form-field class="field">
+                                <mat-label>{{'panel.MMYY'|translate}}</mat-label>
+                                <input type="text" matInput>
+                                <mat-error>
 
- 
-  <div class="tt p-d-flex p-flex-column">
-      <h2>Total Cost</h2>
-      <div class="bottm p-d-flex p-jc-center ">
-          <h1>$ 5</h1><span style="flex: 1 auto;"></span>  <button pButton label="Pay with wallet" class="p-button-rounded p-button-raised"></button>
-      </div>
-  </div>
- 
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="p-col-6">
+                            <mat-form-field class="field">
+                                <mat-label>CVC</mat-label>
+                                <input type="text" matInput>
+                                <mat-error>
+
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="p-col-12">
+                            <button pButton label="{{'panel.Pay ₺'|translate}} 20"
+                                class="p-button-rounde p-button-raised p-button-raised"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-6 p-lg-6">
+                <div class="type">
+                    <div class="p-grid">
+                        <div class="p-col-12 p-d-flex p-ai-center p-jc-center">
+                            <span>{{'post.Total Cost'|translate}}</span>
+                            <span style="flex:1 auto;"></span>
+                            <span>₺ 46.75</span>
+                        </div>
+                        <div class="p-col-12 p-d-flex p-ai-center p-jc-center">
+                            <span>{{'post.Wallet'|translate}}</span>
+                            <span style="flex:1 auto;"></span>
+                            <span>₺ 150.25</span>
+                        </div>
+                        <div class="p-col-12 p-d-flex p-ai-center p-jc-center">
+                            <span>{{'post.Discount'|translate}}</span>
+                            <span style="flex:1 auto;"></span>
+                            <span>₺ 150.25</span>
+                        </div>
+                        <div style="font-size: 1.3em;color: #3548BF;"
+                            class="p-col-12 p-d-flex p-ai-center p-jc-center p-mt-4">
+                            <span>{{'post.Payable'|translate}}</span>
+                            <span style="flex:1 auto;"></span>
+                            <span>₺ 0</span>
+                        </div>
+                        <div class="p-col-12 p-d-flex p-ai-center p-jc-center">
+                            <button pButton label="{{'post.Pay with wallet'|translate}}"
+                                class="p-button-rounde p-button-raised p-button-raised"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

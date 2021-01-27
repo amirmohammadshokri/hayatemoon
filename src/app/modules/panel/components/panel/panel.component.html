@@ -5,8 +5,8 @@
       <div class="menus">
         <div class="menu p-d-flex p-ai-center" *ngFor="let menu of menus;let i = index" [id]="'menu' + i"
           (click)="menuClicked(i)" [routerLink]="menu.id">
-          <div [id]="'dash' + i" class="p-mr-1"></div>
-          <h3>{{menu.label}}</h3>
+          <div [id]="'dash' + i"></div>
+          <h3>{{'panel.' + menu.label | translate}}</h3>
         </div>
       </div>
     </div>

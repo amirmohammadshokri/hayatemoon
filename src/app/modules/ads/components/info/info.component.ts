@@ -7,28 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
 
-  advs: any[] = [];
-  showContactInfo: boolean;
-  marked: boolean;
-  details: any[] = [];
+
 
   constructor() { }
 
   ngOnInit(): void {
-    this.advs.push({
-      id: '1000'
-    });
-    this.advs.push({
-      id: '100'
-    });
 
-    this.details = [
-      { title: 'category', value: 'Job, Education' },
-      { title: 'location', value: 'Istanbul, Kayaş' },
-      { title: 'degree', value: 'Master' },
-      { title: 'work Background', value: 'Teaching in English School' },
-      { title: 'price', value: '$ 1,500' },
-    ];
   }
 
 }

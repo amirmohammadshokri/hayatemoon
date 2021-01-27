@@ -1,76 +1,72 @@
-.container{
-     
-    margin-top: 10em;
-    background-color: #E8E8E8;
-   border-radius: 1.5em;
-   
-    .p{
-        margin-left: 2em;
-        margin-right: 2em;
+.container {
+  background-color: #E8E8E8;
+  border-radius: 2em;
+  padding: 1em 3em;
+
+  .desc {
+    color: #ACACAC;
+  }
+
+  .type {
+    background-color: #f3f3f3;
+    border-radius: 2em;
+    padding: 1em;
+    transition: 0.2s;
+
+    .special-details {
+      color: #707070;
     }
-    .postad{
-    
-     margin-left: 1.5em;
 
-     margin-right: 1.5em;
-      .left{
-          background-color: #f3f3f3;
-          width: 100%;
-          padding: 1em;
-          border-radius: 2em;
-          margin-right: 1em;
-          .active{
-            transition-delay: 5s;
-          }
-      }
-      .active{
-        transition-delay: 5s;
-      }
-      .left:hover{
-        cursor: pointer;
-        background-color: #d6d6e2;
-      }
-      .right{
-          background-color: #f3f3f3;
-          width: 100%;
-          padding: 1em;
-          border-radius: 2em;
-          height: 14em;
-      }
-      .right:hover{
-        cursor: pointer;
-        background-color: #d6d6e2;
-      }
-        // .postspes{
-        //        border-radius: 1.5em;
-        //        background-color: #ffffff;
-        //        cursor: pointer;
-        //        width: 100%;
-        //        :hover{
-        //         background-color: #E8E8E8;
-        //        }
-        //     }
-               
-        // }
-        // .postfeat{
-        //     background-color: #ffffff;
-        
-        //     border-radius: 1.5em;
-        //     width: 100%;
-
-
-        // }
-     
-        // .tt{
-        //     margin-left: 2em;
-        //     margin-right: 2em;
-        //     margin-bottom: 2em;
-        //     .bottm{
-               
-        //     }
-        // }
-    
-        
+    .radio-label {
+      color: #3548BF;
+      font-size: 1.2em;
     }
+  }
+
+  .type:hover {
+    background-color: #DEDEDE;
+  }
+
+  .active {
+    background-color: #3548BF !important;
+    color: #ffffff !important;
+
+    label,
+    p {
+      color: #ffffff !important;
+    }
+  }
+
+  .field {
+    width: 100%;
+  }
+
 }
- 
+
+::ng-deep .main-root-ltr {
+  .special-details {
+    margin-left: 1.8em;
+  }
+
+  .margin-i {
+    margin-right: 0.5em;
+    font-size: 1.8em;
+  }
+
+}
+
+::ng-deep .main-root-rtl {
+  .special-details {
+    margin-right: 1.8em;
+  }
+
+  label {
+    margin-right: 0.5em;
+  }
+
+  .margin-i {
+    margin-left: 0.5em;
+    font-size: 1.8em;
+  }
+
+}

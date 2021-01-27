@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'sc-main',
@@ -9,25 +7,16 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  suportlanguage=['En','فا','Tr'];
-  selectedCategory: number = 1;
-  constructor(private route: ActivatedRoute,private router: Router,private TranslateService:TranslateService) {
-    this.TranslateService.addLangs(this.suportlanguage);
-    this.TranslateService.setDefaultLang('En');
-   const browserlang=this.TranslateService.getBrowserLang();
-   this.TranslateService.use(browserlang);
 
-  }
-  selectedlang(lang:string){
-    this.TranslateService.use(lang);
-  }
+  selectedCategory: number;
+  postAd: boolean;
 
-  
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe(prms => {
-      console.log(prms);
-
+    this.route.params.subscribe(prams => {
+      console.log(prams);
     });
   }
 

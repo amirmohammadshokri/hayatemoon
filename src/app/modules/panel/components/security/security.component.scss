@@ -37,36 +37,17 @@
                 width: 90%;
             }
         }
-
-
-
     }
 }
+
 ::ng-deep .main-root-ltr {
-    .container {
-        .bottom{
-           .form {
-            .cancel{
-                margin-left: 0.5em;
-            }
-           }  
-        }
-          
-        
-       }
-  }
-  
-  ::ng-deep .main-root-rtl {
-      
-    .container {
-     .bottom{
-        .form {
-         .cancel{
-             margin-right: 0.5em;
-         }
-        }  
-     }
-       
-     
+    .cancel {
+        margin-left: 0.5em;
     }
-  }
+}
+
+::ng-deep .main-root-rtl {
+    .cancel {
+        margin-right: 0.5em;
+    }
+}
