@@ -4,33 +4,36 @@
         <mat-label class="signup-lbl">{{'auth.signup' | translate}}</mat-label>
         <mat-form-field class="field">
             <mat-label>{{'auth.username' | translate}}</mat-label>
-            <input type="text" matInput>
+            <input type="text" matInput [(ngModel)]="user.username">
             <mat-error>
                 {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
             <mat-label>{{'auth.email' | translate}}</mat-label>
-            <input type="email" matInput>
+            <input type="email" matInput [(ngModel)]="user.email">
             <mat-error>
                 {{'auth.emailError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
             <mat-label>{{'auth.password' | translate}}</mat-label>
-            <input type="password" matInput>
+            <input type="password" matInput [(ngModel)]="user.password">
             <mat-error>
                 {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
             <mat-label>{{'auth.repeatpassword' | translate}}</mat-label>
-            <input type="password" matInput>
+            <input type="password" matInput [(ngModel)]="repeatedPassword">
             <mat-error>
                 {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
-        <button class="p-py-1" mat-raised-button>{{'auth.signup' | translate}}</button>
+        <button pButton pRipple
+            [disabled]="registered || !user.email || !user.password || !user.username || (user.password !== repeatedPassword)"
+            class="p-py-1" class="p-button-rounded" label="{{'auth.signup' | translate}}"
+            [icon]="(registered?'pi pi-spin pi-spinner':'pi')" (click)="register()"></button>
     </div>
     <div *ngIf="!active" class="signup-btn animate__animated animate__fadeIn" (click)="btnClicked()">
         <div>

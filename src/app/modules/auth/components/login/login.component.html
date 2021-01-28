@@ -22,8 +22,9 @@
                 {{'auth.requiredError' | translate}}
             </mat-error>
         </mat-form-field>
-        <button [disabled]="pressed" class="p-py-1 p-button-rounded p-button-secondary" pButton pRipple
-            (click)="login()" [label]="'auth.login' | translate" [icon]="(pressed?'pi pi-spin pi-spinner':'')"></button>
+        <button pButton pRipple [disabled]="pressed || !user.identifier || !user.password"
+            class="p-py-1 p-button-rounded p-button-secondary" (click)="login()" [label]="'auth.login' | translate"
+            [icon]="(pressed?'pi pi-spin pi-spinner':'pi')"></button>
         <div class="field p-mt-2 forget-pass">
             <span (click)="forgetPassClicked()">{{'auth.forgotpassword' | translate}}</span>
         </div>

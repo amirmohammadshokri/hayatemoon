@@ -37,23 +37,14 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.pressed = true;
     this.sAuth.login(this.user).subscribe(res => {
-      this.setCookie('jwt', res.jwt, 7);
-      this.router.navigate(['./panel']);
+      this.sAuth.setCookie('jwt', res.jwt, 7);
+      this.router.navigate(['./landing']);
     }, err => {
       err[0].messages.forEach(msg => {
         this.sMsg.add({ severity: 'warn', summary: 'warning', detail: msg.message });
       });
       this.pressed = false;
     });
-  }
-
-  setCookie(cname: string, value: string, todays: number): void {
-    const d = new Date();
-    d.setTime(d.getTime() + (todays * 24 * 60 * 60 * 1000));
-    const expires = 'expires=' + d.toUTCString();
-    document.cookie = cname + '=' + value + ';' + expires + ';path=/';
-    document.cookie = cname + '=' + value + ';' + expires + ';path=/en';
-    document.cookie = cname + '=' + value + ';' + expires + ';path=/tr';
   }
 
 }

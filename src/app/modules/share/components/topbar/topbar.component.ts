@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as $ from 'jquery';
 import { SelectItem } from 'primeng/api';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'sc-topbar',
@@ -18,10 +19,17 @@ export class TopbarComponent implements OnInit {
     { label: 'Tr', value: 'tr' },
     { label: 'فا', value: 'fa' }
   ];
+  user: any;
 
-  constructor(private router: Router, private translateService: TranslateService) { }
+  constructor(
+    private router: Router,
+    private sAuth: AuthService,
+    private translateService: TranslateService) { }
 
   ngOnInit(): void {
+    this.sAuth.getUserInfo().subscribe(res => {
+      this.user = res;
+    });
     this.showLng = true;
     $(window).scroll(() => {
       const scroll = $(window).scrollTop();
@@ -61,6 +69,10 @@ export class TopbarComponent implements OnInit {
 
   navigate(route: string): void {
     this.router.navigate([route]);
+  }
+
+  logout(): void {
+    this.sAuth.logout();
   }
 
 }

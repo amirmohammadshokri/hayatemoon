@@ -9,14 +9,14 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private sAuth: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // request = request.clone({
-    //   // setHeaders: {
-    //   //   Authorization: `Bearer ${this.sAuth.getToken()}`,
-    //   //   // Accept: '*/*',
-    //   //   // 'Access-Control-Allow-Origin': '*',
-    //   //   // 'Access-Control-Allow-Credentials': 'true',
-    //   // }
-    // });
+    const token = this.sAuth.getToken();
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
     return next.handle(request);
   }
 }

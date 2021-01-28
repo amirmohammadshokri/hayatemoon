@@ -8,6 +8,10 @@ import { AdsInfoComponent } from './components/ads-info/ads-info.component';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 
 
 
@@ -23,7 +27,13 @@ import { TooltipModule } from 'primeng/tooltip';
     TranslateModule,
     CarouselModule,
     ButtonModule,
-    TooltipModule
+    TooltipModule,
+    HttpClientModule
+  ],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   exports: [
     TopbarComponent,

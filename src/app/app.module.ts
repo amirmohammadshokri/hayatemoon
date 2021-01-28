@@ -1,18 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RippleModule } from 'primeng/ripple';
-import { ShareModule } from './modules/share/share.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-
+import { AppConfig } from 'src/app/app.config';
 
 
 @NgModule({
@@ -26,7 +25,6 @@ import { MessageService } from 'primeng/api';
     RippleModule,
     TextFieldModule,
     MatInputModule,
-    ShareModule,
     HttpClientModule,
     ToastModule,
     TranslateModule.forRoot({
@@ -38,7 +36,9 @@ import { MessageService } from 'primeng/api';
     })
   ],
   providers: [
-    MessageService
+    MessageService,
+    AppConfig,
+    { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true }
   ],
   bootstrap: [AppComponent]
 })

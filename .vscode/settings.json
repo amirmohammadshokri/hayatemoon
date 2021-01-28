@@ -9,12 +9,17 @@
         "MMYY",
         "Residental",
         "Unmark",
+        "addcredit",
         "advs",
+        "checkmark",
         "dynamicdialog",
         "forgotpassword",
+        "markedads",
+        "myads",
         "radiobutton",
         "repeatpassword",
         "signup",
+        "suportlanguage",
         "topbar"
     ]
 }
