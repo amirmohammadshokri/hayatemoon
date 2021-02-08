@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { ILogin } from 'src/app/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private sMsg: MessageService,
     private sAuth: AuthService) { }
 
   ngOnInit(): void {
@@ -39,10 +37,7 @@ export class LoginComponent implements OnInit {
     this.sAuth.login(this.user).subscribe(res => {
       this.sAuth.setCookie('jwt', res.jwt, 7);
       this.router.navigate(['./landing']);
-    }, err => {
-      err[0].messages.forEach(msg => {
-        this.sMsg.add({ severity: 'warn', summary: 'warning', detail: msg.message });
-      });
+    }, () => {
       this.pressed = false;
     });
   }

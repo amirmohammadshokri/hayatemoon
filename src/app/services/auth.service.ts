@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppConfig } from 'src/app/app.config';
-import { ILogin, IRegister } from '../interfaces';
+import { ILogin, IRegister, IUserUpdate } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +30,21 @@ export class AuthService {
   public forgotPassword(email: string): Observable<any> {
     return this.http.post<any>(`${this.url}auth/forgot-password`, {
       email,
-      url: `https://${window.location.hostname}/reset-password.html`
+      url: `https://${window.location.hostname}/auth/forgot-password`
     });
   }
 
+  public resetPassword(code: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.url}auth/reset-password`, {
+      code,
+      password,
+      passwordConfirmation: password
+    });
+  }
+
+  public updateUser(userId: number, model: IUserUpdate): Observable<any> {
+    return this.http.put<any>(`${this.url}users/${userId}`, model);
+  }
 
   getToken(): string {
     return document.cookie.substr(4, document.cookie.length);

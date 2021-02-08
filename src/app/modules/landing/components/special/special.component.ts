@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AdverService } from 'src/app/services/adver.service';
 import * as $ from 'jquery';
-import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sc-special',
@@ -11,10 +11,11 @@ import { MenuItem } from 'primeng/api';
 export class SpecialComponent implements OnInit, AfterViewInit {
 
   advs: any[] = [];
-  responsiveOptions;
-  menus: MenuItem[] = [];
+  responsiveOptions: any;
+  cities: any[] = [];
+  topCities: any[] = [];
 
-  constructor(private sAdver: AdverService) {
+  constructor(private sAdver: AdverService, private router: Router) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -35,17 +36,20 @@ export class SpecialComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.sAdver.getData().subscribe((res: any) => {
-      this.advs = res.data;
+    this.sAdver.getCities().forEach((city, i) => {
+      if (i < 5) {
+        this.topCities.push(city);
+      } else {
+        this.cities.push(city);
+      }
     });
+    this.menuClicked(0, this.topCities[0].value);
+  }
 
-    this.menus = [
-      { label: 'Istanbul', id: 'Istanbul' },
-      { label: 'Ankara', id: 'Ankara' },
-      { label: 'Izmir', id: 'Izmir' },
-      { label: 'Antalya', id: 'Antalya' },
-      { label: 'Konya', id: 'Konya' }
-    ];
+  getData(city: string): void {
+    this.sAdver.getSpecialAdvers(city).subscribe(res => {
+      this.advs = res;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -53,12 +57,18 @@ export class SpecialComponent implements OnInit, AfterViewInit {
     $('#dash0').addClass('dash');
   }
 
-  menuClicked(i): void {
+  menuClicked(i: number, city: string): void {
     $('[id^=menu]').removeClass('active');
     $('#menu' + i).addClass('active');
 
     $('[id^=dash]').removeClass('dash');
     $('#dash' + i).addClass('dash');
+
+    this.getData(city);
+  }
+
+  show(adv: any): void {
+    this.router.navigate([`/ads/info/${adv.id}`]);
   }
 
 }

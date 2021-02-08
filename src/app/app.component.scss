@@ -15,15 +15,15 @@
 
 .main-root-rtl {
     ::ng-deep .mat-button-wrapper {
-        font-family: 'IRANSansWeb';
+        font-family: 'IRANSansWeb' !important;
     }
 
     ::ng-deep .mat-form-field-label {
         text-align: right;
-        font-family: 'IRANSansWeb';
+        font-family: 'IRANSansWeb' !important;
     }
 
     ::ng-deep .p-dropdown .p-dropdown-label {
-        font-family: 'IRANSansWeb';
+        font-family: 'IRANSansWeb' !important;
     }
 }

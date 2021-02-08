@@ -6,9 +6,24 @@
             {{'landing.& Buy Advertisements' | translate}}
         </span>
         <div class="search p-d-flex p-ai-center p-mt-2">
-            <p-dropdown placeholder="{{'landing.all Ads' | translate}}"></p-dropdown>
-            <p-dropdown placeholder="{{'landing.city' | translate}}" class="p-mx-2"></p-dropdown>
-            <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search" routerLink="/ads"></button>
+            <p-cascadeSelect placeholder="{{'landing.all Ads' | translate}}" [(ngModel)]="category"
+                [options]="categories" optionLabel="label" optionGroupLabel="label" [optionGroupChildren]="['items']">
+                <ng-template pTemplate="option" let-option>
+                    <div class="country-item">
+                        <span>{{'common.' + option.value | translate}}</span>
+                    </div>
+                </ng-template>
+            </p-cascadeSelect>
+            <p-dropdown [options]="cities" placeholder="{{'landing.city' | translate}}" [(ngModel)]="city"
+                class="p-mx-2">
+                <ng-template pTemplate="item" let-item>
+                    {{'common.'+item.label | translate}}
+                </ng-template>
+                <ng-template let-selectedItem pTemplate="selectedItem">
+                    {{'common.'+selectedItem.label | translate}}
+                </ng-template>
+            </p-dropdown>
+            <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search" (click)="goToList()"></button>
         </div>
     </div>
     <span style="flex:1 auto;"></span>

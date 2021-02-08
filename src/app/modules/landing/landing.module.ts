@@ -15,6 +15,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { AdverService } from 'src/app/services/adver.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MainComponent, DiscoverComponent, SpecialComponent, PostingComponent, DownloadComponent, AboutComponent, FooterComponent],
@@ -26,7 +28,9 @@ import { TranslateModule } from '@ngx-translate/core';
     ButtonModule,
     CarouselModule,
     HttpClientModule,
-    TranslateModule
+    TranslateModule,
+    CascadeSelectModule,
+    FormsModule
   ],
   providers: [
     AdverService

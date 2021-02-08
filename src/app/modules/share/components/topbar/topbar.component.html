@@ -37,7 +37,7 @@
       </div>
     </div>
     <div *ngIf="user" pRipple class="signup p-d-flex p-ai-center p-jc-center" (click)="navigate('./panel')">
-      <span style="text-decoration: none">{{user.username}}</span>
+      <span class="p-text-nowrap p-text-truncate p-px-1" style="text-decoration: none">{{user.username}}</span>
     </div>
     <div *ngIf="!user" pRipple class="signup p-d-flex p-ai-center p-jc-center" (click)="navigate('./auth')">
       <span style="text-decoration: none">{{'share.signup'|translate}}</span>

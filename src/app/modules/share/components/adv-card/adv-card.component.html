@@ -1,18 +1,20 @@
 <div class="container p-d-flex p-flex-column" (click)="selectPro()">
     <div class="img p-d-flex p-ai-center p-jc-center">
-        <img src="assets/images/landing/NoPath - Copy (4).png" />
+        <img *ngIf="advertisement.images.length > 0" src="https://hayatemoon.com{{advertisement.images[0].url}}" />
+        <img *ngIf="advertisement.images.length === 0" src="assets/images/def.jpg" />
     </div>
     <div class="detail p-d-flex p-flex-column">
         <div class="p-d-flex p-ai-center publish-date">
             <i class="pi pi-clock"></i>
-            <span>2 hours ago</span>
+            <span>{{timeSince(advertisement?.created_at).count}} {{'ads.' + timeSince(advertisement?.created_at).label |
+                translate}}</span>
         </div>
-        <span class="title">{{product.name}}</span>
-        <span class="price">${{product.price}}</span>
+        <span *ngIf="advertisement.title" class="title p-text-nowrap p-text-truncate">{{advertisement.title}}</span>
+        <span *ngIf="advertisement.price" class="price">₺{{advertisement.price | number}}</span>
         <div class="p-d-flex p-ai-center p-jc-center category">
-            <span>{{product.category}}</span>
+            <span *ngIf="advertisement.class">{{'common.'+advertisement.class | translate}}</span>
             <span style="flex:1 auto;"></span>
-            <i class="pi pi-save"></i>
+            <i class="pi pi-eye"></i>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -6,24 +6,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
-
-  login: boolean;
-  forgetPass: boolean;
-  resetPass: boolean;
-
-  constructor() {
-    this.login = false;
-  }
-
-  ngOnInit(): void { }
-
-  stateChanged(state: boolean): void {
-    this.login = state;
-  }
-
-  showForgetPass(): void {
-    this.forgetPass = true;
-  }
+export class AuthComponent {
 
 }

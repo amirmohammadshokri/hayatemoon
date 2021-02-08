@@ -17,14 +17,17 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
+import { MainComponent } from './components/main/main.component';
 
 
 @NgModule({
-  declarations: [AuthComponent,
+  declarations: [
+    AuthComponent,
     ForgetpassComponent,
     ResetpassComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    MainComponent
   ],
   imports: [
     CommonModule,

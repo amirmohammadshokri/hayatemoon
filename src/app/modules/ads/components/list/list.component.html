@@ -23,7 +23,7 @@
                     </p-radioButton>
                     <label class="speciallabel" for="photos">{{'ads.a with photo' | translate}}</label>
                 </div>
-                <p-dropdown placeholder="{{'ads.neighborhood' | translate}}"></p-dropdown>
+                <p-dropdown [options]="cities" placeholder="{{'ads.neighborhood' | translate}}"></p-dropdown>
             </div>
             <div class="bottom p-d-flex p-flex-column">
                 <h3 style="margin: 1em;">{{'ads.categories' | translate}}</h3>
@@ -31,13 +31,13 @@
                     *ngFor="let category of categories;let i = index" [id]="'headerMenu' + i">
                     <a class="p-d-flex p-jc-center p-ai-center" (click)="menuHeaderClick(i)">
                         <i class="menu-header-icon {{category.icon}}"></i>
-                        <span class="catlabel">{{category.label}}</span>
+                        <span class="catlabel">{{'common.' + category.value | translate}}</span>
                         <span style="flex:1 auto;"></span>
-                        <i class="pi pi-angle-down down-icon"></i>
+                        <i *ngIf="category.items" class="pi pi-angle-down down-icon"></i>
                     </a>
                     <div *ngIf="category.visible" class="p-d-flex p-flex-column p-ml-4 p-mt-2">
                         <div class="menu-item p-mb-2" *ngFor="let item of category.items">
-                            <span class="catlmenulabel">{{item.label}}</span>
+                            <span class="catlmenulabel">{{'common.' + item.value | translate}}</span>
                         </div>
                     </div>
                 </div>
@@ -45,14 +45,32 @@
         </div>
         <div class="list p-d-flex p-flex-column p-ai-start">
             <div class="search p-d-flex p-ai-center">
-                <p-dropdown placeholder="{{'ads.allAds' | translate}}"></p-dropdown>
-                <p-dropdown placeholder="{{'ads.city' | translate}}" class="p-mx-2"></p-dropdown>
-                <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search"></button>
+                <p-cascadeSelect placeholder="{{'landing.all Ads' | translate}}" [(ngModel)]="category"
+                    [options]="categories" optionLabel="label" optionGroupLabel="label"
+                    [optionGroupChildren]="['items']">
+                    <ng-template pTemplate="option" let-option>
+                        <div class="country-item">
+                            <span>{{'common.' + option.value | translate}}</span>
+                        </div>
+                    </ng-template>
+                </p-cascadeSelect>
+                <p-dropdown [options]="cities" placeholder="{{'landing.city' | translate}}" [(ngModel)]="city"
+                    class="p-mx-2">
+                    <ng-template pTemplate="item" let-item>
+                        {{'common.'+item.label | translate}}
+                    </ng-template>
+                    <ng-template let-selectedItem pTemplate="selectedItem">
+                        {{'common.'+selectedItem.label | translate}}
+                    </ng-template>
+                </p-dropdown>
+                <button pButton class="p-button-rounded p-button-raised" icon="pi pi-search"
+                    (click)="getData()"></button>
             </div>
             <div class="content">
-                <h5>{{'ads.all Announcements and buy advertisement in Istanbul.'|translate}}</h5>
+                <h5>{{'ads.all'|translate}} {{'common.' + category.value|translate}} {{'ads.in'|translate}} {{city}}
+                </h5>
                 <div class="advs p-d-flex p-flex-wrap p-jc-between">
-                    <sc-adv-card *ngFor="let pro of products" [product]="pro" (selectProduct)="show($event)">
+                    <sc-adv-card *ngFor="let adv of advs" [advertisement]="adv" (selectProduct)="show($event)">
                     </sc-adv-card>
                 </div>
                 <button pButton pRipple label="{{'ads.load more' | translate}}" class="p-button-rounded"></button>

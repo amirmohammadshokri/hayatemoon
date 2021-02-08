@@ -27,9 +27,12 @@ export class TopbarComponent implements OnInit {
     private translateService: TranslateService) { }
 
   ngOnInit(): void {
-    this.sAuth.getUserInfo().subscribe(res => {
-      this.user = res;
-    });
+    const token = this.sAuth.getToken();
+    if (token) {
+      this.sAuth.getUserInfo().subscribe(res => {
+        this.user = res;
+      });
+    }
     this.showLng = true;
     $(window).scroll(() => {
       const scroll = $(window).scrollTop();

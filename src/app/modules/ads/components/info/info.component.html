@@ -1,5 +1,5 @@
 <div style="background-color: #dddddd;" class="p-d-flex p-flex-column p-ai-center">
     <sc-topbar style="width: 100%"></sc-topbar>
-    <sc-ads-info class="info"></sc-ads-info>
+    <sc-ads-info *ngIf="adv" class="info" [advertisement]="adv"></sc-ads-info>
     <sc-main-footer class="p-mt-6" style="width: 100%;"></sc-main-footer>
 </div>

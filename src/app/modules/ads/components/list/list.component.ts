@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
-import { MenuItem } from 'primeng/api';
+import { IAdvertisement } from 'src/app/interfaces';
 import { AdverService } from 'src/app/services/adver.service';
 
 @Component({
@@ -11,34 +11,41 @@ import { AdverService } from 'src/app/services/adver.service';
 })
 export class ListComponent implements OnInit {
 
-  selectedCategory: any = null;
   selectedFilter: number = null;
+  cities: any[] = [];
+  city: string;
+  category: any;
+  categories: any[] = [];
+  advs: IAdvertisement[] = [];
 
-  categories: MenuItem[] = [
-    { icon: 'pi pi-inbox', label: 'All Ads' },
-    {
-      icon: 'pi pi-inbox', label: 'Estate', items: [
-        { label: 'Residental for Rent' },
-        { label: 'Residental for Sale' },
-        { label: 'Commercial for Rent' },
-        { label: 'Commercial for Sale' }
-      ]
-    },
-    { icon: 'pi pi-inbox', label: 'Vehicle ( Buy )' },
-    { icon: 'pi pi-inbox', label: 'Electronics' },
-    { icon: 'pi pi-inbox', label: 'Home & Garden' },
-    { icon: 'pi pi-inbox', label: 'Job' },
-    { icon: 'pi pi-inbox', label: 'Services' },
-  ];
-  products: any[] = [];
-
-  constructor(private sAdver: AdverService, private router: Router) { }
+  constructor(private sAdver: AdverService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selectedCategory = this.categories[1];
-    this.sAdver.getData().subscribe((res: any) => {
-      this.products = res.data;
+    this.route.params.subscribe(prams => {
+      this.cities = this.sAdver.getCities();
+      this.categories = this.sAdver.getCategories();
+      this.city = prams.city;
+      this.category = this.findCategory(prams.category);
+      this.getData();
     });
+  }
+
+  findCategory(value: string): any {
+    let res = null;
+    this.categories.forEach(category => {
+      if (category.value === value) {
+        res = category;
+        return;
+      } else {
+        category.items?.forEach(item => {
+          if (item.value === value) {
+            res = item;
+            return;
+          }
+        });
+      }
+    });
+    return res;
   }
 
   menuHeaderClick(index: number): void {
@@ -53,10 +60,14 @@ export class ListComponent implements OnInit {
     }
   }
 
-  show(product: any): void {
-    console.log(`/ads/info/${product.id}`);
+  show(adv: any): void {
+    this.router.navigate([`/ads/info/${adv.id}`]);
+  }
 
-    this.router.navigate([`/ads/info/${product.id}`]);
+  getData(): void {
+    this.sAdver.getAdvers(this.city, this.category.value).subscribe((res: any) => {
+      this.advs = res;
+    });
   }
 
 }

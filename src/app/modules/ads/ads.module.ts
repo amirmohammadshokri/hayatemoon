@@ -7,13 +7,16 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ListComponent } from './components/list/list.component';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AdverService } from 'src/app/services/adver.service';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InfoComponent } from './components/info/info.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [ListComponent, InfoComponent
@@ -30,10 +33,13 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     DynamicDialogModule,
     TooltipModule,
-    TranslateModule
+    TranslateModule,
+    CascadeSelectModule
   ],
   providers: [
-    AdverService
+    AdverService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class AdsModule { }

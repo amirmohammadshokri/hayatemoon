@@ -4,14 +4,15 @@
         <mat-label class="choose">{{'auth.choose your password wisely.' | translate}}</mat-label>
         <mat-form-field class="field">
             <mat-label class="color-text">{{'auth.password' | translate}}</mat-label>
-            <input type="text" matInput />
+            <input type="password" [(ngModel)]="password" matInput />
             <mat-error> {{'auth.requiredError' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field class="field">
             <mat-label class="color-text">{{'auth.repeatpassword' | translate}}</mat-label>
-            <input type="password" matInput />
+            <input type="password" [(ngModel)]="repeatPassword" matInput />
             <mat-error> {{'auth.requiredError' | translate}} </mat-error>
         </mat-form-field>
-        <button mat-raised-button>{{'auth.ResetPassword' | translate}}</button>
+        <button [disabled]="password !== repeatPassword" mat-raised-button (click)="onSubmit()">{{'auth.ResetPassword' |
+            translate}}</button>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import * as $ from 'jquery';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -11,9 +11,9 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 export class PanelComponent implements OnInit, AfterViewInit {
 
   menus: MenuItem[] = [];
-  menuIndex: number;
+  menuIndex: number = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.menus = [
       { label: 'My Ads', id: 'myads' },
       { label: 'User Profile', id: 'profile' },
@@ -50,6 +50,7 @@ export class PanelComponent implements OnInit, AfterViewInit {
 
     $('[id^=dash]').removeClass('dash');
     $('#dash' + i).addClass('dash');
+    this.cdr.detectChanges();
   }
 
 }

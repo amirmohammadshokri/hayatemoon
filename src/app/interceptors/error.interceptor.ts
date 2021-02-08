@@ -14,16 +14,17 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
-      if (err.status === 200) {
-        // this.sMsg.add({ severity: 'error', summary: 'error', detail: 'خطای سرور' });
-        return;
-      }
       if (err.status === 401 && !this.imOut) {
         // this.sMsg.add({ severity: 'warn', summary: 'هشدار دسترسی', detail: 'جهت امنیت اطلاعات لطفا دوباره وارد شوید .' });
         this.imOut = true;
         this.sAuth.logout();
       }
       const error = err.error?.message || err.statusText;
+      if (error) {
+        error[0].messages.forEach(msg => {
+          this.sMsg.add({ severity: 'warn', summary: 'warning', detail: msg.message });
+        });
+      }
       return throwError(error);
     }));
   }

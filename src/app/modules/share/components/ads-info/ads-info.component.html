@@ -2,16 +2,18 @@
     <div class="head p-d-flex p-ai-center p-jc-start">
         <div class="p-d-flex p-ai-center p-jc-center publish-date">
             <i class="pi pi-clock"></i>
-            <span>2 Day before</span>
+            <span>{{timeSince(advertisement?.created_at).count}} {{'ads.' + timeSince(advertisement?.created_at).label |
+                translate}}</span>
         </div>
     </div>
     <div class="content p-d-flex">
         <div class="left">
             <div class="slider">
-                <p-carousel dir="ltr" [value]="advs" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1">
-                    <ng-template let-product pTemplate="item">
+                <p-carousel dir="ltr" [value]="advertisement?.images" styleClass="custom-carousel" [numVisible]="1"
+                    [numScroll]="1">
+                    <ng-template let-adv pTemplate="item">
                         <div class="img p-d-flex p-ai-center p-jc-center">
-                            <img src="assets/images/landing/NoPath - Copy (4).png" />
+                            <img [src]="'https://hayatemoon.com' + adv.url" />
                         </div>
                     </ng-template>
                 </p-carousel>
@@ -31,11 +33,11 @@
             </div>
         </div>
         <div class="right">
-            <h2>Teaching english and translate farsi to english</h2>
+            <h2>{{advertisement?.title}}</h2>
             <div class="my-phone detail p-ai-center p-jc-center">
                 <span>{{'ads.phone Number'|translate}} </span>
                 <span style="flex:1 auto;"></span>
-                <span class="phone">05537752628</span>
+                <span class="phone">{{advertisement?.phone}}</span>
             </div>
             <div class="contact p-d-flex p-ai-center p-jc-center">
                 <button pButton pRipple label="{{'ads.contact info'|translate}}" class="p-button-rounded"
@@ -52,23 +54,36 @@
                     <div class="copy p-d-flex p-ai-center p-jc-center">
                         <img src="assets/images/ads/copy.svg" alt="">
                     </div>
-                    <span class="phone">05537752628</span>
+                    <span class="phone">{{advertisement?.phone}}</span>
                 </div>
                 <span class="police-header">{{'ads.police' | translate}}</span>
                 <p>{{'ads.policeDetail' | translate}}</p>
             </div>
-            <div class="detail p-d-flex p-ai-center p-jc-center" *ngFor="let detail of details">
-                <span>{{'ads.'+detail.title+''|translate}}</span>
+            <div class="detail p-d-flex p-ai-center p-jc-center">
+                <span>{{'ads.category'|translate}}</span>
                 <span style="flex:1 auto;"></span>
-                <span>{{detail.value}}</span>
+                <span>{{'common.' + advertisement.class|translate}}</span>
             </div>
-            <p class="p-mt-2">International Translators is a translation office based in Vienna, Austria, working
-                with
-                professional
-                translators from across Europe. On this page, you will find information about the translators we
-                co-operate with. To learn more about a translator, please click on her or his name to follow the
-                link to
-                her or his biography page.</p>
+            <div class="detail p-d-flex p-ai-center p-jc-center">
+                <span>{{'ads.location'|translate}}</span>
+                <span style="flex:1 auto;"></span>
+                <span>{{advertisement.city}}</span>
+            </div>
+            <div class="detail p-d-flex p-ai-center p-jc-center">
+                <span>{{'ads.degree'|translate}}</span>
+                <span style="flex:1 auto;"></span>
+            </div>
+            <div class="detail p-d-flex p-ai-center p-jc-center">
+                <span>{{'ads.work Background'|translate}}</span>
+                <span style="flex:1 auto;"></span>
+                <span>{{advertisement.workExperience}}</span>
+            </div>
+            <div class="detail p-d-flex p-ai-center p-jc-center">
+                <span>{{'ads.price'|translate}}</span>
+                <span style="flex:1 auto;"></span>
+                <span>{{advertisement.price | number}} ₺</span>
+            </div>
+            <p class="p-mt-2">{{advertisement.description}}</p>
         </div>
     </div>
 </div>

@@ -9,23 +9,30 @@
         </div>
     </div>
     <div class="p-d-flex p-ai-center bottom">
-        <div class="p-grid">
+        <div style="width: 100%;" class="p-grid">
             <div class="p-col-2">
                 <div class="menus">
-                    <div class="menu p-d-flex p-ai-center" *ngFor="let menu of menus;let i = index" [id]="'menu' + i"
-                        (click)="menuClicked(i)" [routerLink]="menu.id">
+                    <div class="menu p-d-flex p-ai-center" *ngFor="let city of topCities;let i = index"
+                        [id]="'menu' + i" (click)="menuClicked(i,city.value)">
                         <div [id]="'dash' + i" class="p-mr-1"></div>
-                        <span>{{menu.label}}</span>
+                        <span>{{'common.' + city.label|translate}}</span>
                     </div>
-                    <p-dropdown [style]="{'minWidth':'100%','marginTop':'1em'}"
-                        placeholder="{{'landing.other Cities'|translate}}"></p-dropdown>
+                    <p-dropdown [options]="cities" [style]="{'minWidth':'100%','marginTop':'1em'}"
+                        placeholder="{{'landing.other Cities'|translate}}">
+                        <ng-template pTemplate="item" let-item>
+                            {{'common.'+item.label | translate}}
+                        </ng-template>
+                        <ng-template let-selectedItem pTemplate="selectedItem">
+                            {{'common.'+selectedItem.label | translate}}
+                        </ng-template>
+                    </p-dropdown>
                 </div>
             </div>
             <div class="p-col-10">
                 <p-carousel dir="ltr" [value]="advs" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
                     [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-                    <ng-template let-product pTemplate="item">
-                        <sc-adv-card [product]="product"></sc-adv-card>
+                    <ng-template let-adv pTemplate="item">
+                        <sc-adv-card [advertisement]="adv" (selectProduct)="show($event)"></sc-adv-card>
                     </ng-template>
                 </p-carousel>
             </div>

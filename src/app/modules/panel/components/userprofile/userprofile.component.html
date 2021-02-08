@@ -11,7 +11,7 @@
                 <div class="p-col-6">
                     <mat-form-field class="field">
                         <mat-label>{{'panel.Name'|translate}}</mat-label>
-                        <input type="text" matInput>
+                        <input [(ngModel)]="user.name" type="text" matInput>
                         <mat-error>
 
                         </mat-error>
@@ -20,7 +20,7 @@
                 <div class="p-col-6">
                     <mat-form-field style="margin-left: 1em;" class="field">
                         <mat-label>{{'panel.Family'|translate}}</mat-label>
-                        <input type="text" matInput>
+                        <input [(ngModel)]="user.family" type="text" matInput>
                         <mat-error>
 
                         </mat-error>
@@ -29,7 +29,7 @@
                 <div class="p-col-12">
                     <mat-form-field class="field">
                         <mat-label>{{'panel.email'|translate}}</mat-label>
-                        <input type="email" matInput>
+                        <input [(ngModel)]="user.email" type="email" matInput>
                         <mat-error>
 
                         </mat-error>
@@ -39,7 +39,7 @@
                     <div class="address">
                         <mat-form-field style="border-left: 1em;" class="field">
                             <mat-label>{{'panel.Full Address'|translate}}</mat-label>
-                            <input type="text" matInput>
+                            <input [(ngModel)]="user.address" type="text" matInput>
                             <mat-error>
 
                             </mat-error>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="p-col-12 p-d-flex p-jc-center">
                     <button pButton label="{{'panel.Confirm changes'|translate}}"
-                        class="btn p-button-rounded p-button-raised"></button>
+                        class="btn p-button-rounded p-button-raised" (click)="onSubmit()"></button>
                 </div>
             </div>
         </div>
