@@ -31,6 +31,10 @@
         color: #ffffff !important;
         background-color: #000000 !important;
     }
+
+    .signup {
+        display: none;
+    }
 }
 
 .login-form:before {
@@ -105,3 +109,45 @@
         margin-left: -57em;
     }
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+    .login-form {
+        width: auto;
+        height: auto;
+        border-radius: unset;
+        box-shadow: none;
+        background: unset;
+    }
+
+    .login-form:before {
+        box-shadow: none;
+    }
+
+    .login-btn {
+        display: none;
+    }
+
+    .signup {
+        display: block !important;
+    }
+
+    .forget-pass {
+        span {
+            font-size: 1em !important;
+        }
+    }
+
+    ::ng-deep .main-root-rtl {
+        .login-form {
+            margin-left: 19em !important;
+        }
+    }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

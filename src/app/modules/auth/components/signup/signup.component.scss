@@ -23,6 +23,10 @@
         color: #ffffff !important;
         background-color: #3548BF !important;
     }
+
+    .login {
+        display: none;
+    }
 }
 
 .signup:before {
@@ -82,3 +86,36 @@
         margin-left: 45em;
     }
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+    .signup-btn {
+        display: none;
+    }
+
+    .signup-form {
+        width: auto;
+        height: auto;
+        border-radius: unset;
+        box-shadow: none;
+        background: unset;
+    }
+
+    .login {
+        display: block !important;
+    }
+
+
+    ::ng-deep .main-root-rtl {
+        .signup-form {
+            margin-left: 19em;
+        }
+    }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

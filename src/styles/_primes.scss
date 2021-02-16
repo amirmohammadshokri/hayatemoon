@@ -67,3 +67,21 @@
 .p-button-label {
   font-family: 'IRANSansWeb' !important;
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+  .p-cascadeselect {
+    min-width: 10em !important;
+  }
+
+  .p-dropdown {
+    min-width: 10em !important;
+  }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

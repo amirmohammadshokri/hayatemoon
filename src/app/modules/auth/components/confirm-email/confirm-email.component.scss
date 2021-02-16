@@ -1,0 +1,30 @@
+.container {
+    height: 100vh;
+    background-color: #F3F3F3;
+    width: 100vw;
+    z-index: 9;
+    position: relative;
+
+    .confirmation {
+        background-color: #243495;
+        padding: 1em;
+        border-radius: 1em;
+        color: #ffffff;
+
+        i {
+            font-size: 4em;
+        }
+    }
+}
+
+::ng-deep .main-root-rtl {
+    i {
+        margin-left: 0.5em;
+    }
+}
+
+::ng-deep .main-root-ltr {
+    i {
+        margin-right: 0.5em;
+    }
+}

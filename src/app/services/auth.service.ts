@@ -27,6 +27,10 @@ export class AuthService {
     return this.http.get<any>(`${this.url}users/me`);
   }
 
+  public confirmEmail(confirmation: string): Observable<any> {
+    return this.http.get<any>(`${this.url}auth/email-confirmation?confirmation=${confirmation}`);
+  }
+
   public forgotPassword(email: string): Observable<any> {
     return this.http.post<any>(`${this.url}auth/forgot-password`, {
       email,

@@ -15,9 +15,6 @@
     }
 }
 
-
-
-
 ::ng-deep .main-root-ltr {
     .right {
         .rtl {
@@ -41,3 +38,17 @@
         }
     }
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+    .rectangle {
+        padding: 0 1em !important;
+    }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

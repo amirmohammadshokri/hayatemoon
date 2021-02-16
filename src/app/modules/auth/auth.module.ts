@@ -18,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 import { MainComponent } from './components/main/main.component';
+import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MainComponent } from './components/main/main.component';
     ResetpassComponent,
     LoginComponent,
     SignupComponent,
-    MainComponent
+    MainComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     CommonModule,

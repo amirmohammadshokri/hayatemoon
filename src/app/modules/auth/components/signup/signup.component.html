@@ -34,6 +34,9 @@
             [disabled]="registered || !user.email || !user.password || !user.username || (user.password !== repeatedPassword)"
             class="p-py-1" class="p-button-rounded" label="{{'auth.signup' | translate}}"
             [icon]="(registered?'pi pi-spin pi-spinner':'pi')" (click)="register()"></button>
+        <br>
+        <span class="login">have an account? <span style="color: #3548BF;cursor: pointer;" (click)="btnLogin()">log
+                in</span> here.</span>
     </div>
     <div *ngIf="!active" class="signup-btn animate__animated animate__fadeIn" (click)="btnClicked()">
         <div>

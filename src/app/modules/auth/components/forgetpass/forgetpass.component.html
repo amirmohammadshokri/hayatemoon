@@ -5,7 +5,7 @@
             {{'auth.enterEmail' | translate}}
         </mat-label>
         <mat-form-field class="field">
-            <mat-label class="color-text">{{'auth.email' | translate}}</mat-label>
+            <mat-label>{{'auth.email' | translate}}</mat-label>
             <input type="text" matInput [(ngModel)]="email" />
             <mat-error> {{'auth.emailError' | translate}} </mat-error>
         </mat-form-field>
@@ -13,7 +13,7 @@
             (click)="sendEmail()" [label]="'auth.RequestResetLink' | translate"
             [icon]="(pressed?'pi pi-spin pi-spinner':'pi')"></button>
         <div class="p-my-3">
-            <mat-label style="color: #FEE8ED;font-size: 10px;">{{'auth.IfEmail' | translate}}</mat-label>
+            <mat-label class="desc">{{'auth.IfEmail' | translate}}</mat-label>
             <a class="resend">{{'auth.Resend' | translate}}</a>
         </div>
         <span class="back p-mt-3" (click)="showLogin()">{{'auth.Back to login' | translate}}</span>

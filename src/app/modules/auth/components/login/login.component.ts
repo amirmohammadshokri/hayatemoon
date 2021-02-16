@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
     this.changeState.emit(true);
   }
 
+  btnSignup(): void {
+    this.changeState.emit(false);
+  }
+
   forgetPassClicked(): void {
     this.forgetPass.emit(true);
   }

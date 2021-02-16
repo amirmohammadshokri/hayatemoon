@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './forgetpass.component.html',
   styleUrls: ['./forgetpass.component.scss']
 })
-export class ForgetpassComponent implements OnInit {
+export class ForgetpassComponent {
 
   @Output() login = new EventEmitter<boolean>();
   @Output() resetf = new EventEmitter<boolean>();
@@ -15,9 +15,6 @@ export class ForgetpassComponent implements OnInit {
   pressed: boolean;
 
   constructor(private sAuth: AuthService, private sMsg: MessageService) { }
-
-  ngOnInit(): void {
-  }
 
   showLogin(): void {
     this.login.emit();
