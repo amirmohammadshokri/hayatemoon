@@ -1,32 +1,32 @@
 <div class="container">
     <div class="change p-d-flex p-ai-center p-jc-evenly">
-        <h3>{{'post.Residental for Rent'|translate}}</h3>
+        <h3>{{'common.' + selectedCategory|translate}}</h3>
         <span style="flex: 1 auto;"></span>
         <button pButton pRipple label="{{'post.Change Category'|translate}}" class="p-button-rounded p-button-text"
             (click)="onChangeCategory()"></button>
     </div>
-    <div class="bottom p-grid">
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="City">{{'post.City'|translate}}</label>
+    <div class="bottom p-grid p-fluid">
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="City">{{'post.City'|translate}}</label>
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <p-dropdown inputId="City" [style]="{'minWidth':'100%','background-color':'#e8e8e8'}"
                 placeholder="{{'post.City'|translate}}">
             </p-dropdown>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="Neighborhood">{{'post.Neighborhood'|translate}}</label>
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="Neighborhood">{{'post.Neighborhood'|translate}}</label>
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <p-dropdown inputId="Neighborhood" [style]="{'minWidth':'100%','background-color':'#e8e8e8'}"
                 placeholder="{{'post.Neighborhood'|translate}}"></p-dropdown>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-start p-jc-end">
-            <label for="">{{'post.Ad Image'|translate}}</label>
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-start p-jc-end">
+            <label class="lg-label" for="">{{'post.Ad Image'|translate}}</label>
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <div class="p-d-flex p-ai-center">
                 <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle margin-i"></i>
                 <span>{{'post.Adding Image Triple Your Advertise View, Pick Them All Once.'|translate}}</span>
@@ -63,74 +63,76 @@
                 </div>
             </div>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">{{'post.Area'|translate}}</label>
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="">{{'post.Area'|translate}}</label>
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <mat-form-field class="field">
                 <mat-label>{{'post.Square Meters'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
-
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">{{'post.Age Of Building'|translate}}</label>
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="">{{'post.Age Of Building'|translate}}</label>
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <mat-form-field class="field">
                 <mat-label>{{'post.Age Of Building'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
-
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
-            <label for="">{{'post.Number of Rooms'|translate}}</label>
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="">{{'post.Number of Rooms'|translate}}</label>
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <p-dropdown [style]="{'minWidth':'100%','background-color':'#e8e8e8'}" autoWidth="false"
                 placeholder="{{'post.Number of Rooms'|translate}}" class=" sp-mx-2"></p-dropdown>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">{{'panel.Rent'|translate}}</div>
-        <div class="p-col-8">
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="Rent">{{'panel.Rent'|translate}}</label>
+        </div>
+        <div class="p-col-10 p-lg-8">
             <mat-form-field class="field">
                 <mat-label>{{'post.Rent in Turkish Lira'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
-
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">{{'post.Phone Number'|translate}}</div>
-        <div class="p-col-8">
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="Phone">{{'post.Phone Number'|translate}}</label>
+        </div>
+        <div class="p-col-10 p-lg-8">
             <div class="p-d-flex p-ai-center">
                 <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle margin-i"></i>
                 <span>{{'post.Enter A Valid Phone Number So User Can Contact You.'|translate}}</span>
             </div>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2">
         </div>
-        <div class="p-col-8">
+        <div class="p-col-10 p-lg-8">
             <mat-form-field class="field">
-                <mat-label>00905522398405</mat-label>
+                <mat-label>{{'post.Phone Number'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
-
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end">{{'post.Title'|translate}}</div>
-        <div class="p-col-8">
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex p-ai-center p-jc-end">
+            <label class="lg-label" for="Title">{{'post.Title'|translate}}</label>
+        </div>
+        <div class="p-col-10 p-lg-8">
             <div class="p-d-flex p-ai-center">
                 <i style="font-size: 1.5em;color: #3548BF;" class="pi pi-info-circle margin-i"></i>
                 <span>
@@ -138,26 +140,24 @@
                 </span>
             </div>
         </div>
-        <div class="p-col-2"></div>
-
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end"></div>
-        <div class="p-col-8">
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-10 p-lg-8">
             <mat-form-field class="field">
                 <mat-label>{{'post.Description'|translate}}</mat-label>
                 <input type="text" matInput>
                 <mat-error>
-
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="p-col-2"></div>
-        <div class="p-col-2 p-d-flex p-ai-center p-jc-end"></div>
-        <div class="p-col-8">
+        <div class="p-col-1 p-lg-2"></div>
+        <div class="p-col-1 p-lg-2 p-d-flex"></div>
+        <div class="p-col-10 p-lg-8">
             <div class="p-d-flex p-ai-center p-jc-center">
                 <button pButton label="{{'post.Post Ad'|translate}}"
                     class="p-button-rounde p-button-raised p-button-raised" (click)="post()"></button>
             </div>
         </div>
-        <div class="p-col-2"></div>
+        <div class="p-col-1 p-lg-2"></div>
     </div>
 </div>

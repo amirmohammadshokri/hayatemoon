@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'sc-post-adver',
@@ -10,6 +10,7 @@ export class PostAdverComponent implements OnInit {
 
   @Output() changeCategory = new EventEmitter<boolean>();
   @Output() postAd = new EventEmitter<boolean>();
+  @Input() selectedCategory: string;
 
   constructor() {
   }

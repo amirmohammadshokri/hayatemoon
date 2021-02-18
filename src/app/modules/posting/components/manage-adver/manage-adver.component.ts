@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IAdvertisement } from 'src/app/interfaces';
 
 @Component({
   selector: 'sc-manage-adver',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ManageAdverComponent implements OnInit {
 
   mode: number;
+  advertisement: IAdvertisement;
 
   constructor() {
     this.mode = 1;

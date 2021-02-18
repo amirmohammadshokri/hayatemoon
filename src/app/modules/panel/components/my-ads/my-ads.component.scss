@@ -57,6 +57,7 @@
             .manage-btn {
                 color: #3548BF !important;
                 cursor: pointer;
+                margin-top: 3.8em;
 
                 span {
                     color: #3548BF !important;
@@ -116,3 +117,24 @@
         }
     }
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+    .post {
+        padding-top: 4.5em;
+        height: 7em !important;
+    }
+
+    .manage-btn {
+        color: #3548BF !important;
+        cursor: pointer;
+        margin-top: unset !important;
+    }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

@@ -36,10 +36,12 @@
       background-color: #e8e8e8;
       border-radius: 1em;
       padding: 1.5em;
-      margin: 1em 2;
+      margin: 1em;
 
       .radio {
         margin-top: 2em;
+        flex-wrap: wrap;
+        justify-content: space-between;
       }
 
       .field {
@@ -53,12 +55,13 @@
   .container {
     .bottom {
       .form {
-        .radio{
-          .pricelabel{
+        .radio {
+          .pricelabel {
             padding-left: 0;
           }
         }
-        .hcarddetail{
+
+        .hcarddetail {
           padding-left: 1em;
         }
       }
@@ -67,16 +70,17 @@
 }
 
 ::ng-deep .main-root-rtl {
-    
+
   .container {
     .bottom {
       .form {
-        .radio{
-          .pricelabel{
+        .radio {
+          .pricelabel {
             padding-right: 0.5em;
           }
         }
-        .hcarddetail{
+
+        .hcarddetail {
           padding-right: 1em;
         }
       }

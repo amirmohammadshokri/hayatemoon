@@ -4,7 +4,7 @@
         {{'post.also you can choose both of them to affect more on viewers.'|translate}}
     </p>
     <div class="p-grid">
-        <div class="p-col-6 p-lg-6">
+        <div class="p-col-12 p-lg-6">
             <div [class]="'type ' + (type === '1'?'active':'')">
                 <div class="p-field-radiobutton">
                     <p-radioButton inputId="special" value="1" [(ngModel)]="type"></p-radioButton>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="p-col-6 p-lg-6">
+        <div class="p-col-12 p-lg-6">
             <div [class]="'type ' + (type === '2'?'active':'')">
                 <div class="p-field-radiobutton">
                     <p-radioButton inputId="unSpecial" value="2" [(ngModel)]="type"></p-radioButton>
@@ -46,7 +46,7 @@
     </div>
     <div *ngIf="type" class="p-d-flex p-flex-column p-mt-4">
         <div class="p-grid">
-            <div class="p-col-6 p-lg-6">
+            <div class="p-col-12 p-lg-6">
                 <div class="type">
                     <div class="p-grid">
                         <div class="p-col-12 p-d-flex p-ai-center">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="p-col-6 p-lg-6">
+            <div class="p-col-12 p-lg-6">
                 <div class="type">
                     <div class="p-grid">
                         <div class="p-col-12 p-d-flex p-ai-center p-jc-center">

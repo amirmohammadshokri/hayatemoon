@@ -6,8 +6,8 @@
                 translate}}</span>
         </div>
     </div>
-    <div class="content p-d-flex">
-        <div class="left">
+    <div class="content p-d-flex p-grid">
+        <div class="left p-col-12 p-lg-5">
             <div class="slider">
                 <p-carousel dir="ltr" [value]="advertisement?.images" styleClass="custom-carousel" [numVisible]="1"
                     [numScroll]="1">
@@ -32,7 +32,7 @@
                 </a>
             </div>
         </div>
-        <div class="right">
+        <div class="right p-col-12 p-lg-7">
             <h2>{{advertisement?.title}}</h2>
             <div class="my-phone detail p-ai-center p-jc-center">
                 <span>{{'ads.phone Number'|translate}} </span>

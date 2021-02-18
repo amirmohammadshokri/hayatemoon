@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="p-mt-6">
-        <sc-ads-info [className]="'special'" *ngIf="mode === 1"></sc-ads-info>
+        <sc-ads-info [className]="'special'" *ngIf="mode === 1" [advertisement]="advertisement"></sc-ads-info>
         <sc-upgrade *ngIf="mode === 2"></sc-upgrade>
         <sc-post-adver *ngIf="mode === 3"></sc-post-adver>
     </div>

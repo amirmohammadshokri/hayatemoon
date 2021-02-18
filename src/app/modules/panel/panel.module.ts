@@ -16,6 +16,11 @@ import { MyAdsComponent } from './components/my-ads/my-ads.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
+import { AdverService } from 'src/app/services/adver.service';
 
 
 
@@ -40,6 +45,12 @@ import { TranslateModule } from '@ngx-translate/core';
     RadioButtonModule,
     FormsModule,
     TranslateModule
+  ],
+  providers: [
+    AuthService,
+    AdverService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class PanelModule { }

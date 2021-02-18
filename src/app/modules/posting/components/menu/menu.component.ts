@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import * as $ from 'jquery';
+import { AdverService } from 'src/app/services/adver.service';
 
 
 @Component({
@@ -10,26 +11,11 @@ import * as $ from 'jquery';
 })
 export class MenuComponent implements OnInit {
 
-  categories: MenuItem[] = [
-    { icon: 'pi pi-inbox', label: 'All Ads' },
-    {
-      icon: 'pi pi-inbox', label: 'Estate', items: [
-        { label: 'Residental for Rent', id: '1' },
-        { label: 'Residental for Sale', id: '2' },
-        { label: 'Commercial for Rent', id: '3' },
-        { label: 'Commercial for Sale', id: '4' }
-      ]
-    },
-    { icon: 'pi pi-inbox', label: 'Vehicle ( Buy )' },
-    { icon: 'pi pi-inbox', label: 'Electronics' },
-    { icon: 'pi pi-inbox', label: 'Home & Garden' },
-    { icon: 'pi pi-inbox', label: 'Job' },
-    { icon: 'pi pi-inbox', label: 'Services' },
-  ];
-  @Output() selectCategory = new EventEmitter<number>();
+  categories: MenuItem[] = [];
+  @Output() selectCategory = new EventEmitter<string>();
 
-  constructor() {
-
+  constructor(private sAd: AdverService) {
+    this.categories = this.sAd.getCategories().filter(c => c.value !== 'همه ی آگهی ها');
   }
 
   ngOnInit(): void {
@@ -47,8 +33,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  menuItemClicked(id: string): void {
-    this.selectCategory.emit(Number.parseInt(id, 0));
+  menuItemClicked(value: string): void {
+    this.selectCategory.emit(value);
   }
 
 }

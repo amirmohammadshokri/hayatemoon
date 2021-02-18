@@ -15,11 +15,11 @@ export class PanelComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.menus = [
-      { label: 'My Ads', id: 'myads' },
-      { label: 'User Profile', id: 'profile' },
-      { label: 'Add Credit', id: 'addcredit' },
-      { label: 'Marked Ads', id: 'markedads' },
-      { label: 'Security', id: 'security' }
+      { label: 'My Ads', id: 'myads', icon: 'myads' },
+      { label: 'User Profile', id: 'profile', icon: 'patient' },
+      { label: 'Add Credit', id: 'addcredit', icon: 'wallet' },
+      { label: 'Marked Ads', id: 'markedads', icon: 'right' },
+      { label: 'Security', id: 'security', icon: 'password' }
     ];
     this.setActiveMenu();
   }

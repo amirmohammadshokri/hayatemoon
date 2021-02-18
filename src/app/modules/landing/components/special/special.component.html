@@ -10,7 +10,7 @@
     </div>
     <div class="p-d-flex p-ai-center bottom">
         <div style="width: 100%;" class="p-grid">
-            <div class="p-col-2">
+            <div class="p-col-2 p-lg-2 filter">
                 <div class="menus">
                     <div class="menu p-d-flex p-ai-center" *ngFor="let city of topCities;let i = index"
                         [id]="'menu' + i" (click)="menuClicked(i,city.value)">
@@ -28,7 +28,7 @@
                     </p-dropdown>
                 </div>
             </div>
-            <div class="p-col-10">
+            <div class="p-col-12 p-lg-10">
                 <p-carousel dir="ltr" [value]="advs" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
                     [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
                     <ng-template let-adv pTemplate="item">

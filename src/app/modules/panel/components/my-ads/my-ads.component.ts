@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { AdverService } from 'src/app/services/adver.service';
 
 @Component({
   selector: 'sc-my-ads',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyAdsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sAd: AdverService, private sMsg: MessageService) { }
 
   ngOnInit(): void {
+    this.sAd.findMine().subscribe(res => {
+
+    });
   }
 
 }

@@ -5,7 +5,7 @@
         <h1 *ngIf="!postAd">{{'post.Posting Free Advertiesement'|translate}}</h1>
         <sc-menu style="width: 100%;" *ngIf="!selectedCategory" (selectCategory)="onSelectCategory($event)"></sc-menu>
         <sc-post-adver *ngIf="selectedCategory && !postAd" (changeCategory)="selectedCategory=null"
-            (postAd)="postAd=true">
+            [selectedCategory]="selectedCategory" (postAd)="postAd=true">
         </sc-post-adver>
         <sc-manage-adver *ngIf="postAd"></sc-manage-adver>
     </div>

@@ -7,7 +7,7 @@
         <i class="pi pi-angle-down down-icon"></i>
     </a>
     <div *ngIf="category.visible" class="p-d-flex p-flex-column p-ml-4 p-mt-2">
-        <div class="p-my-1 menu-item" *ngFor="let item of category.items" (click)="menuItemClicked(item.id)">
+        <div class="p-my-1 menu-item" *ngFor="let item of category.items" (click)="menuItemClicked(item.value)">
             <span class="margin-label">{{item.label}}</span>
         </div>
     </div>

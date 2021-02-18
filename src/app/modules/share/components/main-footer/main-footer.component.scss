@@ -25,13 +25,13 @@
             font-size: 0.8em;
         }
 
-        span:nth-child(1) {
-            left: 0;
-        }
+        // span:nth-child(1) {
+        //     left: 0;
+        // }
 
-        span:last-child {
-            right: 0;
-        }
+        // span:last-child {
+        //     right: 0;
+        // }
 
         i {
             font-size: 2em;
@@ -39,3 +39,21 @@
         }
     }
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+    .links {
+        width: 95% !important;
+    }
+
+    .footerlink {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

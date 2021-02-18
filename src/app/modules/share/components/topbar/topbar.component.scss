@@ -166,11 +166,11 @@
 
         .icons {
             .icon {
-                margin-left: 1em;
+                margin-left: 0.5em;
             }
 
             .signup {
-                margin-left: 1em;
+                margin-left: 0.5em;
             }
         }
     }
@@ -206,11 +206,11 @@
 
         .icons {
             .icon {
-                margin-right: 1em;
+                margin-right: 0.5em;
             }
 
             .signup {
-                margin-right: 1em;
+                margin-right: 0.5em;
             }
         }
     }
@@ -242,18 +242,14 @@
 
 @media screen and (max-width: 480px) {
     .topbar {
-        padding: 0 1em;
+        padding: 0.5em 1em;
         background: rgba($color: #ffffff, $alpha: 0.1);
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
     }
 
-    .signup {
-        display: none !important;
-    }
-
-    .food {
+    .co-title {
         display: none !important;
     }
 }

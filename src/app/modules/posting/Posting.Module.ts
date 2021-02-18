@@ -16,6 +16,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MainComponent } from './components/main/main.component';
 import { FormsModule } from '@angular/forms';
 import { AdsModule } from '../ads/ads.module';
+import { AdverService } from 'src/app/services/adver.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 
 
 @NgModule({
@@ -39,6 +43,11 @@ import { AdsModule } from '../ads/ads.module';
     TranslateModule,
     FormsModule,
     AdsModule
+  ],
+  providers: [
+    AdverService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class PostingModule {

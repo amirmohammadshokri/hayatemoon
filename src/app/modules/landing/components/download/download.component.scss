@@ -13,6 +13,10 @@
         img {
             cursor: pointer;
         }
+
+        .desc {
+            padding-left: 3em;
+        }
     }
 
     .right {
@@ -35,3 +39,34 @@
         padding-right: 1em;
     }
 }
+
+@media screen and (max-width: 480px) and (min-width: 360px) {}
+
+@media screen and (max-width: 480px) {
+    .rectangle {
+        height: fit-content !important;
+        padding: 0 1em !important;
+    }
+
+    .header {
+        font-size: 2em !important;
+    }
+
+    .right {
+        display: none !important;
+    }
+
+    .desc {
+        padding: 0 7em 0 3.5em !important;
+    }
+
+    img {
+        width: 75% !important;
+    }
+}
+
+@media screen and (max-width: 960px) and (min-width: 480px) {}
+
+@media screen and (max-width: 1366px) and (min-width: 960px) {}
+
+@media screen and (min-width: 1366px) {}

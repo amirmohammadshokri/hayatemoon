@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
-  selectedCategory: number;
+  selectedCategory: string;
   postAd: boolean;
 
   constructor(private route: ActivatedRoute) {
@@ -20,8 +20,8 @@ export class MainComponent implements OnInit {
     });
   }
 
-  onSelectCategory(id: number): void {
-    this.selectedCategory = id;
+  onSelectCategory(value: string): void {
+    this.selectedCategory = value;
   }
 
 }
