@@ -1,0 +1,8 @@
+@mixin localFonts($font) {
+    @font-face {
+        font-family: $font;
+        src: url("./../assets/fonts/#{$font}/#{$font}.eot") format("eot"),
+        url("./../assets/fonts/#{$font}/#{$font}.ttf") format("ttf"),
+        url("./../assets/fonts/#{$font}/#{$font}.woff") format("woff");
+    }
+}

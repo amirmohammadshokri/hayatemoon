@@ -1,0 +1,31 @@
+<div class="menu-wrapper">
+    <div class="sidebar-logo">
+        <a>
+            <img src="assets/layout/images/logo-single.png">
+        </a>
+        <a class="sidebar-pin">
+            <span class="pin"></span>
+        </a>
+    </div>
+    <div class="layout-menu-container">
+        <ul class="layout-menu">
+            <li *ngFor="let menu of menuItems;let i = index" [id]="'headerMenu_' + i">
+                <a class="p-ripple headerMenu" (click)="headerMenuClick(i)" [routerLink]="menu.routerLink">
+                    <i [class]="'layout-menuitem-icon ' + menu.icon"></i>
+                    <span class="layout-menuitem-text">{{menu.label}}</span>
+                    <i *ngIf="menu.items?.length > 0" class="pi pi-fw pi-chevron-down layout-submenu-toggler"></i>
+                    <span class="p-ink"></span>
+                </a>
+                <ul [style]="(menu.visible?'':'display: none;')" role="menu">
+                    <li *ngFor="let item of menu.items;let j = index" [id]="'itemMenu_' + i + '' + j">
+                        <a class="p-ripple" (click)="itemMenuClick(i,j)" [routerLink]="item.routerLink">
+                            <i [class]="'layout-menuitem-icon ' + item.icon"></i>
+                            <span class="layout-menuitem-text">{{item.label}}</span>
+                            <span class="p-ink"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

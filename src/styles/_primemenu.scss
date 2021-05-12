@@ -1,0 +1,28 @@
+.p-panelmenu {
+    .p-panelmenu-header {
+        a .p-panelmenu-icon {
+            margin-right: 0 !important;
+            margin-left: 0.5rem;
+        }
+
+        .pi-chevron-right {
+            transform: rotate(180deg) !important;
+        }
+
+        a .p-menuitem-icon {
+            margin-right: 0 !important;
+            margin-left: 0.5rem;
+        }
+    }
+
+    .p-panelmenu-content {
+        .p-menuitem {
+            .p-menuitem-link {
+                .p-menuitem-icon {
+                    margin-right: 0 !important;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,143 @@
+<div class="card">
+  <div class="p-d-flex p-ai-center p-mb-3">
+    <h5>ثبت تور</h5>
+    <span style="flex:1 auto;"></span>
+    <button pButton pRipple class="p-button-success p-ml-1" label="ذخیره"></button>
+    <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" [routerLink]="'../'"></button>
+<<<<<<< HEAD
+</div>
+ 
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <span> اطلاعات عمومی هتل</span>
+            </ng-template>
+       <div class="p-grid p-fluid"> 
+             <div class="p-col-6 p-lg-6 p-field">
+                <label for="minimumPrice">عنوان</label>
+                <input type="text" [(ngModel)]="item" pInputText  required>
+             </div>
+             <div class="p-col-6 p-lg-6 p-field">
+             <label for="userName">نوع تور</label>
+             <p-dropdown [options]="items" [(ngModel)]="item" placeholder="انتخاب نوع تور" 
+             [virtualScroll]="true" [itemSize]="31" [filter]="false"></p-dropdown>
+             </div>
+        </div>  
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate = "header">
+                <span> هزینه ها</span>
+            </ng-template>
+            <p>t33.</p>
+        </p-tabPanel>
+        <p-tabPanel header="Header III">
+              <p-tabPanel header="Header III">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-search"></i>
+                <span>امکانات</span>
+                <i class="pi pi-cog"></i>
+            </ng-template>
+            <p>t22</p>   
+        </p-tabPanel>
+            <ng-template pTemplate = "header">
+                <span>امکانات</span>
+            </ng-template>
+            <p>t1</p>   
+        </p-tabPanel>
+        <p-tabPanel header="Header IIII">
+            <p-tabPanel header="Header IIII">
+          <ng-template pTemplate = "header">
+              <span>امکانات</span>
+          </ng-template>
+          <p>t22</p>   
+      </p-tabPanel>
+          <ng-template pTemplate = "header">
+              <span>عکس ها</span>
+          </ng-template>
+          <div  class="p-my-6 p-grid card p-shadow-3 animate__animated animate__slideInLeft">
+            <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+                <div class="add-img p-d-flex p-ai-center p-jc-center">
+                    <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                        <img src="assets/layout/images/camera.svg" (click)="file.click()">
+                    </div>
+                    <input type="file" #file accept=".jpg,.png,.jpeg"  style="display:none;">
+                </div>
+                <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index" >
+                    <div class="main p-d-flex p-ai-center p-jc-center">
+                        <img  />
+                    </div>
+                    <div class="tools">
+                        <div class="circle p-d-flex p-ai-center p-jc-center">
+                            <img src="assets/layout/images/bin.svg">
+                        </div>
+                        <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                            <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+                        </div>
+                    </div>
+                </div>
+=======
+  </div>
+
+  <p-tabView styleClass="tabview-custom">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span> اطلاعات عمومی هتل</span>
+      </ng-template>
+      <div class="p-grid p-fluid">
+        <div class="p-col-6 p-lg-6 p-field">
+          <label for="minimumPrice">عنوان</label>
+          <p-inputNumber required></p-inputNumber>
+        </div>
+        <div class="p-col-6 p-lg-6 p-field">
+          <label for="userName">نوع تور</label>
+          <p-dropdown [options]="items" [(ngModel)]="item" placeholder="انتخاب نوع تور" [virtualScroll]="true"
+            [itemSize]="31" [filter]="true"></p-dropdown>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span> هزینه ها</span>
+      </ng-template>
+      <p>t33.</p>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>امکانات</span>
+      </ng-template>
+      <p>t1</p>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>عکس ها</span>
+      </ng-template>
+      <div class="p-my-6 p-grid">
+        <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+          <div class="add-img p-d-flex p-ai-center p-jc-center">
+            <div class="add-circle p-d-flex p-ai-center p-jc-center">
+              <img src="assets/layout/images/camera.svg" (click)="file.click()">
+>>>>>>> 91d7200402068f686ef513fdfb4a9a869499001a
+            </div>
+            <input type="file" #file accept=".jpg,.png,.jpeg" style="display:none;">
+          </div>
+          <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
+            <div class="main p-d-flex p-ai-center p-jc-center">
+              <img />
+            </div>
+            <div class="tools">
+              <div class="circle p-d-flex p-ai-center p-jc-center">
+                <img src="assets/layout/images/bin.svg">
+              </div>
+              <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-col-12">
+          <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

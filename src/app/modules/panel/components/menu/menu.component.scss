@@ -1,0 +1,28 @@
+.database {
+    position: absolute;
+    bottom: 0;
+
+    a {
+        overflow: inherit;
+
+        span {
+            width: 100%;
+        }
+    }
+
+    .db-selected {
+        color: #689F38;
+    }
+
+    .db-unselected {
+        color: #FBC02D;
+    }
+}
+
+:host ::ng-deep .p-dropdown {
+    min-width: 10em;
+}
+
+:host ::ng-deep .p-dropdown-item {
+    padding: 0.5rem 1rem !important;
+}

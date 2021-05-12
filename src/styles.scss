@@ -1,0 +1,73 @@
+@import "variables";
+@import "mixins";
+@import "primes";
+@import "primemenu";
+@import "layout-dark";
+@import "theme-dark";
+@include localFonts($MainFont);
+
+html {
+  height: 100%;
+  font-size: 14px;
+}
+
+body {
+  font-family: $MainFont, Tahoma;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+a {
+  cursor: pointer;
+}
+
+[id^="headerMenu"] {
+  a:focus {
+    outline: 0;
+  }
+}
+
+[id^="itemMenu"] {
+  a:focus {
+    outline: 0;
+  }
+}
+
+.dp-picker-input {
+  font-size: 1rem;
+  color: #69707a;
+  background: #ffffff;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #d4d6d9;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 6px;
+  font-family: $MainFont, Tahoma !important;
+  width: 100% !important;
+  height: 35px !important;
+}
+
+.dp-nav-header-btn {
+  font-family: $MainFont, Tahoma !important;
+}
+
+.dp-calendar-month {
+  font-family: $MainFont, Tahoma !important;
+}
+
+dp-date-picker {
+  width: 100% !important;
+}
+
+.dp-calendar-day {
+  font-family: $MainFont, Tahoma !important;
+}
+
+@media screen and (max-width: 39.938em) {
+  body {
+    font-size: 12px;
+  }
+}

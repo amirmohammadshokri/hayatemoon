@@ -1,0 +1,11 @@
+<p-toast></p-toast>
+<p-progressBar *ngIf="showProgressBar" mode="indeterminate" [style]="{
+                'height': '6px',
+                'margin-top':'-3px',
+                'z-index': '9999',
+                'position': 'absolute',
+                'top': '0',
+                'width': '100%'
+            }">
+</p-progressBar>
+<router-outlet></router-outlet>
