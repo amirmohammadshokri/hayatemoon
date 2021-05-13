@@ -12,7 +12,7 @@ pool:
   name: 'Default'
 
 steps:
-- task: Npm@1
+- task: Npm@0
   inputs:
     command: 'publish'
 
