@@ -33,7 +33,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'run build-prod'
+    customCommand: 'ng build --prod'
 
 - task: PublishBuildArtifacts@1
   inputs:
