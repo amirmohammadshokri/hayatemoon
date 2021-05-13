@@ -33,7 +33,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'npm run build -- --prod'
+    customCommand: 'npm run build'
 
 - task: PublishBuildArtifacts@1
   inputs:
