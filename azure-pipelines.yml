@@ -16,24 +16,24 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- task: Npm@0
-  displayName: 'npm install'
-  inputs:
-    arguments: '--force'
+# - task: Npm@0
+#   displayName: 'npm install'
+#   inputs:
+#     arguments: '--force'
 
-- task: Npm@1
-  displayName: 'npm install angular cli'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'install @angular/cli'
+# - task: Npm@1
+#   displayName: 'npm install angular cli'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'install @angular/cli'
 
-- task: Npm@1
-  displayName: 'npm build'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'npm install'
+# - task: Npm@1
+#   displayName: 'npm build'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'npm install'
     
 # - task: Npm@1
 #   displayName: 'ng build --prod'
@@ -42,7 +42,12 @@ steps:
 #     verbose: false
 #     customCommand: 'ng build --prod'
 
+# - script: |
+#     ng build --prod
+
 - script: |
+    npm install -g @angular/cli
+    npm install
     ng build --prod
 
 - task: PublishBuildArtifacts@1
