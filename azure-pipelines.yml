@@ -15,11 +15,25 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-  
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
+
+- task: Npm@0
+  displayName: 'npm install'
+  inputs:
+    arguments: '--force'
+
+- task: Npm@1
+  displayName: 'npm install angular cli'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'install @angular/cli'
+
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'npm run build -- --prod'
 
 - task: PublishBuildArtifacts@1
   inputs:
