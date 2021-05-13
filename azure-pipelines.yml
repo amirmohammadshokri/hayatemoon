@@ -33,8 +33,15 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'run build'
+    customCommand: 'npm install'
+    
+- task: Npm@1
+  displayName: 'ng build --prod'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'ng build --prod'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
