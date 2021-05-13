@@ -35,12 +35,15 @@ steps:
     verbose: false
     customCommand: 'npm install'
     
-- task: Npm@1
-  displayName: 'ng build --prod'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'ng build --prod'
+# - task: Npm@1
+#   displayName: 'ng build --prod'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'ng build --prod'
+
+- script: |
+    ng build --prod
 
 - task: PublishBuildArtifacts@1
   inputs:
