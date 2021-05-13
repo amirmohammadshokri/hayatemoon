@@ -1,4 +1,5 @@
 # Node.js with Angular
+
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -11,36 +12,42 @@ pool:
   name: 'Default'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- task: Npm@0
-  displayName: 'npm install'
-  inputs:
-    arguments: '--force'
-
 - task: Npm@1
-  displayName: 'npm install angular cli'
   inputs:
-    command: custom
-    verbose: false
-    customCommand: 'install @angular/cli'
+    command: 'publish'
 
-- task: Npm@1
-  displayName: 'npm build'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'npm install'
+
+# steps:
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
+
+# - task: Npm@0
+#   displayName: 'npm install'
+#   inputs:
+#     arguments: '--force'
+
+# - task: Npm@1
+#   displayName: 'npm install angular cli'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'install @angular/cli'
+
+# - task: Npm@1
+#   displayName: 'npm build'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'npm install'
     
-- task: Npm@1
-  displayName: 'ng build --prod'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'ng build --prod'
+# - task: Npm@1
+#   displayName: 'ng build --prod'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'ng build --prod'
 
 # - script: |
 #     ng build --prod
