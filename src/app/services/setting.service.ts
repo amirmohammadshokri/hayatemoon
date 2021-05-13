@@ -11,7 +11,7 @@ import { AppConfig } from "../app.config";
     url: string;
   
     constructor(private http: HttpClient, private conf: AppConfig) {
-      this.url = `${this.conf.getConfig('url')}web/banner/`;
+      this.url = `${this.conf.getConfig('url')}web/Setting/`;
     }
   
     addSetting(obj: any): Observable<any[]> {

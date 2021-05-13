@@ -53,4 +53,5 @@ export class AppComponent implements OnInit {
   logout(): void {
     this.oidcSecurityService.logoff();
   }
+ 
 }

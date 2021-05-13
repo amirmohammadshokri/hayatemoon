@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { MessageService } from 'primeng/api';
@@ -24,10 +24,12 @@ export function initializeApp(appInitService: AppInitService): any {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ProgressBarModule,
     ToastModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     AuthModule.forRoot(),
   ],
   providers: [

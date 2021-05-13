@@ -14,12 +14,12 @@ import { AppConfig } from "../app.config";
       this.url = `${this.conf.getConfig('url')}web/banner/`;
     }
   
-    getBanners(pageNumber: number): Observable<any[]> {
-      return this.http.get<any[]>(`${this.url}latest/${pageNumber}`);
+    getBanners(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.url}`);
     }
   
     addBanner(obj: any): Observable<any[]> {
-      return this.http.post<any[]>(`${this.url}new`, obj);
+      return this.http.post<any[]>(`${this.url}`, obj);
     }
   }
   

@@ -24,11 +24,10 @@ export class MenuComponent implements OnInit, AfterViewInit {
       { label: 'داشبورد', icon: 'pi pi-home', routerLink: ['dashboard'] },
       {
         label: 'مدیریت هتل', icon: 'pi pi-map', items: [
-          { label: 'ثبت هتل', icon: 'pi pi-plus', routerLink: ['hotel/new'] },
-          { label: 'لسیت هتل ها', icon: 'pi pi-list', routerLink: ['hotel'] },
-          { label: 'امکانات هتل ', icon: 'pi pi-list', routerLink: ['hotel'] },
-          { label: 'امکانات اتاق', icon: 'pi pi-list', routerLink: ['hotel'] },
-          { label: 'انوع اتاق', icon: 'pi pi-list', routerLink: ['hotel'] },
+          { label: 'لسیت هتل ها', icon: 'pi pi-list', routerLink: ['hotel/hotels'] },
+          { label: 'امکانات هتل ', icon: 'pi pi-list', routerLink: ['hotel/hotel-facilitieskinds'] },
+          { label: 'امکانات اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-facilitieskinds'] },
+          { label: 'انوع اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-kinds'] }
         ]
       }
     ];
@@ -54,7 +53,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
       if (i === index) {
         this.menuItems[index].visible = !this.menuItems[index].visible;
         $('#headerMenu_' + index).toggleClass('active-menuitem');
-      } else {
+      }
+      else {
         this.menuItems[i].visible = false;
         $('#headerMenu_' + i).removeClass('active-menuitem');
       }

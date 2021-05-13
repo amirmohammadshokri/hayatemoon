@@ -8,11 +8,11 @@ const routes: Routes = [
     children: [
       {
         path: 'hotel',
-        loadChildren: () => import('../hotel/hotel.module').then(a=>a.HotelModule)
+        loadChildren: () => import('../hotel/hotel.module').then(a => a.HotelModule)
       }, {
         path: 'tour',
         loadChildren: () => import('../tour/tour.module').then(m => m.TourModule)
-      }
+      },
     ]
   }
 ];
