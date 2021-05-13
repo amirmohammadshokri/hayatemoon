@@ -40,7 +40,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'ng build'
+    customCommand: 'ng build --prod'
 
 # - script: |
 #     ng build --prod
