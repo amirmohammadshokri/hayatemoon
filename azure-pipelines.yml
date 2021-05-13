@@ -10,47 +10,40 @@ trigger:
 
 pool:
   name: 'Default'
-
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - task: Npm@0
+    displayName: 'npm install'
+    inputs:
+      arguments: '--force'
 
-- task: Npm@0
-  displayName: 'npm install'
-  inputs:
-    arguments: '--force'
+  - task: Npm@1
+    displayName: 'npm install angular cli'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'install @angular/cli'
 
-- task: Npm@1
-  displayName: 'npm install angular cli'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'install @angular/cli'
+  - task: Npm@1
+    displayName: 'npm build'
+    inputs:
+      command: custom
+      verbose: true
+      customCommand: 'run build-prod'
 
-# - task: Npm@1
-#   displayName: 'npm build'
-#   inputs:
-#     command: custom
-#     verbose: false
-#     customCommand: 'npm install'
-    
-- task: Npm@1
-  displayName: 'ng build --prod'
-  inputs:
-    command: custom
-    verbose: true
-    customCommand: 'ng build --prod'
+  - task: ArchiveFiles@1
+    displayName: 'Archive files '
+    inputs:
+      rootFolder: '$(System.DefaultWorkingDirectory)/dist' #name of your project on angular.json .defaultProject value
+      includeRootFolder: true
 
-# - script: |
-#     ng build --prod
+  - task: CopyFiles@2
+    displayName: 'Copy File to: $(TargetFolder)'
+    inputs:
+      SourceFolder: '$(Build.ArtifactStagingDirectory)'
+      Contents: '$(Build.BuildId).zip'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'
 
-# - script: |
-#     npm install -g @angular/cli
-#     npm install
-#     ng build --prod
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: AdminPanel'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'
