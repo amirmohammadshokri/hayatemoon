@@ -42,13 +42,13 @@ steps:
     verbose: false
     customCommand: 'ng build'
 
-- script: |
-    ng build --prod
+# - script: |
+#     ng build --prod
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
+# - script: |
+#     npm install -g @angular/cli
+#     npm install
+#     ng build --prod
 
 - task: PublishBuildArtifacts@1
   inputs:
