@@ -34,17 +34,17 @@ steps:
     verbose: true  
     customCommand: 'run build'  
   
-- task: ArchiveFiles@1
-  displayName: 'Archive files '
-  inputs:
-    rootFolder: '$(System.DefaultWorkingDirectory)/dist/frontend' #name of your project on angular.json .defaultProject value
-    includeRootFolder: false
+# - task: ArchiveFiles@1
+#   displayName: 'Archive files '
+#   inputs:
+#     rootFolder: '$(System.DefaultWorkingDirectory)/dist/frontend' #name of your project on angular.json .defaultProject value
+#     includeRootFolder: false
 
 - task: CopyFiles@2
   displayName: 'Copy File to: $(TargetFolder)'
   inputs:
     SourceFolder: '$(Build.ArtifactStagingDirectory)'
-    Contents: '$(Build.BuildId).zip'
+    Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'
 
 - task: PublishBuildArtifacts@1
