@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { icon, latLng, marker,Map, point, polyline, tileLayer, LatLng } from 'leaflet';
-import { SelectItem } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { IAddResidence } from 'src/app/interfaces/add-residence.interface';
-import { SearchService, VehiclesService } from 'src/app/services';
+import { MediaService, SearchService, VehiclesService } from 'src/app/services';
 import { ResidenceService } from 'src/app/services/residence.service';
 
 @Component({
@@ -66,6 +66,8 @@ export class FormResidenceComponent implements OnInit {
 
   constructor(
     private srvResidence: ResidenceService,
+    private srvMedia: MediaService,
+    private sMsg: MessageService,
     private srvVehicle: VehiclesService,
     private srvSrch: SearchService
   ) { }
@@ -78,6 +80,35 @@ export class FormResidenceComponent implements OnInit {
       this.vehicles = res.map(r => ({ label: r.title, value: r.vehicleId }));
     });
   }
+async submit():Promise<void>
+{
+  this.saving=true;
+  this.saveImages();
+
+}
+saveImages(): Promise<void> {
+  return new Promise(async (resolve, reject) => {
+    if (this.images.length === 0) {
+      resolve();
+    }
+    const formData = new FormData();
+    // save image that not exist.
+    this.images.filter(i => !i.mediaId).forEach((img, i) => {
+      formData.append(`file`, img.file, img.file.name);
+    });
+    const res = await this.srvMedia.upload(formData, 0).toPromise();
+    if (!res) {
+      this.sMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
+      this.saving = false;
+      reject();
+    }
+    
+    this.residence.mediaIds=res.mediaId;
+    this.residence.mainMediaId[this.mainImageIndex].isMain = true;
+    resolve();
+  });
+}
+
   getLocations(event: any): void {
     this.srvSrch.getLocation(event.query).subscribe(res => {
       this.locations = res;
