@@ -28,7 +28,7 @@ steps:
     inputs:
       command: custom
       verbose: true
-      customCommand: 'run build-prod'
+      customCommand: 'run build'
 
   - task: ArchiveFiles@1
     displayName: 'Archive files '
