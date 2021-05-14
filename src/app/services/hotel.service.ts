@@ -50,6 +50,9 @@ export class HotelService {
   deleteRoomkind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}Room/Kind/${id}`);
   }
+  getRoomkindById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}Room/Kind/${id}`);
+  }
   //#endregion
   //#region  romfacilikind
   getRoomfacilitieskind(): Observable<IRoomfacilitieskind[]> {
@@ -61,6 +64,9 @@ export class HotelService {
   deleteRoomfacilitieskind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}Room/FacilitiesKind/${id}`);
   }
+  getRoomfacilitieskindById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}Room/FacilitiesKind/${id}`);
+  }
   //#endregion
   //#region hotelfacilikind
   getHotelfacilitieskind(): Observable<IHotelfacilitieskind[]> {
@@ -71,6 +77,9 @@ export class HotelService {
   }
   deleteHotelfacilitieskind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}FacilitiesKind/${id}`);
+  }
+  getHotelfacilitieskindById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}FacilitiesKind/${id}`);
   }
   //#endregion
 

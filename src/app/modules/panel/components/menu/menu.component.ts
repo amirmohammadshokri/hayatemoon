@@ -29,6 +29,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
           { label: 'امکانات اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-facilitieskinds'] },
           { label: 'انوع اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-kinds'] }
         ]
+      },
+      {
+        label: 'مدیریت اقامتگاه', icon: 'pi pi-map', items: [
+          { label: 'لسیت اقامتگاه ها', icon: 'pi pi-list', routerLink: ['residence/residence'] },
+          { label: 'لیست امکانات اقامتگاه ', icon: 'pi pi-list', routerLink: ['residence/residence-facilitieskinds'] },
+        ]
       }
     ];
   }

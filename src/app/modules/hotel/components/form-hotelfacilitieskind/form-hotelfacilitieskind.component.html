@@ -5,14 +5,18 @@
     </div>
     <span style="flex:1 auto;"></span>
     <span style="flex:1 auto;"></span>
-    <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" icon="pi pi-save"></button>
+    <button pButton [disabled]="saving"  pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" icon="pi pi-save"></button>
     <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
-      routerLink="/panel/hotel/hotel-facilitieskinds"></button>
+      routerLink="../../hotel-facilitieskinds"></button>
   </div>
   <div class="p-grid p-fluid">
     <div class="p-col-6 p-field">
       <label for="title">عنوان</label>
-      <input type="text" id="title" pInputText [(ngModel)]="hotelfacilitieskind.title">
+      <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="hotelfacilitieskind.title" required
+      [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+      <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+        ثبت عنوان اجباری می باشد.
+    </small>
     </div>
     <div class="p-field">
       <label for="icon">آیکون </label>

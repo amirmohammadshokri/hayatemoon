@@ -11,11 +11,10 @@ import { ListRoomkindComponent } from './components/list-roomkind/list-roomkind.
 
 const routes: Routes = [
   { path: 'hotels', component: ListHotelComponent },
+  { path: 'hotel-form/:id', component: FromHotelComponent },
   { path: 'hotel-facilitieskinds', component: ListHotelfacilitieskindComponent },
   { path: 'room-kinds', component: ListRoomkindComponent },
   { path: 'room-facilitieskinds', component: ListRoomfacilitieskindComponent },
-
-  { path: 'hotel-form/:id', component: FromHotelComponent },
   { path: 'hotel-facilitieskind-form/:id', component: FormHotelfacilitieskindComponent },
   { path: 'room-kind-form/:id', component: FormRoomkindComponent },
   { path: 'room-facilitieskind-form/:id', component: FormRoomfacilitieskindComponent },

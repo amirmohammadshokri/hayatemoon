@@ -42,7 +42,7 @@ export class ListRoomfacilitieskindComponent implements OnInit {
 
   getRoomfacilitieskind(): void {
     this.loading = true;
-    this.srvHotel.getRoomkind().subscribe(res => {
+    this.srvHotel.getRoomfacilitieskind().subscribe(res => {
       this.roomfacilitieskind.push(...res);
       this.loading = false;
     });
@@ -67,7 +67,7 @@ export class ListRoomfacilitieskindComponent implements OnInit {
   }
 
   editRoomfacilitieskind(id: number): void {
-    this.router.navigate([`./panel/hotel/form-facilitieskind/${id}`]);
+    this.router.navigate([`../panel/hotel/room-facilitieskind-form/${id}`]);
   }
 
 }

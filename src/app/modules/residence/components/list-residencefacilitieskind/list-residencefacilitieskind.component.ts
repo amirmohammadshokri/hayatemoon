@@ -1,20 +1,20 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { IHotelfacilitieskind } from 'src/app/interfaces/hotelfacilitieskind.interface';
-import { HotelService } from 'src/app/services';
+import { IResidencefacilitieskind } from 'src/app/interfaces/residencefacilitieskind.interface';
+import { ResidenceService } from 'src/app/services/residence.service';
 
 @Component({
-  selector: 'ss-list-hotelfacilitieskind',
-  templateUrl: './list-hotelfacilitieskind.component.html',
-  styleUrls: ['./list-hotelfacilitieskind.component.scss']
+  selector: 'ss-list-residencefacilitieskind',
+  templateUrl: './list-residencefacilitieskind.component.html',
+  styleUrls: ['./list-residencefacilitieskind.component.scss']
 })
-export class ListHotelfacilitieskindComponent implements OnInit {
+export class ListResidencefacilitieskindComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
   currentPage: number;
-  hotelfacilitieskind: IHotelfacilitieskind[] = [];
+  residencefacilitieskind: IResidencefacilitieskind[] = [];
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -22,12 +22,12 @@ export class ListHotelfacilitieskindComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getHotelfacilitieskind();
+      this.getResidencefacilitieskind();
     }
   }
 
   constructor(
-    private srvHotel: HotelService,
+    private srvResidence: ResidenceService,
     private confirmationService: ConfirmationService,
     private router: Router
   ) { }
@@ -38,13 +38,13 @@ export class ListHotelfacilitieskindComponent implements OnInit {
       { field: 'fontIconId', header: 'آیکن' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
-    this.getHotelfacilitieskind();
+    this.getResidencefacilitieskind();
   }
 
-  getHotelfacilitieskind(): void {
+  getResidencefacilitieskind(): void {
     this.loading = true;
-    this.srvHotel.getHotelfacilitieskind().subscribe(res => {
-      this.hotelfacilitieskind.push(...res);
+    this.srvResidence.getResidencefacilitieskind().subscribe(res => {
+      this.residencefacilitieskind.push(...res);
       this.loading = false;
     });
   }
@@ -56,19 +56,21 @@ export class ListHotelfacilitieskindComponent implements OnInit {
       acceptLabel: 'بله',
       rejectLabel: 'نه',
       accept: () => {
-        this.deleteHotelfacilitieskind(id);
+        this.deleteResidencefacilitieskind(id);
       }
     });
   }
 
-  deleteHotelfacilitieskind(id: number): void {
-    this.srvHotel.deleteHotelfacilitieskind(id).subscribe(() => {
-      this.getHotelfacilitieskind();
+  deleteResidencefacilitieskind(id: number): void {
+    this.srvResidence.deleteResidencefacilitieskind(id).subscribe(() => {
+      this.getResidencefacilitieskind();
     });
   }
 
-  editHotelfacilitieskind(id: number): void {
-    this.router.navigate([`../panel/hotel/hotel-facilitieskind-form/${id}`]);
+  editResidencefacilitieskind(id: number): void {
+    console.log(id+'ssssssssssss');
+     
+    this.router.navigate([`../panel/residence/residence-facilitieskind-form/${id}`]);
   }
 
 }

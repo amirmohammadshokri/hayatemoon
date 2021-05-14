@@ -14,7 +14,7 @@ import { CommonServiece } from 'src/app/services/common.service';
 export class FormRoomkindComponent implements OnInit {
 roomkind:IAddrookind= {};
 icons:SelectItem[];
-romkindId:number;
+roomkindId:number;
 fontIconId:string;
 
 
@@ -31,7 +31,18 @@ fontIconId:string;
     this.sComm.getIcons().subscribe(icons => {
       this.icons = icons;
     });
+    this.route.params.subscribe(prms => {
+      if (prms.id > 0) {
+         this.roomkindId = Number.parseInt(prms.id, 0);
+         this.getroomkindById(this.roomkindId);
+      }
+    });
   }
+  getroomkindById(id: number): void {
+    this.srvHotel.getRoomkindById(id).subscribe(cou => {
+      this.roomkind = cou;
+  });
+}
  
   submit(): void {
     if (this.roomkind.id > 0) {

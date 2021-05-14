@@ -69,8 +69,7 @@ export class ListRoomkindComponent implements OnInit {
 
   editRomkind(id: number): void {
     console.log(id);
-
-    this.router.navigate([`./panel/hotel/form-roomkind/${id}`]);
+    this.router.navigate([`../panel/hotel/room-kind-form/${id}`]);
   }
 
 }

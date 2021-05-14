@@ -15,8 +15,9 @@ export class FormRoomfacilitieskindComponent implements OnInit {
 
   roomfacilitieskind:IAddroomfacilitieskind= {};
   icons:SelectItem[];
-  romkindId:number;
+  roomfacilitieskindId:number;
   fontIconId:string;
+  
   
   
     constructor(
@@ -32,7 +33,19 @@ export class FormRoomfacilitieskindComponent implements OnInit {
       this.sComm.getIcons().subscribe(icons => {
         this.icons = icons;
       });
+      this.route.params.subscribe(prms => {
+        if (prms.id > 0) {
+           this.roomfacilitieskindId = Number.parseInt(prms.id, 0);
+           this.getRoomfacilitieskindById(this.roomfacilitieskindId);
+        }
+      });
     }
+    getRoomfacilitieskindById(id: number): void {
+      console.log(id+'ajdfhjdhfjdhfj');
+      this.srvHotel.getRoomfacilitieskindById(id).subscribe(cou => {
+        this.roomfacilitieskind = cou;
+    });
+  }
    
     submit(): void {
       if (this.roomfacilitieskind.id > 0) {

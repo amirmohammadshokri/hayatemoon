@@ -9,7 +9,12 @@ const routes: Routes = [
       {
         path: 'hotel',
         loadChildren: () => import('../hotel/hotel.module').then(a => a.HotelModule)
-      }, {
+      },
+      {
+        path: 'residence',
+        loadChildren: () => import('../residence/residence.module').then(m => m.ResidenceModule)
+      }, 
+      {
         path: 'tour',
         loadChildren: () => import('../tour/tour.module').then(m => m.TourModule)
       },

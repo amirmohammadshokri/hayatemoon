@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { icon, latLng, marker,Map, point, polyline, tileLayer, LatLng } from 'leaflet';
 import { SelectItem } from 'primeng/api';
-import { HotelService, SearchService, VehiclesService } from 'src/app/services';
-import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer } from 'leaflet';
-import { IAddHotel } from 'src/app/interfaces';
+import { IAddResidence } from 'src/app/interfaces/add-residence.interface';
+import { SearchService, VehiclesService } from 'src/app/services';
+import { ResidenceService } from 'src/app/services/residence.service';
 
 @Component({
-  selector: 'ss-from-hotel',
-  templateUrl: './from-hotel.component.html',
-  styleUrls: ['./from-hotel.component.scss']
+  selector: 'ss-form-residence',
+  templateUrl: './form-residence.component.html',
+  styleUrls: ['./form-residence.component.scss']
 })
-export class FromHotelComponent implements OnInit {
-  // Define our base layers so we can reference them multiple times
+export class FormResidenceComponent implements OnInit {
+
   streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true,
     attribution: '&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'
@@ -52,72 +53,36 @@ export class FromHotelComponent implements OnInit {
     zoom: 5,
     center: latLng([35.68490811606957, 51.38854980468751])
   };
-
+  mainImageIndex: number;
   selectedPosition: any;
   saving: boolean;
-
-  hotel: IAddHotel = {};
-  hotelTypes: SelectItem[] = [];
+  residence: IAddResidence = {};
   locations: any[] = [];
-  rates: any[] = [
-    { name: 1, value: 1 },
-    { name: 2, value: 2 },
-    { name: 3, value: 3 },
-    { name: 4, value: 4 },
-    { name: 5, value: 5 },
-    { name: 6, value: 6 },
-  ];
-  selectedRate: any;
+
   facilities: any[] = [];
   vehicles: SelectItem[];
   places: any[];
-  
+  images: { mediaId: number, file: File, url: string }[] = [];
 
   constructor(
-    private srvHotel: HotelService,
+    private srvResidence: ResidenceService,
     private srvVehicle: VehiclesService,
     private srvSrch: SearchService
   ) { }
 
   ngOnInit(): void {
-    this.getHotelType();
     this.getVehicles();
   }
-
-  getHotel(): void {
-
-  }
-
-  getHotelType(): void {
-    this.srvHotel.getHotelType().subscribe(res => {
-      this.hotelTypes = res.map(t => ({ label: t.title, value: t.typeId }));
-    });
-  }
-
-  getLocations(event: any): void {
-    this.srvSrch.getLocation(event.query).subscribe(res => {
-      this.locations = res;
-    });
-  }
-
-  getFacilities(event: any): void {
-    this.srvSrch.getHotelFacilitiesKind(event.query).subscribe(res => {
-      this.facilities = res;
-    });
-  }
-
-  getPlaces(event: any): void {
-    this.srvSrch.getPlaces(event.query).subscribe(res => {
-      this.places = res;
-    });
-  }
-
   getVehicles(): void {
     this.srvVehicle.getVehicles().subscribe(res => {
       this.vehicles = res.map(r => ({ label: r.title, value: r.vehicleId }));
     });
   }
-
+  getLocations(event: any): void {
+    this.srvSrch.getLocation(event.query).subscribe(res => {
+      this.locations = res;
+    });
+  }
   onMapReady(map: Map): void {
     if (this.route.getBounds().isValid()) {
       map.fitBounds(this.route.getBounds(), {
@@ -134,21 +99,25 @@ export class FromHotelComponent implements OnInit {
       this.selectedPosition = position;
     });
   }
-
+  getPlaces(event: any): void {
+    this.srvSrch.getPlaces(event.query).subscribe(res => {
+      this.places = res;
+    });
+  }
   addPlace(): void {
 
   }
-
-  submit(): void {
-    this.saving = true;
-    // if (this.selectedPosition) {
-    //   this.base.baseLocationLatitude = this.selectedPosition.lat;
-    //   this.base.baseLocationLongitude = this.selectedPosition.lng;
-    // }
-    // this.sSet.setBase(this.base).subscribe(res => {
-    //   this.saving = false;
-    //   this.sMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-    // });
+  addImage(e: any): void {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
+  deleteImage(img: any, id: number): void {
+    this.images.splice(id, 1);
   }
 
 }
