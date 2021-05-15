@@ -7,7 +7,6 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 export class HttpClientInterceptor implements HttpInterceptor {
 
   constructor(private oidcSecurityService: OidcSecurityService) { }
-
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     request = request.clone({
       setHeaders: {

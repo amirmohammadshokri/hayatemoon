@@ -23,27 +23,27 @@
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">تلفن</label>
-                    <input type="" pInputText>
+                    <input type="" [(ngModel)]="residence.phone" pInputText>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">ساعت ورود از</label>
-                    <input type="time" pInputText>
+                    <input type="time" [(ngModel)]="residence.fromEntranceHour" pInputText>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">تا ساعت ورود</label>
-                    <input type="time" pInputText>
+                    <input type="time" [(ngModel)]="residence.toEntranceHour" pInputText>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">ساعت خروج</label>
-                    <input type="time" pInputText>
+                    <input type="time" [(ngModel)]="residence.leavingHour" pInputText>
                 </div>
                 <div class="p-col-12 p-field">
                     <label for="">آدرس</label>
-                    <textarea pInputTextarea rows="1"></textarea>
+                    <textarea pInputTextarea [(ngModel)]="residence.address" rows="1"></textarea>
                   </div>
                   <div class="p-col-12 p-field">
                     <label for="">توضیحات</label>
-                    <textarea pInputTextarea rows="2"></textarea>
+                    <textarea pInputTextarea [(ngModel)]="residence.description" rows="2"></textarea>
                   </div>
             </div>
           
@@ -73,6 +73,10 @@
               <button pButton label="افزودن" icon="pi pi-plus" (click)="addPlace()"></button>
             </div>
           </div>
+        </div>
+        <div class="p-col-12">
+          <label for="title">قوانین اقامتگاه</label>
+        <p-chips [(ngModel)]="roles" ></p-chips>
         </div>
         <div class="p-col-6">
           <p-table [value]="residence.places">

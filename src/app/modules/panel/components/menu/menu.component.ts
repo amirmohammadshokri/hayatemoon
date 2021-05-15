@@ -35,7 +35,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
           { label: 'لسیت اقامتگاه ها', icon: 'pi pi-list', routerLink: ['residence/residence'] },
           { label: 'لیست امکانات اقامتگاه ', icon: 'pi pi-list', routerLink: ['residence/residence-facilitieskinds'] },
         ]
-      }
+      },
+      { label: 'لسیت اماکن', icon: 'pi pi-list', routerLink: ['places/places'] },
     ];
   }
 

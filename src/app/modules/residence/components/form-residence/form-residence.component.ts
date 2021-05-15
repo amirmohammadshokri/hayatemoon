@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { icon, latLng, marker,Map, point, polyline, tileLayer, LatLng } from 'leaflet';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddResidence } from 'src/app/interfaces/add-residence.interface';
@@ -58,18 +59,21 @@ export class FormResidenceComponent implements OnInit {
   saving: boolean;
   residence: IAddResidence = {};
   locations: any[] = [];
-
   facilities: any[] = [];
   vehicles: SelectItem[];
   places: any[];
   images: { mediaId: number, file: File, url: string }[] = [];
+  roles: string[];
 
   constructor(
     private srvResidence: ResidenceService,
     private srvMedia: MediaService,
     private sMsg: MessageService,
     private srvVehicle: VehiclesService,
-    private srvSrch: SearchService
+    private srvSrch: SearchService,
+    private router: Router,
+
+
   ) { }
 
   ngOnInit(): void {
@@ -84,8 +88,25 @@ async submit():Promise<void>
 {
   this.saving=true;
   this.saveImages();
+  const obj: IAddResidence = {
+title:this.residence.title,
+phone:this.residence.phone,
+address:this.residence.address,
+description:this.residence.description,
+fromEntranceHour:this.residence.fromEntranceHour,
+toEntranceHour:this.residence.toEntranceHour,
+facilitiesKindIds:this.facilities,
+leavingHour:this.residence.leavingHour,
+rules:this.roles
+    }
+    this.srvResidence.addResidence(obj).subscribe(() => {
+      this.sMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+      this.router.navigate(['./panel/residence/list-residence']);
+    });
 
+  
 }
+ 
 saveImages(): Promise<void> {
   return new Promise(async (resolve, reject) => {
     if (this.images.length === 0) {
@@ -102,7 +123,9 @@ saveImages(): Promise<void> {
       this.saving = false;
       reject();
     }
-    
+    res.forEach(element => {
+      
+    });
     this.residence.mediaIds=res.mediaId;
     this.residence.mainMediaId[this.mainImageIndex].isMain = true;
     resolve();

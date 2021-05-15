@@ -69,7 +69,6 @@ export class ListHotelComponent implements OnInit {
   }
   isUserAuthenticated = (): string => {
     this.sss = localStorage.getItem("token");
-
     return this.sss;
   }
 
@@ -89,10 +88,7 @@ export class ListHotelComponent implements OnInit {
     });
   }
   confirmDelete(id: number): void {
-
-
     this.confirmationService.confirm({
-
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'بله',

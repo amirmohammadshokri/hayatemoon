@@ -18,6 +18,10 @@ const routes: Routes = [
         path: 'tour',
         loadChildren: () => import('../tour/tour.module').then(m => m.TourModule)
       },
+      {
+        path: 'places',
+        loadChildren: () => import('../places/places.module').then(m => m.PlacesModule)
+      },
     ]
   }
 ];

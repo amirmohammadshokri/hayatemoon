@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="p-d-flex p-ai-center p-mb-3">
+      <div>
+        <h5>ثبت اماکن </h5>
+      </div>
+      <span style="flex:1 auto;"></span>
+      <span style="flex:1 auto;"></span>
+      <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()"  label="ذخیره" icon="pi pi-save"></button>
+      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../places"></button>
+    </div>
+    <div class="p-grid p-fluid">
+      <div class="p-col-6 p-field">
+        <label for="title">عنوان</label>
+        <p-chips [(ngModel)]="titleList" ></p-chips>
+        <!-- <input type="text" id="title" pInputText [(ngModel)]="roomkind.title"> -->
+      </div>
+     
+  
+    </div>
+  </div>
+  

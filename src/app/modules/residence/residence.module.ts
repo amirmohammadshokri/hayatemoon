@@ -23,6 +23,7 @@ import { ListResidencefacilitieskindComponent } from './components/list-residenc
 import { FormResidenceComponent } from './components/form-residence/form-residence.component';
 import { ListResidenceComponent } from './components/list-residence/list-residence.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ChipsModule } from 'primeng/chips';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputTextareaModule,
     ConfirmDialogModule,
     RadioButtonModule,
-    ToolbarModule
+    ToolbarModule,
+    ChipsModule
 
   ],
   providers: [

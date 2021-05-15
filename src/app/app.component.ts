@@ -11,6 +11,7 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent implements OnInit {
   showProgressBar: boolean;
+  userData$: any;
 
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -23,6 +24,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userData$ = this.oidcSecurityService.userData$
+    console.log("userdata", this.userData$)
 
     this.oidcSecurityService.checkAuth().subscribe(d => {
       if (!d) {

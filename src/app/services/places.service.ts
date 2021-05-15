@@ -12,7 +12,7 @@ export class PlacesService {
   constructor(private http: HttpClient, private conf: AppConfig) {
     this.url = `${this.conf.getConfig('url')}web/Places/`;
   }
-  addMenu(obj: any): Observable<any> {
+  addPlace(obj: any): Observable<any> {
     return this.http.post<any>(`${this.url}new`, obj);
   }
 
