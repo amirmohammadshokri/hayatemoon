@@ -45,9 +45,9 @@ steps:
   inputs:
     SourceFolder: '$(Build.ArtifactStagingDirectory)'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\Gashtineh.AdminPanel'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Gashtineh.AdminPanel'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
