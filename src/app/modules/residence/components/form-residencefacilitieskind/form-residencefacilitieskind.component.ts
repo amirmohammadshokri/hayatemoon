@@ -55,7 +55,7 @@ export class FormResidencefacilitieskindComponent implements OnInit {
         };
         this.srvResidence.addResidencefacilitieskind(obj).subscribe(() => {
           this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['./panel/residence/list-residencefacilitieskind']);
+          this.router.navigate(['./panel/residence/residence-facilitieskinds']);
         });
       }
       else {
@@ -67,7 +67,7 @@ export class FormResidencefacilitieskindComponent implements OnInit {
         };
         this.srvResidence.addResidencefacilitieskind(obj1).subscribe(() => {
           this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات اقامتگاه ', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['./panel/']);
+          this.router.navigate(['./panel/residence/residence-facilitieskinds']);
         });
       }
     }

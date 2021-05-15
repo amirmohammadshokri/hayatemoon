@@ -16,7 +16,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { HotelService } from 'src/app/services/hotel.service';
 import { ConfirmationService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientInterceptor } from 'src/app/interceptors/http.interceptor';
 import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
@@ -35,6 +35,8 @@ import { ListHotelfacilitieskindComponent } from './components/list-hotelfacilit
     FormHotelfacilitieskindComponent, ListHotelfacilitieskindComponent
   ],
   imports: [
+    DynamicDialogModule,
+    InputTextareaModule,
     CommonModule,
     HotelRoutingModule,
     TabViewModule,

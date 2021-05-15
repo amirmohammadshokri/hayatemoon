@@ -68,8 +68,6 @@ export class ListResidencefacilitieskindComponent implements OnInit {
   }
 
   editResidencefacilitieskind(id: number): void {
-    console.log(id+'ssssssssssss');
-     
     this.router.navigate([`../panel/residence/residence-facilitieskind-form/${id}`]);
   }
 
