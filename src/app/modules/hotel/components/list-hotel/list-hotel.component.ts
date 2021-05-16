@@ -22,8 +22,6 @@ export class ListHotelComponent implements OnInit {
   latest: boolean = false;
   sss: string;
 
-  // hotelTypes: SelectItem[] = [];
-
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
@@ -43,15 +41,15 @@ export class ListHotelComponent implements OnInit {
     this.items = [
       {
         code: 0,
-        name: "فعال"
+        name: 'فعال'
       },
       {
         code: 1,
-        name: "غیر فعال"
+        name: 'غیر فعال'
       },
       {
         code: 2,
-        name: "در انتظار"
+        name: 'در انتظار'
       },
 
     ];
@@ -68,7 +66,7 @@ export class ListHotelComponent implements OnInit {
 
   }
   isUserAuthenticated = (): string => {
-    this.sss = localStorage.getItem("token");
+    this.sss = localStorage.getItem('token');
     return this.sss;
   }
 

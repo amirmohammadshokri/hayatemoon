@@ -25,18 +25,17 @@ export interface IAddTour {
 }
 
 export interface IPrice {
-    price?:number;
-    currencyPrice?:number;
-    currencyPriceType?:number;
-    netPrice?:number;
-    disCountPrice?:number;
+  price?: number;
+  currencyPrice?: number;
+  currencyPriceType?: number;
+  netPrice?: number;
+  disCountPrice?: number;
 }
 
-export interface ITypeTour{
-    id?:number;
-    title?:string;
+export interface ITypeTour {
+  id?: number;
+  title?: string;
 }
- 
 
 export interface IAirPlaneTourVehicles {
   airLineId?: number;
@@ -45,4 +44,4 @@ export interface IAirPlaneTourVehicles {
   flightClass?: string;
   description?: string;
 }
- 
+

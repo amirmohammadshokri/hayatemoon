@@ -21,7 +21,7 @@ export class ListCalendarComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getCalendar();
+      this.getCalendar(false);
     }
   }
   constructor(
@@ -33,12 +33,15 @@ export class ListCalendarComponent implements OnInit {
   ngOnInit(): void {
     this.cols = [
       { field: 'title', header: 'تاریخ' },
-
     ];
-    this.getCalendar();
+    this.getCalendar(true);
   }
 
-  getCalendar(): void {
+  getCalendar(firstLoad: boolean): void {
+    if (firstLoad) {
+      this.calendar = [];
+      this.currentPage = 1;
+    }
     this.loading = true;
     this.serCalendar.getCalendar(1).subscribe(res => {
       this.calendar.push(...res);
@@ -60,7 +63,7 @@ export class ListCalendarComponent implements OnInit {
 
   deleteCalendar(id: number): void {
     this.serCalendar.deleteCalendar(id).subscribe(() => {
-      this.getCalendar();
+      this.getCalendar(true);
     });
   }
 

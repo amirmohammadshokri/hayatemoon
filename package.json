@@ -29,6 +29,7 @@
     "jalali-moment": "^3.3.10",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
+    "ng2-jalali-date-picker": "^2.4.2",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.3.1",

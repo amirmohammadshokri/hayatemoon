@@ -35,19 +35,23 @@ a {
 
 .dp-picker-input {
   font-size: 1rem;
-  color: #69707a;
-  background: #ffffff;
+  font-family: $MainFont, Tahoma !important;
+  width: 100% !important;
+  height: 35px !important;
+  color: #eaebec;
+  background: #3e4754;
   padding: 0.5rem 0.5rem;
-  border: 1px solid #d4d6d9;
+  border: 1px solid #545b67;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s,
     box-shadow 0.2s;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   border-radius: 6px;
-  font-family: $MainFont, Tahoma !important;
-  width: 100% !important;
-  height: 35px !important;
+}
+
+.dp-picker-input:hover {
+  border-color: #777BF1;
 }
 
 .dp-nav-header-btn {

@@ -25,6 +25,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ChipsModule } from 'primeng/chips';
 import { ListCalendarComponent } from './components/list-calendar/list-calendar.component';
 import { FormCalendarComponent } from './components/form-calendar/form-calendar.component';
+import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 
 @NgModule({
@@ -46,14 +47,14 @@ import { FormCalendarComponent } from './components/form-calendar/form-calendar.
     ConfirmDialogModule,
     RadioButtonModule,
     ToolbarModule,
-    ChipsModule
+    ChipsModule,
+    DpDatePickerModule
   ],
   providers: [
     ConfirmationService,
     DialogService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-
   ]
 })
 

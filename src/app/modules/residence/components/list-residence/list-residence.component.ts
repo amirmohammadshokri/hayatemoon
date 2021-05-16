@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { IResidence } from 'src/app/interfaces/residence.iterface';
 import { IState } from 'src/app/interfaces/state.inteface';
 import { ResidenceService } from 'src/app/services/residence.service';
@@ -31,7 +31,7 @@ export class ListResidenceComponent implements OnInit {
       this.currentPage++;
     }
   }
-  
+
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -42,17 +42,16 @@ export class ListResidenceComponent implements OnInit {
     this.items = [
       {
         code: 0,
-        name: "فعال"
+        name: 'فعال'
       },
       {
         code: 1,
-        name: "غیر فعال"
+        name: 'غیر فعال'
       },
       {
         code: 2,
-        name: "در انتظار"
-      },
-
+        name: 'در انتظار'
+      }
     ];
   }
 
@@ -64,13 +63,7 @@ export class ListResidenceComponent implements OnInit {
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
     this.getResidence();
-
   }
-  // isUserAuthenticated = (): string => {
-  //   this.sss = localStorage.getItem("token");
-
-  //   return this.sss;
-  // }
 
   getResidence(): void {
     this.loading = true;
@@ -87,6 +80,7 @@ export class ListResidenceComponent implements OnInit {
       this.loading = false;
     });
   }
+
   confirmDelete(id: number): void {
     this.confirmationService.confirm({
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
@@ -98,12 +92,14 @@ export class ListResidenceComponent implements OnInit {
       }
     });
   }
+
   deleteResidence(id: number): void {
     this.sResidence.deleteResidence(id).subscribe(() => {
       this.currentPage = 1;
       this.getResidence();
     });
   }
+
   editHotel(id: number): void {
     this.router.navigate([`./residence-form/${id}`]);
   }

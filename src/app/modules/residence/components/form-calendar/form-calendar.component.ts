@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { IAddCalendar } from 'src/app/interfaces/add-calendar.interface';
 import { CalendarService } from 'src/app/services/calendar.service';
-import { CommonServiece } from 'src/app/services/common.service';
+import * as moment from 'jalali-moment';
 
 @Component({
   selector: 'ss-form-calendar',
@@ -14,49 +14,56 @@ export class FormCalendarComponent implements OnInit {
 
   calendar: IAddCalendar[] = [];
   CalendarId: number;
-  holiday:any;
-  
+  holiday: any;
+  saving: boolean;
+
   constructor(
     private serCalendar: CalendarService,
     private sMsg: MessageService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private sComm: CommonServiece
-
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(prms => {
-      if (prms.calendarId > 0) {
-        this.CalendarId = Number.parseInt(prms.calendarId, 0);
+      if (prms.id > 0) {
+        this.CalendarId = Number.parseInt(prms.id, 0);
         this.getCalendarById(this.CalendarId);
       }
     });
   }
+
   getCalendarById(id: number): void {
-    this.serCalendar.getCalendarById(id).subscribe(cou => {
-      this.calendar = cou;
+    this.serCalendar.getCalendarById(id).subscribe(cal => {
+      this.holiday = moment(cal.persianDate, 'jYYYY/jMM/jDD');
     });
   }
 
   submit(): void {
+    this.saving = true;
+    const fromDate: Date = this.holiday._d;
+    const utcFromDate = new Date(fromDate.toUTCString());
     if (this.CalendarId > 0) {
       const obj: IAddCalendar = {
-     
+        id: this.CalendarId,
+        holiday: utcFromDate.toISOString()
       };
       this.serCalendar.addCalendar(obj).subscribe(() => {
-        this.sMsg.add({ severity: 'success', summary: 'ویرایش تاریخ', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/residence/list-calendar']);
+        this.sMsg.add({ severity: 'success', summary: 'ویرایش تاریخ', detail: 'ویرایش با موفقیت انجام شد' });
+        this.saving = false;
+      }, _ => {
+        this.saving = false;
       });
     }
     else {
-      const obj1: IAddCalendar = {
-        id:0,
-        holiday:this.holiday
+      const obj: IAddCalendar = {
+        holiday: utcFromDate.toISOString()
       };
-      this.serCalendar.addCalendar(obj1).subscribe(() => {
+      this.serCalendar.addCalendar(obj).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ثبت تاریخ ', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/residence/list-calendar']);
+        this.holiday = null;
+        this.saving = false;
+      }, _ => {
+        this.saving = false;
       });
     }
   }
