@@ -18,12 +18,12 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { HttpClientInterceptor } from 'src/app/interceptors/http.interceptor';
 import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 import { ConfirmationService } from 'primeng/api';
-import {ChipsModule} from 'primeng/chips';
+import { ChipsModule } from 'primeng/chips';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [ FormPlacesComponent, ListPlacesComponent],
+  declarations: [FormPlacesComponent, ListPlacesComponent],
   imports: [
     CommonModule,
     PlacesRoutingModule,
@@ -38,7 +38,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ToolbarModule
   ],
   providers: [
-    // HotelService,
     ConfirmationService,
     DialogService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },

@@ -14,7 +14,7 @@ export class ListPlacesComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
-  currentPage: number=1;
+  currentPage: number;
   places: IPlaces[] = [];
 
   @HostListener('window:scroll', ['$event'])
@@ -23,7 +23,7 @@ export class ListPlacesComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getPlaces();
+      this.getPlaces(false);
     }
   }
   constructor(
@@ -36,13 +36,16 @@ export class ListPlacesComponent implements OnInit {
     this.cols = [
       { field: 'title', header: 'عنوان اماکن' }
     ];
-    this.getPlaces();
+    this.currentPage = 1;
+    this.getPlaces(true);
   }
 
-  getPlaces(): void {
+  getPlaces(firstLoad: boolean): void {
     this.loading = true;
-    
-    this.places = [];
+    if (firstLoad) {
+      this.currentPage = 1;
+      this.places = [];
+    }
     this.srvPlaces.getPlaces(this.currentPage).subscribe(res => {
       this.places.push(...res);
       this.loading = false;
@@ -60,11 +63,13 @@ export class ListPlacesComponent implements OnInit {
       }
     });
   }
+
   deletePlaces(id: number): void {
     this.srvPlaces.deletePlace(id).subscribe(() => {
-      this.getPlaces();
+      this.getPlaces(true);
     });
   }
+
   editPlaces(id: number): void {
     this.router.navigate([`../panel/places/form-palces/${id}`]);
   }

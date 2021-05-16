@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
-import { HotelService, SearchService, VehiclesService } from 'src/app/services';
+import { MessageService, SelectItem } from 'primeng/api';
+import { HotelService, MediaService, SearchService, VehiclesService } from 'src/app/services';
 import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer } from 'leaflet';
 import { IAddHotel } from 'src/app/interfaces';
 
@@ -55,10 +55,10 @@ export class FromHotelComponent implements OnInit {
 
   selectedPosition: any;
   saving: boolean;
-
-  hotel: IAddHotel = {};
+  hotel: IAddHotel = { places: [], hotelMediaIds: [] };
   hotelTypes: SelectItem[] = [];
   locations: any[] = [];
+  selectedLocation: any;
   rates: any[] = [
     { name: 1, value: 1 },
     { name: 2, value: 2 },
@@ -71,12 +71,16 @@ export class FromHotelComponent implements OnInit {
   facilities: any[] = [];
   vehicles: SelectItem[];
   places: any[];
-  
+  place: any = {};
+  images: { mediaId: number, file: File, url: string }[] = [];
+  mainImageIndex: number;
 
   constructor(
     private srvHotel: HotelService,
     private srvVehicle: VehiclesService,
-    private srvSrch: SearchService
+    private srvSrch: SearchService,
+    private srvMedia: MediaService,
+    private srvMsg: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -136,19 +140,73 @@ export class FromHotelComponent implements OnInit {
   }
 
   addPlace(): void {
-
+    this.hotel.places.push({
+      minute: this.place.minute,
+      title: (this.place?.title?.title ?? this.place?.title),
+      vehicleId: this.place.vehicleId,
+      vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
+    });
+    this.place = {};
   }
 
-  submit(): void {
+  saveImages(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      if (this.images.length === 0) {
+        resolve();
+      }
+      // save image that not exist.
+      let i = 0;
+      for await (const img of this.images.filter(im => !im.mediaId)) {
+        const formData = new FormData();
+        formData.append(`file`, img.file, img.file.name);
+        const res = await this.srvMedia.upload(formData, 0).toPromise();
+        if (!res) {
+          this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
+          this.saving = false;
+          reject();
+        }
+        this.hotel.hotelMediaIds.push(res.mediaId);
+        if (i === this.mainImageIndex) {
+          this.hotel.mainMediaId = res.mediaId;
+        }
+        i++;
+      }
+      resolve();
+    });
+  }
+
+  addImage(e: any): void {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
+
+  deleteImage(img: any, id: number): void {
+    this.images.splice(id, 1);
+  }
+
+  async submit(): Promise<void> {
     this.saving = true;
-    // if (this.selectedPosition) {
-    //   this.base.baseLocationLatitude = this.selectedPosition.lat;
-    //   this.base.baseLocationLongitude = this.selectedPosition.lng;
-    // }
-    // this.sSet.setBase(this.base).subscribe(res => {
-    //   this.saving = false;
-    //   this.sMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-    // });
+    this.hotel.rate = this.selectedRate?.value;
+    this.hotel.locationId = this.selectedLocation?.locationId;
+    this.hotel.isAdmin = true;
+    if (this.selectedPosition) {
+      this.hotel.latitude = this.selectedPosition.lat;
+      this.hotel.longitude = this.selectedPosition.lng;
+    }
+    // save images
+    await this.saveImages();
+    this.srvHotel.addHotel(this.hotel).subscribe(res => {
+      this.saving = false;
+      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+      this.hotel = { places: [], hotelMediaIds: [] };
+    }, _ => {
+      this.saving = false;
+    });
   }
 
 }

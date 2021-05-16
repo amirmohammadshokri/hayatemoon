@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { icon, latLng, marker,Map, point, polyline, tileLayer, LatLng } from 'leaflet';
+import { icon, latLng, marker, Map, point, polyline, tileLayer, LatLng } from 'leaflet';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddResidence } from 'src/app/interfaces/add-residence.interface';
 import { MediaService, SearchService, VehiclesService } from 'src/app/services';
@@ -57,13 +57,15 @@ export class FormResidenceComponent implements OnInit {
   mainImageIndex: number;
   selectedPosition: any;
   saving: boolean;
-  residence: IAddResidence = {};
+  residence: IAddResidence = { mediaIds: [], places: [] };
   locations: any[] = [];
+  selectedLocation: any;
   facilities: any[] = [];
   vehicles: SelectItem[];
   places: any[];
   images: { mediaId: number, file: File, url: string }[] = [];
   roles: string[];
+  place: any = {};
 
   constructor(
     private srvResidence: ResidenceService,
@@ -72,71 +74,70 @@ export class FormResidenceComponent implements OnInit {
     private srvVehicle: VehiclesService,
     private srvSrch: SearchService,
     private router: Router,
-
-
   ) { }
 
   ngOnInit(): void {
     this.getVehicles();
   }
+
   getVehicles(): void {
     this.srvVehicle.getVehicles().subscribe(res => {
       this.vehicles = res.map(r => ({ label: r.title, value: r.vehicleId }));
     });
   }
-async submit():Promise<void>
-{
-  this.saving=true;
-  this.saveImages();
-  const obj: IAddResidence = {
-title:this.residence.title,
-phone:this.residence.phone,
-address:this.residence.address,
-description:this.residence.description,
-fromEntranceHour:this.residence.fromEntranceHour,
-toEntranceHour:this.residence.toEntranceHour,
-facilitiesKindIds:this.facilities,
-leavingHour:this.residence.leavingHour,
-rules:this.roles
-    }
-    this.srvResidence.addResidence(obj).subscribe(() => {
-      this.sMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-      this.router.navigate(['./panel/residence/list-residence']);
-    });
 
-  
-}
- 
-saveImages(): Promise<void> {
-  return new Promise(async (resolve, reject) => {
-    if (this.images.length === 0) {
-      resolve();
+  async submit(): Promise<void> {
+    this.saving = true;
+    this.residence.locationId = this.selectedLocation?.locationId;
+    this.residence.isAdmin = true;
+    if (this.selectedPosition) {
+      this.residence.latitude = this.selectedPosition.lat;
+      this.residence.longitude = this.selectedPosition.lng;
     }
-    const formData = new FormData();
-    // save image that not exist.
-    this.images.filter(i => !i.mediaId).forEach((img, i) => {
-      formData.append(`file`, img.file, img.file.name);
-    });
-    const res = await this.srvMedia.upload(formData, 0).toPromise();
-    if (!res) {
-      this.sMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
+    this.residence.facilitiesKindIds = this.facilities;
+    this.residence.rules = this.roles;
+    // save images
+    await this.saveImages();
+    this.srvResidence.addResidence(this.residence).subscribe(() => {
+      this.sMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+      this.residence = { mediaIds: [], places: [] };
+    }, _ => {
       this.saving = false;
-      reject();
-    }
-    res.forEach(element => {
-      
     });
-    this.residence.mediaIds=res.mediaId;
-    this.residence.mainMediaId[this.mainImageIndex].isMain = true;
-    resolve();
-  });
-}
+  }
+
+  saveImages(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      if (this.images.length === 0) {
+        resolve();
+      }
+      // save image that not exist.
+      let i = 0;
+      for await (const img of this.images.filter(im => !im.mediaId)) {
+        const formData = new FormData();
+        formData.append(`file`, img.file, img.file.name);
+        const res = await this.srvMedia.upload(formData, 0).toPromise();
+        if (!res) {
+          this.sMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
+          this.saving = false;
+          reject();
+        }
+        this.residence.mediaIds.push(res.mediaId);
+        if (i === this.mainImageIndex) {
+          this.residence.mainMediaId = res.mediaId;
+        }
+        i++;
+      }
+      resolve();
+    });
+  }
 
   getLocations(event: any): void {
     this.srvSrch.getLocation(event.query).subscribe(res => {
       this.locations = res;
     });
   }
+
   onMapReady(map: Map): void {
     if (this.route.getBounds().isValid()) {
       map.fitBounds(this.route.getBounds(), {
@@ -153,14 +154,23 @@ saveImages(): Promise<void> {
       this.selectedPosition = position;
     });
   }
+
   getPlaces(event: any): void {
     this.srvSrch.getPlaces(event.query).subscribe(res => {
       this.places = res;
     });
   }
-  addPlace(): void {
 
+  addPlace(): void {
+    this.residence.places.push({
+      minute: this.place.minute,
+      title: (this.place?.title?.title ?? this.place?.title),
+      vehicleId: this.place.vehicleId,
+      vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
+    });
+    this.place = {};
   }
+
   addImage(e: any): void {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
@@ -170,6 +180,7 @@ saveImages(): Promise<void> {
       reader.readAsDataURL(e.target.files[0]);
     }
   }
+
   deleteImage(img: any, id: number): void {
     this.images.splice(id, 1);
   }

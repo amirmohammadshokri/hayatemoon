@@ -1,19 +1,20 @@
 <div class="card">
-  <div class="p-d-flex p-ai-center p-mb-3">
-    <div>
-      <h5>ثبت انواع امکان</h5>
+  <p-toolbar>
+    <div class="p-toolbar-group-right">
     </div>
-    <span style="flex:1 auto;"></span>
-    <span style="flex:1 auto;"></span>
-    <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" icon="pi pi-save"></button>
-    <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="/panel/hotel/room-facilitieskinds"></button>
-  </div>
-  <div class="p-grid p-fluid">
+    <div class="p-toolbar-group-left">
+      <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+        icon="pi pi-save"></button>
+      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
+        routerLink="/panel/hotel/room-facilitieskinds"></button>
+    </div>
+  </p-toolbar>
+  <div class="p-grid p-fluid  p-mt-2">
     <div class="p-col-6 p-field">
       <label for="title">عنوان</label>
       <input type="text" id="title" pInputText [(ngModel)]="roomfacilitieskind.title">
     </div>
-    <div class="p-field">
+    <div class="p-col-6 p-field">
       <label for="icon">آیکون </label>
       <p-dropdown [options]="icons" [(ngModel)]="roomfacilitieskind.fontIconId" [filter]="true" filterBy="value"
         placeholder="یه آیکون انتخاب کن">

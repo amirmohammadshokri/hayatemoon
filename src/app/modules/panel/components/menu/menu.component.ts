@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
     this.menuItems = [
       { label: 'داشبورد', icon: 'pi pi-home', routerLink: ['dashboard'] },
       {
-        label: 'مدیریت هتل', icon: 'pi pi-map', items: [
+        label: 'مدیریت هتل', icon: 'fa fa-hotel', items: [
           { label: 'لسیت هتل ها', icon: 'pi pi-list', routerLink: ['hotel/hotels'] },
           { label: 'امکانات هتل ', icon: 'pi pi-list', routerLink: ['hotel/hotel-facilitieskinds'] },
           { label: 'امکانات اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-facilitieskinds'] },
@@ -31,12 +31,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
         ]
       },
       {
-        label: 'مدیریت اقامتگاه', icon: 'pi pi-map', items: [
+        label: 'مدیریت اقامتگاه', icon: 'fa fa-cutlery', items: [
           { label: 'لسیت اقامتگاه ها', icon: 'pi pi-list', routerLink: ['residence/residence'] },
           { label: 'لیست امکانات اقامتگاه ', icon: 'pi pi-list', routerLink: ['residence/residence-facilitieskinds'] },
         ]
       },
-      { label: 'لسیت اماکن', icon: 'pi pi-list', routerLink: ['places/places'] },
+      { label: 'لسیت اماکن', icon: 'fa fa-map-marker', routerLink: ['places/places'] },
     ];
   }
 

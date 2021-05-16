@@ -27,7 +27,7 @@ export class HotelService {
   }
 
   addHotel(obj: any): Observable<any[]> {
-    return this.http.post<any[]>(`${this.url}new`, obj);
+    return this.http.post<any[]>(`${this.url}`, obj);
   }
 
   getHotelType(): Observable<any> {

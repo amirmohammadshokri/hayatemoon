@@ -1,37 +1,37 @@
 <div class="card">
-    <div class="p-d-flex p-ai-center p-mb-3">
-      <div>
-        <h5> ثبت امکان اقامتگاه</h5>
-      </div>
-      <span style="flex:1 auto;"></span>
-      <span style="flex:1 auto;"></span>
-      <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" icon="pi pi-save"></button>
-      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="/panel/residence/residence-facilitieskinds"></button>
+  <p-toolbar>
+    <div class="p-toolbar-group-right">
     </div>
-    <div class="p-grid p-fluid">
-      <div class="p-col-6 p-field">
-        <label for="title">عنوان</label>
-        <input type="text" id="title" pInputText [(ngModel)]="residencefacilitieskind.title">
-      </div>
-      <div class="p-field">
-        <label for="icon">آیکون </label>
-        <p-dropdown [options]="icons" [(ngModel)]="residencefacilitieskind.fontIconId" [filter]="true" filterBy="value"
-          placeholder="یه آیکون انتخاب کن">
-          <ng-template pTemplate="selectedItem">
-            <div *ngIf="roomkind.fontIconId">
-              <i style="font-size: 1.3em;" [class]="roomkind.fontIconId"></i>
-              <span class="p-mr-2">{{roomkind.fontIconId}}</span>
-            </div>
-          </ng-template>
-          <ng-template let-icon pTemplate="item">
-            <div>
-              <i style="font-size: 1.3em;" [class]="icon.value"></i>
-              <span class="p-mr-2">{{icon.label}}</span>
-            </div>
-          </ng-template>
-        </p-dropdown>
-      </div>
-  
+    <div class="p-toolbar-group-left">
+      <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+        icon="pi pi-save"></button>
+      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
+        routerLink="/panel/residence/residence-facilitieskinds"></button>
     </div>
+  </p-toolbar>
+  <div class="p-grid p-fluid p-mt-2">
+    <div class="p-col-6 p-field">
+      <label for="title">عنوان</label>
+      <input type="text" id="title" pInputText [(ngModel)]="residencefacilitieskind.title">
+    </div>
+    <div class="p-col-6  p-field">
+      <label for="icon">آیکون </label>
+      <p-dropdown [options]="icons" [(ngModel)]="residencefacilitieskind.fontIconId" [filter]="true" filterBy="value"
+        placeholder="یه آیکون انتخاب کن">
+        <ng-template pTemplate="selectedItem">
+          <div *ngIf="roomkind.fontIconId">
+            <i style="font-size: 1.3em;" [class]="roomkind.fontIconId"></i>
+            <span class="p-mr-2">{{roomkind.fontIconId}}</span>
+          </div>
+        </ng-template>
+        <ng-template let-icon pTemplate="item">
+          <div>
+            <i style="font-size: 1.3em;" [class]="icon.value"></i>
+            <span class="p-mr-2">{{icon.label}}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+
   </div>
-  
+</div>

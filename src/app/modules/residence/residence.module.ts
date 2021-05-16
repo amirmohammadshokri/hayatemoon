@@ -44,10 +44,8 @@ import { ChipsModule } from 'primeng/chips';
     RadioButtonModule,
     ToolbarModule,
     ChipsModule
-
   ],
   providers: [
-    // HotelService,
     ConfirmationService,
     DialogService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },

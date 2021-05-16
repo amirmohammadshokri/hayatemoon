@@ -15,6 +15,7 @@ export interface IAddHotel {
     title?: string;
     minute?: number;
     vehicleId?: number;
+    vehicleTitle?: string;
   }[];
   description?: string;
   isAdmin?: boolean;

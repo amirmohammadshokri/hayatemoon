@@ -28,6 +28,7 @@ import { FormRoomfacilitieskindComponent } from './components/form-roomfacilitie
 import { ListRoomfacilitieskindComponent } from './components/list-roomfacilitieskind/list-roomfacilitieskind.component';
 import { FormHotelfacilitieskindComponent } from './components/form-hotelfacilitieskind/form-hotelfacilitieskind.component';
 import { ListHotelfacilitieskindComponent } from './components/list-hotelfacilitieskind/list-hotelfacilitieskind.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
@@ -50,7 +51,8 @@ import { ListHotelfacilitieskindComponent } from './components/list-hotelfacilit
     FormsModule,
     LeafletModule,
     InputTextareaModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    RadioButtonModule
   ],
   providers: [
     HotelService,

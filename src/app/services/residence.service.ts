@@ -24,7 +24,7 @@ export class ResidenceService {
   }
 
   addResidence(obj: any): Observable<any[]> {
-    return this.http.post<any[]>(`${this.url}new`, obj);
+    return this.http.post<any[]>(`${this.url}`, obj);
   }
 
   deleteResidence(id: number): Observable<any> {
@@ -39,8 +39,8 @@ export class ResidenceService {
     return this.http.post<any[]>(`${this.url}FacilitiesKind`, obj);
   }
   deleteResidencefacilitieskind(id: number): Observable<any> {
-    console.log(id+'Amir');
-    
+    console.log(id + 'Amir');
+
     return this.http.delete<any>(`${this.url}FacilitiesKind/${id}`);
   }
   getResidencefacilitieskindById(id: number): Observable<any> {
