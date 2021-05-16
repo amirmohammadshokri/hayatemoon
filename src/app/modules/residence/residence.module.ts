@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ResidenceRoutingModule } from './residence-routing.module';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -24,10 +23,14 @@ import { FormResidenceComponent } from './components/form-residence/form-residen
 import { ListResidenceComponent } from './components/list-residence/list-residence.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ChipsModule } from 'primeng/chips';
+import { ListCalendarComponent } from './components/list-calendar/list-calendar.component';
+import { FormCalendarComponent } from './components/form-calendar/form-calendar.component';
 
 
 @NgModule({
-  declarations: [FormResidencefacilitieskindComponent, ListResidencefacilitieskindComponent, FormResidenceComponent, ListResidenceComponent],
+  declarations: [FormResidencefacilitieskindComponent, ListResidencefacilitieskindComponent,
+    FormResidenceComponent, ListResidenceComponent, ListCalendarComponent,
+    FormCalendarComponent],
   imports: [
     CommonModule,
     ResidenceRoutingModule,

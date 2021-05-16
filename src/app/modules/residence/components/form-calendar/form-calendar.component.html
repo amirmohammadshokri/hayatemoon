@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="p-d-flex p-ai-center p-mb-3">
+      <div>
+        <h5>ثبت تاریخ </h5>
+      </div>
+      <span style="flex:1 auto;"></span>
+      <span style="flex:1 auto;"></span>
+      <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()"  label="ذخیره" icon="pi pi-save"></button>
+      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../calendar"></button>
+    </div>
+    <div class="p-grid p-fluid">
+      <div class="p-col-6 p-field">
+        <label for="title">تاریخ</label>
+        <dp-date-picker id="holiday" [(ngModel)]="holiday" dir="ltr" theme="dp-material" mode="day">
+        </dp-date-picker>
+        <p-chips [(ngModel)]="holiday" ></p-chips>
+      </div>
+     
+  
+    </div>
+  </div>
+  

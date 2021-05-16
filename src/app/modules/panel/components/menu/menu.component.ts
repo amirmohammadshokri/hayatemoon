@@ -34,6 +34,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
         label: 'مدیریت اقامتگاه', icon: 'fa fa-cutlery', items: [
           { label: 'لسیت اقامتگاه ها', icon: 'pi pi-list', routerLink: ['residence/residence'] },
           { label: 'لیست امکانات اقامتگاه ', icon: 'pi pi-list', routerLink: ['residence/residence-facilitieskinds'] },
+          { label: 'لیست تقویم', icon: 'pi pi-list', routerLink: ['residence/calendar'] },
         ]
       },
       { label: 'لسیت اماکن', icon: 'fa fa-map-marker', routerLink: ['places/places'] },
