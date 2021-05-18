@@ -19,8 +19,6 @@ export class ListHotelComponent implements OnInit {
   items: IState[];
   item: any;
   title: string;
-  latest: boolean = false;
-  sss: string;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -28,14 +26,13 @@ export class ListHotelComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.isUserAuthenticated();
+      this.getHotels();
     }
   }
 
   constructor(
     private confirmationService: ConfirmationService,
     private sHotel: HotelService,
-    private sMsg: MessageService,
     private router: Router
   ) {
     this.items = [
@@ -63,11 +60,6 @@ export class ListHotelComponent implements OnInit {
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
     this.getHotels();
-
-  }
-  isUserAuthenticated = (): string => {
-    this.sss = localStorage.getItem('token');
-    return this.sss;
   }
 
   getHotels(): void {
@@ -85,6 +77,7 @@ export class ListHotelComponent implements OnInit {
       this.loading = false;
     });
   }
+
   confirmDelete(id: number): void {
     this.confirmationService.confirm({
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
@@ -96,12 +89,14 @@ export class ListHotelComponent implements OnInit {
       }
     });
   }
+
   deleteHotel(id: number): void {
     this.sHotel.deleteHotel(id).subscribe(() => {
       this.currentPage = 1;
       this.getHotels();
     });
   }
+
   editHotel(id: number): void {
     this.router.navigate([`./hotel-form/${id}`]);
   }

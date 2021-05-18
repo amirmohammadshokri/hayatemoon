@@ -4,7 +4,7 @@ import { FormTourComponent } from './components/form-tour/form-tour.component';
 import { ListTourComponent } from './components/list-tour/list-tour.component';
 
 const routes: Routes = [
-  { path: 'tour', component: ListTourComponent },
+  { path: 'tours', component: ListTourComponent },
   { path: 'tour-form/:id', component: FormTourComponent },
 ];
 

@@ -56,12 +56,10 @@ import { RadioButtonModule } from 'primeng/radiobutton';
   ],
   providers: [
     HotelService,
-
     ConfirmationService,
     DialogService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-
   ]
 })
 export class HotelModule { }

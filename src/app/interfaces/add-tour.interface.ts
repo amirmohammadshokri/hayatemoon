@@ -1,47 +1,32 @@
 export interface IAddTour {
-  title?: string;
-  hotelId?: number;
-  description?: string;
-  tourType?: number;
   isForeign?: boolean;
+  isInstallments?: boolean;
   fromLocationId?: number;
   toLocationId?: number;
-  startDate?: string;
-  endDate?: string;
+  title?: string;
+  tourType?: number;
+  vehicles?: IVehicle[];
   dayDuration?: number;
   nightDuration?: number;
-  mainImageId?: number;
-  tourMediaIds: number[];
-  isInstallments?: boolean;
-  promotionType?: number;
-  promotionEndDate?: string;
-  price?: IPrice[];
+  startDate?: string;
+  endDate?: string;
   tourCategories?: number[];
-  tourVehicle?: {
-    airPlaneTourVehicles?: IAirPlaneTourVehicles[];
-    trainTourVehicles?: any[];
-    busTourVehicles?: any;
-  };
+  tourMediaIds: number[];
+  mainImageId?: number;
+  price?: IPrice[];
+  hotelId?: number;
+  hotelRooms?: number[];
+  description?: string;
 }
-
 export interface IPrice {
   price?: number;
+  disCountPrice?: number;
   currencyPrice?: number;
   currencyPriceType?: number;
   netPrice?: number;
-  disCountPrice?: number;
 }
-
-export interface ITypeTour {
-  id?: number;
-  title?: string;
-}
-
-export interface IAirPlaneTourVehicles {
-  airLineId?: number;
-  goneTime?: string;
-  backTime?: string;
-  flightClass?: string;
-  description?: string;
+export interface IVehicle {
+  type: number;
+  vehicleId: number;
 }
 

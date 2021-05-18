@@ -1,1 +1,153 @@
-<p>form-tour works!</p>
+<div class="card">
+  <p-toolbar>
+    <div class="p-toolbar-group-right">
+      <button [disabled]="saving" pButton pRipple label="ارسال جهت تایید"
+        [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success" (click)="submit()">
+      </button>
+    </div>
+    <div class="p-toolbar-group-left">
+      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="/panel/tour/tours">
+      </button>
+    </div>
+  </p-toolbar>
+  <div class="p-grid p-fluid p-mt-2">
+    <div class="p-col-3 p-field">
+      <label for="title">عنوان تور</label>
+      <input type="text" id="title" pInputText [(ngModel)]="tour.title">
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">نوع تور</label>
+      <p-dropdown [options]="tourTypes" placeholder="انتخاب" [(ngModel)]="tour.tourType"></p-dropdown>
+    </div>
+    <div class="p-col-3 p-field-checkbox">
+      <p-checkbox [(ngModel)]="tour.isForeign" [binary]="true"></p-checkbox>
+      <label for="isForeign">خارجی</label>
+    </div>
+    <div class="p-col-3 p-field-checkbox">
+      <p-checkbox [(ngModel)]="tour.isInstallments" [binary]="true"></p-checkbox>
+      <label for="isInstallments">اقساطی</label>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">از مسیر</label>
+      <p-autoComplete [suggestions]="locations" [(ngModel)]="fromLocation" (completeMethod)="getLocations($event)"
+        field="title">
+      </p-autoComplete>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">به مسیر</label>
+      <p-autoComplete [suggestions]="locations" [(ngModel)]="toLocation" (completeMethod)="getLocations($event)"
+        field="title">
+      </p-autoComplete>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="dayDuration">چند روز</label>
+      <input type="text" id="dayDuration" pInputText pKeyFilter="num" [(ngModel)]="tour.dayDuration">
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="nightDuration">چند شب</label>
+      <input type="text" id="nightDuration" pInputText pKeyFilter="num" [(ngModel)]="tour.nightDuration">
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="fromDate">از تاریخ</label>
+      <dp-date-picker id="fromDate" [(ngModel)]="fromDate" dir="ltr" theme="dp-material" mode="daytime">
+      </dp-date-picker>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="toDate">تا تاریخ</label>
+      <dp-date-picker id="toDate" [(ngModel)]="toDate" dir="ltr" theme="dp-material" mode="daytime">
+      </dp-date-picker>
+    </div>
+    <div class="p-col-6 p-field">
+      <label for="">دسته بندی</label>
+      <p-autoComplete [suggestions]="categories" [(ngModel)]="selectedCategory" (completeMethod)="getCategories($event)"
+        field="title">
+      </p-autoComplete>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">وسیله نقلیه رفت</label>
+      <p-multiSelect [options]="vehicels" [(ngModel)]="goVehicels" optionLabel="title" display="chip"></p-multiSelect>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">وسیله نقلیه برگشت</label>
+      <p-multiSelect [options]="vehicels" [(ngModel)]="backVehicels" optionLabel="title" display="chip"></p-multiSelect>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">انتخاب هتل</label>
+      <p-autoComplete [suggestions]="hotels" [(ngModel)]="selectedHotel" (completeMethod)="getHotels($event)"
+        field="title">
+      </p-autoComplete>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="">انتخاب اتاق</label>
+      <p-autoComplete [suggestions]="rooms" [(ngModel)]="selectedRoom" (completeMethod)="getRooms($event)"
+        field="title">
+      </p-autoComplete>
+    </div>
+    <div class="p-col-12 p-field">
+      <label for="">توضیحات</label>
+      <textarea pInputTextarea rows="1" [(ngModel)]="tour.description"></textarea>
+    </div>
+    <div class="p-col-12">
+      <p-fieldset>
+        <ng-template pTemplate="header">
+          <div class="p-d-flex p-ai-center">
+            <span>قیمت</span>
+            <button pButton icon="pi pi-plus" class="p-button-rounded p-button-text p-mr-4" (click)="addPrice()"></button>
+          </div>
+        </ng-template>
+        <div *ngFor="let price of tour.price" class="p-grid p-fluid">
+          <div class="p-col-2 p-field">
+            <label for="">قیمت</label>
+            <p-inputNumber [(ngModel)]="price.price" suffix=" تومان">
+            </p-inputNumber>
+          </div>
+          <div class="p-col-2 p-field">
+            <label for="">تخفیف</label>
+            <p-inputNumber [(ngModel)]="price.disCountPrice" suffix=" تومان">
+            </p-inputNumber>
+          </div>
+          <div class="p-col-2 p-field">
+            <label for="">نوع ارز</label>
+            <p-dropdown [options]="currencies" placeholder="انتخاب" [(ngModel)]="price.currencyPriceType"></p-dropdown>
+          </div>
+          <div class="p-col-2 p-field">
+            <label for="">قیمت ارزی</label>
+            <p-inputNumber [(ngModel)]="price.currencyPrice">
+            </p-inputNumber>
+          </div>
+          <div class="p-col-4 p-field">
+            <label for="">قیمت نمایشی</label>
+            <p-inputNumber [(ngModel)]="price.netPrice" suffix="تومان">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-fieldset>
+    </div>
+    <div class="p-col-12">
+      <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+        <div class="add-img p-d-flex p-ai-center p-jc-center">
+          <div class="add-circle p-d-flex p-ai-center p-jc-center">
+            <img src="assets/layout/images/camera.svg" (click)="file.click()">
+          </div>
+          <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
+        </div>
+        <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
+          <div class="main p-d-flex p-ai-center p-jc-center">
+            <img [src]="img.url" (error)="defaultImg(img)" (click)="displayGallery=true" />
+          </div>
+          <div class="tools">
+            <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
+              <img src="assets/layout/images/bin.svg">
+            </div>
+            <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+              <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-12">
+        <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+      </div>
+    </div>
+  </div>
+</div>

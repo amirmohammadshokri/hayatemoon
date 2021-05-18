@@ -18,7 +18,7 @@
           <input type="text" id="title" pInputText [(ngModel)]="hotel.title">
         </div>
         <div class="p-col-4 p-field">
-          <label for="">درجه هتل</label>
+          <label for="selectedRate">درجه هتل</label>
           <p-dropdown [options]="rates" [(ngModel)]="selectedRate" optionLabel="name" placeholder="انتخاب">
             <ng-template pTemplate="selectedItem">
               <div *ngIf="selectedRate">

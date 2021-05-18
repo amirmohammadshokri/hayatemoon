@@ -37,7 +37,16 @@ export class MenuComponent implements OnInit, AfterViewInit {
           { label: 'لیست تقویم', icon: 'pi pi-list', routerLink: ['residence/calendar'] },
         ]
       },
-      { label: 'لسیت اماکن', icon: 'fa fa-map-marker', routerLink: ['places/places'] },
+      {
+        label: 'مدیریت اماکن', icon: 'fa fa-map-marker', items: [
+          { label: 'لسیت اماکن', icon: 'pi pi-list', routerLink: ['places/places'] }
+        ]
+      },
+      {
+        label: 'مدیریت تور', icon: 'fa fa-globe', items: [
+          { label: 'لسیت تورها', icon: 'pi pi-list', routerLink: ['tour/tours'] }
+        ]
+      },
     ];
   }
 

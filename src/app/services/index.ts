@@ -10,3 +10,4 @@ export * from './search.service';
 export * from './setting.service';
 export * from './tour.service';
 export * from './vehicles.service';
+export * from './currency.service';
