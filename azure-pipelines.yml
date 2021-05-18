@@ -43,7 +43,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy File to: $(TargetFolder)'
   inputs:
-    SourceFolder: '$(Build.ArtifactStagingDirectory)'
+    SourceFolder: '$(Build.ArtifactStagingDirectory)/dist/frontend'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
