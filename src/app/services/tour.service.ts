@@ -11,11 +11,11 @@ export class TourService {
   url: string;
 
   constructor(private http: HttpClient, private conf: AppConfig) {
-    this.url = `${this.conf.getConfig('url')}web/tour/`;
+    this.url = `${this.conf.getConfig('url')}web/tour`;
   }
 
   getTours(pageNumber: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}latest/${pageNumber}`);
+    return this.http.get<any[]>(`${this.url}/latest/${pageNumber}`);
   }
 
   addTour(obj: any): Observable<any[]> {
@@ -23,11 +23,11 @@ export class TourService {
   }
 
   getTourType(): Observable<any> {
-    return this.http.get<any>(`${this.url}type`);
+    return this.http.get<any>(`${this.url}/type`);
   }
 
   getCategories(pageNumber: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}CategoryKind/Latest${(pageNumber ? `?page=${pageNumber}` : ``)}`);
+    return this.http.get<any[]>(`${this.url}/CategoryKind/Latest${(pageNumber ? `?page=${pageNumber}` : ``)}`);
   }
 
 }
