@@ -14,8 +14,8 @@ export class TourService {
     this.url = `${this.conf.getConfig('url')}web/tour`;
   }
 
-  getTours(pageNumber: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}/latest/${pageNumber}`);
+  getTours(filter: string, pageNumber: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/Registered/latest?page=${pageNumber}${(filter !== `` ? `&${filter}` : ``)}`);
   }
 
   addTour(obj: any): Observable<any[]> {

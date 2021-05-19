@@ -23,7 +23,7 @@ export class HotelService {
   }
 
   getHotels(filter: string, pageNumber: number): Observable<IHotel[]> {
-    return this.http.get<IHotel[]>(`${this.url}Registered/latest${filter}`);
+    return this.http.get<IHotel[]>(`${this.url}Registered/latest?page=${pageNumber}${(filter ? `&${filter}` : ``)}`);
   }
 
   addHotel(obj: any): Observable<any[]> {
@@ -37,50 +37,59 @@ export class HotelService {
   deleteHotel(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}${id}`);
   }
-  //roomkindService
+
+  // roomkindService
   //#region
   getRoomkind(): Observable<IRoomkind[]> {
     return this.http.get<IRoomkind[]>(`${this.url}Room/Kind/latest`);
   }
-  addRomkind(obj: any): Observable<any[]> {
-    console.log(obj);
 
+  addRomkind(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}Room/Kind`, obj);
   }
+
   deleteRoomkind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}Room/Kind/${id}`);
   }
+
   getRoomkindById(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}Room/Kind/${id}`);
   }
+
   //#endregion
   //#region  romfacilikind
   getRoomfacilitieskind(): Observable<IRoomfacilitieskind[]> {
     return this.http.get<IRoomfacilitieskind[]>(`${this.url}Room/FacilitiesKind/latest`);
   }
+
   addRoomfacilitieskind(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}Room/FacilitiesKind`, obj);
   }
+
   deleteRoomfacilitieskind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}Room/FacilitiesKind/${id}`);
   }
+
   getRoomfacilitieskindById(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}Room/FacilitiesKind/${id}`);
   }
+
   //#endregion
   //#region hotelfacilikind
   getHotelfacilitieskind(): Observable<IHotelfacilitieskind[]> {
     return this.http.get<IHotelfacilitieskind[]>(`${this.url}FacilitiesKind/latest`);
   }
+
   addHotelfacilitieskind(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}FacilitiesKind`, obj);
   }
+
   deleteHotelfacilitieskind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}FacilitiesKind/${id}`);
   }
+
   getHotelfacilitieskindById(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}FacilitiesKind/${id}`);
   }
-  //#endregion
 
 }

@@ -1,9 +1,20 @@
 <div class="card">
   <p-toolbar>
     <div class="p-toolbar-group-right">
+      <div class="p-grid p-fluid">
+        <div class="p-col-6 p-field">
+          <label for="title"> عنوان تور</label>
+          <input type="text" id="title" pInputText [(ngModel)]="title" />
+        </div>
+        <div class="p-col-6 p-field">
+          <label for="state">وضعیت</label>
+          <p-dropdown inputId="state" [options]="items" [(ngModel)]="item" placeholder="انتخاب وضعیت"
+            optionLabel="name"></p-dropdown>
+        </div>
+      </div>
     </div>
     <div class="p-toolbar-group-left">
-      <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو" (click)="getToures()"></button>
+      <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو" (click)="getToures(true)"></button>
       <button pButton pRipple label="ثبت تور جدید" icon="pi pi-plus" class="p-button-success"
         routerLink="../tour-form/new"></button>
     </div>

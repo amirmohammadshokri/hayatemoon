@@ -92,6 +92,10 @@ export class FormTourComponent implements OnInit {
     this.tour.price.push({});
   }
 
+  removePrice(index: number): void {
+    this.tour.price.splice(index, 1);
+  }
+
   addImage(e: any): void {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
