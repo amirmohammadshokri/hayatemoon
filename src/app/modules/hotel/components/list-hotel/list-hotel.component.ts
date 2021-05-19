@@ -26,7 +26,7 @@ export class ListHotelComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getHotels();
+      this.getHotels(false);
     }
   }
 
@@ -34,44 +34,36 @@ export class ListHotelComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private sHotel: HotelService,
     private router: Router
-  ) {
-    this.items = [
-      {
-        code: 0,
-        name: 'فعال'
-      },
-      {
-        code: 1,
-        name: 'غیر فعال'
-      },
-      {
-        code: 2,
-        name: 'در انتظار'
-      },
-
-    ];
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.items = [
+      { code: 0, name: 'فعال' },
+      { code: 1, name: 'غیر فعال' },
+      { code: 2, name: 'در انتظار' },
+    ];
     this.cols = [
       { field: 'title', header: 'عنوان هتل' },
       { field: 'fullname', header: 'ایجاد کننده' },
       { field: 'state', header: 'وضعیت' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
-    this.getHotels();
+    this.getHotels(true);
   }
 
-  getHotels(): void {
+  getHotels(firstLoad: boolean): void {
+    if (firstLoad) {
+      this.currentPage = 1;
+      this.hotels = [];
+    }
     this.loading = true;
-    let filter = `?`;
+    let filter = ``;
     if (this.item) {
       filter += `&state=${this.item.code}`;
     }
     if (this.title) {
       filter += `&title=${this.title}`;
     }
-    this.hotels = [];
     this.sHotel.getHotels(filter, this.currentPage).subscribe(res => {
       this.hotels.push(...res);
       this.loading = false;
@@ -92,8 +84,7 @@ export class ListHotelComponent implements OnInit {
 
   deleteHotel(id: number): void {
     this.sHotel.deleteHotel(id).subscribe(() => {
-      this.currentPage = 1;
-      this.getHotels();
+      this.getHotels(true);
     });
   }
 

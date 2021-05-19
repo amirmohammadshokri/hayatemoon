@@ -128,6 +128,8 @@ export class FormTourComponent implements OnInit {
       this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
       this.saving = false;
       this.tour = { tourMediaIds: [], price: [{}], vehicles: [] };
+    }, _ => {
+      this.saving = false;
     });
   }
 
