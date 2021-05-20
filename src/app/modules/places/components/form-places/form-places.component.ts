@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { IAddPlaces } from 'src/app/interfaces/add-paces.interface';
 import { PlacesService } from 'src/app/services';
-import { CommonServiece } from 'src/app/services/common.service';
 
 @Component({
   selector: 'ss-form-places',
@@ -14,15 +13,13 @@ export class FormPlacesComponent implements OnInit {
   places: IAddPlaces[] = [];
   PlacesId: number;
   titleList: string[];
+  saving: boolean;
 
 
   constructor(
     private serPlaces: PlacesService,
-    private sMsg: MessageService,
     private route: ActivatedRoute,
-    private router: Router,
-    private sComm: CommonServiece
-
+    private srvMsg: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -40,36 +37,12 @@ export class FormPlacesComponent implements OnInit {
   }
 
   submit(): void {
+    this.saving = true;
     this.serPlaces.addPlace({ titleList: this.titleList }).subscribe(res => {
-      
+      this.saving = false;
+      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+      this.titleList = [];
     });
   }
-   
-
-  // submit(): void {
-  //   if (this.places.placeId > 0) {
-  //     const obj: IAddrookind = {
-  //       id:this.roomkind.id,
-  //        fontIconId:this.roomkind.fontIconId,
-  //        title:this.roomkind.title
-  //     };
-  //     this.srvHotel.addRomkind(obj).subscribe(() => {
-  //       this.sMsg.add({ severity: 'success', summary: 'ویرایش انواع اتاق', detail: 'عملیات با موفقیت انجام شد' });
-  //       this.router.navigate(['./panel/hotel/list-roomkind']);
-  //     });
-  //   }
-  //   else {
-  //     this.roomkind.id = 0;
-  //     const obj1: IRoomkind = {
-  //       id:0,
-  //       fontIconId:this.roomkind.fontIconId,
-  //       title:this.roomkind.title
-  //     };
-  //     this.srvHotel.addRomkind(obj1).subscribe(() => {
-  //       this.sMsg.add({ severity: 'success', summary: 'ثبت انواع اتاق ', detail: 'عملیات با موفقیت انجام شد' });
-  //       this.router.navigate(['./panel/news']);
-  //     });
-  //   }
-  // }
 
 }

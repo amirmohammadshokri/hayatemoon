@@ -9,22 +9,20 @@ import { CommonServiece } from 'src/app/services/common.service';
 @Component({
   selector: 'ss-form-roomkind',
   templateUrl: './form-roomkind.component.html',
-  styleUrls: ['./form-roomkind.component.scss'] 
+  styleUrls: ['./form-roomkind.component.scss']
 })
 export class FormRoomkindComponent implements OnInit {
-roomkind:IAddrookind= {};
-icons:SelectItem[];
-roomkindId:number;
-fontIconId:string;
-
-
+  roomkind: IAddrookind = {};
+  icons: SelectItem[];
+  roomkindId: number;
+  fontIconId: string;
   constructor(
     private srvHotel: HotelService,
     private sMsg: MessageService,
     private route: ActivatedRoute,
     private router: Router,
-    private sComm:CommonServiece
-   
+    private sComm: CommonServiece
+
   ) { }
 
   ngOnInit(): void {
@@ -33,23 +31,23 @@ fontIconId:string;
     });
     this.route.params.subscribe(prms => {
       if (prms.id > 0) {
-         this.roomkindId = Number.parseInt(prms.id, 0);
-         this.getroomkindById(this.roomkindId);
+        this.roomkindId = Number.parseInt(prms.id, 0);
+        this.getroomkindById(this.roomkindId);
       }
     });
   }
   getroomkindById(id: number): void {
     this.srvHotel.getRoomkindById(id).subscribe(cou => {
       this.roomkind = cou;
-  });
-}
- 
+    });
+  }
+
   submit(): void {
     if (this.roomkind.id > 0) {
       const obj: IAddrookind = {
-        id:this.roomkind.id,
-         fontIconId:this.roomkind.fontIconId,
-         title:this.roomkind.title
+        id: this.roomkind.id,
+        fontIconId: this.roomkind.fontIconId,
+        title: this.roomkind.title
       };
       this.srvHotel.addRomkind(obj).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ویرایش انواع اتاق', detail: 'عملیات با موفقیت انجام شد' });
@@ -59,9 +57,9 @@ fontIconId:string;
     else {
       this.roomkind.id = 0;
       const obj1: IRoomkind = {
-        id:0,
-        fontIconId:this.roomkind.fontIconId,
-        title:this.roomkind.title
+        id: 0,
+        fontIconId: this.roomkind.fontIconId,
+        title: this.roomkind.title
       };
       this.srvHotel.addRomkind(obj1).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ثبت انواع اتاق ', detail: 'عملیات با موفقیت انجام شد' });

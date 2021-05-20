@@ -13,7 +13,7 @@ export interface IAddTour {
   tourCategories?: number[];
   tourMediaIds: number[];
   mainImageId?: number;
-  price?: IPrice[];
+  price?: IPrice;
   hotelId?: number;
   hotelRooms?: number[];
   description?: string;

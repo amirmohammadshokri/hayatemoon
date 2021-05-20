@@ -23,9 +23,9 @@
       <p-dropdown [options]="icons" [(ngModel)]="hotelfacilitieskind.fontIconId" [filter]="true" filterBy="value"
         placeholder="یه آیکون انتخاب کن">
         <ng-template pTemplate="selectedItem">
-          <div *ngIf="roomkind.fontIconId">
-            <i style="font-size: 1.3em;" [class]="roomkind.fontIconId"></i>
-            <span class="p-mr-2">{{roomkind.fontIconId}}</span>
+          <div *ngIf="hotelfacilitieskind.fontIconId">
+            <i style="font-size: 1.3em;" [class]="hotelfacilitieskind.fontIconId"></i>
+            <span class="p-mr-2">{{hotelfacilitieskind.fontIconId}}</span>
           </div>
         </ng-template>
         <ng-template let-icon pTemplate="item">
@@ -36,6 +36,5 @@
         </ng-template>
       </p-dropdown>
     </div>
-
   </div>
 </div>

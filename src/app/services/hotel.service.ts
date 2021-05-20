@@ -58,8 +58,8 @@ export class HotelService {
 
   //#endregion
   //#region  romfacilikind
-  getRoomfacilitieskind(): Observable<IRoomfacilitieskind[]> {
-    return this.http.get<IRoomfacilitieskind[]>(`${this.url}Room/FacilitiesKind/latest`);
+  getRoomfacilitieskind(page: number): Observable<IRoomfacilitieskind[]> {
+    return this.http.get<IRoomfacilitieskind[]>(`${this.url}Room/FacilitiesKind/latest?page=${page}`);
   }
 
   addRoomfacilitieskind(obj: any): Observable<any[]> {

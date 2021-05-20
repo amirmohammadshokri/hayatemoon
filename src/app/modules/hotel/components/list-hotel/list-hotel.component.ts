@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { IHotel } from 'src/app/interfaces/hotel.interface';
 import { IState } from 'src/app/interfaces/state.inteface';
 import { HotelService } from 'src/app/services/hotel.service';

@@ -6,7 +6,9 @@ import { MessageService } from 'primeng/api';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+
   constructor(private sMsg: MessageService) { }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       const error = err.error.error || err.error?.detail || err.statusText;

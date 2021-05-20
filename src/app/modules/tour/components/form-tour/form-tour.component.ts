@@ -10,7 +10,7 @@ import { CurrencyService, MediaService, SearchService, TourService, VehiclesServ
 })
 export class FormTourComponent implements OnInit {
 
-  tour: IAddTour = { tourMediaIds: [], price: [{}], vehicles: [] };
+  tour: IAddTour = { tourMediaIds: [], price: {}, vehicles: [] };
   saving: boolean;
   locations: any[] = [];
   fromLocation: any;
@@ -89,11 +89,11 @@ export class FormTourComponent implements OnInit {
   }
 
   addPrice(): void {
-    this.tour.price.push({});
+    // this.tour.price.push({});
   }
 
   removePrice(index: number): void {
-    this.tour.price.splice(index, 1);
+    // this.tour.price.splice(index, 1);
   }
 
   addImage(e: any): void {
@@ -110,10 +110,10 @@ export class FormTourComponent implements OnInit {
     this.saving = true;
     this.tour.fromLocationId = this.fromLocation.locationId;
     this.tour.toLocationId = this.toLocation.locationId;
-    const startDate: Date = this.fromDate._d;
+    const startDate: Date = this.fromDate?._d;
     const utcFromDate = new Date(startDate.toUTCString());
     this.tour.startDate = utcFromDate.toISOString();
-    const endDate: Date = this.toDate._d;
+    const endDate: Date = this.toDate?._d;
     const utcendDate = new Date(endDate.toUTCString());
     this.tour.endDate = utcendDate.toISOString();
     this.goVehicels.forEach(vehicle => {
@@ -127,7 +127,7 @@ export class FormTourComponent implements OnInit {
     this.srvTour.addTour(this.tour).subscribe(res => {
       this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
       this.saving = false;
-      this.tour = { tourMediaIds: [], price: [{}], vehicles: [] };
+      this.tour = { tourMediaIds: [], price: {}, vehicles: [] };
     }, _ => {
       this.saving = false;
     });

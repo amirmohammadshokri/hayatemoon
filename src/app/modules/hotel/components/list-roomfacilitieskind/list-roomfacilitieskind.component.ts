@@ -21,7 +21,7 @@ export class ListRoomfacilitieskindComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getRoomfacilitieskind();
+      this.getRoomfacilitieskind(false);
     }
   }
 
@@ -37,12 +37,16 @@ export class ListRoomfacilitieskindComponent implements OnInit {
       { field: 'fontIconId', header: 'آیکن' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
-    this.getRoomfacilitieskind();
+    this.getRoomfacilitieskind(true);
   }
 
-  getRoomfacilitieskind(): void {
+  getRoomfacilitieskind(firstLoad: boolean): void {
+    if (firstLoad) {
+      this.currentPage = 1;
+      this.roomfacilitieskind = [];
+    }
     this.loading = true;
-    this.srvHotel.getRoomfacilitieskind().subscribe(res => {
+    this.srvHotel.getRoomfacilitieskind(this.currentPage).subscribe(res => {
       this.roomfacilitieskind.push(...res);
       this.loading = false;
     });
@@ -62,7 +66,7 @@ export class ListRoomfacilitieskindComponent implements OnInit {
 
   deleteRoomfacilitieskind(id: number): void {
     this.srvHotel.deleteRoomfacilitieskind(id).subscribe(() => {
-      this.getRoomfacilitieskind();
+      this.getRoomfacilitieskind(true);
     });
   }
 

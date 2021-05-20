@@ -20,5 +20,19 @@ export interface IAddResidence {
   toEntranceHour?: string;
   leavingHour?: string;
   rules?: string[];
+  prices?: IPrice;
   isAdmin?: boolean;
+}
+
+interface IPrice {
+  price?: number;
+  thursdayPercent?: number;
+  fridayPercent?: number;
+  holiday?: number;
+  beforeHoliday?: number;
+  priceRules?: {
+    price?: number;
+    from?: any;
+    to?: any
+  }[];
 }

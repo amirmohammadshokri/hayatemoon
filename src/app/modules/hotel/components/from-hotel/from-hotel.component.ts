@@ -142,6 +142,7 @@ export class FromHotelComponent implements OnInit {
   addPlace(): void {
     this.hotel.places.push({
       minute: this.place.minute,
+      id: this.place?.title?.placeId,
       title: (this.place?.title?.title ?? this.place?.title),
       vehicleId: this.place.vehicleId,
       vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
