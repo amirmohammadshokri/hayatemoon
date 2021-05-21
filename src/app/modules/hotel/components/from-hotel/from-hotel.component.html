@@ -24,8 +24,7 @@
         </div>
         <div class="p-col-4 p-field">
           <label for="selectedRate">درجه هتل</label>
-          <p-dropdown [options]="rates"   id="rates" [(ngModel)]="selectedRate" optionLabel="name" placeholder="انتخاب"  required
-          [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+          <p-dropdown [options]="rates"  [(ngModel)]="selectedRate" optionLabel="name"  >
             <ng-template pTemplate="selectedItem">
               <div *ngIf="selectedRate">
                 <i class="pi pi-star"></i>
@@ -45,19 +44,30 @@
               <i *ngIf="rate.value > 5" class="pi pi-star p-mr-1"></i>
             </ng-template>
           </p-dropdown>
-          <!-- <small *ngIf="(rates.invalid && submitted) || (rates.dirty && rates.invalid)" class="p-error">
+          <!-- <small *ngIf="(selectedItem.invalid && submitted) || (selectedItem.dirty && item.invalid)" class="p-error">
             ثبت درجه اجباری می باشد.
           </small> -->
         </div>
         <div class="p-col-4 p-field">
           <label for="">نام شهر</label>
-          <p-autoComplete [suggestions]="locations" [(ngModel)]="selectedLocation"
-            (completeMethod)="getLocations($event)" field="title">
+          <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
+            (completeMethod)="getLocations($event)" field="title" 
+            [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
           </p-autoComplete>
+        <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
+          انتخاب شهر اجباری است
+        </small>
         </div>
         <div class="p-col-6 p-field">
           <label for="">نوع هتل</label>
-          <p-dropdown [options]="hotelTypes" placeholder="انتخاب" [(ngModel)]="hotel.typeId"></p-dropdown>
+          <p-dropdown [options]="hotelTypes" #typeId="ngModel"  [(ngModel)]="hotel.typeId" 
+          required
+          placeholder="انتخاب نوع هتل"
+          [ngClass]="{'ng-dirty': (typeId.invalid && submitted) || (typeId.dirty && typeId.invalid)}"
+          ></p-dropdown>
+          <small *ngIf="(typeId.invalid && submitted) || (typeId.dirty && typeId.invalid)" class="p-error">
+            نوع هتل حتما باید انتخاب شود
+          </small>
         </div>
         <div class="p-col-6 p-field">
           <label for="">تلفن</label>
