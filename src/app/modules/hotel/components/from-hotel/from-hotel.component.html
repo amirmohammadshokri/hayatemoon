@@ -70,7 +70,7 @@
     </div>
     <div class="p-col-12  p-field">
       <label for="">امکانات هتل</label>
-      <p-autoComplete [suggestions]="facilities" [(ngModel)]="hotel.facilitiesKindIds"
+      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds"
         (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
       </p-autoComplete>
     </div>
