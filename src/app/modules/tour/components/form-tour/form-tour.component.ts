@@ -60,7 +60,7 @@ export class FormTourComponent implements OnInit {
   }
 
   getRooms(event: any): void {
-    this.srvSrch.getHotelRooms(this.selectedHotel?.id, event.query).subscribe(res => {
+    this.srvSrch.getHotelRooms(null, event.query).subscribe(res => {
       this.rooms = res;
     });
   }
