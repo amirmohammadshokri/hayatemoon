@@ -16,6 +16,7 @@ export class ListHotelComponent implements OnInit {
   hotels: IHotel[] = [];
   loading: boolean;
   currentPage: number;
+  selectedHotelId:number;
   items: IState[];
   item: any;
   title: string;
@@ -50,7 +51,18 @@ export class ListHotelComponent implements OnInit {
     ];
     this.getHotels(true);
   }
+  
+  confirmChangestate(id: number): void {
+    this.confirmationService.confirm({
+    key:"stateDialog"
+    });
+  }
 
+  changeState(stateId:number):void{
+    this.selectedHotelId=stateId; 
+
+  }
+  
   getHotels(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;

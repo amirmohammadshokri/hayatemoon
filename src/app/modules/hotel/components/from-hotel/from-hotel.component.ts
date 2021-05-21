@@ -211,8 +211,7 @@ export class FromHotelComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    console.log(this.hotel.phone);
-    
+
     if (this.hotel.phone) {
     this.saving = true;
     this.hotel.rate = this.selectedRate?.value;

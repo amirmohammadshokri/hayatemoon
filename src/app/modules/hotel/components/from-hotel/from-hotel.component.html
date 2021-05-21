@@ -15,11 +15,17 @@
       <div class="p-grid p-fluid">
         <div class="p-col-4 p-field">
           <label for="title">نام هتل</label>
-          <input type="text" id="title" pInputText [(ngModel)]="hotel.title">
+          <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="hotel.title" required
+          [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+        <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+          ثبت عنوان اجباری می باشد.
+        </small>
+      
         </div>
         <div class="p-col-4 p-field">
           <label for="selectedRate">درجه هتل</label>
-          <p-dropdown [options]="rates" [(ngModel)]="selectedRate" optionLabel="name" placeholder="انتخاب">
+          <p-dropdown [options]="rates"   id="rates" [(ngModel)]="selectedRate" optionLabel="name" placeholder="انتخاب"  required
+          [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
             <ng-template pTemplate="selectedItem">
               <div *ngIf="selectedRate">
                 <i class="pi pi-star"></i>
@@ -39,6 +45,9 @@
               <i *ngIf="rate.value > 5" class="pi pi-star p-mr-1"></i>
             </ng-template>
           </p-dropdown>
+          <!-- <small *ngIf="(rates.invalid && submitted) || (rates.dirty && rates.invalid)" class="p-error">
+            ثبت درجه اجباری می باشد.
+          </small> -->
         </div>
         <div class="p-col-4 p-field">
           <label for="">نام شهر</label>
@@ -61,7 +70,11 @@
         </div>
         <div class="p-col-12 p-field">
           <label for="">آدرس</label>
-          <textarea pInputTextarea rows="1" [(ngModel)]="hotel.address"></textarea>
+          <textarea pInputTextarea rows="1"#address="ngModel" id="address"  [(ngModel)]="hotel.address"  required
+          [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+          <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
+            ثبت آدرس اجباری می باشد.
+          </small>
         </div>
         <div class="p-col-12 p-field">
           <label for="">توضیحات</label>
