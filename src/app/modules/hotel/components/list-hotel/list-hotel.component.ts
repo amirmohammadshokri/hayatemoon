@@ -54,7 +54,7 @@ export class ListHotelComponent implements OnInit {
   
   confirmChangestate(id: number): void {
     this.confirmationService.confirm({
-    key:"stateDialog"
+    key:'stateDialog'
     });
   }
 
