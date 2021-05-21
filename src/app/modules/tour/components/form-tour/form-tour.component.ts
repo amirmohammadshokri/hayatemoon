@@ -110,7 +110,7 @@ export class FormTourComponent implements OnInit {
   async submit(): Promise<void> {
     if (this.tour.title && this.tour.tourType && this.fromLocation &&
       this.toLocation && this.tour.dayDuration && this.tour.nightDuration && this.fromDate && this.toDate && this.selectedCategory &&
-      this.tour.hotelId && this.tour.hotelRooms?.length > 0) {
+      this.tour.hotelId && this.tour.hotelRooms?.length > 0 && this.tour.price.price) {
       this.saving = true;
       this.tour.fromLocationId = this.fromLocation.locationId;
       this.tour.toLocationId = this.toLocation.locationId;

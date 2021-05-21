@@ -21,7 +21,8 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="tourType">نوع تور</label>
-      <p-dropdown #tourType="ngModel" [options]="tourTypes" [(ngModel)]="tour.tourType" required  placeholder="انتخاب نوع تور"
+      <p-dropdown #tourType="ngModel" [options]="tourTypes" [(ngModel)]="tour.tourType" required
+        placeholder="انتخاب نوع تور"
         [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}"></p-dropdown>
       <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
         نوع تور حتما باید انتخاب شود
@@ -147,8 +148,12 @@
         <div class="p-grid p-fluid">
           <div class="p-col-2 p-field">
             <label for="">قیمت</label>
-            <p-inputNumber [(ngModel)]="tour.price.price" suffix=" تومان">
+            <p-inputNumber #price="ngModel" [(ngModel)]="tour.price.price" suffix=" تومان" required
+              [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}">
             </p-inputNumber>
+            <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">
+              لطفا قیمت را وارد کنید
+            </small>
           </div>
           <div class="p-col-2 p-field">
             <label for="">تخفیف</label>
