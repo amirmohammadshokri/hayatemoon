@@ -21,7 +21,7 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="tourType">نوع تور</label>
-      <p-dropdown #tourType="ngModel" [options]="tourTypes" placeholder="انتخاب" [(ngModel)]="tour.tourType" required
+      <p-dropdown #tourType="ngModel" [options]="tourTypes" [(ngModel)]="tour.tourType" required  placeholder="انتخاب نوع تور"
         [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}"></p-dropdown>
       <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
         نوع تور حتما باید انتخاب شود
@@ -37,39 +37,71 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">از مسیر</label>
-      <p-autoComplete [suggestions]="locations" [(ngModel)]="fromLocation" (completeMethod)="getLocations($event)"
-        field="title">
+      <p-autoComplete #fromLoc="ngModel" [suggestions]="locations" [(ngModel)]="fromLocation"
+        (completeMethod)="getLocations($event)" field="title" required
+        [ngClass]="{'ng-dirty': (fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)}">
       </p-autoComplete>
+      <small *ngIf="(fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)" class="p-error">
+        انتخاب مسیر رفت اجباری است
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="">به مسیر</label>
-      <p-autoComplete [suggestions]="locations" [(ngModel)]="toLocation" (completeMethod)="getLocations($event)"
-        field="title">
+      <p-autoComplete #toLoc="ngModel" [suggestions]="locations" [(ngModel)]="toLocation"
+        (completeMethod)="getLocations($event)" field="title" required
+        [ngClass]="{'ng-dirty': (toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)}">
       </p-autoComplete>
+      <small *ngIf="(toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)" class="p-error">
+        انتخاب مسیر برگشت اجباری است
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="dayDuration">چند روز</label>
-      <input type="text" id="dayDuration" pInputText pKeyFilter="num" [(ngModel)]="tour.dayDuration">
+      <input #dayDuration="ngModel" type="text" id="dayDuration" pInputText pKeyFilter="num"
+        [(ngModel)]="tour.dayDuration" required
+        [ngClass]="{'ng-dirty': (dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)}">
+      <small *ngIf="(dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)" class="p-error">
+        تعداد روزهای تور را وارد کنید
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="nightDuration">چند شب</label>
-      <input type="text" id="nightDuration" pInputText pKeyFilter="num" [(ngModel)]="tour.nightDuration">
+      <input #nightDuration="ngModel" type="text" id="nightDuration" pInputText pKeyFilter="num"
+        [(ngModel)]="tour.nightDuration" required
+        [ngClass]="{'ng-dirty': (nightDuration.invalid && submitted) || (nightDuration.dirty && nightDuration.invalid)}">
+      <small *ngIf="(nightDuration.invalid && submitted) || (nightDuration.dirty && nightDuration.invalid)"
+        class="p-error">
+        تعداد شب های تور را وارد کنید
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="fromDate">از تاریخ</label>
-      <dp-date-picker id="fromDate" [(ngModel)]="fromDate" dir="ltr" theme="dp-material" mode="daytime">
+      <dp-date-picker #fromDt="ngModel" id="fromDate" [(ngModel)]="fromDate" dir="ltr" theme="dp-material"
+        mode="daytime" required
+        [ngClass]="{'ng-dirty': (fromDt.invalid && submitted) || (fromDt.dirty && fromDt.invalid)}">
       </dp-date-picker>
+      <small *ngIf="(fromDt.invalid && submitted)" class="p-error">
+        تاریخ و زمان آغاز را انتخاب کنید
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="toDate">تا تاریخ</label>
-      <dp-date-picker id="toDate" [(ngModel)]="toDate" dir="ltr" theme="dp-material" mode="daytime">
+      <dp-date-picker #toDt="ngModel" id="toDate" [(ngModel)]="toDate" dir="ltr" theme="dp-material" mode="daytime"
+        required [ngClass]="{'ng-dirty': (toDt.invalid && submitted) || (toDt.dirty && toDt.invalid)}">
       </dp-date-picker>
+      <small *ngIf="(toDt.invalid && submitted)" class="p-error">
+        تاریخ و زمان پایان را انتخاب کنید
+      </small>
     </div>
     <div class="p-col-6 p-field">
       <label for="">دسته بندی</label>
-      <p-autoComplete [suggestions]="categories" [(ngModel)]="selectedCategory" (completeMethod)="getCategories($event)"
-        field="title" [multiple]="true">
+      <p-autoComplete #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategory"
+        (completeMethod)="getCategories($event)" field="title" [multiple]="true" required
+        [ngClass]="{'ng-dirty': (category.invalid && submitted) || (category.dirty && category.invalid)}">
       </p-autoComplete>
+      <small *ngIf="(category.invalid && submitted) || (category.dirty && category.invalid)" class="p-error">
+        انتخاب دسته بندی اجباری است
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="">وسیله نقلیه رفت</label>
@@ -81,15 +113,23 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب هتل</label>
-      <p-autoComplete [suggestions]="hotels" [(ngModel)]="selectedHotel" (completeMethod)="getHotels($event)"
-        field="title">
+      <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="selectedHotel"
+        (completeMethod)="getHotels($event)" field="title" required
+        [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
       </p-autoComplete>
+      <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
+        انتخاب هتل اجباری است
+      </small>
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب اتاق</label>
-      <p-autoComplete [suggestions]="rooms" [(ngModel)]="selectedRoom" (completeMethod)="getRooms($event)"
-        field="title">
+      <p-autoComplete #room="ngModel" [suggestions]="rooms" [(ngModel)]="selectedRoom"
+        (completeMethod)="getRooms($event)" field="title" required
+        [ngClass]="{'ng-dirty': (room.invalid && submitted) || (room.dirty && room.invalid)}">
       </p-autoComplete>
+      <small *ngIf="(room.invalid && submitted) || (room.dirty && room.invalid)" class="p-error">
+        انتخاب اتاق اجباری است
+      </small>
     </div>
     <div class="p-col-12 p-field">
       <label for="">توضیحات</label>

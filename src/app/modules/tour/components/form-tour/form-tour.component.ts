@@ -10,13 +10,13 @@ import { CurrencyService, MediaService, SearchService, TourService, VehiclesServ
 })
 export class FormTourComponent implements OnInit {
 
-  tour: IAddTour = { tourMediaIds: [], price: {}, vehicles: [] };
+  tour: IAddTour = { isForeign: false, isInstallments: false, tourMediaIds: [], price: {}, vehicles: [] };
   saving: boolean;
   submitted: boolean;
   locations: any[] = [];
   fromLocation: any;
   toLocation: any;
-  tourTypes: SelectItem[];
+  tourTypes: SelectItem[] = [];
   categories: any[];
   selectedCategory: SelectItem;
   fromDate: any;
@@ -67,7 +67,7 @@ export class FormTourComponent implements OnInit {
 
   getTourType(): void {
     this.srvTour.getTourType().subscribe(res => {
-      this.tourTypes = res.map(t => ({ label: t.title, value: t.typeId }));
+      this.tourTypes = res.map(t => ({ label: t.title, value: t.id }));
     });
   }
 
@@ -108,7 +108,9 @@ export class FormTourComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    if (this.tour.title) {
+    if (this.tour.title && this.tour.tourType && this.fromLocation &&
+      this.toLocation && this.tour.dayDuration && this.tour.nightDuration && this.fromDate && this.toDate && this.selectedCategory &&
+      this.tour.hotelId && this.tour.hotelRooms?.length > 0) {
       this.saving = true;
       this.tour.fromLocationId = this.fromLocation.locationId;
       this.tour.toLocationId = this.toLocation.locationId;
