@@ -73,6 +73,7 @@ export class FromHotelComponent implements OnInit {
   ];
   selectedRate: any;
   facilities: any[] = [];
+  facilitiesKinds: any[] = [];
   vehicles: SelectItem[];
   places: any[];
   place: any = {};
@@ -223,6 +224,7 @@ export class FromHotelComponent implements OnInit {
       this.hotel.latitude = this.selectedPosition.lat;
       this.hotel.longitude = this.selectedPosition.lng;
     }
+    this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
     // save images
    // await this.saveImages();
     this.srvHotel.addHotel(this.hotel).subscribe(res => {
