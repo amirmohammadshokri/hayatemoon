@@ -12,6 +12,7 @@ export class FormTourComponent implements OnInit {
 
   tour: IAddTour = { tourMediaIds: [], price: {}, vehicles: [] };
   saving: boolean;
+  submitted: boolean;
   locations: any[] = [];
   fromLocation: any;
   toLocation: any;
@@ -107,30 +108,34 @@ export class FormTourComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    this.saving = true;
-    this.tour.fromLocationId = this.fromLocation.locationId;
-    this.tour.toLocationId = this.toLocation.locationId;
-    const startDate: Date = this.fromDate?._d;
-    const utcFromDate = new Date(startDate.toUTCString());
-    this.tour.startDate = utcFromDate.toISOString();
-    const endDate: Date = this.toDate?._d;
-    const utcendDate = new Date(endDate.toUTCString());
-    this.tour.endDate = utcendDate.toISOString();
-    this.goVehicels.forEach(vehicle => {
-      this.tour.vehicles.push({ type: 0, vehicleId: vehicle.vehicleId });
-    });
-    this.backVehicels.forEach(vehicle => {
-      this.tour.vehicles.push({ type: 1, vehicleId: vehicle.vehicleId });
-    });
+    if (this.tour.title) {
+      this.saving = true;
+      this.tour.fromLocationId = this.fromLocation.locationId;
+      this.tour.toLocationId = this.toLocation.locationId;
+      const startDate: Date = this.fromDate?._d;
+      const utcFromDate = new Date(startDate.toUTCString());
+      this.tour.startDate = utcFromDate.toISOString();
+      const endDate: Date = this.toDate?._d;
+      const utcendDate = new Date(endDate.toUTCString());
+      this.tour.endDate = utcendDate.toISOString();
+      this.goVehicels.forEach(vehicle => {
+        this.tour.vehicles.push({ type: 0, vehicleId: vehicle.vehicleId });
+      });
+      this.backVehicels.forEach(vehicle => {
+        this.tour.vehicles.push({ type: 1, vehicleId: vehicle.vehicleId });
+      });
 
-    await this.saveImages();
-    this.srvTour.addTour(this.tour).subscribe(res => {
-      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-      this.saving = false;
-      this.tour = { tourMediaIds: [], price: {}, vehicles: [] };
-    }, _ => {
-      this.saving = false;
-    });
+      await this.saveImages();
+      this.srvTour.addTour(this.tour).subscribe(res => {
+        this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+        this.saving = false;
+        this.tour = { tourMediaIds: [], price: {}, vehicles: [] };
+      }, _ => {
+        this.saving = false;
+      });
+    }
+
+    this.submitted = true;
   }
 
   saveImages(): Promise<void> {

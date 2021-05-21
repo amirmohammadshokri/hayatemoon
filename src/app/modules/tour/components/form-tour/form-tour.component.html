@@ -13,11 +13,19 @@
   <div class="p-grid p-fluid p-mt-2">
     <div class="p-col-3 p-field">
       <label for="title">عنوان تور</label>
-      <input type="text" id="title" pInputText [(ngModel)]="tour.title">
+      <input #title="ngModel" id="title" type="text" required pInputText [(ngModel)]="tour.title"
+        [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+      <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+        ثبت عنوان تور اجباری است
+      </small>
     </div>
     <div class="p-col-3 p-field">
-      <label for="">نوع تور</label>
-      <p-dropdown [options]="tourTypes" placeholder="انتخاب" [(ngModel)]="tour.tourType"></p-dropdown>
+      <label for="tourType">نوع تور</label>
+      <p-dropdown #tourType="ngModel" [options]="tourTypes" placeholder="انتخاب" [(ngModel)]="tour.tourType" required
+        [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}"></p-dropdown>
+      <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
+        نوع تور حتما باید انتخاب شود
+      </small>
     </div>
     <div class="p-col-3 p-field-checkbox">
       <p-checkbox [(ngModel)]="tour.isForeign" [binary]="true"></p-checkbox>
@@ -109,7 +117,8 @@
           </div>
           <div class="p-col-2 p-field">
             <label for="">نوع ارز</label>
-            <p-dropdown [options]="currencies" placeholder="انتخاب" [(ngModel)]="tour.price.currencyPriceType"></p-dropdown>
+            <p-dropdown [options]="currencies" placeholder="انتخاب" [(ngModel)]="tour.price.currencyPriceType">
+            </p-dropdown>
           </div>
           <div class="p-col-2 p-field">
             <label for="">قیمت ارزی</label>

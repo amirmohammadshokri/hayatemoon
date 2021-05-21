@@ -4,7 +4,7 @@
     </div>
     <div class="p-toolbar-group-left">
       <button pButton [disabled]="saving" pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
-        icon="pi pi-save"></button>
+        [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
       <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
         routerLink="../../hotel-facilitieskinds"></button>
     </div>

@@ -1,5 +1,5 @@
 export interface IAddhotelfacilitieskind {
-    id?:number;
-    title?:string ;
-    fontIconId?:string;
+  id?: number;
+  title?: string;
+  fontIconId?: string;
 }

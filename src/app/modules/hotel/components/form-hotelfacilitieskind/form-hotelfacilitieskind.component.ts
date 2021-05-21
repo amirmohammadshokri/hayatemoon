@@ -51,33 +51,23 @@ export class FormHotelfacilitieskindComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.hotelfacilitieskind.id > 0) {
-      const obj: IAddhotelfacilitieskind = {
-        id: this.romfacilitieskindId,
-        fontIconId: this.hotelfacilitieskind.fontIconId,
-        title: this.hotelfacilitieskind.title
-      };
-      this.submitted = true;
-      if (this.hotelfacilitieskind.title) {
-        this.saving = true;
-        this.srvHotel.addHotelfacilitieskind(obj).subscribe(() => {
+    if (this.hotelfacilitieskind.title) {
+      this.saving = true;
+      if (this.hotelfacilitieskind.id > 0) {
+        this.hotelfacilitieskind.id = this.romfacilitieskindId;
+        this.srvHotel.addHotelfacilitieskind(this.hotelfacilitieskind).subscribe(() => {
           this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات هتل', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/hotel/hotel-facilitieskinds']);
+        });
+      }
+      else {
+        this.srvHotel.addHotelfacilitieskind(this.hotelfacilitieskind).subscribe(() => {
+          this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات هتل ', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/hotel/hotel-facilitieskinds']);
         });
       }
     }
-    else {
-      this.hotelfacilitieskind.id = 0;
-      const obj1: IHotelfacilitieskind = {
-        hotelFacilityKindId: 0,
-        fontIconId: this.hotelfacilitieskind.fontIconId,
-        title: this.hotelfacilitieskind.title
-      };
-      this.srvHotel.addHotelfacilitieskind(obj1).subscribe(() => {
-        this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات هتل ', detail: 'عملیات با موفقیت انجام شد' });
-        this.hotelfacilitieskind = {};
-        this.submitted = false;
-      });
-    }
+    this.submitted = true;
   }
 
 }
