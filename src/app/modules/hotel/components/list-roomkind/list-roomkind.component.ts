@@ -23,7 +23,7 @@ export class ListRoomkindComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getRomkind();
+      this.getRomkind(false);
     }
   }
   constructor(
@@ -38,12 +38,17 @@ export class ListRoomkindComponent implements OnInit {
       { field: 'fontIconId', header: 'آیکن' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
-    this.getRomkind();
+    this.currentPage = 1;
+    this.getRomkind(true);
   }
 
-  getRomkind(): void {
+  getRomkind(firstLoad: boolean): void {
+    if (firstLoad) {
+      this.currentPage = 1;
+      this.roomkind = [];
+    }
     this.loading = true;
-    this.srvHotel.getRoomkind().subscribe(res => {
+    this.srvHotel.getRoomkind(this.currentPage).subscribe(res => {
       this.roomkind.push(...res);
       this.loading = false;
     });
@@ -63,7 +68,7 @@ export class ListRoomkindComponent implements OnInit {
 
   deleteRoomkind(id: number): void {
     this.srvHotel.deleteRoomkind(id).subscribe(() => {
-      this.getRomkind();
+      this.getRomkind(true);
     });
   }
 

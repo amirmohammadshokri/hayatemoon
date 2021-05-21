@@ -30,19 +30,21 @@ export class ResidenceService {
   deleteResidence(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}${id}`);
   }
+
   //#endregion
   //#region  Residencefacilitieskind
-  getResidencefacilitieskind(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}FacilitiesKind/latest`);
+  getResidencefacilitieskind(page: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}FacilitiesKind/latest?page=${page}`);
   }
+
   addResidencefacilitieskind(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}FacilitiesKind`, obj);
   }
-  deleteResidencefacilitieskind(id: number): Observable<any> {
-    console.log(id + 'Amir');
 
+  deleteResidencefacilitieskind(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}FacilitiesKind/${id}`);
   }
+
   getResidencefacilitieskindById(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}FacilitiesKind/${id}`);
   }

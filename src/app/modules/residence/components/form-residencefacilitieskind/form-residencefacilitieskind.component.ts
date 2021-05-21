@@ -13,63 +13,60 @@ import { ResidenceService } from 'src/app/services/residence.service';
 export class FormResidencefacilitieskindComponent implements OnInit {
 
 
-  residencefacilitieskind:IAddResidencefacilitieskind= {};
-  icons:SelectItem[];
-  residencefacilitieskindId:number;
-  fontIconId:string;
-  
-    constructor(
-      private srvResidence: ResidenceService,
-      private sMsg: MessageService,
-      private route: ActivatedRoute,
-      private router: Router,
-      private sComm:CommonServiece
-     
-    ) { }
-  
-    ngOnInit(): void {
-      this.sComm.getIcons().subscribe(icons => {
-        this.icons = icons;
-      });
-      this.route.params.subscribe(prms => {
-        if (prms.id > 0) {
-          console.log(Number.parseInt(prms.id, 0)+'Amiriiiiiiiii');
-      
-           this.residencefacilitieskindId = Number.parseInt(prms.id, 0);
-           this.getResidencefacilitieskindById(this.residencefacilitieskindId);
-        }
-      });
-    }
-    getResidencefacilitieskindById(id: number): void {
-      this.srvResidence.getResidencefacilitieskindById(id).subscribe(cou => {
-        this.residencefacilitieskind = cou;
+  residencefacilitieskind: IAddResidencefacilitieskind = {};
+  icons: SelectItem[];
+  residencefacilitieskindId: number;
+  fontIconId: string;
+
+  constructor(
+    private srvResidence: ResidenceService,
+    private sMsg: MessageService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private sComm: CommonServiece
+
+  ) { }
+
+  ngOnInit(): void {
+    this.sComm.getIcons().subscribe(icons => {
+      this.icons = icons;
+    });
+    this.route.params.subscribe(prms => {
+      if (prms.id > 0) {
+        this.residencefacilitieskindId = Number.parseInt(prms.id, 0);
+        this.getResidencefacilitieskindById(this.residencefacilitieskindId);
+      }
     });
   }
-   
-    submit(): void {
-      if (this.residencefacilitieskind.id > 0) {
-        const obj: IAddResidencefacilitieskind = {
-          id:this.residencefacilitieskind.id,
-           fontIconId:this.residencefacilitieskind.fontIconId,
-           title:this.residencefacilitieskind.title
-        };
-        this.srvResidence.addResidencefacilitieskind(obj).subscribe(() => {
-          this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['./panel/residence/residence-facilitieskinds']);
-        });
-      }
-      else {
-        this.residencefacilitieskind.id = 0;
-        const obj1: IAddResidencefacilitieskind = {
-          id:0,
-          fontIconId:this.residencefacilitieskind.fontIconId,
-          title:this.residencefacilitieskind.title
-        };
-        this.srvResidence.addResidencefacilitieskind(obj1).subscribe(() => {
-          this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات اقامتگاه ', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['./panel/residence/residence-facilitieskinds']);
-        });
-      }
+  getResidencefacilitieskindById(id: number): void {
+    this.srvResidence.getResidencefacilitieskindById(id).subscribe(cou => {
+      this.residencefacilitieskind = cou;
+    });
+  }
+
+  submit(): void {
+    if (this.residencefacilitieskind.id > 0) {
+      const obj: IAddResidencefacilitieskind = {
+        id: this.residencefacilitieskind.id,
+        fontIconId: this.residencefacilitieskind.fontIconId,
+        title: this.residencefacilitieskind.title
+      };
+      this.srvResidence.addResidencefacilitieskind(obj).subscribe(() => {
+        this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+      });
     }
-  
+    else {
+      this.residencefacilitieskind.id = 0;
+      const obj1: IAddResidencefacilitieskind = {
+        id: 0,
+        fontIconId: this.residencefacilitieskind.fontIconId,
+        title: this.residencefacilitieskind.title
+      };
+      this.srvResidence.addResidencefacilitieskind(obj1).subscribe(() => {
+        this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات اقامتگاه ', detail: 'عملیات با موفقیت انجام شد' });
+        this.residencefacilitieskind = {};
+      });
+    }
+  }
+
 }

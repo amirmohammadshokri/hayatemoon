@@ -22,7 +22,7 @@ export class ListResidencefacilitieskindComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
-      this.getResidencefacilitieskind();
+      this.getResidencefacilitieskind(false);
     }
   }
 
@@ -38,12 +38,16 @@ export class ListResidencefacilitieskindComponent implements OnInit {
       { field: 'fontIconId', header: 'آیکن' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
-    this.getResidencefacilitieskind();
+    this.getResidencefacilitieskind(true);
   }
 
-  getResidencefacilitieskind(): void {
+  getResidencefacilitieskind(firstLoad: boolean): void {
+    if (firstLoad) {
+      this.currentPage = 1;
+      this.residencefacilitieskind = [];
+    }
     this.loading = true;
-    this.srvResidence.getResidencefacilitieskind().subscribe(res => {
+    this.srvResidence.getResidencefacilitieskind(this.currentPage).subscribe(res => {
       this.residencefacilitieskind.push(...res);
       this.loading = false;
     });
@@ -63,7 +67,7 @@ export class ListResidencefacilitieskindComponent implements OnInit {
 
   deleteResidencefacilitieskind(id: number): void {
     this.srvResidence.deleteResidencefacilitieskind(id).subscribe(() => {
-      this.getResidencefacilitieskind();
+      this.getResidencefacilitieskind(true);
     });
   }
 

@@ -52,8 +52,6 @@ export class FormHotelfacilitieskindComponent implements OnInit {
 
   submit(): void {
     if (this.hotelfacilitieskind.id > 0) {
-      console.log(this.hotelfacilitieskind.id);
-
       const obj: IAddhotelfacilitieskind = {
         id: this.romfacilitieskindId,
         fontIconId: this.hotelfacilitieskind.fontIconId,
@@ -64,7 +62,6 @@ export class FormHotelfacilitieskindComponent implements OnInit {
         this.saving = true;
         this.srvHotel.addHotelfacilitieskind(obj).subscribe(() => {
           this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات هتل', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['../panel/hotel/list-hotelfacilitieskind']);
         });
       }
     }
@@ -77,7 +74,8 @@ export class FormHotelfacilitieskindComponent implements OnInit {
       };
       this.srvHotel.addHotelfacilitieskind(obj1).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات هتل ', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/hotel/list-hotelfacilitieskind']);
+        this.hotelfacilitieskind = {};
+        this.submitted = false;
       });
     }
   }

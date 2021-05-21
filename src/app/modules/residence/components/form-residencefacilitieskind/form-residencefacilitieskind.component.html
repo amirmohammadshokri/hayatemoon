@@ -19,9 +19,9 @@
       <p-dropdown [options]="icons" [(ngModel)]="residencefacilitieskind.fontIconId" [filter]="true" filterBy="value"
         placeholder="یه آیکون انتخاب کن">
         <ng-template pTemplate="selectedItem">
-          <div *ngIf="roomkind.fontIconId">
-            <i style="font-size: 1.3em;" [class]="roomkind.fontIconId"></i>
-            <span class="p-mr-2">{{roomkind.fontIconId}}</span>
+          <div *ngIf="residencefacilitieskind.fontIconId">
+            <i style="font-size: 1.3em;" [class]="residencefacilitieskind.fontIconId"></i>
+            <span class="p-mr-2">{{residencefacilitieskind.fontIconId}}</span>
           </div>
         </ng-template>
         <ng-template let-icon pTemplate="item">

@@ -40,8 +40,8 @@ export class HotelService {
 
   // roomkindService
   //#region
-  getRoomkind(): Observable<IRoomkind[]> {
-    return this.http.get<IRoomkind[]>(`${this.url}Room/Kind/latest`);
+  getRoomkind(page: number): Observable<IRoomkind[]> {
+    return this.http.get<IRoomkind[]>(`${this.url}Room/Kind/latest?page=${page}`);
   }
 
   addRomkind(obj: any): Observable<any[]> {
@@ -76,8 +76,8 @@ export class HotelService {
 
   //#endregion
   //#region hotelfacilikind
-  getHotelfacilitieskind(): Observable<IHotelfacilitieskind[]> {
-    return this.http.get<IHotelfacilitieskind[]>(`${this.url}FacilitiesKind/latest`);
+  getHotelfacilitieskind(page: number): Observable<IHotelfacilitieskind[]> {
+    return this.http.get<IHotelfacilitieskind[]>(`${this.url}FacilitiesKind/latest?page=${page}`);
   }
 
   addHotelfacilitieskind(obj: any): Observable<any[]> {
