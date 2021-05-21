@@ -16,6 +16,8 @@ export class FormRoomfacilitieskindComponent implements OnInit {
   icons: SelectItem[];
   roomfacilitieskindId: number;
   fontIconId: string;
+  saving: boolean;
+  submitted: boolean;
 
   constructor(
     private srvHotel: HotelService,
@@ -44,6 +46,8 @@ export class FormRoomfacilitieskindComponent implements OnInit {
   }
 
   submit(): void {
+    if (this.roomfacilitieskind.title) {
+      this.saving = true;
     if (this.roomfacilitieskind.id > 0) {
       const obj: IAddroomfacilitieskind = {
         id: this.roomfacilitieskind.id,
@@ -64,9 +68,13 @@ export class FormRoomfacilitieskindComponent implements OnInit {
       };
       this.srvHotel.addRoomfacilitieskind(obj1).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات اتاق ', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/']);
+        this.router.navigate(['./panel/hotel/room-facilitieskinds']);
       });
     }
+    
   }
+  this.submitted=true;
+}
+
 
 }

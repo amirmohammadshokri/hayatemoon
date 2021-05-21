@@ -52,7 +52,12 @@
         </div>
         <div class="p-col-6 p-field">
           <label for="">تلفن</label>
-          <input type="text" pInputText [(ngModel)]="hotel.phone">
+          <input type="text" #phone="ngModel" id="phone" pInputText [(ngModel)]="hotel.phone" required
+      [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+    <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
+      ثبت تلفن اجباری می باشد.
+    </small>
+	
         </div>
         <div class="p-col-12 p-field">
           <label for="">آدرس</label>

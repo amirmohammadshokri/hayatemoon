@@ -26,6 +26,12 @@ export class HotelService {
     return this.http.get<IHotel[]>(`${this.url}Registered/latest?page=${pageNumber}${(filter ? `&${filter}` : ``)}`);
   }
 
+  getHotelById(id: number): Observable<any> {
+    console.log(id+'id===amir');
+    
+    return this.http.get<any>(`${this.url}Registered/${id}`);
+  }
+
   addHotel(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}`, obj);
   }

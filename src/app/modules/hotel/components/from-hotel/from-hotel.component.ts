@@ -3,6 +3,8 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { HotelService, MediaService, SearchService, VehiclesService } from 'src/app/services';
 import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer } from 'leaflet';
 import { IAddHotel } from 'src/app/interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'ss-from-hotel',
@@ -55,7 +57,9 @@ export class FromHotelComponent implements OnInit {
 
   selectedPosition: any;
   saving: boolean;
+  submitted: boolean;
   hotel: IAddHotel = { places: [], hotelMediaIds: [] };
+  
   hotelTypes: SelectItem[] = [];
   locations: any[] = [];
   selectedLocation: any;
@@ -80,18 +84,31 @@ export class FromHotelComponent implements OnInit {
     private srvVehicle: VehiclesService,
     private srvSrch: SearchService,
     private srvMedia: MediaService,
-    private srvMsg: MessageService
+    private srvMsg: MessageService,
+    private router: Router,
+    private route1: ActivatedRoute,
+ 
+ 
+     
   ) { }
 
   ngOnInit(): void {
+    
     this.getHotelType();
     this.getVehicles();
+    this.route1.params.subscribe(prms => {
+      
+    });
   }
 
   getHotel(): void {
 
   }
-
+  getHotelById(id: number): void {
+    this.srvHotel.getHotelById(id).subscribe(cou => {
+      this.hotel = cou;
+    });
+  }
   getHotelType(): void {
     this.srvHotel.getHotelType().subscribe(res => {
       this.hotelTypes = res.map(t => ({ label: t.title, value: t.typeId }));
@@ -151,6 +168,8 @@ export class FromHotelComponent implements OnInit {
   }
 
   saveImages(): Promise<void> {
+    console.log('ذخیره عکس');
+    
     return new Promise(async (resolve, reject) => {
       if (this.images.length === 0) {
         resolve();
@@ -191,23 +210,31 @@ export class FromHotelComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
+    console.log(this.hotel.phone);
+    
+    if (this.hotel.phone) {
     this.saving = true;
     this.hotel.rate = this.selectedRate?.value;
     this.hotel.locationId = this.selectedLocation?.locationId;
     this.hotel.isAdmin = true;
+   
+    
     if (this.selectedPosition) {
       this.hotel.latitude = this.selectedPosition.lat;
       this.hotel.longitude = this.selectedPosition.lng;
     }
     // save images
-    await this.saveImages();
+   // await this.saveImages();
     this.srvHotel.addHotel(this.hotel).subscribe(res => {
       this.saving = false;
+      console.log(res);
+      
       this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
       this.hotel = { places: [], hotelMediaIds: [] };
     }, _ => {
       this.saving = false;
     });
   }
+}
 
 }

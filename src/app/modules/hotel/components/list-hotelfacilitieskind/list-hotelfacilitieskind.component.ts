@@ -13,6 +13,7 @@ export class ListHotelfacilitieskindComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
+  deleting: boolean;
   currentPage: number;
   hotelfacilitieskind: IHotelfacilitieskind[] = [];
 
@@ -67,7 +68,9 @@ export class ListHotelfacilitieskindComponent implements OnInit {
   }
 
   deleteHotelfacilitieskind(id: number): void {
+    this.deleting=true;
     this.srvHotel.deleteHotelfacilitieskind(id).subscribe(() => {
+      this.deleting=false;
       this.getHotelfacilitieskind(true);
     });
   }

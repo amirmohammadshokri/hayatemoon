@@ -11,7 +11,12 @@
   <div class="p-grid p-fluid p-mt-2">
     <div class="p-col-6 p-field">
       <label for="title">عنوان</label>
-      <input type="text" id="title" pInputText [(ngModel)]="roomkind.title">
+      <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="roomkind.title" required
+      [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+    <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+      ثبت عنوان اجباری می باشد.
+    </small>
+	
     </div>
     <div class="p-col-6 p-field">
       <label for="icon">آیکون منو</label>

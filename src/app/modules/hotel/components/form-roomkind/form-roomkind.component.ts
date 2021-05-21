@@ -16,6 +16,10 @@ export class FormRoomkindComponent implements OnInit {
   icons: SelectItem[];
   roomkindId: number;
   fontIconId: string;
+  saving: boolean;
+  submitted: boolean;
+  
+
   constructor(
     private srvHotel: HotelService,
     private sMsg: MessageService,
@@ -43,6 +47,9 @@ export class FormRoomkindComponent implements OnInit {
   }
 
   submit(): void {
+    
+    if (this.roomkind.title) {
+      this.saving = true;
     if (this.roomkind.id > 0) {
       const obj: IAddrookind = {
         id: this.roomkind.id,
@@ -66,5 +73,7 @@ export class FormRoomkindComponent implements OnInit {
       });
     }
   }
+  this.submitted=true;
+}
 
 }
