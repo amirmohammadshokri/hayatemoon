@@ -59,7 +59,7 @@ export class FromHotelComponent implements OnInit {
   saving: boolean;
   submitted: boolean;
   hotel: IAddHotel = { places: [], hotelMediaIds: [] };
-  
+  hotelId: number;
   hotelTypes: SelectItem[] = [];
   locations: any[] = [];
   selectedLocation: any;
@@ -98,7 +98,12 @@ export class FromHotelComponent implements OnInit {
     this.getHotelType();
     this.getVehicles();
     this.route1.params.subscribe(prms => {
-      
+  
+      if(prms.id>0)
+      {
+        this.hotelId = Number.parseInt(prms.id, 0);
+        this.getHotelById(this.hotelId);
+      }
     });
   }
 
@@ -169,8 +174,6 @@ export class FromHotelComponent implements OnInit {
   }
 
   saveImages(): Promise<void> {
-    console.log('ذخیره عکس');
-    
     return new Promise(async (resolve, reject) => {
       if (this.images.length === 0) {
         resolve();
@@ -212,7 +215,9 @@ export class FromHotelComponent implements OnInit {
 
   async submit(): Promise<void> {
 
-    if (this.hotel.phone) {
+    if (1==1) {
+        console.log('ssssss');
+        
     this.saving = true;
     this.hotel.rate = this.selectedRate?.value;
     this.hotel.locationId = this.selectedLocation?.locationId;
@@ -225,17 +230,16 @@ export class FromHotelComponent implements OnInit {
     }
     this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
     // save images
-   // await this.saveImages();
+   await this.saveImages();
     this.srvHotel.addHotel(this.hotel).subscribe(res => {
       this.saving = false;
-      console.log(res);
-      
       this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
       this.hotel = { places: [], hotelMediaIds: [] };
     }, _ => {
       this.saving = false;
     });
   }
+  this.submitted = true;
 }
 
 }

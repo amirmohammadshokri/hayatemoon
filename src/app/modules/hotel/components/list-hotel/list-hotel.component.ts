@@ -96,7 +96,7 @@ export class ListHotelComponent implements OnInit {
   }
 
   editHotel(id: number): void {
-    this.router.navigate([`./hotel-form/${id}`]);
+    this.router.navigate([`../panel/hotel/hotel-form/${id}`]);
   }
 
 }
