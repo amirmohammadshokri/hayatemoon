@@ -34,6 +34,10 @@ export class HotelService {
     return this.http.post<any[]>(`${this.url}`, obj);
   }
 
+  changeState(obj: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.url}Registered/State/${obj.id}`, obj);
+  }
+
   getHotelType(): Observable<any> {
     return this.http.get<any>(`${this.url}Type/Latest`);
   }

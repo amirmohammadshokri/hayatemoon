@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { IHotel } from 'src/app/interfaces/hotel.interface';
 import { IState } from 'src/app/interfaces/state.inteface';
 import { HotelService } from 'src/app/services/hotel.service';
@@ -16,7 +16,7 @@ export class ListHotelComponent implements OnInit {
   hotels: IHotel[] = [];
   loading: boolean;
   currentPage: number;
-  selectedHotelId: number;
+  selectedHotel: IHotel;
   items: IState[];
   item: any;
   title: string;
@@ -35,6 +35,7 @@ export class ListHotelComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     private srvHotel: HotelService,
+    private srvMsg: MessageService,
     private router: Router
   ) { }
 
@@ -55,7 +56,13 @@ export class ListHotelComponent implements OnInit {
 
   changeState(stateId: number): void {
     this.showStateDialog = false;
-
+    this.srvHotel.changeState({
+      id: this.selectedHotel.id,
+      state: stateId
+    }).subscribe(res => {
+      this.srvMsg.add({ severity: 'success', summary: 'تغییر وضعیت', detail: 'عملیات با موفقیت انجام شد' });
+      this.selectedHotel.state = { id: stateId, title: this.items.find(i => i.code === stateId).name };
+    });
   }
 
   getHotels(firstLoad: boolean): void {

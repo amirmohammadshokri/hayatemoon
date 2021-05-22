@@ -11,7 +11,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
-      const error = err.error.error || err.error?.detail || err.statusText;
+      const error = err.error.title || err.error.error || err.error?.detail || err.statusText;
       this.sMsg.add({ severity: 'error', summary: 'توجه', detail: error });
       return throwError(error);
     }));

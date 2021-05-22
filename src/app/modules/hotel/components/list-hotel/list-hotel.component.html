@@ -60,14 +60,14 @@
           <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info p-mr-1"
             (click)="editHotel(rowData.id)" pTooltip="ویرایش"></button>
           <button pButton pRipple icon="pi pi-check" class="p-button p-button-warning p-mr-1"
-            (click)="showStateDialog=true;selectedHotelId=rowData.id;" pTooltip="تغییر وضعیت"></button>
+            (click)="showStateDialog=true;selectedHotel=rowData;" pTooltip="تغییر وضعیت"></button>
         </td>
       </tr>
     </ng-template>
   </p-table>
 </div>
 <p-dialog [(visible)]="showStateDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
-  <h6>وضعیت مورد نظر را انتخاب نمائید</h6>
+  <h6>وضعیت مورد نظر جهت تغییر را انتخاب نمائید</h6>
   <ng-template pTemplate="footer">
     <button type="button" pButton class="p-button-warning" icon="pi pi-times" label="در انتظار" (click)="changeState(0)"></button>
     <button type="button" pButton class="p-button-success" icon="pi pi-check" label="فعال" (click)="changeState(1)"></button>
