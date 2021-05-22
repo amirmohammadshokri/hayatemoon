@@ -27,11 +27,7 @@ export class HotelService {
   }
 
   getHotelById(id: number): Observable<any> {
-<<<<<<< HEAD
     return this.http.get<any>(`${this.url}Registered/${id}`);
-=======
-    return this.http.get<any>(`${this.url}Registered/0?id=${id}`);
->>>>>>> 51bbf6f3e6e3080350d3a0faff4dd85120070ced
   }
 
   addHotel(obj: any): Observable<any[]> {
