@@ -70,7 +70,7 @@ export class FromHotelComponent implements OnInit {
     { name: 3, value: 3 },
     { name: 4, value: 4 },
     { name: 5, value: 5 },
-    { name: 6, value: 6 },
+    { name: 6, value: 6 }
   ];
   selectedRate: any;
   facilities: any[] = [];
@@ -88,20 +88,15 @@ export class FromHotelComponent implements OnInit {
     private srvMedia: MediaService,
     private srvMsg: MessageService,
     private router: Router,
-    private route1: ActivatedRoute,
+    private aRoute: ActivatedRoute,
     private confirmationService: ConfirmationService,
- 
- 
-     
   ) { }
 
   ngOnInit(): void {
-    
     this.getHotelType();
     this.getVehicles();
-    this.route1.params.subscribe(prms => {
-      if(prms.id>0)
-      {
+    this.aRoute.params.subscribe(prms => {
+      if (prms.id > 0) {
         this.hotelId = Number.parseInt(prms.id, 0);
         this.getHotelById(this.hotelId);
       }
@@ -123,22 +118,36 @@ export class FromHotelComponent implements OnInit {
   deletePlaces(id: number): void {
     this.places = this.places.splice(id);
   }
- 
 
-  getHotel(): void {
-
-  }
   getHotelById(id: number): void {
-    this.srvHotel.getHotelById(id).subscribe(cou => {
-      this.hotel = cou;
-      this.selectedLocation = {
-       locationId:cou.locationId
+    this.srvHotel.getHotelById(id).subscribe(hotel => {
+      this.hotel = {
+        hotelId: hotel.id,
+        typeId: hotel.type.id,
+        title: hotel.title,
+        places: hotel.places.map(p => ({
+          minute: p.minute,
+          id: p.place.placeId,
+          title: p.place.title,
+          vehicleId: p.vehicle.vehicleId,
+          vehicleTitle: p.vehicle.title
+        })),
+        address: hotel.address,
+        phone: hotel.phone,
+        latitude: hotel.latitude,
+        longitude: hotel.longitude,
+        hotelMediaIds: hotel.mediaIds,
+        mainMediaId: hotel.mainMediaId,
+        facilitiesKindIds: hotel.facilities,
+        description: hotel.facilities,
+        state: hotel.state.id,
       };
-      this.places=cou.places;
-      this.locations=cou.location;
-      this.facilitiesKinds=cou.facilities;
+      this.selectedLocation = hotel.location;
+      this.facilitiesKinds = hotel.facilities;
+      this.selectedRate = hotel.rate.id;
     });
   }
+
   getHotelType(): void {
     this.srvHotel.getHotelType().subscribe(res => {
       this.hotelTypes = res.map(t => ({ label: t.title, value: t.typeId }));
@@ -238,30 +247,37 @@ export class FromHotelComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-
-    if (1==1) {
-    this.saving = true;
-    this.hotel.rate = this.selectedRate?.value;
-    this.hotel.locationId = this.selectedLocation?.locationId;
-    this.hotel.isAdmin = true;
-   
-    
-    if (this.selectedPosition) {
-      this.hotel.latitude = this.selectedPosition.lat;
-      this.hotel.longitude = this.selectedPosition.lng;
+    if (this.hotel.title && this.hotel.typeId && this.selectedRate && this.selectedLocation && this.hotel.address) {
+      this.saving = true;
+      this.hotel.rate = this.selectedRate;
+      this.hotel.locationId = this.selectedLocation?.locationId;
+      this.hotel.isAdmin = true;
+      if (this.selectedPosition) {
+        this.hotel.latitude = this.selectedPosition.lat;
+        this.hotel.longitude = this.selectedPosition.lng;
+      }
+      this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
+      // save images
+      await this.saveImages();
+      if (this.hotel.hotelId) {
+        this.srvHotel.editHotel(this.hotel).subscribe(res => {
+          this.saving = false;
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+          this.router.navigate(['./panel/hotel/hotels']);
+        }, _ => {
+          this.saving = false;
+        });
+      } else {
+        this.srvHotel.addHotel(this.hotel).subscribe(res => {
+          this.saving = false;
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+          this.router.navigate(['./panel/hotel/hotels']);
+        }, _ => {
+          this.saving = false;
+        });
+      }
     }
-    this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
-    // save images
-   await this.saveImages();
-    this.srvHotel.addHotel(this.hotel).subscribe(res => {
-      this.saving = false;
-      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-      this.hotel = { places: [], hotelMediaIds: [] };
-    }, _ => {
-      this.saving = false;
-    });
+    this.submitted = true;
   }
-  this.submitted = true;
-}
 
 }
