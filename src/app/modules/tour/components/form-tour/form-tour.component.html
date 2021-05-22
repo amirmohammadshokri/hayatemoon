@@ -96,7 +96,7 @@
     </div>
     <div class="p-col-6 p-field">
       <label for="">دسته بندی</label>
-      <p-autoComplete #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategory"
+      <p-autoComplete #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategories"
         (completeMethod)="getCategories($event)" field="title" [multiple]="true" required
         [ngClass]="{'ng-dirty': (category.invalid && submitted) || (category.dirty && category.invalid)}">
       </p-autoComplete>
@@ -125,7 +125,7 @@
     <div class="p-col-3 p-field">
       <label for="">انتخاب اتاق</label>
       <p-autoComplete #room="ngModel" [suggestions]="rooms" [(ngModel)]="selectedRoom"
-        (completeMethod)="getRooms($event)" field="title" required
+        (completeMethod)="getRooms($event)" field="title" required  [multiple]="true"
         [ngClass]="{'ng-dirty': (room.invalid && submitted) || (room.dirty && room.invalid)}">
       </p-autoComplete>
       <small *ngIf="(room.invalid && submitted) || (room.dirty && room.invalid)" class="p-error">

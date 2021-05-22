@@ -88,19 +88,18 @@ export class FromHotelComponent implements OnInit {
     private srvMsg: MessageService,
     private router: Router,
     private route1: ActivatedRoute,
- 
- 
-     
+
+
+
   ) { }
 
   ngOnInit(): void {
-    
+
     this.getHotelType();
     this.getVehicles();
     this.route1.params.subscribe(prms => {
-  
-      if(prms.id>0)
-      {
+
+      if (prms.id > 0) {
         this.hotelId = Number.parseInt(prms.id, 0);
         this.getHotelById(this.hotelId);
       }
@@ -214,32 +213,27 @@ export class FromHotelComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-
-    if (1==1) {
-        console.log('ssssss');
-        
-    this.saving = true;
-    this.hotel.rate = this.selectedRate?.value;
-    this.hotel.locationId = this.selectedLocation?.locationId;
-    this.hotel.isAdmin = true;
-   
-    
-    if (this.selectedPosition) {
-      this.hotel.latitude = this.selectedPosition.lat;
-      this.hotel.longitude = this.selectedPosition.lng;
+    if (this.hotel.title && this.hotel.typeId && this.hotel.phone && this.hotel.address && this.selectedRate && this.selectedLocation) {
+      this.saving = true;
+      this.hotel.rate = this.selectedRate?.value;
+      this.hotel.locationId = this.selectedLocation?.locationId;
+      this.hotel.isAdmin = true;
+      if (this.selectedPosition) {
+        this.hotel.latitude = this.selectedPosition.lat;
+        this.hotel.longitude = this.selectedPosition.lng;
+      }
+      this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
+      // save images
+      await this.saveImages();
+      this.srvHotel.addHotel(this.hotel).subscribe(res => {
+        this.saving = false;
+        this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+        this.hotel = { places: [], hotelMediaIds: [] };
+      }, _ => {
+        this.saving = false;
+      });
     }
-    this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
-    // save images
-   await this.saveImages();
-    this.srvHotel.addHotel(this.hotel).subscribe(res => {
-      this.saving = false;
-      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-      this.hotel = { places: [], hotelMediaIds: [] };
-    }, _ => {
-      this.saving = false;
-    });
+    this.submitted = true;
   }
-  this.submitted = true;
-}
 
 }

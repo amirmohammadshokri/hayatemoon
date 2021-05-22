@@ -18,7 +18,7 @@ export class FormTourComponent implements OnInit {
   toLocation: any;
   tourTypes: SelectItem[] = [];
   categories: any[];
-  selectedCategory: SelectItem;
+  selectedCategories: any[];
   fromDate: any;
   toDate: any;
   vehicels: any[];
@@ -26,7 +26,7 @@ export class FormTourComponent implements OnInit {
   backVehicels: any[];
   hotels: any[] = [];
   selectedHotel: any;
-  selectedRoom: any;
+  selectedRoom: any[];
   rooms: any[] = [];
   images: { mediaId: number, file: File, url: string }[] = [];
   currencies: SelectItem[] = [];
@@ -108,9 +108,11 @@ export class FormTourComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    if (this.tour.title && this.tour.tourType && this.fromLocation &&
-      this.toLocation && this.tour.dayDuration && this.tour.nightDuration && this.fromDate && this.toDate && this.selectedCategory &&
-      this.tour.hotelId && this.tour.hotelRooms?.length > 0 && this.tour.price.price) {
+    if (this.tour.title && this.tour?.tourType > -1 && this.fromLocation &&
+      this.toLocation && this.tour.dayDuration && this.tour.nightDuration &&
+      this.fromDate && this.toDate && this.selectedCategories?.length > 0 &&
+      this.selectedHotel && this.selectedRoom?.length > 0 && this.tour.price.price) {
+
       this.saving = true;
       this.tour.fromLocationId = this.fromLocation.locationId;
       this.tour.toLocationId = this.toLocation.locationId;
@@ -120,12 +122,15 @@ export class FormTourComponent implements OnInit {
       const endDate: Date = this.toDate?._d;
       const utcendDate = new Date(endDate.toUTCString());
       this.tour.endDate = utcendDate.toISOString();
-      this.goVehicels.forEach(vehicle => {
+      this.goVehicels?.forEach(vehicle => {
         this.tour.vehicles.push({ type: 0, vehicleId: vehicle.vehicleId });
       });
-      this.backVehicels.forEach(vehicle => {
+      this.backVehicels?.forEach(vehicle => {
         this.tour.vehicles.push({ type: 1, vehicleId: vehicle.vehicleId });
       });
+      this.tour.hotelId = this.selectedHotel.id;
+      this.tour.hotelRooms = this.selectedRoom.map(r => r.kindId);
+      this.tour.tourCategories = this.selectedCategories.map(c => c.id);
 
       await this.saveImages();
       this.srvTour.addTour(this.tour).subscribe(res => {

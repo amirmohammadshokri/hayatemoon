@@ -16,15 +16,15 @@
         <div class="p-col-4 p-field">
           <label for="title">نام هتل</label>
           <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="hotel.title" required
-          [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
-        <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
-          ثبت عنوان اجباری می باشد.
-        </small>
-      
+            [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+          <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+            ثبت عنوان اجباری می باشد.
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="selectedRate">درجه هتل</label>
-          <p-dropdown [options]="rates"  [(ngModel)]="selectedRate" optionLabel="name"  >
+          <p-dropdown #srate="ngModel" [options]="rates" [(ngModel)]="selectedRate" required placeholder="انتخاب درجه"
+            [ngClass]="{'ng-dirty': (srate.invalid && submitted) || (srate.dirty && srate.invalid)}">
             <ng-template pTemplate="selectedItem">
               <div *ngIf="selectedRate">
                 <i class="pi pi-star"></i>
@@ -44,27 +44,25 @@
               <i *ngIf="rate.value > 5" class="pi pi-star p-mr-1"></i>
             </ng-template>
           </p-dropdown>
-          <!-- <small *ngIf="(selectedItem.invalid && submitted) || (selectedItem.dirty && item.invalid)" class="p-error">
-            ثبت درجه اجباری می باشد.
-          </small> -->
+          <small *ngIf="(srate.invalid && submitted) || (srate.dirty && srate.invalid)" class="p-error">
+            انتخاب درجه هتل اجباری است.
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">نام شهر</label>
           <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
-            (completeMethod)="getLocations($event)" field="title" 
+            (completeMethod)="getLocations($event)" field="title"
             [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
           </p-autoComplete>
-        <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
-          انتخاب شهر اجباری است
-        </small>
+          <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
+            انتخاب شهر اجباری است
+          </small>
         </div>
         <div class="p-col-6 p-field">
           <label for="">نوع هتل</label>
-          <p-dropdown [options]="hotelTypes" #typeId="ngModel"  [(ngModel)]="hotel.typeId" 
-          required
-          placeholder="انتخاب نوع هتل"
-          [ngClass]="{'ng-dirty': (typeId.invalid && submitted) || (typeId.dirty && typeId.invalid)}"
-          ></p-dropdown>
+          <p-dropdown [options]="hotelTypes" #typeId="ngModel" [(ngModel)]="hotel.typeId" required
+            placeholder="انتخاب نوع هتل"
+            [ngClass]="{'ng-dirty': (typeId.invalid && submitted) || (typeId.dirty && typeId.invalid)}"></p-dropdown>
           <small *ngIf="(typeId.invalid && submitted) || (typeId.dirty && typeId.invalid)" class="p-error">
             نوع هتل حتما باید انتخاب شود
           </small>
@@ -72,16 +70,16 @@
         <div class="p-col-6 p-field">
           <label for="">تلفن</label>
           <input type="text" #phone="ngModel" id="phone" pInputText [(ngModel)]="hotel.phone" required
-      [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
-    <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
-      ثبت تلفن اجباری می باشد.
-    </small>
-	
+            [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+          <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
+            ثبت تلفن اجباری می باشد.
+          </small>
+
         </div>
         <div class="p-col-12 p-field">
           <label for="">آدرس</label>
-          <textarea pInputTextarea rows="1"#address="ngModel" id="address"  [(ngModel)]="hotel.address"  required
-          [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+          <textarea pInputTextarea rows="1" #address="ngModel" id="address" [(ngModel)]="hotel.address" required
+            [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
           <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
             ثبت آدرس اجباری می باشد.
           </small>
@@ -98,8 +96,8 @@
     </div>
     <div class="p-col-12  p-field">
       <label for="">امکانات هتل</label>
-      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds"
-        (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
+      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)"
+        field="title" [multiple]="true">
       </p-autoComplete>
     </div>
     <div class="p-col-6">
