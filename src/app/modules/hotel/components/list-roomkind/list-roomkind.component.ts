@@ -14,6 +14,7 @@ export class ListRoomkindComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
+  deleting:boolean;
   currentPage: number;
   roomkind: IRoomkind[] = [];
 
@@ -67,7 +68,9 @@ export class ListRoomkindComponent implements OnInit {
   }
 
   deleteRoomkind(id: number): void {
+    this.deleting=true;
     this.srvHotel.deleteRoomkind(id).subscribe(() => {
+      this.deleting=false;
       this.getRomkind(true);
     });
   }

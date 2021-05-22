@@ -13,6 +13,7 @@ export class ListResidencefacilitieskindComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
+  deleting:boolean;
   currentPage: number;
   residencefacilitieskind: IResidencefacilitieskind[] = [];
 
@@ -66,7 +67,9 @@ export class ListResidencefacilitieskindComponent implements OnInit {
   }
 
   deleteResidencefacilitieskind(id: number): void {
+      this.deleting=true;
     this.srvResidence.deleteResidencefacilitieskind(id).subscribe(() => {
+      this.deleting=false;
       this.getResidencefacilitieskind(true);
     });
   }

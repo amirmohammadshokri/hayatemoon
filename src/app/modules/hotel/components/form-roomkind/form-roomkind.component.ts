@@ -58,6 +58,7 @@ export class FormRoomkindComponent implements OnInit {
       };
       this.srvHotel.addRomkind(obj).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ویرایش انواع اتاق', detail: 'عملیات با موفقیت انجام شد' });
+        this.router.navigate(['./panel/hotel/room-kinds']);
       });
     }
     else {
@@ -70,6 +71,7 @@ export class FormRoomkindComponent implements OnInit {
       this.srvHotel.addRomkind(obj1).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ثبت انواع اتاق ', detail: 'عملیات با موفقیت انجام شد' });
         this.roomkind = {};
+        this.router.navigate(['./panel/hotel/room-kinds']);
       });
     }
   }

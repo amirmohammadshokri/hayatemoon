@@ -17,6 +17,9 @@ export class FormResidencefacilitieskindComponent implements OnInit {
   icons: SelectItem[];
   residencefacilitieskindId: number;
   fontIconId: string;
+  saving: boolean;
+  submitted: boolean;
+  
 
   constructor(
     private srvResidence: ResidenceService,
@@ -45,6 +48,8 @@ export class FormResidencefacilitieskindComponent implements OnInit {
   }
 
   submit(): void {
+    if (this.residencefacilitieskind.title) {
+      this.saving = true;
     if (this.residencefacilitieskind.id > 0) {
       const obj: IAddResidencefacilitieskind = {
         id: this.residencefacilitieskind.id,
@@ -53,6 +58,7 @@ export class FormResidencefacilitieskindComponent implements OnInit {
       };
       this.srvResidence.addResidencefacilitieskind(obj).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+        this.router.navigate(['./panel/residence/residence-facilitieskinds']);
       });
     }
     else {
@@ -65,8 +71,12 @@ export class FormResidencefacilitieskindComponent implements OnInit {
       this.srvResidence.addResidencefacilitieskind(obj1).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ثبت امکانات اقامتگاه ', detail: 'عملیات با موفقیت انجام شد' });
         this.residencefacilitieskind = {};
+        this.router.navigate(['./panel/residence/residence-facilitieskinds']);
       });
     }
+  }
+  this.submitted = true;
+		  
   }
 
 }
