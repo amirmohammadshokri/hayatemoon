@@ -16,10 +16,11 @@ export class ListHotelComponent implements OnInit {
   hotels: IHotel[] = [];
   loading: boolean;
   currentPage: number;
-  selectedHotelId:number;
+  selectedHotelId: number;
   items: IState[];
   item: any;
   title: string;
+  showStateDialog: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -33,7 +34,7 @@ export class ListHotelComponent implements OnInit {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private sHotel: HotelService,
+    private srvHotel: HotelService,
     private router: Router
   ) { }
 
@@ -51,18 +52,12 @@ export class ListHotelComponent implements OnInit {
     ];
     this.getHotels(true);
   }
-  
-  confirmChangestate(id: number): void {
-    this.confirmationService.confirm({
-    key:'stateDialog'
-    });
-  }
 
-  changeState(stateId:number):void{
-    this.selectedHotelId=stateId; 
+  changeState(stateId: number): void {
+    this.showStateDialog = false;
 
   }
-  
+
   getHotels(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
@@ -76,7 +71,7 @@ export class ListHotelComponent implements OnInit {
     if (this.title) {
       filter += `&title=${this.title}`;
     }
-    this.sHotel.getHotels(filter, this.currentPage).subscribe(res => {
+    this.srvHotel.getHotels(filter, this.currentPage).subscribe(res => {
       this.hotels.push(...res);
       this.loading = false;
     });
@@ -95,7 +90,7 @@ export class ListHotelComponent implements OnInit {
   }
 
   deleteHotel(id: number): void {
-    this.sHotel.deleteHotel(id).subscribe(() => {
+    this.srvHotel.deleteHotel(id).subscribe(() => {
       this.getHotels(true);
     });
   }

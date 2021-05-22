@@ -27,8 +27,6 @@ export class HotelService {
   }
 
   getHotelById(id: number): Observable<any> {
-    console.log(id+'id===amir');
-    
     return this.http.get<any>(`${this.url}Registered/${id}`);
   }
 
