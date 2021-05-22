@@ -79,7 +79,7 @@ export class FormTourComponent implements OnInit {
 
   getLocations(event: any): void {
     this.srvSrch.getLocation(event.query).subscribe(res => {
-      this.locations = res;
+      //this.locations = res;
     });
   }
 

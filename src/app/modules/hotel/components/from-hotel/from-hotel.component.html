@@ -130,6 +130,7 @@
             <th>اماکن</th>
             <th>وسیله نقلیه</th>
             <th>دقیقه</th>
+            <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-place>
@@ -137,6 +138,8 @@
             <td>{{place.title}}</td>
             <td>{{place.vehicleTitle}}</td>
             <td>{{place.minute}}</td>
+            <td>   <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+              (click)="confirmDelete(place.placeId)" pTooltip="حذف"></button></td>
           </tr>
         </ng-template>
       </p-table>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, SelectItem } from 'primeng/api';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { HotelService, MediaService, SearchService, VehiclesService } from 'src/app/services';
 import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer } from 'leaflet';
 import { IAddHotel } from 'src/app/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ILocation } from 'src/app/interfaces/location.interface';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class FromHotelComponent implements OnInit {
   hotelId: number;
   hotelTypes: SelectItem[] = [];
   locations: any[] = [];
-  selectedLocation: any;
+  selectedLocation: ILocation;
   rates: any[] = [
     { name: 1, value: 1 },
     { name: 2, value: 2 },
@@ -88,23 +89,41 @@ export class FromHotelComponent implements OnInit {
     private srvMsg: MessageService,
     private router: Router,
     private route1: ActivatedRoute,
-
-
-
+    private confirmationService: ConfirmationService,
+ 
+ 
+     
   ) { }
 
   ngOnInit(): void {
-
+    
     this.getHotelType();
     this.getVehicles();
     this.route1.params.subscribe(prms => {
-
-      if (prms.id > 0) {
+      if(prms.id>0)
+      {
         this.hotelId = Number.parseInt(prms.id, 0);
         this.getHotelById(this.hotelId);
       }
     });
   }
+
+  confirmDelete(id: number): void {
+    this.confirmationService.confirm({
+      message: 'آیا از حذف این ردیف اطمینان دارید؟',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'بله',
+      rejectLabel: 'نه',
+      accept: () => {
+        this.deletePlaces(id);
+      }
+    });
+  }
+
+  deletePlaces(id: number): void {
+    this.places = this.places.splice(id);
+  }
+ 
 
   getHotel(): void {
 
@@ -112,6 +131,12 @@ export class FromHotelComponent implements OnInit {
   getHotelById(id: number): void {
     this.srvHotel.getHotelById(id).subscribe(cou => {
       this.hotel = cou;
+      this.selectedLocation = {
+       locationId:cou.locationId
+      };
+      this.places=cou.places;
+      this.locations=cou.location;
+      this.facilitiesKinds=cou.facilities;
     });
   }
   getHotelType(): void {
@@ -213,27 +238,30 @@ export class FromHotelComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    if (this.hotel.title && this.hotel.typeId && this.hotel.phone && this.hotel.address && this.selectedRate && this.selectedLocation) {
-      this.saving = true;
-      this.hotel.rate = this.selectedRate?.value;
-      this.hotel.locationId = this.selectedLocation?.locationId;
-      this.hotel.isAdmin = true;
-      if (this.selectedPosition) {
-        this.hotel.latitude = this.selectedPosition.lat;
-        this.hotel.longitude = this.selectedPosition.lng;
-      }
-      this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
-      // save images
-      await this.saveImages();
-      this.srvHotel.addHotel(this.hotel).subscribe(res => {
-        this.saving = false;
-        this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-        this.hotel = { places: [], hotelMediaIds: [] };
-      }, _ => {
-        this.saving = false;
-      });
+
+    if (1==1) {
+    this.saving = true;
+    this.hotel.rate = this.selectedRate?.value;
+    this.hotel.locationId = this.selectedLocation?.locationId;
+    this.hotel.isAdmin = true;
+   
+    
+    if (this.selectedPosition) {
+      this.hotel.latitude = this.selectedPosition.lat;
+      this.hotel.longitude = this.selectedPosition.lng;
     }
-    this.submitted = true;
+    this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
+    // save images
+   await this.saveImages();
+    this.srvHotel.addHotel(this.hotel).subscribe(res => {
+      this.saving = false;
+      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+      this.hotel = { places: [], hotelMediaIds: [] };
+    }, _ => {
+      this.saving = false;
+    });
   }
+  this.submitted = true;
+}
 
 }
