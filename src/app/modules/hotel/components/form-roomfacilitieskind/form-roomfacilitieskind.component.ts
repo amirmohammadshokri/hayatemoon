@@ -57,6 +57,7 @@ export class FormRoomfacilitieskindComponent implements OnInit {
       this.srvHotel.addRoomfacilitieskind(obj).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ویرایش امکانات اتاق', detail: 'عملیات با موفقیت انجام شد' });
         this.roomfacilitieskind = {};
+        this.router.navigate(['./panel/hotel/room-facilitieskinds']);
       });
     }
     else {

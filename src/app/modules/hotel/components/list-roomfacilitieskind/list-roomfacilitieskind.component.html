@@ -40,7 +40,7 @@
           {{rowData.createdDate}}
         </td>
         <td>
-          <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+          <button pButton pRipple [disabled]="deleting"  [icon]="(deleting?'pi pi-spin pi-spinner':'pi pi-trash')" class="p-button p-button-danger"
             (click)="confirmDelete(rowData.id)"></button>
           <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-warning  p-mr-1"
             (click)="editRoomfacilitieskind(rowData.id)"></button>

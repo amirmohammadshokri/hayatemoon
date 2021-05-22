@@ -9,11 +9,15 @@
         routerLink="/panel/residence/residence-facilitieskinds"></button>
     </div>
   </p-toolbar>
-  <div class="p-grid p-fluid p-mt-2">
-    <div class="p-col-6 p-field">
-      <label for="title">عنوان</label>
-      <input type="text" id="title" pInputText [(ngModel)]="residencefacilitieskind.title">
-    </div>
+  <div class="p-grid p-col-12 p-fluid p-mt-2">
+    <div class="p-col-6  p-field">
+      <label for="icon">عنوان </label>
+      <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="residencefacilitieskind.title" required
+      [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+    <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+      ثبت عنوان اجباری می باشد.
+    </small></div>
+    
     <div class="p-col-6  p-field">
       <label for="icon">آیکون </label>
       <p-dropdown [options]="icons" [(ngModel)]="residencefacilitieskind.fontIconId" [filter]="true" filterBy="value"
@@ -32,6 +36,8 @@
         </ng-template>
       </p-dropdown>
     </div>
+  
 
   </div>
+   
 </div>
