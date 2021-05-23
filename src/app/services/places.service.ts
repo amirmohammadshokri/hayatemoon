@@ -13,6 +13,8 @@ export class PlacesService {
     this.url = `${this.conf.getConfig('url')}web/Places/`;
   }
   addPlace(obj: any): Observable<any> {
+    console.log(obj);
+    
     return this.http.post<any>(`${this.url}new`, obj);
   }
 
