@@ -3,20 +3,14 @@
     <div class="p-toolbar-group-right">
     </div>
     <div class="p-toolbar-group-left">
-<<<<<<< HEAD
       <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
         [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
-=======
-      <button pButton [disabled]="saving" pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
-      [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
->>>>>>> b17e3fca57ef7b041b53f89727712760fbeb2fa9
       <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../places"></button>
     </div>
   </p-toolbar>
   <div class="p-grid p-fluid p-mt-2">
     <div *ngIf="!placeId" class="p-col-12 p-field">
       <label for="title">عنوان</label>
-<<<<<<< HEAD
       <p-chips #list="ngModel" [(ngModel)]="titleList" required
         [ngClass]="{'ng-dirty': (list.invalid && submitted) || (list.dirty && list.invalid)}">
       </p-chips>
@@ -31,14 +25,6 @@
       <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
         لطفا عنوان را وارد کنید
       </small>
-=======
-      <p-chips [(ngModel)]="titleList" ></p-chips>
-    <!-- <small *ngIf="(titleList.invalid && sumbited) || (titleList.dirty && titleList.invalid)" class="p-error">
-      ثبت عنوان اجباری می باشد.
-    </small> -->
-      
-	
->>>>>>> b17e3fca57ef7b041b53f89727712760fbeb2fa9
     </div>
   </div>
 </div>
