@@ -33,7 +33,7 @@
           <input type="time" [(ngModel)]="residence.fromEntranceHour" pInputText>
         </div>
         <div class="p-col-4 p-field">
-          <label for="">تا ساعت ورود</label>
+          <label for="">تا ساعت</label>
           <input type="time" [(ngModel)]="residence.toEntranceHour" pInputText>
         </div>
         <div class="p-col-4 p-field">
@@ -97,13 +97,17 @@
                   <th>اماکن</th>
                   <th>وسیله نقلیه</th>
                   <th>دقیقه</th>
+                  <th style="width: 4em;"></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-place>
+              <ng-template pTemplate="body" let-place let-index="rowIndex">
                 <tr>
                   <td>{{place.title}}</td>
                   <td>{{place.vehicleTitle}}</td>
                   <td>{{place.minute}}</td>
+                  <td>
+                    <button pButton icon="pi pi-times" class="p-button-danger p-button-text p-button-rounded" (click)="removePlace(index)"></button>
+                  </td>
                 </tr>
               </ng-template>
             </p-table>

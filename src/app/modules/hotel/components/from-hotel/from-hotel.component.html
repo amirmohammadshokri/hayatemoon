@@ -28,11 +28,11 @@
             <ng-template pTemplate="selectedItem">
               <div *ngIf="selectedRate">
                 <i class="pi pi-star"></i>
-                <i *ngIf="selectedRate.value > 1" class="pi pi-star p-mr-1"></i>
-                <i *ngIf="selectedRate.value > 2" class="pi pi-star p-mr-1"></i>
-                <i *ngIf="selectedRate.value > 3" class="pi pi-star p-mr-1"></i>
-                <i *ngIf="selectedRate.value > 4" class="pi pi-star p-mr-1"></i>
-                <i *ngIf="selectedRate.value > 5" class="pi pi-star p-mr-1"></i>
+                <i *ngIf="selectedRate > 1" class="pi pi-star p-mr-1"></i>
+                <i *ngIf="selectedRate > 2" class="pi pi-star p-mr-1"></i>
+                <i *ngIf="selectedRate > 3" class="pi pi-star p-mr-1"></i>
+                <i *ngIf="selectedRate > 4" class="pi pi-star p-mr-1"></i>
+                <i *ngIf="selectedRate > 5" class="pi pi-star p-mr-1"></i>
               </div>
             </ng-template>
             <ng-template let-rate pTemplate="item">
@@ -130,7 +130,7 @@
             <th>اماکن</th>
             <th>وسیله نقلیه</th>
             <th>دقیقه</th>
-            <th></th>
+            <th style="width: 5em;"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-place>

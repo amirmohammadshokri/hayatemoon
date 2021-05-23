@@ -141,10 +141,8 @@
         <ng-template pTemplate="header">
           <div class="p-d-flex p-ai-center">
             <span>قیمت</span>
-            <!-- <button pButton icon="pi pi-plus" class="p-button-rounded p-button-text p-mr-4" (click)="addPrice()"></button> -->
           </div>
         </ng-template>
-        <!-- <div *ngFor="let price of tour.price;let i = index" class="p-grid p-fluid"> -->
         <div class="p-grid p-fluid">
           <div class="p-col-2 p-field">
             <label for="">قیمت</label>
@@ -175,10 +173,6 @@
             <p-inputNumber [(ngModel)]="tour.price.netPrice" suffix="تومان">
             </p-inputNumber>
           </div>
-          <!-- <div class="p-col-1 p-field">
-            <label for="">   </label>
-            <button pButton icon="pi pi-times" class="p-button-danger p-button-rounded p-button-text p-mt-5" (click)="removePrice(i)"></button>
-          </div> -->
         </div>
       </p-fieldset>
     </div>

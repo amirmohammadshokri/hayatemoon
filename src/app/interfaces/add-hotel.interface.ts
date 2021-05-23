@@ -1,5 +1,5 @@
 export interface IAddHotel {
-  hotelId?:number;
+  hotelId?: number;
   typeId?: number;
   title?: string;
   rate?: number;
@@ -20,5 +20,5 @@ export interface IAddHotel {
   }[];
   description?: string;
   isAdmin?: boolean;
-  state?:number;
+  state?: number;
 }

@@ -15,8 +15,8 @@ export class ResidenceService {
     this.url = `${this.conf.getConfig('url')}web/Residence/`;
   }
   //#region Residence
-  getResidence(pageNumber: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}latest/${pageNumber}`);
+  getResidence(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}Registered/${id}`);
   }
 
   getResidences(filter: string, pageNumber: number): Observable<IResidence[]> {
