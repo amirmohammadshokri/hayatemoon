@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { IAddPlaces } from 'src/app/interfaces/add-paces.interface';
 import { PlacesService } from 'src/app/services';
 
 @Component({

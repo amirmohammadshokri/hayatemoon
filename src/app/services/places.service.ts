@@ -14,6 +14,8 @@ export class PlacesService {
   }
 
   addPlace(obj: any): Observable<any> {
+    console.log(obj);
+    
     return this.http.post<any>(`${this.url}new`, obj);
   }
 
