@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { IAddPlaces } from 'src/app/interfaces/add-paces.interface';
 import { PlacesService } from 'src/app/services';
@@ -14,12 +14,14 @@ export class FormPlacesComponent implements OnInit {
   PlacesId: number;
   titleList: string[];
   saving: boolean;
+  sumbited:boolean;
 
 
   constructor(
     private serPlaces: PlacesService,
     private route: ActivatedRoute,
-    private srvMsg: MessageService
+    private srvMsg: MessageService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -31,18 +33,27 @@ export class FormPlacesComponent implements OnInit {
     });
   }
   getPlacesById(id: number): void {
+    console.log(id+'dsddsdsd');
+    
     this.serPlaces.getPlaces(id).subscribe(cou => {
+ 
       this.places = cou;
     });
   }
 
   submit(): void {
-    this.saving = true;
+    if(this.titleList){
+      this.saving = true;
     this.serPlaces.addPlace({ titleList: this.titleList }).subscribe(res => {
       this.saving = false;
       this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
       this.titleList = [];
+      this.router.navigate(['./panel/places/places']);
     });
+    }
+    this.sumbited==true;
+
+    
   }
 
 }
