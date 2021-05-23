@@ -67,17 +67,15 @@ export class FormTourComponent implements OnInit {
         // vehicles: IVehicle[],
         dayDuration: res.dayDuration,
         nightDuration: res.nightDuration,
-        // tourCategories: number[],
         tourMediaIds: res.mediaIds,
         mainImageId: res.mainMediaId,
         price: {
           currencyPrice: res.prices.currencyPrice,
-          currencyPriceType: res.prices.currencyPriceType.id,
+          currencyPriceType: res.prices?.currencyPriceType?.id,
           price: res.prices.price,
           netPrice: res.prices.netPrice,
           disCountPrice: res.prices.disCountPrice
         },
-        hotelId: res.hotel.id,
         // hotelRooms: number[],
         description: res.description
       };
@@ -85,6 +83,14 @@ export class FormTourComponent implements OnInit {
       this.toDate = moment(res.endDate, 'jYYYY/jMM/jDD  HH:mm');
       this.fromLocation = res.fromLocation;
       this.toLocation = res.toLocation;
+      this.images = res.mediaIds.map(id => ({
+        mediaId: id,
+        file: null,
+        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+      }));
+      this.mainImageIndex = res.mediaIds.findIndex(id => id === this.tour.mainImageId);
+      this.selectedHotel = res.hotel;
+      this.selectedCategories = res.categories;
     });
 
   }
@@ -129,6 +135,10 @@ export class FormTourComponent implements OnInit {
     this.srvCurrency.get().subscribe(res => {
       this.currencies = res.map(t => ({ label: t.title, value: t.typeId }));
     });
+  }
+
+  defaultImg(row: any): void {
+    row.url = 'assets/no-image.png';
   }
 
   addImage(e: any): void {

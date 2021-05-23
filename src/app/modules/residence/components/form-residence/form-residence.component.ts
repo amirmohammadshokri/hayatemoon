@@ -115,6 +115,12 @@ export class FormResidenceComponent implements OnInit {
       };
       this.residence.prices.priceRules = res.priceRules;
       this.selectedLocation = res.location;
+      this.images = res.mediaIds.map(id => ({
+        mediaId: id,
+        file: null,
+        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+      }));
+      this.mainImageIndex = res.mediaIds.findIndex(id => id === this.residence.mainMediaId);
     });
   }
 
@@ -194,6 +200,10 @@ export class FormResidenceComponent implements OnInit {
       vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
     });
     this.place = {};
+  }
+
+  defaultImg(row: any): void {
+    row.url = 'assets/no-image.png';
   }
 
   addImage(e: any): void {

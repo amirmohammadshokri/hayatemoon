@@ -59,7 +59,7 @@ export class FromHotelComponent implements OnInit {
   selectedPosition: any;
   saving: boolean;
   submitted: boolean;
-  hotel: IAddHotel = { places: [], hotelMediaIds: [] };
+  hotel: IAddHotel = { places: [], mediaIds: [] };
   hotelId: number;
   hotelTypes: SelectItem[] = [];
   locations: any[] = [];
@@ -136,15 +136,21 @@ export class FromHotelComponent implements OnInit {
         phone: hotel.phone,
         latitude: hotel.latitude,
         longitude: hotel.longitude,
-        hotelMediaIds: hotel.mediaIds,
+        mediaIds: hotel.mediaIds,
         mainMediaId: hotel.mainMediaId,
         facilitiesKindIds: hotel.facilities,
-        description: hotel.facilities,
+        description: hotel.description,
         state: hotel.state.id,
       };
       this.selectedLocation = hotel.location;
-      this.facilitiesKinds = hotel.facilities;
+      this.facilitiesKinds = hotel.facilities.map(f => ({ kindId: f.id, title: f.title }));
       this.selectedRate = hotel.rate.id;
+      this.images = hotel.mediaIds.map(id => ({
+        mediaId: id,
+        file: null,
+        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+      }));
+      this.mainImageIndex = hotel.mediaIds.findIndex(id => id === this.hotel.mainMediaId);
     });
   }
 
@@ -206,6 +212,10 @@ export class FromHotelComponent implements OnInit {
     this.place = {};
   }
 
+  defaultImg(row: any): void {
+    row.url = 'assets/no-image.png';
+  }
+
   saveImages(): Promise<void> {
     return new Promise(async (resolve, reject) => {
       if (this.images.length === 0) {
@@ -222,7 +232,7 @@ export class FromHotelComponent implements OnInit {
           this.saving = false;
           reject();
         }
-        this.hotel.hotelMediaIds.push(res.mediaId);
+        this.hotel.mediaIds.push(res.mediaId);
         if (i === this.mainImageIndex) {
           this.hotel.mainMediaId = res.mediaId;
         }
