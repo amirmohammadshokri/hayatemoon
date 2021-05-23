@@ -71,6 +71,6 @@ export class ListPlacesComponent implements OnInit {
   }
 
   editPlaces(id: number): void {
-    this.router.navigate([`../panel/places/form-palces/${id}`]);
+    this.router.navigate([`../panel/places/form-places/${id}`]);
   }
 }

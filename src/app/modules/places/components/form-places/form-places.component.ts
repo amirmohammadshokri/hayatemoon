@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { IAddPlaces } from 'src/app/interfaces/add-paces.interface';
 import { PlacesService } from 'src/app/services';
@@ -10,39 +10,55 @@ import { PlacesService } from 'src/app/services';
   styleUrls: ['./form-places.component.scss']
 })
 export class FormPlacesComponent implements OnInit {
-  places: IAddPlaces[] = [];
-  PlacesId: number;
+  placeId: number;
   titleList: string[];
   saving: boolean;
-
+  submitted: boolean;
+  place: string;
 
   constructor(
-    private serPlaces: PlacesService,
+    private srvPlace: PlacesService,
     private route: ActivatedRoute,
+    private router: Router,
     private srvMsg: MessageService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(prms => {
-      if (prms.placeId > 0) {
-        this.PlacesId = Number.parseInt(prms.placeId, 0);
-        this.getPlacesById(this.PlacesId);
+      if (prms.id > 0) {
+        this.placeId = Number.parseInt(prms.id, 0);
+        this.getPlacesById(this.placeId);
       }
     });
   }
+
   getPlacesById(id: number): void {
-    this.serPlaces.getPlaces(id).subscribe(cou => {
-      this.places = cou;
+    this.srvPlace.getPlace(id).subscribe(cou => {
+      this.place = cou.title;
     });
   }
 
   submit(): void {
-    this.saving = true;
-    this.serPlaces.addPlace({ titleList: this.titleList }).subscribe(res => {
-      this.saving = false;
-      this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-      this.titleList = [];
-    });
+    if (this.placeId) {
+      if (this.place) {
+        this.saving = true;
+        this.srvPlace.editPlaces(this.placeId, { placeId: this.placeId, title: this.place }).subscribe(res => {
+          this.saving = false;
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+          this.router.navigate(['../panel/places/places']);
+        });
+      }
+    } else {
+      if (this.titleList.length > 0) {
+        this.saving = true;
+        this.srvPlace.addPlace({ titleList: this.titleList }).subscribe(res => {
+          this.saving = false;
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+          this.router.navigate(['../panel/places/places']);
+        });
+      }
+    }
+    this.submitted = true;
   }
 
 }

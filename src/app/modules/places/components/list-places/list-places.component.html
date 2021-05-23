@@ -5,7 +5,7 @@
     <div class="p-toolbar-group-left">
       <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو" (click)="getPlaces(true)"></button>
       <button pButton pRipple label="ثبت  جدید" icon="pi pi-plus" class="p-button-success p-ml-0"
-      routerLink="../places-form/new"></button>
+      routerLink="../form-places/new"></button>
     </div>
   </p-toolbar>
   <p-confirmDialog header="تایید" icon="pi pi-exclamation-triangle"></p-confirmDialog>
@@ -33,7 +33,7 @@
           <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
             (click)="confirmDelete(rowData.placeId)"></button>
           <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-warning p-mr-1"
-            (click)="editPlaces(rowData.id)"></button>
+            (click)="editPlaces(rowData.placeId)"></button>
         </td>
       </tr>
     </ng-template>

@@ -1,3 +1,3 @@
-export interface IAddPlaces{
-    titleList?:string[];
+export interface IAddPlaces {
+  titleList?: string[];
 }

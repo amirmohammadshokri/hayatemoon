@@ -5,7 +5,7 @@ import { ListPlacesComponent } from './components/list-places/list-places.compon
 
 const routes: Routes = [
   { path: 'places', component: ListPlacesComponent },
-  { path: 'places-form/:id', component: FormPlacesComponent }
+  { path: 'form-places/:id', component: FormPlacesComponent }
 ];
 
 @NgModule({
