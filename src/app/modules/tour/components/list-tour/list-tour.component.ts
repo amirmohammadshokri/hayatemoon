@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { IState } from 'src/app/interfaces';
 import { TourService } from 'src/app/services';
 
@@ -27,7 +29,10 @@ export class ListTourComponent implements OnInit {
     }
   }
 
-  constructor(private srvTour: TourService) { }
+  constructor(
+    private confirmationService: ConfirmationService,
+    private srvTour: TourService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.items = [
@@ -61,6 +66,23 @@ export class ListTourComponent implements OnInit {
       this.tours.push(...res);
       this.loading = false;
     });
+  }
+
+  confirmDelete(id: number): void {
+    this.confirmationService.confirm({
+      message: 'آیا از حذف این ردیف اطمینان دارید؟',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'بله',
+      rejectLabel: 'نه',
+      accept: () => {
+
+      }
+    });
+  }
+
+
+  editTour(id: number): void {
+    this.router.navigate([`../panel/tour/tour-form/${id}`]);
   }
 
 }

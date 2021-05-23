@@ -18,6 +18,10 @@ export class TourService {
     return this.http.get<any[]>(`${this.url}/Registered/latest?page=${pageNumber}${(filter !== `` ? `&${filter}` : ``)}`);
   }
 
+  getTour(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/Registered/${id}`);
+  }
+
   addTour(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}`, obj);
   }

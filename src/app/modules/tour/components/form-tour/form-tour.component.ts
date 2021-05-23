@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddTour } from 'src/app/interfaces';
 import { CurrencyService, MediaService, SearchService, TourService, VehiclesService } from 'src/app/services';
+import * as moment from 'jalali-moment';
 
 @Component({
   selector: 'ss-form-tour',
@@ -31,6 +33,7 @@ export class FormTourComponent implements OnInit {
   images: { mediaId: number, file: File, url: string }[] = [];
   currencies: SelectItem[] = [];
   mainImageIndex: number;
+  tourId: number;
 
   constructor(
     private srvSrch: SearchService,
@@ -38,13 +41,52 @@ export class FormTourComponent implements OnInit {
     private srvMsg: MessageService,
     private srvTour: TourService,
     private srvVehicle: VehiclesService,
-    private srvCurrency: CurrencyService
+    private srvCurrency: CurrencyService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.getTourType();
     this.getVehicles();
     this.getCurrency();
+    this.route.params.subscribe(prms => {
+      if (prms.id > 0) {
+        this.tourId = Number.parseInt(prms.id, 0);
+        this.getTour(this.tourId);
+      }
+    });
+  }
+
+  getTour(id: number): void {
+    this.srvTour.getTour(this.tourId).subscribe(res => {
+      this.tour = {
+        isForeign: res.isForeign,
+        isInstallments: res.isInstallments,
+        title: res.title,
+        tourType: res.type.id,
+        // vehicles: IVehicle[],
+        dayDuration: res.dayDuration,
+        nightDuration: res.nightDuration,
+        // tourCategories: number[],
+        tourMediaIds: res.mediaIds,
+        mainImageId: res.mainMediaId,
+        price: {
+          currencyPrice: res.prices.currencyPrice,
+          currencyPriceType: res.prices.currencyPriceType.id,
+          price: res.prices.price,
+          netPrice: res.prices.netPrice,
+          disCountPrice: res.prices.disCountPrice
+        },
+        hotelId: res.hotel.id,
+        // hotelRooms: number[],
+        description: res.description
+      };
+      this.fromDate = moment(res.startDate, 'jYYYY/jMM/jDD  HH:mm');
+      this.toDate = moment(res.endDate, 'jYYYY/jMM/jDD  HH:mm');
+      this.fromLocation = res.fromLocation;
+      this.toLocation = res.toLocation;
+    });
+
   }
 
   getCategories(event: any): void {
@@ -79,7 +121,7 @@ export class FormTourComponent implements OnInit {
 
   getLocations(event: any): void {
     this.srvSrch.getLocation(event.query).subscribe(res => {
-      //this.locations = res;
+      this.locations = res;
     });
   }
 
@@ -87,14 +129,6 @@ export class FormTourComponent implements OnInit {
     this.srvCurrency.get().subscribe(res => {
       this.currencies = res.map(t => ({ label: t.title, value: t.typeId }));
     });
-  }
-
-  addPrice(): void {
-    // this.tour.price.push({});
-  }
-
-  removePrice(index: number): void {
-    // this.tour.price.splice(index, 1);
   }
 
   addImage(e: any): void {
