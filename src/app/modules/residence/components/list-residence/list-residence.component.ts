@@ -18,7 +18,6 @@ export class ListResidenceComponent implements OnInit {
   items: IState[];
   item: any;
   title: string;
-  latest: boolean = false;
   sss: string;
 
   // hotelTypes: SelectItem[] = [];
@@ -31,7 +30,6 @@ export class ListResidenceComponent implements OnInit {
       this.currentPage++;
     }
   }
-
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -100,8 +98,8 @@ export class ListResidenceComponent implements OnInit {
     });
   }
 
-  editHotel(id: number): void {
-    this.router.navigate([`./residence-form/${id}`]);
+  editResidence(id: number): void {
+    this.router.navigate([`../panel/residence/residence-form/${id}`]);
   }
 
 }

@@ -80,7 +80,6 @@ export class ListTourComponent implements OnInit {
     });
   }
 
-
   editTour(id: number): void {
     this.router.navigate([`../panel/tour/tour-form/${id}`]);
   }

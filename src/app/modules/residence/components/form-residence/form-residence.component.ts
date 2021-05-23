@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { icon, latLng, marker, Map, point, polyline, tileLayer, LatLng } from 'leaflet';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddResidence } from 'src/app/interfaces/add-residence.interface';
@@ -65,17 +65,56 @@ export class FormResidenceComponent implements OnInit {
   places: any[];
   images: { mediaId: number, file: File, url: string }[] = [];
   place: any = {};
+  residenceId: number;
 
   constructor(
     private srvResidence: ResidenceService,
     private srvMedia: MediaService,
     private sMsg: MessageService,
     private srvVehicle: VehiclesService,
-    private srvSrch: SearchService
+    private srvSrch: SearchService,
+    private aRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.getVehicles();
+    this.aRoute.params.subscribe(prms => {
+      if (prms.id > 0) {
+        this.residenceId = Number.parseInt(prms.id, 0);
+        this.getResidence();
+      }
+    });
+  }
+
+  getResidence(): void {
+    this.srvResidence.getResidence(this.residenceId).subscribe(res => {
+      this.residence = {
+        title: res.title,
+        address: res.address,
+        phone: res.phone,
+        latitude: res.latitude,
+        longitude: res.longitude,
+        mediaIds: res.mediaIds,
+        mainMediaId: res.mainMediaId,
+        places: res.places.map(p => ({
+          minute: p.minute,
+          id: p.place.placeId,
+          title: p.place.title,
+          vehicleId: p.vehicle.vehicleId,
+          vehicleTitle: p.vehicle.title
+        })),
+        description: res.description,
+        fromEntranceHour: res.fromEntranceHour,
+        toEntranceHour: res.toEntranceHour,
+        leavingHour: res.leavingHour,
+        rules: res.rules.map(r => r.rule),
+        prices: (res.basePrice ?? {}),
+        isAdmin: res.isAdmin,
+        facilitiesKindIds: res.facilities.map(f => f.id)
+      };
+      this.residence.prices.priceRules = res.priceRules;
+      this.selectedLocation = res.location;
+    });
   }
 
   getVehicles(): void {
@@ -179,6 +218,10 @@ export class FormResidenceComponent implements OnInit {
 
   removePrice(index: number): void {
     this.residence.prices.priceRules.splice(index, 1);
+  }
+
+  removePlace(index: number): void {
+    this.residence.places.splice(index, 1);
   }
 
   async submit(): Promise<void> {

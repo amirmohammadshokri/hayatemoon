@@ -52,12 +52,12 @@ export class FormTourComponent implements OnInit {
     this.route.params.subscribe(prms => {
       if (prms.id > 0) {
         this.tourId = Number.parseInt(prms.id, 0);
-        this.getTour(this.tourId);
+        this.getTour();
       }
     });
   }
 
-  getTour(id: number): void {
+  getTour(): void {
     this.srvTour.getTour(this.tourId).subscribe(res => {
       this.tour = {
         isForeign: res.isForeign,
