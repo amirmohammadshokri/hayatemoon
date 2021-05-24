@@ -115,8 +115,10 @@ export class FromHotelComponent implements OnInit {
     });
   }
 
-  deletePlaces(id: number): void {
-    this.places = this.places.splice(id);
+  
+
+  deletePlaces(index: number): void {
+    this.hotel.places.splice(index, 1);
   }
 
   getHotelById(id: number): void {

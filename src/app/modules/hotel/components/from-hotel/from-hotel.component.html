@@ -132,13 +132,13 @@
             <th style="width: 5em;"></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-place>
+        <ng-template pTemplate="body" let-place let-index="rowIndex">
           <tr>
             <td>{{place.title}}</td>
             <td>{{place.vehicleTitle}}</td>
             <td>{{place.minute}}</td>
             <td>   <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-              (click)="confirmDelete(place.placeId)" pTooltip="حذف"></button></td>
+              (click)="deletePlaces(index)" pTooltip="حذف"></button></td>
           </tr>
         </ng-template>
       </p-table>

@@ -69,8 +69,8 @@
 <p-dialog [(visible)]="showStateDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
   <h6>وضعیت مورد نظر جهت تغییر را انتخاب نمائید</h6>
   <ng-template pTemplate="footer">
-    <button type="button" pButton class="p-button-warning" icon="pi pi-times" label="در انتظار" (click)="changeState(0)"></button>
-    <button type="button" pButton class="p-button-success" icon="pi pi-check" label="فعال" (click)="changeState(1)"></button>
-    <button type="button" pButton class="p-button-danger" icon="pi pi-check" label="غیر فعال" (click)="changeState(2)"></button>
+    <button type="button" pButton class="p-button-warning" icon="pi pi-times" label="در انتظار" (click)="changeState(2)"></button>
+    <button type="button" pButton class="p-button-success" icon="pi pi-check" label="فعال" (click)="changeState(0)"></button>
+    <button type="button" pButton class="p-button-danger" icon="pi pi-check" label="غیر فعال" (click)="changeState(1)"></button>
   </ng-template>
 </p-dialog>
