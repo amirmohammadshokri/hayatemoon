@@ -32,14 +32,9 @@ export class FormPlacesComponent implements OnInit {
   }
 
   getPlacesById(id: number): void {
-<<<<<<< HEAD
-    this.serPlaces.getPlaces(id).subscribe(cou => {
-      this.places=cou;
-
-=======
     this.srvPlace.getPlace(id).subscribe(cou => {
       this.place = cou.title;
->>>>>>> cb5143501d6af3eaae8761dcd55e6c3acab6d47a
+
     });
   }
 
