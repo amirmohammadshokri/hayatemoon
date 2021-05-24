@@ -22,6 +22,11 @@ export class PlacesService {
     return this.http.get<any[]>(`${this.url}latest/${pageNumber}`);
   }
 
+  getPlacesBuId(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/${id}`);
+  }
+
+
   editPlaces(id: number, obj: any): Observable<any> {
     return this.http.put<any>(`${this.url}${id}`, obj);
   }
