@@ -51,7 +51,7 @@
         <div class="p-col-4 p-field">
           <label for="">نام شهر</label>
           <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
-            (completeMethod)="getLocations($event)" field="title"
+            (completeMethod)="getLocations($event)" field="title" required
             [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
           </p-autoComplete>
           <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
@@ -74,7 +74,6 @@
           <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
             ثبت تلفن اجباری می باشد.
           </small>
-
         </div>
         <div class="p-col-12 p-field">
           <label for="">آدرس</label>

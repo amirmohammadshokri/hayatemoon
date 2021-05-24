@@ -12,6 +12,7 @@ export class PlacesService {
   constructor(private http: HttpClient, private conf: AppConfig) {
     this.url = `${this.conf.getConfig('url')}web/Places/`;
   }
+
   addPlace(obj: any): Observable<any> {
     console.log(obj);
     
@@ -21,12 +22,13 @@ export class PlacesService {
   getPlaces(pageNumber: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}latest/${pageNumber}`);
   }
-
-  getPlacesBuId(id: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}/${id}`);
+ 
+ 
+  getPlace(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}${id}`);
   }
 
-
+ 
   editPlaces(id: number, obj: any): Observable<any> {
     return this.http.put<any>(`${this.url}${id}`, obj);
   }
@@ -34,10 +36,6 @@ export class PlacesService {
   deletePlace(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}${id}`);
   }
-
-  // Search(verb: string): Observable<any[]> {
-  // return this.http.get<any[]>(`${this.conf.getConfig('url')}web/Search/AutoSuggest?search=${verb}`);
-  // }
 
 
 }

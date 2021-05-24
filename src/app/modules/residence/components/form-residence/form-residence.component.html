@@ -16,33 +16,64 @@
       <div class="p-grid p-fluid">
         <div class="p-col-4 p-field">
           <label for="title">نام اقامتگاه</label>
-          <input type="text" id="title" pInputText [(ngModel)]="residence.title">
+          <input #title="ngModel" type="text" id="title" pInputText [(ngModel)]="residence.title" required
+            [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+          <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+            ثبت عنوان اجباری می باشد.
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">نام شهر</label>
-          <p-autoComplete [suggestions]="locations" [(ngModel)]="selectedLocation"
-            (completeMethod)="getLocations($event)" field="title">
+          <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
+            (completeMethod)="getLocations($event)" field="title" required
+            [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
           </p-autoComplete>
+          <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
+            انتخاب شهر اجباری است
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">تلفن</label>
-          <input type="" [(ngModel)]="residence.phone" pInputText>
+          <input #phone="ngModel" type="" [(ngModel)]="residence.phone" pInputText required
+            [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+          <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
+            ثبت تلفن اجباری می باشد
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">ساعت ورود از</label>
-          <input type="time" [(ngModel)]="residence.fromEntranceHour" pInputText>
+          <input #fromEntranceHour="ngModel" type="time" [(ngModel)]="residence.fromEntranceHour" pInputText required
+            [ngClass]="{'ng-dirty': (fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)}">
+          <small *ngIf="(fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)"
+            class="p-error">
+            ساعت ورود را وارد کنید
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">تا ساعت</label>
-          <input type="time" [(ngModel)]="residence.toEntranceHour" pInputText>
+          <input #toEntranceHour="ngModel" type="time" [(ngModel)]="residence.toEntranceHour" pInputText required
+            [ngClass]="{'ng-dirty': (toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)}">
+          <small *ngIf="(toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)"
+            class="p-error">
+            ساعت پایان را وارد کنید
+          </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">ساعت خروج</label>
-          <input type="time" [(ngModel)]="residence.leavingHour" pInputText>
+          <input #leavingHour="ngModel" type="time" [(ngModel)]="residence.leavingHour" pInputText required
+            [ngClass]="{'ng-dirty': (leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)}">
+          <small *ngIf="(leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)"
+            class="p-error">
+            ساعت خروج را وارد کنید
+          </small>
         </div>
         <div class="p-col-12 p-field">
           <label for="">آدرس</label>
-          <textarea pInputTextarea [(ngModel)]="residence.address" rows="1"></textarea>
+          <textarea #address="ngModel" pInputTextarea [(ngModel)]="residence.address" rows="1" required
+            [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+          <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
+            آدرس را وارد کنید
+          </small>
         </div>
         <div class="p-col-12 p-field">
           <label for="">توضیحات</label>
@@ -106,7 +137,8 @@
                   <td>{{place.vehicleTitle}}</td>
                   <td>{{place.minute}}</td>
                   <td>
-                    <button pButton icon="pi pi-times" class="p-button-danger p-button-text p-button-rounded" (click)="removePlace(index)"></button>
+                    <button pButton icon="pi pi-times" class="p-button-danger p-button-text p-button-rounded"
+                      (click)="removePlace(index)"></button>
                   </td>
                 </tr>
               </ng-template>

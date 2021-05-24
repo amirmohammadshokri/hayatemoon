@@ -8,7 +8,7 @@ export interface IAddHotel {
   phone?: string;
   latitude?: number;
   longitude?: number;
-  hotelMediaIds?: number[];
+  mediaIds?: number[];
   mainMediaId?: number;
   facilitiesKindIds?: number[];
   places?: {

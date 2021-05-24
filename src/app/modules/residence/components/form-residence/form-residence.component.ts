@@ -66,6 +66,7 @@ export class FormResidenceComponent implements OnInit {
   images: { mediaId: number, file: File, url: string }[] = [];
   place: any = {};
   residenceId: number;
+  submitted: boolean;
 
   constructor(
     private srvResidence: ResidenceService,
@@ -114,6 +115,12 @@ export class FormResidenceComponent implements OnInit {
       };
       this.residence.prices.priceRules = res.priceRules;
       this.selectedLocation = res.location;
+      this.images = res.mediaIds.map(id => ({
+        mediaId: id,
+        file: null,
+        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+      }));
+      this.mainImageIndex = res.mediaIds.findIndex(id => id === this.residence.mainMediaId);
     });
   }
 
@@ -195,6 +202,10 @@ export class FormResidenceComponent implements OnInit {
     this.place = {};
   }
 
+  defaultImg(row: any): void {
+    row.url = 'assets/no-image.png';
+  }
+
   addImage(e: any): void {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
@@ -225,30 +236,34 @@ export class FormResidenceComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    this.saving = true;
-    this.residence.locationId = this.selectedLocation?.locationId;
-    this.residence.isAdmin = true;
-    if (this.selectedPosition) {
-      this.residence.latitude = this.selectedPosition.lat;
-      this.residence.longitude = this.selectedPosition.lng;
+    if (this.residence.title && this.selectedLocation && this.residence.phone && this.residence.fromEntranceHour
+      && this.residence.toEntranceHour && this.residence.leavingHour && this.residence.address) {
+      this.saving = true;
+      this.residence.locationId = this.selectedLocation?.locationId;
+      this.residence.isAdmin = true;
+      if (this.selectedPosition) {
+        this.residence.latitude = this.selectedPosition.lat;
+        this.residence.longitude = this.selectedPosition.lng;
+      }
+      this.residence.prices?.priceRules?.forEach(role => {
+        const from: Date = role.from?._d;
+        const utcFrom = new Date(from.toUTCString());
+        role.from = utcFrom.toISOString();
+        const to: Date = role.to?._d;
+        const utcTo = new Date(to.toUTCString());
+        role.to = utcTo.toISOString();
+      });
+      // save images
+      await this.saveImages();
+      this.srvResidence.addResidence(this.residence).subscribe(() => {
+        this.sMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+        this.saving = false;
+        this.residence = { mediaIds: [], places: [], prices: {} };
+      }, _ => {
+        this.saving = false;
+      });
     }
-    this.residence.prices?.priceRules?.forEach(role => {
-      const from: Date = role.from?._d;
-      const utcFrom = new Date(from.toUTCString());
-      role.from = utcFrom.toISOString();
-      const to: Date = role.to?._d;
-      const utcTo = new Date(to.toUTCString());
-      role.to = utcTo.toISOString();
-    });
-    // save images
-    await this.saveImages();
-    this.srvResidence.addResidence(this.residence).subscribe(() => {
-      this.sMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-      this.saving = false;
-      this.residence = { mediaIds: [], places: [], prices: {} };
-    }, _ => {
-      this.saving = false;
-    });
+    this.submitted = true;
   }
 
 }
