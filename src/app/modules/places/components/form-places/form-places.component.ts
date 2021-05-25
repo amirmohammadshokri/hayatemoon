@@ -34,6 +34,7 @@ export class FormPlacesComponent implements OnInit {
   getPlacesById(id: number): void {
     this.srvPlace.getPlace(id).subscribe(cou => {
       this.place = cou.title;
+
     });
   }
 

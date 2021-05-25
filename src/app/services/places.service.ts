@@ -22,11 +22,13 @@ export class PlacesService {
   getPlaces(pageNumber: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}latest/${pageNumber}`);
   }
-
+ 
+ 
   getPlace(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}${id}`);
   }
 
+ 
   editPlaces(id: number, obj: any): Observable<any> {
     return this.http.put<any>(`${this.url}${id}`, obj);
   }

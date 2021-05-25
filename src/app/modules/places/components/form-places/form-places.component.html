@@ -11,6 +11,12 @@
   <div class="p-grid p-fluid p-mt-2">
     <div *ngIf="!placeId" class="p-col-12 p-field">
       <label for="title">عنوان</label>
+<<<<<<< HEAD
+      <p-chips [(ngModel)]="titleList" ></p-chips>
+
+
+	
+=======
       <p-chips #list="ngModel" [(ngModel)]="titleList" required
         [ngClass]="{'ng-dirty': (list.invalid && submitted) || (list.dirty && list.invalid)}">
       </p-chips>
@@ -25,6 +31,7 @@
       <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
         لطفا عنوان را وارد کنید
       </small>
+>>>>>>> cb5143501d6af3eaae8761dcd55e6c3acab6d47a
     </div>
   </div>
 </div>
