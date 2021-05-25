@@ -29,7 +29,6 @@ export function initializeApp(appInitService: AppInitService): any {
     ProgressBarModule,
     ToastModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     AuthModule.forRoot(),
   ],
   providers: [
