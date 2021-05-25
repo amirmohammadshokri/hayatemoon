@@ -221,6 +221,8 @@ export class FromHotelComponent implements OnInit {
   saveImages(): Promise<void> {
     return new Promise(async (resolve, reject) => {
       if (this.images.length === 0) {
+        console.log('gfgfg');
+        
         resolve();
       }
       // save image that not exist.
