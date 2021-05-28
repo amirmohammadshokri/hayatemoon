@@ -15,6 +15,7 @@ export class ListCalendarComponent implements OnInit {
   currentPage: number;
   calendar: ICalendar[] = [];
 
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
@@ -43,7 +44,7 @@ export class ListCalendarComponent implements OnInit {
       this.currentPage = 1;
     }
     this.loading = true;
-    this.serCalendar.getCalendar(1).subscribe(res => {
+    this.serCalendar.getCalendar(this.currentPage).subscribe(res => {
       this.calendar.push(...res);
       this.loading = false;
     });
@@ -68,7 +69,7 @@ export class ListCalendarComponent implements OnInit {
   }
 
   editCalendar(id: number): void {
-    console.log(id);
+   
     this.router.navigate([`../panel/residence/calendar-form/${id}`]);
   }
 

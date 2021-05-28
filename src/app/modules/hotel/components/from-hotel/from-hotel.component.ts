@@ -204,6 +204,15 @@ export class FromHotelComponent implements OnInit {
   }
 
   addPlace(): void {
+    this.hotel.places.forEach(element => {
+     
+      if(element.id===this.place?.title?.placeId)
+      {
+        this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'اماکن تکراری.' }); return;
+        
+      }
+  
+   });
     this.hotel.places.push({
       minute: this.place.minute,
       id: this.place?.title?.placeId,

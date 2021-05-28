@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { IAddCalendar } from 'src/app/interfaces/add-calendar.interface';
 import { CalendarService } from 'src/app/services/calendar.service';
@@ -20,7 +20,9 @@ export class FormCalendarComponent implements OnInit {
   constructor(
     private serCalendar: CalendarService,
     private sMsg: MessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+
   ) { }
 
   ngOnInit(): void {
@@ -50,8 +52,10 @@ export class FormCalendarComponent implements OnInit {
       this.serCalendar.addCalendar(obj).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'ویرایش تاریخ', detail: 'ویرایش با موفقیت انجام شد' });
         this.saving = false;
+        this.router.navigate(['../panel/residence/calendar']);
       }, _ => {
         this.saving = false;
+        this.router.navigate(['../panel/residence/calendar']);
       });
     }
     else {
@@ -62,8 +66,11 @@ export class FormCalendarComponent implements OnInit {
         this.sMsg.add({ severity: 'success', summary: 'ثبت تاریخ ', detail: 'عملیات با موفقیت انجام شد' });
         this.holiday = null;
         this.saving = false;
+        this.router.navigate(['../panel/residence/calendar']);
+
       }, _ => {
         this.saving = false;
+        this.router.navigate(['../panel/residence/calendar']);
       });
     }
   }
