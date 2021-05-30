@@ -20,7 +20,7 @@ export class ResidenceService {
   }
 
   getResidences(filter: string, pageNumber: number): Observable<IResidence[]> {
-    return this.http.get<IResidence[]>(`${this.url}Registered/latest${filter}`);
+    return this.http.get<IResidence[]>(`${this.url}Registered/latest?page=${pageNumber}${(filter ? `&${filter}` : ``)}`);
   }
 
   addResidence(obj: any): Observable<any[]> {
@@ -29,6 +29,11 @@ export class ResidenceService {
 
   deleteResidence(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}${id}`);
+  }
+
+
+  changeState(obj: any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.url}Registered/State/${obj.id}`, obj);
   }
 
   //#endregion

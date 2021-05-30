@@ -1,8 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { IResidence } from 'src/app/interfaces/residence.iterface';
 import { IState } from 'src/app/interfaces/state.inteface';
+import { DataService } from 'src/app/services';
 import { ResidenceService } from 'src/app/services/residence.service';
 
 @Component({
@@ -18,9 +19,8 @@ export class ListResidenceComponent implements OnInit {
   items: IState[];
   item: any;
   title: string;
-  sss: string;
-
-  // hotelTypes: SelectItem[] = [];
+  showStateDialog: boolean;
+  selectedResidence: any;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -28,14 +28,16 @@ export class ListResidenceComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
       this.currentPage++;
+      this.getResidence(false);
     }
   }
 
   constructor(
     private confirmationService: ConfirmationService,
-    private sResidence: ResidenceService,
-    private sMsg: MessageService,
-    private router: Router
+    private srvRes: ResidenceService,
+    private srvMsg: MessageService,
+    private router: Router,
+    private srvData: DataService
   ) {
     this.items = [
       {
@@ -60,20 +62,36 @@ export class ListResidenceComponent implements OnInit {
       { field: 'state', header: 'وضعیت' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
-    this.getResidence();
+    this.getResidence(true);
   }
 
-  getResidence(): void {
+  changeState(stateId: number): void {
+    this.srvData.showMainProgressBarForMe();
+    this.showStateDialog = false;
+    this.srvRes.changeState({
+      id: this.selectedResidence.id,
+      state: stateId
+    }).subscribe(res => {
+      this.srvMsg.add({ severity: 'success', summary: 'تغییر وضعیت', detail: 'عملیات با موفقیت انجام شد' });
+      this.srvData.thanksMainProgressBar();
+      this.selectedResidence.state = { id: stateId, title: this.items.find(i => i.code === stateId).name };
+    });
+  }
+
+  getResidence(firstLoad: boolean): void {
+    if (firstLoad) {
+      this.currentPage = 1;
+      this.residences = [];
+    }
     this.loading = true;
-    let filter = `?`;
+    let filter = ``;
     if (this.item) {
       filter += `&state=${this.item.code}`;
     }
     if (this.title) {
       filter += `&title=${this.title}`;
     }
-    this.residences = [];
-    this.sResidence.getResidences(filter, this.currentPage).subscribe(res => {
+    this.srvRes.getResidences(filter, this.currentPage).subscribe(res => {
       this.residences.push(...res);
       this.loading = false;
     });
@@ -92,9 +110,9 @@ export class ListResidenceComponent implements OnInit {
   }
 
   deleteResidence(id: number): void {
-    this.sResidence.deleteResidence(id).subscribe(() => {
+    this.srvRes.deleteResidence(id).subscribe(() => {
       this.currentPage = 1;
-      this.getResidence();
+      this.getResidence(true);
     });
   }
 

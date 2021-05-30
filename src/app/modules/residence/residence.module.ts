@@ -27,6 +27,8 @@ import { ListCalendarComponent } from './components/list-calendar/list-calendar.
 import { FormCalendarComponent } from './components/form-calendar/form-calendar.component';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { FieldsetModule } from 'primeng/fieldset';
+import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [FormResidencefacilitieskindComponent, ListResidencefacilitieskindComponent,
@@ -49,7 +51,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     ToolbarModule,
     ChipsModule,
     DpDatePickerModule,
-    FieldsetModule
+    FieldsetModule,
+    TooltipModule,
+    DialogModule
   ],
   providers: [
     ConfirmationService,

@@ -65,9 +65,6 @@ export class ListHotelComponent implements OnInit {
     });
   }
 
-  g
-  
-  
   getHotels(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
