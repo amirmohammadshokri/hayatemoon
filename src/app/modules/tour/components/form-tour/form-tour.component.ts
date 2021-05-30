@@ -79,7 +79,6 @@ export class FormTourComponent implements OnInit {
           netPrice: res.prices.netPrice,
           disCountPrice: res.prices.disCountPrice
         },
-        hotelRooms: res.hotelRooms,
         description: res.description
       };
       this.fromDate = moment(res.startDate, 'jYYYY/jMM/jDD  HH:mm');
@@ -93,6 +92,7 @@ export class FormTourComponent implements OnInit {
       }));
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.tour.mainImageId);
       this.selectedHotel = res.hotel;
+      this.selectedRoom = res.hotelRooms;
       this.selectedCategories = res.categories;
       this.srvData.thanksMainProgressBar();
     });
