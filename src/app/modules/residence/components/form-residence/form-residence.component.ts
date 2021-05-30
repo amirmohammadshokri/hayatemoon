@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { icon, latLng, marker, Map, point, polyline, tileLayer, LatLng } from 'leaflet';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddResidence } from 'src/app/interfaces/add-residence.interface';
-import { MediaService, SearchService, VehiclesService } from 'src/app/services';
+import { DataService, MediaService, SearchService, VehiclesService } from 'src/app/services';
 import { ResidenceService } from 'src/app/services/residence.service';
+import * as moment from 'jalali-moment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ss-form-residence',
@@ -13,14 +15,8 @@ import { ResidenceService } from 'src/app/services/residence.service';
 })
 export class FormResidenceComponent implements OnInit {
 
-  streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    detectRetina: true,
-    attribution: '&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'
-  });
-  wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-    detectRetina: true,
-    attribution: '&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'
-  });
+  streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { detectRetina: true });
+  wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', { detectRetina: true });
 
   // Marker for tehran
   tehran = marker([35.68490811606957, 51.38854980468751], {
@@ -51,7 +47,7 @@ export class FormResidenceComponent implements OnInit {
   // Set the initial set of displayed layers (we could also use the leafletLayers input binding for this)
   options = {
     layers: [this.streetMaps, this.tehran],
-    zoom: 5,
+    zoom: 10,
     center: latLng([35.68490811606957, 51.38854980468751])
   };
   mainImageIndex: number;
@@ -61,6 +57,8 @@ export class FormResidenceComponent implements OnInit {
   locations: any[] = [];
   selectedLocation: any;
   facilities: any[] = [];
+  facilitiesKinds: any[] = [];
+  existRules: { id: number, rule: string }[] = [];
   vehicles: SelectItem[];
   places: any[];
   images: { mediaId: number, file: File, url: string }[] = [];
@@ -69,12 +67,14 @@ export class FormResidenceComponent implements OnInit {
   submitted: boolean;
 
   constructor(
+    private srvData: DataService,
     private srvResidence: ResidenceService,
     private srvMedia: MediaService,
-    private sMsg: MessageService,
+    private srvMsg: MessageService,
     private srvVehicle: VehiclesService,
     private srvSrch: SearchService,
-    private aRoute: ActivatedRoute
+    private aRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -88,6 +88,7 @@ export class FormResidenceComponent implements OnInit {
   }
 
   getResidence(): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvResidence.getResidence(this.residenceId).subscribe(res => {
       this.residence = {
         title: res.title,
@@ -110,10 +111,16 @@ export class FormResidenceComponent implements OnInit {
         leavingHour: res.leavingHour,
         rules: res.rules.map(r => r.rule),
         prices: (res.basePrice ?? {}),
-        isAdmin: res.isAdmin,
-        facilitiesKindIds: res.facilities.map(f => f.id)
+        isAdmin: res.isAdmin
       };
-      this.residence.prices.priceRules = res.priceRules;
+      this.facilitiesKinds = res.facilities.map(f => ({ kindId: f.id, title: f.title }));
+      this.residence.prices.priceRules = res.priceRules.map(p => ({
+        price: p.price,
+        from: moment(p.fromPersianDate, 'jYYYY/jMM/jDD'),
+        to: moment(p.toPersianDate, 'jYYYY/jMM/jDD')
+      }));
+
+      this.existRules = res.rules;
       this.selectedLocation = res.location;
       this.images = res.mediaIds.map(id => ({
         mediaId: id,
@@ -121,12 +128,15 @@ export class FormResidenceComponent implements OnInit {
         url: `http://beta-api.gozarino.com/v1/web/media/${id}`
       }));
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.residence.mainMediaId);
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getVehicles(): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvVehicle.getVehicles().subscribe(res => {
       this.vehicles = res.map(r => ({ label: r.title, value: r.vehicleId }));
+      this.srvData.thanksMainProgressBar();
     });
   }
 
@@ -142,10 +152,11 @@ export class FormResidenceComponent implements OnInit {
         formData.append(`file`, img.file, img.file.name);
         const res = await this.srvMedia.upload(formData, 0).toPromise();
         if (!res) {
-          this.sMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
+          this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
           this.saving = false;
           reject();
         }
+        img.mediaId = res.mediaId;
         this.residence.mediaIds.push(res.mediaId);
         if (i === this.mainImageIndex) {
           this.residence.mainMediaId = res.mediaId;
@@ -157,8 +168,10 @@ export class FormResidenceComponent implements OnInit {
   }
 
   getLocations(event: any): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvSrch.getLocation(event.query).subscribe(res => {
       this.locations = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
@@ -180,8 +193,10 @@ export class FormResidenceComponent implements OnInit {
   }
 
   getFacilities(event: any): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvSrch.getHotelFacilitiesKind(event.query).subscribe(res => {
       this.facilities = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
@@ -192,14 +207,27 @@ export class FormResidenceComponent implements OnInit {
   }
 
   addPlace(): void {
-    this.residence.places.push({
-      minute: this.place.minute,
-      id: this.place?.title?.placeId,
-      title: (this.place?.title?.title ?? this.place?.title),
-      vehicleId: this.place.vehicleId,
-      vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
-    });
-    this.place = {};
+    let add = true;
+    for (let index = 0; index < this.residence.places.length; index++) {
+      const place = this.residence.places[index];
+      if ((place.id === this.place?.title?.placeId || place.title === this.place?.title) &&
+        place.vehicleId === this.place.vehicleId &&
+        place.minute === this.place.minute) {
+        this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'لطفا موارد تکراری را وارد نکنید .' });
+        add = false;
+        break;
+      }
+    }
+    if (add) {
+      this.residence.places.push({
+        minute: this.place.minute,
+        id: this.place?.title?.placeId,
+        title: (this.place?.title?.title ?? this.place?.title),
+        vehicleId: this.place.vehicleId,
+        vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
+      });
+      this.place = {};
+    }
   }
 
   defaultImg(row: any): void {
@@ -253,15 +281,45 @@ export class FormResidenceComponent implements OnInit {
         const utcTo = new Date(to.toUTCString());
         role.to = utcTo.toISOString();
       });
+      this.residence.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
       // save images
       await this.saveImages();
-      this.srvResidence.addResidence(this.residence).subscribe(() => {
-        this.sMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-        this.saving = false;
-        this.residence = { mediaIds: [], places: [], prices: {} };
-      }, _ => {
-        this.saving = false;
-      });
+      if (this.residenceId > 0) {
+        this.residence.id = this.residenceId;
+        const rules = [];
+        this.residence.rules.forEach(rule => {
+          const index = this.existRules.findIndex(r => r.rule === rule);
+          if (index > -1) {
+            rules.push(this.existRules[index]);
+          } else {
+            rules.push({ id: 0, rule });
+          }
+        });
+        const residence = _.cloneDeep(this.residence);
+        residence.rules = rules;
+        residence.mainMediaId = (residence.mainMediaId ?? 0);
+        this.srvResidence.editResidence(residence).subscribe(() => {
+          residence.prices.id = this.residenceId;
+          this.srvResidence.editPrice(residence.prices).subscribe(() => {
+            this.srvMsg.add({ severity: 'success', summary: 'ویرایش اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+            this.saving = false;
+            this.router.navigate(['./panel/residence/residence']);
+          }, () => {
+            this.saving = false;
+          });
+        }, () => {
+          this.saving = false;
+        });
+      } else {
+        this.srvResidence.addResidence(this.residence).subscribe(() => {
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+          this.saving = false;
+          this.router.navigate(['./panel/residence/residence']);
+        }, () => {
+          this.saving = false;
+        });
+      }
+
     }
     this.submitted = true;
   }

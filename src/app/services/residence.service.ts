@@ -27,10 +27,17 @@ export class ResidenceService {
     return this.http.post<any[]>(`${this.url}`, obj);
   }
 
+  editResidence(obj: any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.url}`, obj);
+  }
+
+  editPrice(obj: any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.url}Price`, obj);
+  }
+
   deleteResidence(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}${id}`);
   }
-
 
   changeState(obj: any): Observable<any[]> {
     return this.http.put<any[]>(`${this.url}Registered/State/${obj.id}`, obj);

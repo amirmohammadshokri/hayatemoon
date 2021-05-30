@@ -239,6 +239,7 @@ export class FromHotelComponent implements OnInit {
           this.saving = false;
           reject();
         }
+        img.mediaId = res.mediaId;
         this.hotel.mediaIds.push(res.mediaId);
         if (i === this.mainImageIndex) {
           this.hotel.mainMediaId = res.mediaId;

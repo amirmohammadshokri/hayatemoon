@@ -1,4 +1,5 @@
 export interface IAddResidence {
+  id?: number;
   title?: string;
   locationId?: number;
   address?: string;
@@ -19,7 +20,7 @@ export interface IAddResidence {
   fromEntranceHour?: string;
   toEntranceHour?: string;
   leavingHour?: string;
-  rules?: string[];
+  rules?: any[];
   prices?: IPrice;
   isAdmin?: boolean;
 }
