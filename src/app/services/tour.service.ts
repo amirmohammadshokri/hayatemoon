@@ -26,6 +26,10 @@ export class TourService {
     return this.http.post<any[]>(`${this.url}`, obj);
   }
 
+  editTour(obj: any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.url}`, obj);
+  }
+
   getTourType(): Observable<any> {
     return this.http.get<any>(`${this.url}/type`);
   }

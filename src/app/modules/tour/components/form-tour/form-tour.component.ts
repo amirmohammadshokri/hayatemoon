@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddTour } from 'src/app/interfaces';
-import { CurrencyService, MediaService, SearchService, TourService, VehiclesService } from 'src/app/services';
+import { CurrencyService, DataService, MediaService, SearchService, TourService, VehiclesService } from 'src/app/services';
 import * as moment from 'jalali-moment';
 
 @Component({
@@ -36,13 +36,15 @@ export class FormTourComponent implements OnInit {
   tourId: number;
 
   constructor(
+    private srvData: DataService,
     private srvSrch: SearchService,
     private srvMedia: MediaService,
     private srvMsg: MessageService,
     private srvTour: TourService,
     private srvVehicle: VehiclesService,
     private srvCurrency: CurrencyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +60,7 @@ export class FormTourComponent implements OnInit {
   }
 
   getTour(): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvTour.getTour(this.tourId).subscribe(res => {
       this.tour = {
         isForeign: res.isForeign,
@@ -76,7 +79,7 @@ export class FormTourComponent implements OnInit {
           netPrice: res.prices.netPrice,
           disCountPrice: res.prices.disCountPrice
         },
-        // hotelRooms: number[],
+        hotelRooms: res.hotelRooms,
         description: res.description
       };
       this.fromDate = moment(res.startDate, 'jYYYY/jMM/jDD  HH:mm');
@@ -91,49 +94,64 @@ export class FormTourComponent implements OnInit {
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.tour.mainImageId);
       this.selectedHotel = res.hotel;
       this.selectedCategories = res.categories;
+      this.srvData.thanksMainProgressBar();
     });
 
   }
 
   getCategories(event: any): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvSrch.getToueCategories(event.query).subscribe(res => {
       this.categories = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getHotels(event: any): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvSrch.getHotel(event.query).subscribe(res => {
       this.hotels = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getRooms(event: any): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvSrch.getHotelRooms(null, event.query).subscribe(res => {
       this.rooms = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getTourType(): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvTour.getTourType().subscribe(res => {
       this.tourTypes = res.map(t => ({ label: t.title, value: t.id }));
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getVehicles(): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvVehicle.getVehicles().subscribe(res => {
       this.vehicels = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getLocations(event: any): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvSrch.getLocation(event.query).subscribe(res => {
       this.locations = res;
+      this.srvData.thanksMainProgressBar();
     });
   }
 
   getCurrency(): void {
+    this.srvData.showMainProgressBarForMe();
     this.srvCurrency.get().subscribe(res => {
       this.currencies = res.map(t => ({ label: t.title, value: t.typeId }));
+      this.srvData.thanksMainProgressBar();
     });
   }
 
@@ -177,13 +195,24 @@ export class FormTourComponent implements OnInit {
       this.tour.tourCategories = this.selectedCategories.map(c => c.id);
 
       await this.saveImages();
-      this.srvTour.addTour(this.tour).subscribe(res => {
-        this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-        this.saving = false;
-        this.tour = { tourMediaIds: [], price: {}, vehicles: [] };
-      }, _ => {
-        this.saving = false;
-      });
+      if (this.tourId > 0) {
+        this.tour.tourId = this.tourId;
+        this.srvTour.editTour(this.tour).subscribe(res => {
+          this.srvMsg.add({ severity: 'success', summary: 'ویرایش اطلاعات', detail: 'ویرایش اطلاعات با موفقیت انجام شد .' });
+          this.saving = false;
+          this.router.navigate(['./panel/tour/tours']);
+        }, _ => {
+          this.saving = false;
+        });
+      } else {
+        this.srvTour.addTour(this.tour).subscribe(res => {
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+          this.saving = false;
+          this.router.navigate(['./panel/tour/tours']);
+        }, _ => {
+          this.saving = false;
+        });
+      }
     }
 
     this.submitted = true;
@@ -205,6 +234,7 @@ export class FormTourComponent implements OnInit {
           this.saving = false;
           reject();
         }
+        img.mediaId = res.mediaId;
         this.tour.tourMediaIds.push(res.mediaId);
         if (i === this.mainImageIndex) {
           this.tour.mainImageId = res.mediaId;

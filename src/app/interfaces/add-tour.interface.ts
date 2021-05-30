@@ -1,4 +1,5 @@
 export interface IAddTour {
+  tourId?: number;
   isForeign?: boolean;
   isInstallments?: boolean;
   fromLocationId?: number;
