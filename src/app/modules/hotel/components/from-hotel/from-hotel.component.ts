@@ -280,7 +280,7 @@ export class FromHotelComponent implements OnInit {
       if (this.hotel.hotelId) {
         this.srvHotel.editHotel(this.hotel).subscribe(res => {
           this.saving = false;
-          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت  اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
           this.router.navigate(['./panel/hotel/hotels']);
         }, _ => {
           this.saving = false;

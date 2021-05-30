@@ -50,7 +50,7 @@ export class FormCalendarComponent implements OnInit {
         holiday: utcFromDate.toISOString()
       };
       this.serCalendar.addCalendar(obj).subscribe(() => {
-        this.sMsg.add({ severity: 'success', summary: 'ویرایش تاریخ', detail: 'ویرایش با موفقیت انجام شد' });
+        this.sMsg.add({ severity: 'success', summary: 'ویرایش  تاریخ', detail: 'ویرایش با موفقیت انجام شد' });
         this.saving = false;
         this.router.navigate(['../panel/residence/calendar']);
       }, _ => {
