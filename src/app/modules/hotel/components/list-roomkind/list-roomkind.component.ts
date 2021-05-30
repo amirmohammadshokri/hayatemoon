@@ -14,7 +14,7 @@ export class ListRoomkindComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
-  deleting:boolean;
+  deleting: boolean;
   currentPage: number;
   roomkind: IRoomkind[] = [];
 
@@ -68,15 +68,14 @@ export class ListRoomkindComponent implements OnInit {
   }
 
   deleteRoomkind(id: number): void {
-    this.deleting=true;
+    this.deleting = true;
     this.srvHotel.deleteRoomkind(id).subscribe(() => {
-      this.deleting=false;
+      this.deleting = false;
       this.getRomkind(true);
     });
   }
 
   editRomkind(id: number): void {
-    console.log(id);
     this.router.navigate([`../panel/hotel/room-kind-form/${id}`]);
   }
 

@@ -25,9 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userData$ = this.oidcSecurityService.userData$
-    console.log("userdata", this.userData$)
-
+    this.userData$ = this.oidcSecurityService.userData$;
     this.oidcSecurityService.checkAuth().subscribe(d => {
       if (!d) {
         this.oidcSecurityService.authorize();
@@ -36,9 +34,7 @@ export class AppComponent implements OnInit {
 
     this.eventService
       .registerForEvents()
-      .pipe(filter((notification) => notification.type === EventTypes.CheckSessionReceived))
-      .subscribe((value) => console.log('CheckSessionReceived with value from app', value));
-
+      .pipe(filter((notification) => notification.type === EventTypes.CheckSessionReceived));
     this.primengConfig.ripple = true;
     this.sData.mainProgressBar.subscribe(res => {
       if (res.length > 0) {
@@ -57,5 +53,5 @@ export class AppComponent implements OnInit {
   logout(): void {
     this.oidcSecurityService.logoff();
   }
- 
+
 }

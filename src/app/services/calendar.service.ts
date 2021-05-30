@@ -14,8 +14,6 @@ export class CalendarService {
   }
 
   addCalendar(obj: any): Observable<any> {
-    console.log(obj);
-    
     return this.http.post<any>(`${this.url}`, obj);
   }
 

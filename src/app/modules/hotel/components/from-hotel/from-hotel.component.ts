@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { HotelService, MediaService, SearchService, VehiclesService } from 'src/app/services';
-import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer } from 'leaflet';
+import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer, Control, Util } from 'leaflet';
 import { IAddHotel } from 'src/app/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILocation } from 'src/app/interfaces/location.interface';
@@ -14,14 +14,8 @@ import { ILocation } from 'src/app/interfaces/location.interface';
 })
 export class FromHotelComponent implements OnInit {
   // Define our base layers so we can reference them multiple times
-  streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    detectRetina: true,
-    attribution: '&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'
-  });
-  wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-    detectRetina: true,
-    attribution: '&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'
-  });
+  streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { detectRetina: true });
+  wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', { detectRetina: true });
 
   // Marker for tehran
   tehran = marker([35.68490811606957, 51.38854980468751], {
@@ -52,7 +46,7 @@ export class FromHotelComponent implements OnInit {
   // Set the initial set of displayed layers (we could also use the leafletLayers input binding for this)
   options = {
     layers: [this.streetMaps, this.tehran],
-    zoom: 5,
+    zoom: 15,
     center: latLng([35.68490811606957, 51.38854980468751])
   };
 
@@ -114,8 +108,6 @@ export class FromHotelComponent implements OnInit {
       }
     });
   }
-
-  
 
   deletePlaces(index: number): void {
     this.hotel.places.splice(index, 1);
@@ -190,7 +182,7 @@ export class FromHotelComponent implements OnInit {
     if (this.route.getBounds().isValid()) {
       map.fitBounds(this.route.getBounds(), {
         padding: point(24, 24),
-        maxZoom: 15,
+        maxZoom: 30,
         animate: true
       });
     }
@@ -204,23 +196,27 @@ export class FromHotelComponent implements OnInit {
   }
 
   addPlace(): void {
-    this.hotel.places.forEach(element => {
-     
-      if(element.id===this.place?.title?.placeId)
-      {
-        this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'اماکن تکراری.' }); return;
-        
+    let add = true;
+    for (let index = 0; index < this.hotel.places.length; index++) {
+      const place = this.hotel.places[index];
+      if ((place.id === this.place?.title?.placeId || place.title === this.place?.title) &&
+        place.vehicleId === this.place.vehicleId &&
+        place.minute === this.place.minute) {
+        this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'لطفا موارد تکراری را وارد نکنید .' });
+        add = false;
+        break;
       }
-  
-   });
-    this.hotel.places.push({
-      minute: this.place.minute,
-      id: this.place?.title?.placeId,
-      title: (this.place?.title?.title ?? this.place?.title),
-      vehicleId: this.place.vehicleId,
-      vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
-    });
-    this.place = {};
+    }
+    if (add) {
+      this.hotel.places.push({
+        minute: this.place.minute,
+        id: this.place?.title?.placeId,
+        title: (this.place?.title?.title ?? this.place?.title),
+        vehicleId: this.place.vehicleId,
+        vehicleTitle: this.vehicles?.find(v => v.value === this.place?.vehicleId)?.label
+      });
+      this.place = {};
+    }
   }
 
   defaultImg(row: any): void {
@@ -230,8 +226,6 @@ export class FromHotelComponent implements OnInit {
   saveImages(): Promise<void> {
     return new Promise(async (resolve, reject) => {
       if (this.images.length === 0) {
-        console.log('gfgfg');
-        
         resolve();
       }
       // save image that not exist.
