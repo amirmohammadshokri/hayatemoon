@@ -90,34 +90,30 @@
       </div>
     </div>
     <div class="p-col-6">
-      <div class="map" leaflet (leafletMapReady)="onMapReady($event)"  [leafletOptions]="options"
-        [leafletLayersControl]="layersControl" ></div>
+      <div class="map" leaflet (leafletMapReady)="onMapReady($event)" [leafletOptions]="options"
+        [leafletLayersControl]="layersControl"></div>
     </div>
-    <div class="p-col-12  p-field">
-      <div class="p-grid p-fluid">
-        <div class="p-col-3 p-field">
-          <label for="latitude">latitude</label>
-          <input type="text" #latitude="ngModel" id="latitude" pInputText [(ngModel)]="hotel.latitude" required
-            [ngClass]="{'ng-dirty': (latitude.invalid && submitted) || (latitude.dirty && latitude.invalid)}">
-          <small *ngIf="(latitude.invalid && submitted) || (latitude.dirty && latitude.invalid)" class="p-error">
-            ثبت latitude اجباری می باشد.
-          </small>
-        </div>
-        <div class="p-col-3 p-field">
-          <label for="longitude">longitude</label>
-          <input type="text" #longitude="ngModel" id="longitude" pInputText [(ngModel)]="hotel.longitude" required
-            [ngClass]="{'ng-dirty': (longitude.invalid && submitted) || (longitude.dirty && longitude.invalid)}">
-          <small *ngIf="(longitude.invalid && submitted) || (longitude.dirty && longitude.invalid)" class="p-error">
-            ثبت longitude اجباری می باشد.
-          </small>
-        </div>
-        <div class="p-col-6 p-field"> 
-       <label for="">امکانات هتل</label>
+    <div class="p-col-3 p-field">
+      <label for="latitude">latitude</label>
+      <input type="text" #latitude="ngModel" id="latitude" pInputText [(ngModel)]="hotel.latitude" required
+        [ngClass]="{'ng-dirty': (latitude.invalid && submitted) || (latitude.dirty && latitude.invalid)}">
+      <small *ngIf="(latitude.invalid && submitted) || (latitude.dirty && latitude.invalid)" class="p-error">
+        ثبت latitude اجباری می باشد.
+      </small>
+    </div>
+    <div class="p-col-3 p-field">
+      <label for="longitude">longitude</label>
+      <input type="text" #longitude="ngModel" id="longitude" pInputText [(ngModel)]="hotel.longitude" required
+        [ngClass]="{'ng-dirty': (longitude.invalid && submitted) || (longitude.dirty && longitude.invalid)}">
+      <small *ngIf="(longitude.invalid && submitted) || (longitude.dirty && longitude.invalid)" class="p-error">
+        ثبت longitude اجباری می باشد.
+      </small>
+    </div>
+    <div class="p-col-6 p-field">
+      <label for="">امکانات هتل</label>
       <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)"
         field="title" [multiple]="true">
       </p-autoComplete>
-        </div>
- 
     </div>
     <div class="p-col-6">
       <div class="p-grid p-fluid">
@@ -157,8 +153,8 @@
             <td>{{place.title}}</td>
             <td>{{place.vehicleTitle}}</td>
             <td>{{place.minute}}</td>
-            <td>   <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-              (click)="deletePlaces(index)" pTooltip="حذف"></button></td>
+            <td> <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+                (click)="deletePlaces(index)" pTooltip="حذف"></button></td>
           </tr>
         </ng-template>
       </p-table>
@@ -190,4 +186,3 @@
       </div>
     </div>
   </div>
-</div>

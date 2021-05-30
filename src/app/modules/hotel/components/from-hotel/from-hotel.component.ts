@@ -192,6 +192,8 @@ export class FromHotelComponent implements OnInit {
       mark.setLatLng(new LatLng(position.lat, position.lng), { draggable: 'true' });
       map.panTo(new LatLng(position.lat, position.lng));
       this.selectedPosition = position;
+      this.hotel.latitude = position.lat;
+      this.hotel.longitude = position.lng;
     });
   }
 
