@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormHotelfacilitieskindComponent } from './components/form-hotelfacilitieskind/form-hotelfacilitieskind.component';
+import { FormRoomComponent } from './components/form-room/form-room.component';
 import { FormRoomfacilitieskindComponent } from './components/form-roomfacilitieskind/form-roomfacilitieskind.component';
 import { FormRoomkindComponent } from './components/form-roomkind/form-roomkind.component';
 import { FromHotelComponent } from './components/from-hotel/from-hotel.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'hotel-facilitieskind-form/:id', component: FormHotelfacilitieskindComponent },
   { path: 'room-kind-form/:id', component: FormRoomkindComponent },
   { path: 'room-facilitieskind-form/:id', component: FormRoomfacilitieskindComponent },
+  { path: 'form-room/:id', component: FormRoomComponent },
 ];
 
 @NgModule({

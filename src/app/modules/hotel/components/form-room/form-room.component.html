@@ -1,0 +1,41 @@
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+                icon="pi pi-save"></button>
+            <button pButton pRipple icon="pi pi-plus" label="افزودن اتاق" class="p-button-info p-ml-1" (click)="addRoom()"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
+                routerLink="../../room-kinds"></button>
+        </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2" *ngFor="let room of rooms">
+        <div class="p-col-6 p-field">
+            <label for="title">عنوان</label>
+            <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="room.hotelId" required
+                [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+            <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+                ثبت عنوان اجباری می باشد.
+            </small>
+        </div>
+        <div class="p-col-6 p-field">
+            <label for="icon">آیکون منو</label>
+            <p-dropdown [options]="icons" [(ngModel)]="room.fontIconId" [filter]="true" filterBy="value"
+                placeholder="یه آیکون انتخاب کن">
+                <ng-template pTemplate="selectedItem">
+                    <div *ngIf="room.fontIconId">
+                        <i style="font-size: 1.3em;" [class]="room.fontIconId"></i>
+                        <span class="p-mr-2">{{room.fontIconId}}</span>
+                    </div>
+                </ng-template>
+                <ng-template let-icon pTemplate="item">
+                    <div>
+                        <i style="font-size: 1.3em;" [class]="icon.value"></i>
+                        <span class="p-mr-2">{{icon.label}}</span>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+    </div>
+</div>

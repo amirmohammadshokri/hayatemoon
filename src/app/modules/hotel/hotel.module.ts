@@ -31,11 +31,12 @@ import { ListHotelfacilitieskindComponent } from './components/list-hotelfacilit
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { FormRoomComponent } from './components/form-room/form-room.component';
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
     FormRoomkindComponent, FormRoomfacilitieskindComponent, ListRoomfacilitieskindComponent,
-    FormHotelfacilitieskindComponent, ListHotelfacilitieskindComponent
+    FormHotelfacilitieskindComponent, ListHotelfacilitieskindComponent, FormRoomComponent
   ],
   imports: [
     DynamicDialogModule,

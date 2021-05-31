@@ -263,11 +263,16 @@ export class FromHotelComponent implements OnInit {
   }
 
   deleteImage(img: any, id: number): void {
-    this.images.splice(id, 1);
+    this.images.splice(id, 1);    
+    this.hotel.mediaIds = this.hotel.mediaIds.filter(id => id !== img.mediaId);
+    if (this.hotel.mainMediaId === img.mediaId) {
+      this.hotel.mainMediaId = 0;
+    }
   }
 
   async submit(): Promise<void> {
-    if (this.hotel.title && this.hotel.typeId && this.selectedRate && this.selectedLocation && this.hotel.address) {
+    if (this.hotel.title && this.hotel.typeId && this.selectedRate &&
+      this.selectedLocation && this.hotel.address) {
       this.saving = true;
       this.hotel.rate = this.selectedRate;
       this.hotel.locationId = this.selectedLocation?.locationId;
