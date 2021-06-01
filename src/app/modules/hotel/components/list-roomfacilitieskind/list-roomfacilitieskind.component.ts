@@ -12,15 +12,16 @@ import { HotelService } from 'src/app/services';
 export class ListRoomfacilitieskindComponent implements OnInit {
   cols: any[];
   loading: boolean;
-  deleting:boolean;
+  deleting: boolean;
   currentPage: number;
   roomfacilitieskind: IRoomfacilitieskind[] = [];
+  nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getRoomfacilitieskind(false);
     }
@@ -49,6 +50,9 @@ export class ListRoomfacilitieskindComponent implements OnInit {
     this.loading = true;
     this.srvHotel.getRoomfacilitieskind(this.currentPage).subscribe(res => {
       this.roomfacilitieskind.push(...res);
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.loading = false;
     });
   }
@@ -66,9 +70,9 @@ export class ListRoomfacilitieskindComponent implements OnInit {
   }
 
   deleteRoomfacilitieskind(id: number): void {
-    this.deleting=true;
+    this.deleting = true;
     this.srvHotel.deleteRoomfacilitieskind(id).subscribe(() => {
-      this.deleting=true;
+      this.deleting = true;
       this.getRoomfacilitieskind(true);
     });
   }

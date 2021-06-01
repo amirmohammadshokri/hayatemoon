@@ -11,18 +11,18 @@ import { HotelService } from 'src/app/services';
 })
 export class ListRoomkindComponent implements OnInit {
 
-
   cols: any[];
   loading: boolean;
   deleting: boolean;
   currentPage: number;
   roomkind: IRoomkind[] = [];
+  nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getRomkind(false);
     }
@@ -50,6 +50,9 @@ export class ListRoomkindComponent implements OnInit {
     }
     this.loading = true;
     this.srvHotel.getRoomkind(this.currentPage).subscribe(res => {
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.roomkind.push(...res);
       this.loading = false;
     });

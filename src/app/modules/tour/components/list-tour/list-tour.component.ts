@@ -18,12 +18,13 @@ export class ListTourComponent implements OnInit {
   items: IState[];
   item: any;
   title: string;
+  nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getToures(false);
     }
@@ -63,6 +64,9 @@ export class ListTourComponent implements OnInit {
       filter += `&title=${this.title}`;
     }
     this.srvTour.getTours(filter, this.currentPage).subscribe(res => {
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.tours.push(...res);
       this.loading = false;
     });

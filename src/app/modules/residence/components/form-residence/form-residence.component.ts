@@ -7,6 +7,7 @@ import { DataService, MediaService, SearchService, VehiclesService } from 'src/a
 import { ResidenceService } from 'src/app/services/residence.service';
 import * as moment from 'jalali-moment';
 import * as _ from 'lodash';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'ss-form-residence',
@@ -145,25 +146,24 @@ export class FormResidenceComponent implements OnInit {
       if (this.images.length === 0) {
         resolve();
       }
-      // save image that not exist.
-      let i = 0;
-      for await (const img of this.images.filter(im => !im.mediaId)) {
+      const calls = [];
+      for (const img of this.images.filter(im => !im.mediaId)) {
         const formData = new FormData();
         formData.append(`file`, img.file, img.file.name);
-        const res = await this.srvMedia.upload(formData, 0).toPromise();
-        if (!res) {
-          this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
-          this.saving = false;
-          reject();
-        }
-        img.mediaId = res.mediaId;
-        this.residence.mediaIds.push(res.mediaId);
-        if (i === this.mainImageIndex) {
-          this.residence.mainMediaId = res.mediaId;
-        }
-        i++;
+        calls.push(this.srvMedia.upload(formData, 0));
       }
-      resolve();
+      forkJoin(calls).subscribe(res => {
+        const key = 'mediaId';
+        this.residence.mainMediaId = res[this.mainImageIndex][key];
+        for (let index = 0; index < res.length; index++) {
+          this.images.filter(im => !im.mediaId)[index].mediaId = res[index][key];
+          this.residence.mediaIds.push(res[index][key]);
+        }
+        resolve();
+      }, () => {
+        this.saving = false;
+        reject();
+      });
     });
   }
 
@@ -246,7 +246,7 @@ export class FormResidenceComponent implements OnInit {
 
 
   deleteImage(img: any, id: number): void {
-    this.images.splice(id, 1);    
+    this.images.splice(id, 1);
     this.residence.mediaIds = this.residence.mediaIds.filter(id => id !== img.mediaId);
     if (this.residence.mainMediaId === img.mediaId) {
       this.residence.mainMediaId = 0;
@@ -283,7 +283,7 @@ export class FormResidenceComponent implements OnInit {
     this.residence.places.splice(index, 1);
   }
 
-  async submit(): Promise<void> {
+  submit(): void {
     if (this.residence.title && this.selectedLocation && this.residence.phone && this.residence.fromEntranceHour
       && this.residence.toEntranceHour && this.residence.leavingHour && this.residence.address) {
       this.saving = true;
@@ -303,38 +303,38 @@ export class FormResidenceComponent implements OnInit {
       });
       this.residence.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
       // save images
-      await this.saveImages();
-      if (this.residenceId > 0) {
-        this.residence.id = this.residenceId;
-        const rules = [];
-        this.residence.rules.forEach(rule => {
-          const index = this.existRules.findIndex(r => r.rule === rule);
-          if (index > -1) {
-            rules.push(this.existRules[index]);
-          } else {
-            rules.push({ id: 0, rule });
-          }
-        });
-        const residence = _.cloneDeep(this.residence);
-        residence.rules = rules;
-        residence.mainMediaId = (residence.mainMediaId ?? 0);
-        this.srvResidence.editResidence(residence).subscribe(() => {
-          this.srvMsg.add({ severity: 'success', summary: 'ویرایش اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-          this.saving = false;
-          this.router.navigate(['./panel/residence/residence']);
-        }, () => {
-          this.saving = false;
-        });
-      } else {
-        this.srvResidence.addResidence(this.residence).subscribe(() => {
-          this.srvMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-          this.saving = false;
-          this.router.navigate(['./panel/residence/residence']);
-        }, () => {
-          this.saving = false;
-        });
-      }
-
+      this.saveImages().then(() => {
+        if (this.residenceId > 0) {
+          this.residence.id = this.residenceId;
+          const rules = [];
+          this.residence.rules.forEach(rule => {
+            const index = this.existRules.findIndex(r => r.rule === rule);
+            if (index > -1) {
+              rules.push(this.existRules[index]);
+            } else {
+              rules.push({ id: 0, rule });
+            }
+          });
+          const residence = _.cloneDeep(this.residence);
+          residence.rules = rules;
+          residence.mainMediaId = (residence.mainMediaId ?? 0);
+          this.srvResidence.editResidence(residence).subscribe(() => {
+            this.srvMsg.add({ severity: 'success', summary: 'ویرایش اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+            this.saving = false;
+            this.router.navigate(['./panel/residence/residence']);
+          }, () => {
+            this.saving = false;
+          });
+        } else {
+          this.srvResidence.addResidence(this.residence).subscribe(() => {
+            this.srvMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+            this.saving = false;
+            this.router.navigate(['./panel/residence/residence']);
+          }, () => {
+            this.saving = false;
+          });
+        }
+      })
     }
     this.submitted = true;
   }

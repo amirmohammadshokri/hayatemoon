@@ -55,7 +55,6 @@ export class FormCalendarComponent implements OnInit {
         this.router.navigate(['../panel/residence/calendar']);
       }, _ => {
         this.saving = false;
-        this.router.navigate(['../panel/residence/calendar']);
       });
     }
     else {
@@ -67,10 +66,8 @@ export class FormCalendarComponent implements OnInit {
         this.holiday = null;
         this.saving = false;
         this.router.navigate(['../panel/residence/calendar']);
-
       }, _ => {
         this.saving = false;
-        this.router.navigate(['../panel/residence/calendar']);
       });
     }
   }

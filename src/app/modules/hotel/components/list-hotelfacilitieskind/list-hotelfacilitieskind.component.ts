@@ -16,12 +16,13 @@ export class ListHotelfacilitieskindComponent implements OnInit {
   deleting: boolean;
   currentPage: number;
   hotelfacilitieskind: IHotelfacilitieskind[] = [];
+  nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getHotelfacilitieskind(false);
     }
@@ -50,6 +51,9 @@ export class ListHotelfacilitieskindComponent implements OnInit {
     }
     this.loading = true;
     this.srvHotel.getHotelfacilitieskind(this.currentPage).subscribe(res => {
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.hotelfacilitieskind.push(...res);
       this.loading = false;
     });
@@ -68,9 +72,9 @@ export class ListHotelfacilitieskindComponent implements OnInit {
   }
 
   deleteHotelfacilitieskind(id: number): void {
-    this.deleting=true;
+    this.deleting = true;
     this.srvHotel.deleteHotelfacilitieskind(id).subscribe(() => {
-      this.deleting=false;
+      this.deleting = false;
       this.getHotelfacilitieskind(true);
     });
   }

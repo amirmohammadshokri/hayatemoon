@@ -14,13 +14,13 @@ export class ListCalendarComponent implements OnInit {
   loading: boolean;
   currentPage: number;
   calendar: ICalendar[] = [];
-
+  nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getCalendar(false);
     }
@@ -45,6 +45,9 @@ export class ListCalendarComponent implements OnInit {
     }
     this.loading = true;
     this.serCalendar.getCalendar(this.currentPage).subscribe(res => {
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.calendar.push(...res);
       this.loading = false;
     });
@@ -69,7 +72,6 @@ export class ListCalendarComponent implements OnInit {
   }
 
   editCalendar(id: number): void {
-   
     this.router.navigate([`../panel/residence/calendar-form/${id}`]);
   }
 

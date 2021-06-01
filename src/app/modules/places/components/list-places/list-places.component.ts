@@ -11,7 +11,7 @@ import { PlacesService } from 'src/app/services';
 })
 export class ListPlacesComponent implements OnInit {
 
-
+  nothingElse: boolean;
   cols: any[];
   loading: boolean;
   currentPage: number;
@@ -21,7 +21,7 @@ export class ListPlacesComponent implements OnInit {
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getPlaces(false);
     }
@@ -47,6 +47,9 @@ export class ListPlacesComponent implements OnInit {
       this.places = [];
     }
     this.srvPlaces.getPlaces(this.currentPage).subscribe(res => {
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.places.push(...res);
       this.loading = false;
     });

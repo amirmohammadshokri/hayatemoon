@@ -4,6 +4,7 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { IAddTour } from 'src/app/interfaces';
 import { CurrencyService, DataService, MediaService, SearchService, TourService, VehiclesService } from 'src/app/services';
 import * as moment from 'jalali-moment';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'ss-form-tour',
@@ -169,7 +170,7 @@ export class FormTourComponent implements OnInit {
     }
   }
 
-  async submit(): Promise<void> {
+  submit(): void {
     if (this.tour.title && this.tour?.tourType > -1 && this.fromLocation &&
       this.toLocation && this.tour.dayDuration && this.tour.nightDuration &&
       this.fromDate && this.toDate && this.selectedCategories?.length > 0 &&
@@ -194,25 +195,26 @@ export class FormTourComponent implements OnInit {
       this.tour.hotelRooms = this.selectedRoom.map(r => r.kindId);
       this.tour.tourCategories = this.selectedCategories.map(c => c.id);
 
-      await this.saveImages();
-      if (this.tourId > 0) {
-        this.tour.tourId = this.tourId;
-        this.srvTour.editTour(this.tour).subscribe(res => {
-          this.srvMsg.add({ severity: 'success', summary: 'ویرایش اطلاعات', detail: 'ویرایش اطلاعات با موفقیت انجام شد .' });
-          this.saving = false;
-          this.router.navigate(['./panel/tour/tours']);
-        }, _ => {
-          this.saving = false;
-        });
-      } else {
-        this.srvTour.addTour(this.tour).subscribe(res => {
-          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-          this.saving = false;
-          this.router.navigate(['./panel/tour/tours']);
-        }, _ => {
-          this.saving = false;
-        });
-      }
+      this.saveImages().then(() => {
+        if (this.tourId > 0) {
+          this.tour.tourId = this.tourId;
+          this.srvTour.editTour(this.tour).subscribe(res => {
+            this.srvMsg.add({ severity: 'success', summary: 'ویرایش اطلاعات', detail: 'ویرایش اطلاعات با موفقیت انجام شد .' });
+            this.saving = false;
+            this.router.navigate(['./panel/tour/tours']);
+          }, _ => {
+            this.saving = false;
+          });
+        } else {
+          this.srvTour.addTour(this.tour).subscribe(res => {
+            this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+            this.saving = false;
+            this.router.navigate(['./panel/tour/tours']);
+          }, _ => {
+            this.saving = false;
+          });
+        }
+      });
     }
 
     this.submitted = true;
@@ -223,25 +225,24 @@ export class FormTourComponent implements OnInit {
       if (this.images.length === 0) {
         resolve();
       }
-      // save image that not exist.
-      let i = 0;
-      for await (const img of this.images.filter(im => !im.mediaId)) {
+      const calls = [];
+      for (const img of this.images.filter(im => !im.mediaId)) {
         const formData = new FormData();
         formData.append(`file`, img.file, img.file.name);
-        const res = await this.srvMedia.upload(formData, 0).toPromise();
-        if (!res) {
-          this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
-          this.saving = false;
-          reject();
-        }
-        img.mediaId = res.mediaId;
-        this.tour.tourMediaIds.push(res.mediaId);
-        if (i === this.mainImageIndex) {
-          this.tour.mainImageId = res.mediaId;
-        }
-        i++;
+        calls.push(this.srvMedia.upload(formData, 0));
       }
-      resolve();
+      forkJoin(calls).subscribe(res => {
+        const key = 'mediaId';
+        this.tour.mainImageId = res[this.mainImageIndex][key];
+        for (let index = 0; index < res.length; index++) {
+          this.images.filter(im => !im.mediaId)[index].mediaId = res[index][key];
+          this.tour.tourMediaIds.push(res[index][key]);
+        }
+        resolve();
+      }, () => {
+        this.saving = false;
+        reject();
+      });
     });
   }
 

@@ -13,15 +13,16 @@ export class ListResidencefacilitieskindComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
-  deleting:boolean;
+  deleting: boolean;
   currentPage: number;
   residencefacilitieskind: IResidencefacilitieskind[] = [];
+  nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
-    if (max - 5 <= Math.round(pos) && Math.round(pos) <= max + 5) {
+    if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
       this.getResidencefacilitieskind(false);
     }
@@ -49,6 +50,9 @@ export class ListResidencefacilitieskindComponent implements OnInit {
     }
     this.loading = true;
     this.srvResidence.getResidencefacilitieskind(this.currentPage).subscribe(res => {
+      if (res.length === 0) {
+        this.nothingElse = true;
+      }
       this.residencefacilitieskind.push(...res);
       this.loading = false;
     });
@@ -67,9 +71,9 @@ export class ListResidencefacilitieskindComponent implements OnInit {
   }
 
   deleteResidencefacilitieskind(id: number): void {
-      this.deleting=true;
+    this.deleting = true;
     this.srvResidence.deleteResidencefacilitieskind(id).subscribe(() => {
-      this.deleting=false;
+      this.deleting = false;
       this.getResidencefacilitieskind(true);
     });
   }
