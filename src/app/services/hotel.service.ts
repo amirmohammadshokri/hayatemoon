@@ -104,4 +104,10 @@ export class HotelService {
     return this.http.get<any>(`${this.url}FacilitiesKind/${id}`);
   }
 
+  //#region Room
+  addRoom(obj: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.url}Room`, obj);
+  }
+  //#endregion
+
 }

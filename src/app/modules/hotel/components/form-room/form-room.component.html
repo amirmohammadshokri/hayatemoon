@@ -1,0 +1,71 @@
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+                icon="pi pi-save"></button>
+            <button pButton pRipple icon="pi pi-plus" label="افزودن اتاق" class="p-button-info p-ml-1" (click)="addRoom()"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
+                routerLink="../../room-kinds"></button>
+        </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2" *ngFor="let room of rooms">
+      <div class="p-col-6 p-field">
+            <label for="">انتخاب هتل</label>
+        <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="selectedHotel"
+            (completeMethod)="getHotels($event)" field="title" required
+            [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
+        </p-autoComplete>
+        <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
+            انتخاب هتل اجباری است
+        </small>
+     </div>
+     <div class="p-col-6 p-field">
+        <label for="">انتخاب نوع اتاق</label>
+        <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="selectedRoom"
+            (completeMethod)="getRoomkinds($event)" field="title" required
+            [ngClass]="{'ng-dirty': (roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)}">
+        </p-autoComplete>
+        <small *ngIf="(roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)" class="p-error">
+        انتخاب نوع اتاق اجباری است.
+        </small>
+    </div>
+    <div class="p-col-3 p-field">
+        <label for="adult">ظرفیت برگسال</label>
+        <input  type="text" id="adult" pInputText pKeyFilter="num"
+          [(ngModel)]="rooms.adult">
+    </div>
+    <div class="p-col-3 p-field">
+        <label for="child">ظرفیت کودک</label>
+        <input #child="ngModel" type="text" id="child" pInputText pKeyFilter="num"
+          [(ngModel)]="rooms.child">
+    </div>
+    <div class="p-col-6 p-field">
+        <label for="">امکانات اتاق</label>
+        <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKindIds" (completeMethod)="getFacilities($event)"
+          field="title" [multiple]="true">
+        </p-autoComplete>
+      </div>
+    </div>
+      <!-- <div class="p-col-3 p-field-checkbox">
+        <p-checkbox id="breakFast" [(ngModel)]="rooms.breakFast" [binary]="true"></p-checkbox>
+        <label for="breakFast">صبحانه</label>
+      </div>
+      <div class="p-col-3 p-field-checkbox">
+        <p-checkbox [(ngModel)]="rooms.lunch" [binary]="true"></p-checkbox>
+        <label for="lunch">ناهار</label>
+      </div>
+      <div class="p-col-3 p-field-checkbox">
+        <p-checkbox [(ngModel)]="rooms.dinner" [binary]="true"></p-checkbox>
+        <label for="dinner">شام</label>
+      </div> -->
+       <!-- <div class="p-col-3 p-field-checkbox">
+        <label for="extraService">ظرفیت اضافه</label>
+        <p-checkbox [(ngModel)]="rooms.extraService" [binary]="true"></p-checkbox>
+      </div> -->
+      <!-- <div class="p-col-12 p-field">
+        <label for="">توضیحات</label>
+        <textarea pInputTextarea rows="1" [(ngModel)]="rooms.description"></textarea>
+      </div> -->
+</div>

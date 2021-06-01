@@ -244,8 +244,13 @@ export class FormResidenceComponent implements OnInit {
     }
   }
 
+
   deleteImage(img: any, id: number): void {
-    this.images.splice(id, 1);
+    this.images.splice(id, 1);    
+    this.residence.mediaIds = this.residence.mediaIds.filter(id => id !== img.mediaId);
+    if (this.residence.mainMediaId === img.mediaId) {
+      this.residence.mainMediaId = 0;
+    }
   }
 
   addPrice(): void {
