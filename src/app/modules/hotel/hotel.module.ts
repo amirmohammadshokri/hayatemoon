@@ -6,6 +6,8 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+
 
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -33,6 +35,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormRoomComponent } from './components/form-room/form-room.component';
 
+
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
     FormRoomkindComponent, FormRoomfacilitieskindComponent, ListRoomfacilitieskindComponent,
@@ -57,6 +60,7 @@ import { FormRoomComponent } from './components/form-room/form-room.component';
     ConfirmDialogModule,
     RadioButtonModule,
     DialogModule,
+    CheckboxModule,
     TooltipModule
   ],
   providers: [

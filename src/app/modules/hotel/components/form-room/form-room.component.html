@@ -11,31 +11,61 @@
         </div>
     </p-toolbar>
     <div class="p-grid p-fluid p-mt-2" *ngFor="let room of rooms">
-        <div class="p-col-6 p-field">
-            <label for="title">عنوان</label>
-            <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="room.hotelId" required
-                [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
-            <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
-                ثبت عنوان اجباری می باشد.
-            </small>
-        </div>
-        <div class="p-col-6 p-field">
-            <label for="icon">آیکون منو</label>
-            <p-dropdown [options]="icons" [(ngModel)]="room.fontIconId" [filter]="true" filterBy="value"
-                placeholder="یه آیکون انتخاب کن">
-                <ng-template pTemplate="selectedItem">
-                    <div *ngIf="room.fontIconId">
-                        <i style="font-size: 1.3em;" [class]="room.fontIconId"></i>
-                        <span class="p-mr-2">{{room.fontIconId}}</span>
-                    </div>
-                </ng-template>
-                <ng-template let-icon pTemplate="item">
-                    <div>
-                        <i style="font-size: 1.3em;" [class]="icon.value"></i>
-                        <span class="p-mr-2">{{icon.label}}</span>
-                    </div>
-                </ng-template>
-            </p-dropdown>
-        </div>
+      <div class="p-col-6 p-field">
+            <label for="">انتخاب هتل</label>
+        <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="selectedHotel"
+            (completeMethod)="getHotels($event)" field="title" required
+            [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
+        </p-autoComplete>
+        <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
+            انتخاب هتل اجباری است
+        </small>
+     </div>
+     <div class="p-col-6 p-field">
+        <label for="">انتخاب نوع اتاق</label>
+        <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="selectedRoom"
+            (completeMethod)="getRoomkinds($event)" field="title" required
+            [ngClass]="{'ng-dirty': (roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)}">
+        </p-autoComplete>
+        <small *ngIf="(roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)" class="p-error">
+        انتخاب نوع اتاق اجباری است.
+        </small>
     </div>
+    <div class="p-col-3 p-field">
+        <label for="adult">ظرفیت برگسال</label>
+        <input  type="text" id="adult" pInputText pKeyFilter="num"
+          [(ngModel)]="rooms.adult">
+    </div>
+    <div class="p-col-3 p-field">
+        <label for="child">ظرفیت کودک</label>
+        <input #child="ngModel" type="text" id="child" pInputText pKeyFilter="num"
+          [(ngModel)]="rooms.child">
+    </div>
+    <div class="p-col-6 p-field">
+        <label for="">امکانات اتاق</label>
+        <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKindIds" (completeMethod)="getFacilities($event)"
+          field="title" [multiple]="true">
+        </p-autoComplete>
+      </div>
+    </div>
+      <!-- <div class="p-col-3 p-field-checkbox">
+        <p-checkbox id="breakFast" [(ngModel)]="rooms.breakFast" [binary]="true"></p-checkbox>
+        <label for="breakFast">صبحانه</label>
+      </div>
+      <div class="p-col-3 p-field-checkbox">
+        <p-checkbox [(ngModel)]="rooms.lunch" [binary]="true"></p-checkbox>
+        <label for="lunch">ناهار</label>
+      </div>
+      <div class="p-col-3 p-field-checkbox">
+        <p-checkbox [(ngModel)]="rooms.dinner" [binary]="true"></p-checkbox>
+        <label for="dinner">شام</label>
+      </div> -->
+       <!-- <div class="p-col-3 p-field-checkbox">
+        <label for="extraService">ظرفیت اضافه</label>
+        <p-checkbox [(ngModel)]="rooms.extraService" [binary]="true"></p-checkbox>
+      </div> -->
+      <!-- <div class="p-col-12 p-field">
+        <label for="">توضیحات</label>
+        <textarea pInputTextarea rows="1" [(ngModel)]="rooms.description"></textarea>
+      </div> -->
 </div>
