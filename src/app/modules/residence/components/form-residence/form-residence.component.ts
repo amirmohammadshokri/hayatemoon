@@ -255,6 +255,21 @@ export class FormResidenceComponent implements OnInit {
     this.residence.prices.priceRules.push({});
   }
 
+  savePrice(): void {
+    this.saving = true;
+    const prices = {
+      id: this.residenceId,
+      prices: this.residence.prices,
+      isAdmin: true
+    };
+    this.srvResidence.editPrice(prices).subscribe(() => {
+      this.srvMsg.add({ severity: 'success', summary: 'ویرایش مبالغ', detail: 'عملیات با موفقیت انجام شد' });
+      this.saving = false;
+    }, () => {
+      this.saving = false;
+    });
+  }
+
   removePrice(index: number): void {
     this.residence.prices.priceRules.splice(index, 1);
   }
@@ -299,14 +314,9 @@ export class FormResidenceComponent implements OnInit {
         residence.rules = rules;
         residence.mainMediaId = (residence.mainMediaId ?? 0);
         this.srvResidence.editResidence(residence).subscribe(() => {
-          residence.prices.id = this.residenceId;
-          this.srvResidence.editPrice(residence.prices).subscribe(() => {
-            this.srvMsg.add({ severity: 'success', summary: 'ویرایش اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
-            this.saving = false;
-            this.router.navigate(['./panel/residence/residence']);
-          }, () => {
-            this.saving = false;
-          });
+          this.srvMsg.add({ severity: 'success', summary: 'ویرایش اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
+          this.saving = false;
+          this.router.navigate(['./panel/residence/residence']);
         }, () => {
           this.saving = false;
         });

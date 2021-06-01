@@ -91,8 +91,8 @@
     </div>
     <div class="p-col-12  p-field">
       <label for="">امکانات اقامتگاه</label>
-      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds"
-        (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
+      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)"
+        field="title" [multiple]="true">
       </p-autoComplete>
     </div>
     <div class="p-col-12">
@@ -152,9 +152,12 @@
         <ng-template pTemplate="header">
           <div class="p-d-flex p-ai-center">
             <span>قیمت</span>
-            <button style="width: auto;" pButton label="افزودن" icon="pi pi-plus" class="p-mr-4"
+            <button [disabled]="saving" *ngIf="residenceId" style="width: auto;" pButton label="ذخیره"
+              [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success p-mr-2"
+              (click)="savePrice()"></button>
+            <button [disabled]="saving" style="width: auto;" pButton label="افزودن" icon="pi pi-plus" class="p-mr-2"
               (click)="addPrice()"></button>
-            <i class="p-mr-4" style="font-size: 0.8em;">اگر می خواهید یک روز یا بازه ی زمانی خاصی را قیمت گزاری کنید ،از
+            <i class="p-mr-2" style="font-size: 0.8em;">اگر می خواهید یک روز یا بازه ی زمانی خاصی را قیمت گزاری کنید ،از
               این دکمه استفاده کنید .</i>
           </div>
         </ng-template>
