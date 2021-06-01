@@ -5,6 +5,7 @@ import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer, Control,
 import { IAddHotel } from 'src/app/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILocation } from 'src/app/interfaces/location.interface';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -139,12 +140,12 @@ export class FromHotelComponent implements OnInit {
       this.selectedLocation = hotel.location;
       this.facilitiesKinds = hotel.facilities.map(f => ({ kindId: f.id, title: f.title }));
       this.selectedRate = hotel.rate.id;
-      this.images = hotel.mediaIds.map(id => ({
-        mediaId: id,
+      this.images = hotel.mediaIds.map(mid => ({
+        mediaId: mid,
         file: null,
         url: `http://beta-api.gozarino.com/v1/web/media/${id}`
       }));
-      this.mainImageIndex = hotel.mediaIds.findIndex(id => id === this.hotel.mainMediaId);
+      this.mainImageIndex = hotel.mediaIds.findIndex(mid => mid === this.hotel.mainMediaId);
     });
   }
 
@@ -230,25 +231,24 @@ export class FromHotelComponent implements OnInit {
       if (this.images.length === 0) {
         resolve();
       }
-      // save image that not exist.
-      let i = 0;
-      for await (const img of this.images.filter(im => !im.mediaId)) {
+      const calls = [];
+      for (const img of this.images.filter(im => !im.mediaId)) {
         const formData = new FormData();
         formData.append(`file`, img.file, img.file.name);
-        const res = await this.srvMedia.upload(formData, 0).toPromise();
-        if (!res) {
-          this.srvMsg.add({ severity: 'warn', summary: 'توجه', detail: 'ثبت تصاویر با مشکل مواجه شد لطفا دوباره تلاش نمائید.' });
-          this.saving = false;
-          reject();
-        }
-        img.mediaId = res.mediaId;
-        this.hotel.mediaIds.push(res.mediaId);
-        if (i === this.mainImageIndex) {
-          this.hotel.mainMediaId = res.mediaId;
-        }
-        i++;
+        calls.push(this.srvMedia.upload(formData, 0));
       }
-      resolve();
+      forkJoin(calls).subscribe(res => {
+        const key = 'mediaId';
+        this.hotel.mainMediaId = res[this.mainImageIndex][key];
+        for (let index = 0; index < res.length; index++) {
+          this.images.filter(im => !im.mediaId)[index].mediaId = res[index][key];
+          this.hotel.mediaIds.push(res[index][key]);
+        }
+        resolve();
+      }, () => {
+        this.saving = false;
+        reject();
+      });
     });
   }
 
@@ -263,14 +263,14 @@ export class FromHotelComponent implements OnInit {
   }
 
   deleteImage(img: any, id: number): void {
-    this.images.splice(id, 1);    
-    this.hotel.mediaIds = this.hotel.mediaIds.filter(id => id !== img.mediaId);
+    this.images.splice(id, 1);
+    this.hotel.mediaIds = this.hotel.mediaIds.filter(m => m !== img.mediaId);
     if (this.hotel.mainMediaId === img.mediaId) {
       this.hotel.mainMediaId = 0;
     }
   }
 
-  async submit(): Promise<void> {
+  submit(): void {
     if (this.hotel.title && this.hotel.typeId && this.selectedRate &&
       this.selectedLocation && this.hotel.address) {
       this.saving = true;
@@ -283,24 +283,25 @@ export class FromHotelComponent implements OnInit {
       }
       this.hotel.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
       // save images
-      await this.saveImages();
-      if (this.hotel.hotelId) {
-        this.srvHotel.editHotel(this.hotel).subscribe(res => {
-          this.saving = false;
-          this.srvMsg.add({ severity: 'success', summary: 'ثبت  اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-          this.router.navigate(['./panel/hotel/hotels']);
-        }, _ => {
-          this.saving = false;
-        });
-      } else {
-        this.srvHotel.addHotel(this.hotel).subscribe(res => {
-          this.saving = false;
-          this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
-          this.router.navigate(['./panel/hotel/hotels']);
-        }, _ => {
-          this.saving = false;
-        });
-      }
+      this.saveImages().then(() => {
+        if (this.hotel.hotelId) {
+          this.srvHotel.editHotel(this.hotel).subscribe(res => {
+            this.saving = false;
+            this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+            this.router.navigate(['./panel/hotel/hotels']);
+          }, _ => {
+            this.saving = false;
+          });
+        } else {
+          this.srvHotel.addHotel(this.hotel).subscribe(res => {
+            this.saving = false;
+            this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
+            this.router.navigate(['./panel/hotel/hotels']);
+          }, _ => {
+            this.saving = false;
+          });
+        }
+      });
     }
     this.submitted = true;
   }
