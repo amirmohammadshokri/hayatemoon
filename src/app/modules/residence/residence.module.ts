@@ -13,9 +13,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientInterceptor } from 'src/app/interceptors/http.interceptor';
-import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FormResidencefacilitieskindComponent } from './components/form-residencefacilitieskind/form-residencefacilitieskind.component';
 import { ListResidencefacilitieskindComponent } from './components/list-residencefacilitieskind/list-residencefacilitieskind.component';
@@ -57,9 +54,7 @@ import { DialogModule } from 'primeng/dialog';
   ],
   providers: [
     ConfirmationService,
-    DialogService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    DialogService
   ]
 })
 

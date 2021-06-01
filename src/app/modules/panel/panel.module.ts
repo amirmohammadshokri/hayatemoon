@@ -6,9 +6,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { PanelRoutingModule } from './panel.routing.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientInterceptor } from 'src/app/interceptors/http.interceptor';
-import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
@@ -33,9 +31,6 @@ import { BadgeModule } from 'primeng/badge';
     TooltipModule,
     BadgeModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-  ]
+  providers: []
 })
 export class PanelModule { }

@@ -11,10 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ListTourComponent } from './components/list-tour/list-tour.component';
 import { FormTourComponent } from './components/form-tour/form-tour.component';
 import { ConfirmationService } from 'primeng/api';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { HttpClientInterceptor } from 'src/app/interceptors/http.interceptor';
-import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -53,9 +50,7 @@ import { FieldsetModule } from 'primeng/fieldset';
   ],
   providers: [
     ConfirmationService,
-    DialogService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    DialogService
   ]
 })
 export class TourModule { }

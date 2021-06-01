@@ -11,6 +11,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
 import { AppInitService } from './services/app-init.service';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 export function initializeApp(appInitService: AppInitService): any {
   return (): Promise<any> => {
@@ -36,17 +37,9 @@ export function initializeApp(appInitService: AppInitService): any {
     OidcConfigService,
     AppConfig,
     AppInitService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      deps: [AppInitService],
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpClientInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true, },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true, },
+    { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppInitService], multi: true, },
     { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true }
   ],
   bootstrap: [AppComponent]
