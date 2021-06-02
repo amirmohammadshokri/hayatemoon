@@ -22,6 +22,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FieldsetModule } from 'primeng/fieldset';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [ListTourComponent, FormTourComponent],
@@ -46,7 +47,8 @@ import { FieldsetModule } from 'primeng/fieldset';
     KeyFilterModule,
     DpDatePickerModule,
     MultiSelectModule,
-    FieldsetModule
+    FieldsetModule,
+    TagModule
   ],
   providers: [
     ConfirmationService,

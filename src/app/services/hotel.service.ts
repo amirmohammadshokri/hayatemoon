@@ -108,6 +108,18 @@ export class HotelService {
   addRoom(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}Room`, obj);
   }
+
+  editRoom(obj: any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.url}Room`, obj);
+  }
+
+  getRooms(page: number): Observable<any> {
+    return this.http.get<any>(`${this.url}Room/latest?page=${page}`);
+  }
+
+  deleteRoom(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}Room/${id}`);
+  }
   //#endregion
 
 }

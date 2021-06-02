@@ -17,8 +17,10 @@ export class FormRoomComponent implements OnInit {
   roomkinds: any[] = [];
   selectedRoom: any;
   facilities: any[] = [];
+  facilitiesKindIds: any[] = [];
   facilitiesKinds: any[] = [];
   saving: boolean;
+  submitted: boolean;
 
   constructor(
     private srvData: DataService,

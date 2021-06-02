@@ -186,7 +186,7 @@
         </div>
         <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
           <div class="main p-d-flex p-ai-center p-jc-center">
-            <img [src]="img.url" (error)="defaultImg(img)" (click)="displayGallery=true" />
+            <img [src]="img.url" (error)="defaultImg(img)"/>
           </div>
           <div class="tools">
             <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">

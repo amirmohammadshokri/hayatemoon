@@ -27,13 +27,15 @@ import { ListHotelfacilitieskindComponent } from './components/list-hotelfacilit
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { TagModule } from 'primeng/tag';
 import { FormRoomComponent } from './components/form-room/form-room.component';
+import { ListRoomComponent } from './components/list-room/list-room.component';
 
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
     FormRoomkindComponent, FormRoomfacilitieskindComponent, ListRoomfacilitieskindComponent,
-    FormHotelfacilitieskindComponent, ListHotelfacilitieskindComponent, FormRoomComponent
+    FormHotelfacilitieskindComponent, ListHotelfacilitieskindComponent, FormRoomComponent, ListRoomComponent
   ],
   imports: [
     DynamicDialogModule,
@@ -55,7 +57,8 @@ import { FormRoomComponent } from './components/form-room/form-room.component';
     RadioButtonModule,
     DialogModule,
     CheckboxModule,
-    TooltipModule
+    TooltipModule,
+    TagModule
   ],
   providers: [
     ConfirmationService,

@@ -246,4 +246,12 @@ export class FormTourComponent implements OnInit {
     });
   }
 
+  deleteImage(img: any, id: number): void {
+    this.images.splice(id, 1);
+    this.tour.tourMediaIds = this.tour.tourMediaIds.filter(id => id !== img.mediaId);
+    if (this.tour.mainImageId === img.mediaId) {
+      this.tour.mainImageId = 0;
+    }
+  }
+
 }

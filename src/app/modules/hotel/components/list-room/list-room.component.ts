@@ -1,20 +1,19 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { IRoomkind } from 'src/app/interfaces/roomkind.interface';
 import { HotelService } from 'src/app/services';
 
 @Component({
-  selector: 'ss-list-roomkind',
-  templateUrl: './list-roomkind.component.html',
-  styleUrls: ['./list-roomkind.component.scss']
+  selector: 'ss-list-room',
+  templateUrl: './list-room.component.html',
+  styleUrls: ['./list-room.component.scss']
 })
-export class ListRoomkindComponent implements OnInit {
+export class ListRoomComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
   currentPage: number;
-  roomkind: IRoomkind[] = [];
+  rooms: any[] = [];
   nothingElse: boolean;
 
   @HostListener('window:scroll', ['$event'])
@@ -23,7 +22,7 @@ export class ListRoomkindComponent implements OnInit {
     const max = document.documentElement.scrollHeight;
     if (max === Math.round(pos) && !this.nothingElse) {
       this.currentPage++;
-      this.getRomkind(false);
+      this.getRooms(false);
     }
   }
   constructor(
@@ -39,20 +38,20 @@ export class ListRoomkindComponent implements OnInit {
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
     this.currentPage = 1;
-    this.getRomkind(true);
+    this.getRooms(true);
   }
 
-  getRomkind(firstLoad: boolean): void {
+  getRooms(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
-      this.roomkind = [];
+      this.rooms = [];
     }
     this.loading = true;
-    this.srvHotel.getRoomkind(this.currentPage).subscribe(res => {
+    this.srvHotel.getRooms(this.currentPage).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
-      this.roomkind.push(...res);
+      this.rooms.push(...res);
       this.loading = false;
     });
   }
@@ -64,19 +63,19 @@ export class ListRoomkindComponent implements OnInit {
       acceptLabel: 'بله',
       rejectLabel: 'نه',
       accept: () => {
-        this.deleteRoomkind(id);
+        this.deleteRoom(id);
       }
     });
   }
 
-  deleteRoomkind(id: number): void {
-    this.srvHotel.deleteRoomkind(id).subscribe(() => {
-      this.getRomkind(true);
+  deleteRoom(id: number): void {
+    this.srvHotel.deleteRoom(id).subscribe(() => {
+      this.getRooms(true);
     });
   }
 
-  editRomkind(id: number): void {
-    this.router.navigate([`../panel/hotel/room-kind-form/${id}`]);
+  editRoom(id: number): void {
+    this.router.navigate([`../panel/hotel/room-form/${id}`]);
   }
 
 }

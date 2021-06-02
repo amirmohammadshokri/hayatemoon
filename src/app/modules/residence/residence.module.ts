@@ -26,6 +26,7 @@ import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { FieldsetModule } from 'primeng/fieldset';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [FormResidencefacilitieskindComponent, ListResidencefacilitieskindComponent,
@@ -50,7 +51,8 @@ import { DialogModule } from 'primeng/dialog';
     DpDatePickerModule,
     FieldsetModule,
     TooltipModule,
-    DialogModule
+    DialogModule,
+    TagModule
   ],
   providers: [
     ConfirmationService,

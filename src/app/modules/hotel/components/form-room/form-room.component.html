@@ -11,7 +11,7 @@
     </div>
   </p-toolbar>
   <div class="p-grid p-fluid p-mt-2" *ngFor="let room of rooms">
-    <div class="p-col-6 p-field">
+    <div class="p-col-3 p-field">
       <label for="">انتخاب هتل</label>
       <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="selectedHotel"
         (completeMethod)="getHotels($event)" field="title" required
@@ -21,7 +21,7 @@
         انتخاب هتل اجباری است
       </small>
     </div>
-    <div class="p-col-6 p-field">
+    <div class="p-col-3 p-field">
       <label for="">انتخاب نوع اتاق</label>
       <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="selectedRoom"
         (completeMethod)="getRoomkinds($event)" field="title" required
@@ -39,27 +39,27 @@
       <label for="child">ظرفیت کودک</label>
       <input #child="ngModel" type="text" id="child" pInputText pKeyFilter="num" [(ngModel)]="room.child">
     </div>
+    <div class="p-col-1 p-field-checkbox">
+      <p-checkbox id="breakFast" [(ngModel)]="room.breakFast" [binary]="true"></p-checkbox>
+      <label for="breakFast">صبحانه</label>
+    </div>
+    <div class="p-col-1 p-field-checkbox">
+      <p-checkbox [(ngModel)]="room.lunch" [binary]="true"></p-checkbox>
+      <label for="lunch">ناهار</label>
+    </div>
+    <div class="p-col-1 p-field-checkbox">
+      <p-checkbox [(ngModel)]="room.dinner" [binary]="true"></p-checkbox>
+      <label for="dinner">شام</label>
+    </div>
+    <div class="p-col-3 p-field-checkbox">
+      <p-checkbox [(ngModel)]="room.extraService" [binary]="true"></p-checkbox>
+      <label for="extraService">ظرفیت اضافه</label>
+    </div>
     <div class="p-col-6 p-field">
       <label for="">امکانات اتاق</label>
       <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKindIds"
         (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
       </p-autoComplete>
-    </div>
-    <div class="p-col-3 p-field-checkbox">
-      <p-checkbox id="breakFast" [(ngModel)]="room.breakFast" [binary]="true"></p-checkbox>
-      <label for="breakFast">صبحانه</label>
-    </div>
-    <div class="p-col-3 p-field-checkbox">
-      <p-checkbox [(ngModel)]="room.lunch" [binary]="true"></p-checkbox>
-      <label for="lunch">ناهار</label>
-    </div>
-    <div class="p-col-3 p-field-checkbox">
-      <p-checkbox [(ngModel)]="room.dinner" [binary]="true"></p-checkbox>
-      <label for="dinner">شام</label>
-    </div>
-    <div class="p-col-3 p-field-checkbox">
-      <label for="extraService">ظرفیت اضافه</label>
-      <p-checkbox [(ngModel)]="room.extraService" [binary]="true"></p-checkbox>
     </div>
     <div class="p-col-12 p-field">
       <label for="">توضیحات</label>
