@@ -32,7 +32,7 @@
       </small>
     </div>
     <div class="p-col-3 p-field">
-      <label for="adult">ظرفیت برگسال</label>
+      <label for="adult">ظرفیت بزرگسال</label>
       <input type="text" id="adult" pInputText pKeyFilter="num" [(ngModel)]="room.adult">
     </div>
     <div class="p-col-3 p-field">
@@ -40,19 +40,19 @@
       <input #child="ngModel" type="text" id="child" pInputText pKeyFilter="num" [(ngModel)]="room.child">
     </div>
     <div class="p-col-1 p-field-checkbox">
-      <p-checkbox id="breakFast" [(ngModel)]="room.breakFast" [binary]="true"></p-checkbox>
+      <p-checkbox inputId="breakFast" [(ngModel)]="room.breakFast" [binary]="true"></p-checkbox>
       <label for="breakFast">صبحانه</label>
     </div>
     <div class="p-col-1 p-field-checkbox">
-      <p-checkbox [(ngModel)]="room.lunch" [binary]="true"></p-checkbox>
+      <p-checkbox inputId="lunch" [(ngModel)]="room.lunch" [binary]="true"></p-checkbox>
       <label for="lunch">ناهار</label>
     </div>
     <div class="p-col-1 p-field-checkbox">
-      <p-checkbox [(ngModel)]="room.dinner" [binary]="true"></p-checkbox>
+      <p-checkbox inputId="dinner" [(ngModel)]="room.dinner" [binary]="true"></p-checkbox>
       <label for="dinner">شام</label>
     </div>
     <div class="p-col-3 p-field-checkbox">
-      <p-checkbox [(ngModel)]="room.extraService" [binary]="true"></p-checkbox>
+      <p-checkbox inputId="extraService" [(ngModel)]="room.extraService" [binary]="true"></p-checkbox>
       <label for="extraService">ظرفیت اضافه</label>
     </div>
     <div class="p-col-6 p-field">
