@@ -30,7 +30,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
 import { FormRoomComponent } from './components/form-room/form-room.component';
 import { ListRoomComponent } from './components/list-room/list-room.component';
-
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
@@ -58,7 +59,9 @@ import { ListRoomComponent } from './components/list-room/list-room.component';
     DialogModule,
     CheckboxModule,
     TooltipModule,
-    TagModule
+    TagModule,
+    KeyFilterModule,
+    DividerModule
   ],
   providers: [
     ConfirmationService,

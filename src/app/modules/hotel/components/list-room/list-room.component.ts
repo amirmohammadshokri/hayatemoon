@@ -35,7 +35,7 @@ export class ListRoomComponent implements OnInit {
     this.cols = [
       { field: 'title', header: 'عنوان اتاق' },
       { field: 'fontIconId', header: 'آیکن' },
-      { field: 'createdDate', header: 'تاریخ ایجاد' }
+      { field: 'description', header: 'توضیحات' }
     ];
     this.currentPage = 1;
     this.getRooms(true);

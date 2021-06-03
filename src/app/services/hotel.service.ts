@@ -117,6 +117,10 @@ export class HotelService {
     return this.http.get<any>(`${this.url}Room/latest?page=${page}`);
   }
 
+  getRoom(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}Room/${id}`);
+  }
+
   deleteRoom(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}Room/${id}`);
   }

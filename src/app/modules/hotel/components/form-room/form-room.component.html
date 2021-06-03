@@ -3,17 +3,20 @@
     <div class="p-toolbar-group-right">
     </div>
     <div class="p-toolbar-group-left">
-      <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
-        icon="pi pi-save"></button>
+      <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+        [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
       <button pButton pRipple icon="pi pi-plus" label="افزودن اتاق" class="p-button-info p-ml-1"
         (click)="addRoom()"></button>
       <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../room-kinds"></button>
     </div>
   </p-toolbar>
-  <div class="p-grid p-fluid p-mt-2" *ngFor="let room of rooms">
+  <div class="p-grid p-fluid p-mt-2" *ngFor="let room of rooms;let i = index">
+    <div class="p-col-12">
+      <p-divider></p-divider>
+    </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب هتل</label>
-      <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="selectedHotel"
+      <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="room.hotelId"
         (completeMethod)="getHotels($event)" field="title" required
         [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
       </p-autoComplete>
@@ -23,7 +26,7 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب نوع اتاق</label>
-      <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="selectedRoom"
+      <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="room.kindId"
         (completeMethod)="getRoomkinds($event)" field="title" required
         [ngClass]="{'ng-dirty': (roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)}">
       </p-autoComplete>
@@ -32,32 +35,32 @@
       </small>
     </div>
     <div class="p-col-3 p-field">
-      <label for="adult">ظرفیت بزرگسال</label>
-      <input type="text" id="adult" pInputText pKeyFilter="num" [(ngModel)]="room.adult">
+      <label for="adult{{i}}">ظرفیت بزرگسال</label>
+      <p-inputNumber id="adult{{i}}" [(ngModel)]="room.adult"></p-inputNumber>
     </div>
     <div class="p-col-3 p-field">
-      <label for="child">ظرفیت کودک</label>
-      <input #child="ngModel" type="text" id="child" pInputText pKeyFilter="num" [(ngModel)]="room.child">
+      <label for="child{{i}}">ظرفیت کودک</label>
+      <p-inputNumber id="child{{i}}" [(ngModel)]="room.child"></p-inputNumber>
     </div>
     <div class="p-col-1 p-field-checkbox">
-      <p-checkbox inputId="breakFast" [(ngModel)]="room.breakFast" [binary]="true"></p-checkbox>
-      <label for="breakFast">صبحانه</label>
+      <p-checkbox inputId="breakFast{{i}}" [(ngModel)]="room.breakFast" [binary]="true"></p-checkbox>
+      <label for="breakFast{{i}}">صبحانه</label>
     </div>
     <div class="p-col-1 p-field-checkbox">
-      <p-checkbox inputId="lunch" [(ngModel)]="room.lunch" [binary]="true"></p-checkbox>
-      <label for="lunch">ناهار</label>
+      <p-checkbox inputId="lunch{{i}}" [(ngModel)]="room.lunch" [binary]="true"></p-checkbox>
+      <label for="lunch{{i}}">ناهار</label>
     </div>
     <div class="p-col-1 p-field-checkbox">
-      <p-checkbox inputId="dinner" [(ngModel)]="room.dinner" [binary]="true"></p-checkbox>
-      <label for="dinner">شام</label>
+      <p-checkbox inputId="dinner{{i}}" [(ngModel)]="room.dinner" [binary]="true"></p-checkbox>
+      <label for="dinner{{i}}">شام</label>
     </div>
     <div class="p-col-3 p-field-checkbox">
-      <p-checkbox inputId="extraService" [(ngModel)]="room.extraService" [binary]="true"></p-checkbox>
-      <label for="extraService">ظرفیت اضافه</label>
+      <p-checkbox inputId="extraService{{i}}" [(ngModel)]="room.extraService" [binary]="true"></p-checkbox>
+      <label for="extraService{{i}}">ظرفیت اضافه</label>
     </div>
     <div class="p-col-6 p-field">
       <label for="">امکانات اتاق</label>
-      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKindIds"
+      <p-autoComplete [suggestions]="facilities" [(ngModel)]="room.facilitiesKindIds"
         (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
       </p-autoComplete>
     </div>
