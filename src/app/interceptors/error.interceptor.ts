@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
-      if (err.code === 403) {
+      if (err.status === 403) {
         this.router.navigate(['./pages/access']);
       } else {
         const error = err.error.title || err.error.error || err.error?.detail || err.statusText;

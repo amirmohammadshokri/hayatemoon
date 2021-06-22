@@ -35,7 +35,6 @@ import { ChipsModule } from 'primeng/chips';
   providers: [
     ConfirmationService,
     DialogService
-
   ]
 })
 export class PlacesModule { }

@@ -17,6 +17,7 @@ export * from './roomfacilitieskind.interface';
 export * from './roomkind.interface';
 export * from './state.inteface';
 export * from './add-room.interface';
+export * from './ticket-filter.interface';
 
 
 
