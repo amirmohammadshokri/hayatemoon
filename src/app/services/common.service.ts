@@ -9,9 +9,6 @@ import { AppConfig } from '../app.config';
     providedIn: 'root'
   })
   export class CommonServiece{
-    getMenuWithReportId(reportId: any) {
-      throw new Error('Method not implemented.');
-    }
     url: string;
     constructor(private http: HttpClient) {
         this.url = `assets/`;
