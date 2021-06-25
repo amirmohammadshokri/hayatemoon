@@ -15,7 +15,7 @@
                 <th *ngFor="let col of columns">
                     {{ col.header }}
                 </th>
-                <th style="width: 8em"></th>
+                <th style="width: 4em"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
@@ -25,6 +25,9 @@
                 </td>
                 <td>
                     <span class="p-column-title"> عنوان اماکن</span> {{rowData.title}}
+                </td>
+                <td>
+                  <i *ngIf="!rowData.isRead" class="pi pi-circle-off" style="color: #f22613;"></i>
                 </td>
             </tr>
         </ng-template>
