@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ITicketFilter } from 'src/app/interfaces';
 import { TicketingService } from 'src/app/services/ticketing.service';
 
 @Component({
@@ -14,13 +13,6 @@ export class ListTicketsComponent implements OnInit {
   loading: boolean;
   currentPage: number;
   tickets: any[] = [];
-  filter: ITicketFilter = {
-    attachmentMediaId: 0,
-    priority: 0,
-    receiverUserId: 0,
-    text: '',
-    title: ''
-  };
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -50,7 +42,7 @@ export class ListTicketsComponent implements OnInit {
       this.currentPage = 1;
       this.tickets = [];
     }
-    this.srvTicket.getTicketings(this.filter).subscribe(res => {
+    this.srvTicket.getTickets(this.currentPage, 15, null, null, null, null).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
