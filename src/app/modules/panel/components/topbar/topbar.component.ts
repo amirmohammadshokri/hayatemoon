@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { TicketingService } from 'src/app/services';
 
 
 @Component({
@@ -10,8 +11,9 @@ import * as $ from 'jquery';
 export class TopbarComponent implements OnInit {
 
   avatar = 'assets/user.svg';
+  unreadedTicket: number;
 
-  constructor() { }
+  constructor(private srvTicket: TicketingService) { }
 
   ngOnInit(): void {
     $('.search-item').click(() => {
@@ -47,6 +49,10 @@ export class TopbarComponent implements OnInit {
         $('body').removeClass('blocked-scroll');
         $('#layout').removeClass('layout-mobile-active');
       }
+    });
+
+    this.srvTicket.unreadTicketCount().subscribe(count => {
+      this.unreadedTicket = count;
     });
   }
 

@@ -28,6 +28,15 @@ export class TicketingService {
   }
 
   unreadTicketCount(): Observable<number> {
-    return this.http.get<number>(`${this.url}UnRead/Count`);
+    return this.http.get<number>(`${this.url}/UnRead/Count`);
   }
+
+  conversations(ticketId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/${ticketId}/Conversation`);
+  }
+
+  closeTicket(ticketId: number): Observable<any> {
+    return this.http.put<any>(`${this.url}/${ticketId}/Close`, null);
+  }
+
 }

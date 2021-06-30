@@ -1,50 +1,61 @@
 <div class="layout-topbar">
-    <div class="layout-topbar-wrapper">
-        <div class="layout-topbar-left">
-            <a id="menu-button" class="menu-button">
-                <i id="menu-button-i" class="pi pi-bars"></i>
-            </a>
-            <a id="logo-link" class="layout-topbar-logo">
-                <img alt="freya-layout" src="assets/layout/images/logo.png">
-            </a>
-        </div>
-        <ss-menu></ss-menu>
-        <div class="layout-topbar-right">
-            <ul class="layout-topbar-actions">
-                <li class="topbar-item search-item">
-                    <a>
-                        <i class="topbar-icon pi pi-search"></i>
-                    </a>
-                    <div class="search-input-wrapper">
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input type="text" placeholder="جستجو ....." class="p-inputtext p-component">
-                        </span>
-                    </div>
-                    <ul class="fadeInDown">
-                        <div class="search-input-wrapper p-fluid" style="width: 100%;">
-                            <span class="p-input-icon-left">
-                                <i class="pi pi-search"></i>
-                                <input type="text" placeholder="جستجو ..." class="p-inputtext p-component">
-                            </span>
-                        </div>
-                    </ul>
-                </li>
-                <li class="topbar-item user-profile">
-                    <a class="p-d-flex" id="user">
-                        <img id="user-img" [src]="avatar" (error)="defaultAvatar()">
-                    </a>
-                    <ul class="fadeInDown">
-                        <li routerLink="profile"><a><span>پروفایل</span></a></li>
-                        <li><a><span>تنظیمات</span></a></li>
-                        <li><a><span>پیام ها</span></a></li>
-                        <li (click)="signout()"><a><span>خروج</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-            <a class="layout-rightpanel-button">
-                <i class="pi pi-arrow-right"></i>
-            </a>
-        </div>
+  <div class="layout-topbar-wrapper">
+    <div class="layout-topbar-left">
+      <a id="menu-button" class="menu-button">
+        <i id="menu-button-i" class="pi pi-bars"></i>
+      </a>
+      <a id="logo-link" class="layout-topbar-logo">
+        <img alt="freya-layout" src="assets/layout/images/logo.png" />
+      </a>
     </div>
+    <ss-menu></ss-menu>
+    <div class="layout-topbar-right">
+      <ul class="layout-topbar-actions">
+        <li class="topbar-item search-item">
+          <a>
+            <i class="topbar-icon pi pi-search"></i>
+          </a>
+          <div class="search-input-wrapper">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input type="text" placeholder="جستجو ....." class="p-inputtext p-component" />
+            </span>
+          </div>
+          <ul class="fadeInDown">
+            <div class="search-input-wrapper p-fluid" style="width: 100%">
+              <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="text" placeholder="جستجو ..." class="p-inputtext p-component" />
+              </span>
+            </div>
+          </ul>
+        </li>
+        <li class="topbar-item user-profile">
+          <a class="p-d-flex" id="user" pBadge [value]="unreadedTicket" severity="danger" style="font-size: 2rem">
+            <img id="user-img" [src]="avatar" (error)="defaultAvatar()" />
+          </a>
+          <ul class="fadeInDown">
+            <li routerLink="profile">
+              <a><span>پروفایل</span></a>
+            </li>
+            <li>
+              <a><span>تنظیمات</span></a>
+            </li>
+            <li routerLink="ticket/tickets">
+              <a>
+                <span>تیکت ها</span>
+                <p-badge [ngStyle]="{'font-size': '2em'}" styleClass="p-mr-2" [value]="unreadedTicket" severity="danger"></p-badge>
+              </a>
+            </li>
+            <li (click)="signout()">
+              <a><span>خروج</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <a class="layout-rightpanel-button">
+        <i class="pi pi-arrow-right"></i>
+      </a>
+    </div>
+  </div>
 </div>

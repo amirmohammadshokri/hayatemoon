@@ -16,10 +16,11 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ChipsModule } from 'primeng/chips';
 import { FormTicketComponent } from './components/form-ticket/form-ticket.component';
+import { ConversationsComponent } from './components/conversations/conversations.component';
 
 
 @NgModule({
-  declarations: [ListTicketsComponent, FormTicketComponent],
+  declarations: [ListTicketsComponent, FormTicketComponent, ConversationsComponent],
   imports: [
     CommonModule,
     TicketingRoutingModule,

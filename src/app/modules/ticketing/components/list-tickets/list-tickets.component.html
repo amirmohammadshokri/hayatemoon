@@ -3,8 +3,10 @@
         <div class="p-toolbar-group-right">
         </div>
         <div class="p-toolbar-group-left">
-            <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو" (click)="getTickets(true)"></button>
-            <button pButton pRipple label="ثبت  جدید" icon="pi pi-plus" class="p-button-success p-ml-0" routerLink="../form-ticket/new"></button>
+            <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو"
+                (click)="getTickets(true)"></button>
+            <button pButton pRipple label="ثبت  جدید" icon="pi pi-plus" class="p-button-success p-ml-0"
+                routerLink="../form-ticket/new"></button>
         </div>
     </p-toolbar>
     <p-confirmDialog header="تایید" icon="pi pi-exclamation-triangle"></p-confirmDialog>
@@ -19,15 +21,15 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
-            <tr>
+            <tr [style]="(rowData.isRead?'':'color:#f64747')">
                 <td>
                     <span class="p-column-title"> ردیف</span> {{ index + 1 }}
                 </td>
                 <td>
-                    <span class="p-column-title"> عنوان اماکن</span> {{rowData.title}}
+                    <span class="p-column-title">عنوان اماکن</span> {{rowData.title}}
                 </td>
                 <td>
-                  <i *ngIf="!rowData.isRead" class="pi pi-circle-off" style="color: #f22613;"></i>
+                    <button pButton icon="pi pi-comment" routerLink="../conversations/{{rowData.id}}"></button>
                 </td>
             </tr>
         </ng-template>
