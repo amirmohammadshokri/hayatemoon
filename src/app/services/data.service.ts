@@ -10,7 +10,7 @@ export class DataService {
   private mainProgressBar = new BehaviorSubject<boolean[]>([]);
   mainProgressBar$ = this.mainProgressBar.asObservable();
 
-  private userInfo = new BehaviorSubject<any>(null);
+  private userInfo = new BehaviorSubject<number>(null);
   userInfo$ = this.userInfo.asObservable();
 
   reset(): void {
@@ -37,7 +37,7 @@ export class DataService {
     this.mainProgressBar.next(temp);
   }
 
-  setUserInfo(info: any): void {
+  setUserInfo(info: number): void {
     this.userInfo.next(info);
   }
 

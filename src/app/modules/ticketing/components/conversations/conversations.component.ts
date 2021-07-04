@@ -26,7 +26,7 @@ export class ConversationsComponent implements OnInit {
   }
 
   getConversations(): void {
-    this.srvTicket.conversations(this.ticketId).subscribe(prms => {
+    this.srvTicket.conversations(3).subscribe(prms => {
       this.conversasions = prms;
     })
   }

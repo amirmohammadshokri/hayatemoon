@@ -26,11 +26,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.userData$ = this.srvOidc.userData$;
-
     this.srvOidc.checkAuth().subscribe(d => {
+      this.sData.setUserInfo(10);
       if (!d) {
         this.srvOidc.authorize();
-        this.sData.setUserInfo(null);
       }
     });
 

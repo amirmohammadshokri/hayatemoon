@@ -52,10 +52,12 @@ export class TopbarComponent implements OnInit {
       }
     });
 
-    this.sData.userInfo$.subscribe(() => {
-      this.srvTicket.unreadTicketCount().subscribe(count => {
-        this.unreadedTicket = count;
-      });
+    this.sData.userInfo$.subscribe((res) => {
+      if (res > 0) {
+        this.srvTicket.unreadTicketCount().subscribe(count => {
+          this.unreadedTicket = count;
+        });
+      }
     })
   }
 
