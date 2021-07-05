@@ -7,8 +7,11 @@ import { BehaviorSubject } from 'rxjs';
 export class DataService {
 
   private data = {};
-  private mainProgressBarWait = new BehaviorSubject<boolean[]>([]);
-  mainProgressBar = this.mainProgressBarWait.asObservable();
+  private mainProgressBar = new BehaviorSubject<boolean[]>([]);
+  mainProgressBar$ = this.mainProgressBar.asObservable();
+
+  private userInfo = new BehaviorSubject<number>(null);
+  userInfo$ = this.userInfo.asObservable();
 
   reset(): void {
     this.data = {};
@@ -23,14 +26,19 @@ export class DataService {
   }
 
   showMainProgressBarForMe(): void {
-    const temp = this.mainProgressBarWait.getValue();
+    const temp = this.mainProgressBar.getValue();
     temp.push(true);
-    this.mainProgressBarWait.next(temp);
+    this.mainProgressBar.next(temp);
   }
 
   thanksMainProgressBar(): void {
-    const temp = this.mainProgressBarWait.getValue();
+    const temp = this.mainProgressBar.getValue();
     temp.pop();
-    this.mainProgressBarWait.next(temp);
+    this.mainProgressBar.next(temp);
   }
+
+  setUserInfo(info: number): void {
+    this.userInfo.next(info);
+  }
+
 }

@@ -18,25 +18,26 @@ export class AppComponent implements OnInit {
     private sData: DataService,
     private cdr: ChangeDetectorRef,
     private eventService: PublicEventsService,
-    private oidcSecurityService: OidcSecurityService
+    private srvOidc: OidcSecurityService
   ) {
     this.showProgressBar = false;
   }
 
   ngOnInit(): void {
 
-    this.userData$ = this.oidcSecurityService.userData$;
-    this.oidcSecurityService.checkAuth().subscribe(d => {
+    this.userData$ = this.srvOidc.userData$;
+    this.srvOidc.checkAuth().subscribe(d => {
+      this.sData.setUserInfo(10);
       if (!d) {
-        this.oidcSecurityService.authorize();
+        this.srvOidc.authorize();
       }
     });
 
     this.eventService
       .registerForEvents()
       .pipe(filter((notification) => notification.type === EventTypes.CheckSessionReceived));
-    this.primengConfig.ripple = true;
-    this.sData.mainProgressBar.subscribe(res => {
+
+    this.sData.mainProgressBar$.subscribe(res => {
       if (res.length > 0) {
         this.showProgressBar = true;
       } else {
@@ -44,14 +45,9 @@ export class AppComponent implements OnInit {
       }
       this.cdr.detectChanges();
     });
-  }
 
-  login(): void {
-    this.oidcSecurityService.authorize();
-  }
+    this.primengConfig.ripple = true;
 
-  logout(): void {
-    this.oidcSecurityService.logoff();
   }
 
 }

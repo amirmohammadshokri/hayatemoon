@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import * as $ from 'jquery';
+import { DataService, TicketingService } from 'src/app/services';
 
 
 @Component({
@@ -10,8 +12,9 @@ import * as $ from 'jquery';
 export class TopbarComponent implements OnInit {
 
   avatar = 'assets/user.svg';
+  unreadedTicket: number;
 
-  constructor() { }
+  constructor(private srvTicket: TicketingService, private srvOidc: OidcSecurityService, private sData: DataService) { }
 
   ngOnInit(): void {
     $('.search-item').click(() => {
@@ -48,9 +51,18 @@ export class TopbarComponent implements OnInit {
         $('#layout').removeClass('layout-mobile-active');
       }
     });
+
+    this.sData.userInfo$.subscribe((res) => {
+      if (res > 0) {
+        this.srvTicket.unreadTicketCount().subscribe(count => {
+          this.unreadedTicket = count;
+        });
+      }
+    })
   }
 
   signout(): void {
+    this.srvOidc.logoff();
   }
 
   defaultAvatar(): void {

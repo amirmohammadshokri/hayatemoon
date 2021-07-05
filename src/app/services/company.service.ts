@@ -54,7 +54,7 @@ export class CompanyService {
   }
 
   getUsers(page: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.url}/User​/Latest?page=${page}&pageSize=${pageSize}`);
+    return this.http.get(`${this.url}/User/Latest?page=${page}&pageSize=${pageSize}`);
   }
   getUser(companyId:number ,page: number, pageSize: number):Observable<any>{
     return this.http.get(`${this.url}/${companyId}/User/Latest?page=${page}&pagesize=${pageSize}`);

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
+import { Router } from '@angular/router';
+import { MessageService, SelectItem } from 'primeng/api';
 import { IAddTicket } from 'src/app/interfaces';
+import { CompanyService, TicketingService } from 'src/app/services';
 
 @Component({
   selector: 'ss-form-ticket',
@@ -17,14 +19,32 @@ export class FormTicketComponent implements OnInit {
     { label: 'متوسط', value: 1 },
     { label: 'زیاد', value: 0 }
   ];
+  users: any[];
 
-  constructor() { }
+  constructor(
+    private srvCompany: CompanyService,
+    private srvTicket: TicketingService,
+    private router: Router,
+    private srvMsg: MessageService) { }
 
   ngOnInit(): void {
+    this.srvCompany.getUsers(1, 1000).subscribe(res => {
+      this.users = res;
+    });
   }
 
   submit(): void {
-
+    if (this.ticket.title && this.ticket.text) {
+      this.saving = true;
+      this.srvTicket.addTicket(this.ticket).subscribe(() => {
+        this.srvMsg.add({ severity: 'success', summary: 'ثبت تیکت', detail: 'درخواست با موفقیت ثبت شد' });
+        this.saving = false;
+        this.router.navigate(['../panel/ticket/tickets']);
+      }, () => {
+        this.saving = false;
+      });
+    }
+    this.submitted = true;
   }
 
 }

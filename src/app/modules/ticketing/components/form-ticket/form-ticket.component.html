@@ -22,6 +22,10 @@
       <p-dropdown [options]="priorities" [(ngModel)]="ticket.priority"></p-dropdown>
     </div>
     <div class="p-col-12 p-field">
+      <label for="user">گیرنده</label>
+      <p-dropdown [options]="users" [(ngModel)]="ticket.receiverUserId"></p-dropdown>
+    </div>
+    <div class="p-col-12 p-field">
       <label for="title">توضیحات</label>
       <textarea #text="ngModel" rows="5" cols="30" pInputTextarea autoResize="autoResize" [(ngModel)]="ticket.text"
         required [ngClass]="{'ng-dirty': (text.invalid && submitted) || (text.dirty && text.invalid)}"></textarea>
