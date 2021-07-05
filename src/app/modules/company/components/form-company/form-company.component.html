@@ -1,132 +1,122 @@
 <div class="card">
     <p-toolbar>
-      <div class="p-toolbar-group-right">
-      </div>
-      <div class="p-toolbar-group-left">
-        <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
-          [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
-        <button pButton pRipple icon="pi pi-plus" label="افزودن شرکت" class="p-button-info p-ml-1"
-           ></button>
-    <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../room-kinds"></button>
-      </div>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
+            <button pButton pRipple icon="pi pi-plus" label="افزودن شرکت" class="p-button-info p-ml-1"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../room-kinds"></button>
+        </div>
     </p-toolbar>
     <div class="p-grid p-fluid p-mt-2">
-      <div class="p-col-4 p-field">
-        <label for="title">عنوان</label>
-        <input type="text" #title="ngModel"  [(ngModel)]="companyAdd.title" pInputText>
-      </div>
-      <!-- نوع؟؟؟؟؟؟ -->
-      <div class="p-col-4 p-field">
-        <label for="title">نوع</label>
-        <p-dropdown [options]="companyType" #typeId="ngModel" [(ngModel)]="companyAdd.type" placeholder="انتخاب نوع شرکت"></p-dropdown> 
-     
+        <div class="p-col-4 p-field">
+            <label for="title">عنوان</label>
+            <input type="text" #title="ngModel" [(ngModel)]="companyAdd.title" pInputText>
         </div>
-      
-      <div class="p-col-4 p-field">
-        <label for="title">نام مدیرعامل</label>
-        <input type="text" #ceoFirstName="ngModel"  [(ngModel)]="companyAdd.ceoFirstName"   pInputText>
-      </div>
-      <div class="p-col-4 p-field">
-        <label for="title">نام خانوادگی مدیرعامل</label>
-        <input type="text" #ceoLastName="ngModel"  [(ngModel)]="companyAdd.ceoLastName"   pInputText>
-      </div>
-      <div class="p-col-4 p-field">
-        <label for="title">کد ملی مدیرعامل</label>
-        <input type="text" #ceoNationalCode="ngModel"  [(ngModel)]="companyAdd.ceoNationalCode"   pInputText>
-      </div>
-      <div class="p-col-4 p-field">
+        <div class="p-col-4 p-field">
+            <label for="title">نوع</label>
+            <p-dropdown [options]="companyType" #typeId="ngModel" [(ngModel)]="companyAdd.type" placeholder="انتخاب نوع شرکت">
+            </p-dropdown>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">نام مدیرعامل</label>
+            <input type="text" #ceoFirstName="ngModel" [(ngModel)]="companyAdd.ceoFirstName" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">نام خانوادگی مدیرعامل</label>
+            <input type="text" #ceoLastName="ngModel" [(ngModel)]="companyAdd.ceoLastName" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">کد ملی مدیرعامل</label>
+            <input type="text" #ceoNationalCode="ngModel" [(ngModel)]="companyAdd.ceoNationalCode" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
             <label for="title"> تاربخ تولد</label>
             <dp-date-picker id="ceoBirthDate" [(ngModel)]="ceoBirthDate" dir="ltr" theme="dp-material" mode="day">
             </dp-date-picker>
         </div>
-      <!-- تاریخ -->
-      <div class="p-col-4 p-field">
-        <label for="title">شناسه ملی شرکت</label>
-        <input type="text" #companyNationalCode="ngModel"  [(ngModel)]="companyAdd.companyNationalCode"  pInputText>
-      </div>
-      <div class="p-col-4 p-field">
-        <label for="title">کد اقتصادی شرکت</label>
-        <input type="text" #economyCode="ngModel"  [(ngModel)]="companyAdd.economyCode"  pInputText>
-      </div>
-      <div class="p-col-4 p-field">
-        <label for="">نام شهر</label>
-        <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
-          (completeMethod)="getLocations($event)" field="title"
-          [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
-        </p-autoComplete>
-      </div>
-      <div class="p-col-4 p-field">
-        <label for="title">وضعیت شرکت</label>
-        <p-dropdown [options]="state1" #typeId="ngModel" [(ngModel)]="companyAdd.state"></p-dropdown> 
-     
-      </div>
-      <div class="p-col-4 p-field">
-        <label for="title">آدرس</label>
-        <textarea pInputTextarea  ></textarea>
-      </div>
-        <div class="p-col-6">
-          <div class="p-grid p-fluid">   
-            <div class="p-col-5 p-field">
-              <label for="title">عنوان</label>
-              <input type="text"     pInputText>
-            </div>
-            <div class="p-col-5 p-field">
-              <label for="title">تلفن</label>
-              <input type="text"    pInputText>
-            </div>
-            
-            <div class="p-col-2 p-field">&ensp;
-              <button pButton label="افزودن" icon="pi pi-plus"  ></button>
-            </div>
-          </div>
+        <div class="p-col-4 p-field">
+            <label for="title">شناسه ملی شرکت</label>
+            <input type="text" #companyNationalCode="ngModel" [(ngModel)]="companyAdd.companyNationalCode" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">کد اقتصادی شرکت</label>
+            <input type="text" #economyCode="ngModel" [(ngModel)]="companyAdd.economyCode" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="">نام شهر</label>
+            <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+            </p-autoComplete>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">وضعیت شرکت</label>
+            <p-dropdown [options]="state1" #typeId="ngModel" [(ngModel)]="companyAdd.state"></p-dropdown>
+        </div>
+        <div class="p-col-8 p-field">
+            <label for="title">آدرس</label>
+            <textarea pInputTextarea rows="1"></textarea>
         </div>
         <div class="p-col-6">
-          <p-table >
-            <ng-template pTemplate="header">
-              <tr>
-             
-                <th>عنوان</th>
-                <th>تلفن</th>
-                <th style="width: 5em;"></th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-place let-index="rowIndex">
-              <tr>
-             
-                <td>ببب</td>
-                <td>34343</td>
-                <td> <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-                      pTooltip="حذف"></button></td>
-              </tr>
-            </ng-template>
-          </p-table>
+            <div class="p-grid p-fluid">
+                <div class="p-col-5 p-field">
+                    <label for="title">عنوان</label>
+                    <input type="text" pInputText [(ngModel)]="contact.title">
+                </div>
+                <div class="p-col-5 p-field">
+                    <label for="title">تلفن</label>
+                    <input type="text" pInputText [(ngModel)]="contact.value">
+                </div>
+                <div class="p-col-2 p-field">
+                    <label for="">&ensp;</label>
+                    <button pButton label="افزودن" icon="pi pi-plus" (click)="addContact()"></button>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-6">
+            <p-table [value]="companyAdd.contacts">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>عنوان</th>
+                        <th>تلفن</th>
+                        <th style="width: 5em;"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-conatct>
+                    <tr>
+                        <td>{{conatct.title}}</td>
+                        <td>{{conatct.value}}</td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger" pTooltip="حذف"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
         <div class="p-col-12">
-          <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
-            <div class="add-img p-d-flex p-ai-center p-jc-center"   >
-              <div class="add-circle p-d-flex p-ai-center p-jc-center">
-                <img src="assets/layout/images/camera.svg" >
-              </div>
-              <input type="file" #file accept=".jpg,.png,.jpeg"   style="display:none;">
-            </div>
-            <div class="img p-d-flex p-ai-center p-jc-center"  >
-              <div class="main p-d-flex p-ai-center p-jc-center">
-                <img  />
-              </div>
-              <div class="tools">
-                <div class="circle p-d-flex p-ai-center p-jc-center"  >
-                  <img src="assets/layout/images/bin.svg">
+            <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+                <div class="add-img p-d-flex p-ai-center p-jc-center">
+                    <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                        <img src="assets/layout/images/camera.svg">
+                    </div>
+                    <input type="file" #file accept=".jpg,.png,.jpeg" style="display:none;">
                 </div>
-                <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
-                  <p-radioButton name="isMain"   ></p-radioButton>
+                <div class="img p-d-flex p-ai-center p-jc-center">
+                    <div class="main p-d-flex p-ai-center p-jc-center">
+                        <img />
+                    </div>
+                    <div class="tools">
+                        <div class="circle p-d-flex p-ai-center p-jc-center">
+                            <img src="assets/layout/images/bin.svg">
+                        </div>
+                        <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                            <p-radioButton name="isMain"></p-radioButton>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="p-col-12">
-            <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
-          </div>
+            <div class="p-col-12">
+                <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+            </div>
         </div>
     </div>
-  </div>
-  
+</div>

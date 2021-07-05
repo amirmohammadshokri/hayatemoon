@@ -18,10 +18,10 @@ interface State {
 })
 export class FormCompanyComponent implements OnInit {
 
-  companyAdd:IAddCompany={contacts:[],certificatesMediaIds:[]};
+  companyAdd: IAddCompany = { contacts: [], certificatesMediaIds: [] };
   companyId: number;
   ceoBirthDate: any;
-  state1:State[];
+  state1: SelectItem[];
   companyType: SelectItem[] = [];
   locations: any[] = [];
   selectedLocation: ILocation;
@@ -31,57 +31,57 @@ export class FormCompanyComponent implements OnInit {
   submitted: boolean;
 
   constructor(
-     
+
     private srvCo: CompanyService,
-    private srcSrch:SearchService,
+    private srcSrch: SearchService,
     // private srvMsg: MessageService,
     private router: Router,
     private aRoute: ActivatedRoute,
-    
+
     // private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
-  
+
     this.getCompanyType();
-    this.state1=[
-      {id:0,value:'فعال'},
-      {id:1,value:'غیر فعال'}
+    this.state1 = [
+      { value: 0, label: 'فعال' },
+      { value: 1, label: 'غیر فعال' }
     ]
-    
+
     this.aRoute.params.subscribe(prms => {
-      console.log("Hello world",prms);
+      console.log("Hello world", prms);
       if (prms.id > 0) {
         console.log("Hello world");
-        
+
         this.companyId = Number.parseInt(prms.id, 0);
         this.getCompanyById(this.companyId);
       }
-      else{
-   
+      else {
+
       }
     });
   }
 
   submit(): void {
-      this.saving = true;
-    if (this.companyAdd.id> 0) {
+    this.saving = true;
+    if (this.companyAdd.id > 0) {
       const obj: IAddCompany = {
         id: this.companyAdd.id,
-        title:this.companyAdd.title,
-        type:1,
-        ceoFirstName:this.companyAdd.ceoFirstName,
-        ceoLastName:this.companyAdd.ceoLastName,
-        ceoNationalCode:this.companyAdd.ceoNationalCode,
-        ceoBirthDate:'2020/03/03',
-        companyNationalCode:this.companyAdd.companyNationalCode,
-        economyCode:this.companyAdd.economyCode,
-        address:this.companyAdd.address,
-        locationId:this.selectedLocation?.locationId,
-        state:this.companyAdd.state,
-        contacts:null
+        title: this.companyAdd.title,
+        type: 1,
+        ceoFirstName: this.companyAdd.ceoFirstName,
+        ceoLastName: this.companyAdd.ceoLastName,
+        ceoNationalCode: this.companyAdd.ceoNationalCode,
+        ceoBirthDate: '2020/03/03',
+        companyNationalCode: this.companyAdd.companyNationalCode,
+        economyCode: this.companyAdd.economyCode,
+        address: this.companyAdd.address,
+        locationId: this.selectedLocation?.locationId,
+        state: this.companyAdd.state,
+        contacts: null
       };
-      this.srvCo.editCompany(this.companyId,obj).subscribe(() => {
+      this.srvCo.editCompany(this.companyId, obj).subscribe(() => {
         // this.srvMsg.add({ severity: 'success', summary: 'ویرایش امکانات اتاق', detail: 'عملیات با موفقیت انجام شد' });
         this.companyAdd = {};
         this.router.navigate(['./panel/company/company-list']);
@@ -91,30 +91,30 @@ export class FormCompanyComponent implements OnInit {
       this.companyAdd.id = 0;
       const obj1: IAddCompany = {
         id: 0,
-        title:this.companyAdd.title,
-        type:1,
-        ceoFirstName:this.companyAdd.ceoFirstName,
-        ceoLastName:this.companyAdd.ceoLastName,
-        ceoNationalCode:this.companyAdd.ceoNationalCode,
-        ceoBirthDate:'2020/03/03',
-        companyNationalCode:this.companyAdd.companyNationalCode,
-        economyCode:this.companyAdd.economyCode,
-        address:this.companyAdd.address,
-        locationId:this.companyAdd.locationId,
-        state:this.companyAdd.state,
-        contacts:null
+        title: this.companyAdd.title,
+        type: 1,
+        ceoFirstName: this.companyAdd.ceoFirstName,
+        ceoLastName: this.companyAdd.ceoLastName,
+        ceoNationalCode: this.companyAdd.ceoNationalCode,
+        ceoBirthDate: '2020/03/03',
+        companyNationalCode: this.companyAdd.companyNationalCode,
+        economyCode: this.companyAdd.economyCode,
+        address: this.companyAdd.address,
+        locationId: this.companyAdd.locationId,
+        state: this.companyAdd.state,
+        contacts: null
       };
       this.srvCo.addCompany(obj1).subscribe(() => {
         // this.srvMsg.add({ severity: 'success', summary: 'ثبت امکانات اتاق ', detail: 'عملیات با موفقیت انجام شد' });
         this.router.navigate(['./panel/hotel/room-facilitieskinds']);
       });
     }
-    
- 
-  this.submitted=true;
+
+
+    this.submitted = true;
   }
 
-  getCompanyById(id:number): void {
+  getCompanyById(id: number): void {
     this.srvCo.getCompany(id).subscribe(res => {
       this.ceoBirthDate = moment(res.ceoBirthDate, 'jYYYY/jMM/jDD');
       this.companyAdd = res;
@@ -132,6 +132,8 @@ export class FormCompanyComponent implements OnInit {
     });
   }
 
- 
+  addContact(): void {
+    this.companyAdd.contacts.push(this.contact);
+  }
 
 }
