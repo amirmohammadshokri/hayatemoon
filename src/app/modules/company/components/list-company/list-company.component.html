@@ -1,1 +1,67 @@
-<p>list-company works!</p>
+<div class="card">
+    <p-toolbar>
+      <div class="p-toolbar-group-right">
+        <div class="p-grid p-fluid">
+        </div>
+      </div>
+      <div class="p-toolbar-group-left">
+        <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو"></button>
+        <button pButton pRipple label="ثبت شرکت جدید" icon="pi pi-plus" class="p-button-success"
+          routerLink="../form-company/new"></button>
+      </div>
+    </p-toolbar>  
+    <p-confirmDialog header="تایید" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-table [columns]="cols" [value]="companys" styleClass="p-datatable-striped" [loading]="loading">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 4em">ردیف</th>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th style="width: 12em"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr>
+          <td>
+            <span class="p-column-title"> ردیف</span>
+            {{ index + 1 }}
+          </td>
+          <td>
+            <span class="p-column-title"> عنوان شرکت</span>
+            {{ rowData.title }}
+          </td>
+          <td>
+            <span class="p-column-title">ایجاد کننده</span>
+            {{ rowData.regCompanyUser.regUser.fullName }}
+          </td>
+          <td>  
+            <span class="p-column-title">  شرکت نام</span>
+            {{ rowData.regCompanyUser.companyTitle }}
+
+          </td>
+          <td>  
+            <span class="p-column-title"> مدیرعامل نام</span>
+            {{ rowData.ceoFirstName }}
+          </td>
+          <td>
+            <span class="p-column-title"> مدیرعامل نام خانوادگی</span>
+            {{ rowData.ceoLastName }}
+          </td>
+       
+          <td>
+            <span class="p-column-title"> تاریخ ایجاد</span>
+            {{ rowData.saveDate }}
+          </td>
+          <td>
+            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+              (click)="confirmDelete(rowData.companyId)" pTooltip="حذف"></button>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info p-mr-1"
+              (click)="editCompany(rowData.companyId)" pTooltip="ویرایش"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+</div>
+ 
+  

@@ -11,6 +11,7 @@ import { ListRoomComponent } from './components/list-room/list-room.component';
 import { ListRoomfacilitieskindComponent } from './components/list-roomfacilitieskind/list-roomfacilitieskind.component';
 import { ListRoomkindComponent } from './components/list-roomkind/list-roomkind.component';
 
+
 const routes: Routes = [
   { path: 'hotels', component: ListHotelComponent },
   { path: 'hotel-form/:id', component: FromHotelComponent },

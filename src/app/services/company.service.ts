@@ -22,9 +22,9 @@ export class CompanyService {
   }
 
   getCompanyTypes(): Observable<any> {
-    return this.http.get(`${this.url}/Type​/Latest`);
+   return this.http.get(`${this.url}/Type/Latest`);
   }
-
+  
   getCompany(id: number): Observable<any> {
     return this.http.get(`${this.url}/${id}`);
   }
@@ -41,7 +41,7 @@ export class CompanyService {
     return this.http.post(`${this.url}/User`, obj);
   }
 
-  getUser(id: number): Observable<any> {
+  getUserById(id: number): Observable<any> {
     return this.http.get(`${this.url}/User/${id}`);
   }
 
@@ -56,5 +56,10 @@ export class CompanyService {
   getUsers(page: number, pageSize: number): Observable<any> {
     return this.http.get(`${this.url}/User​/Latest?page=${page}&pageSize=${pageSize}`);
   }
-
+  getUser(companyId:number ,page: number, pageSize: number):Observable<any>{
+    return this.http.get(`${this.url}/${companyId}/User/Latest?page=${page}&pagesize=${pageSize}`);
+  }
+  // getUser(companyId:number ,page: number, pageSize: number): Observable<any> {
+  //   return this.http.get(`${this.url}/${companyId}/User/Latest?page=${page}&pagesize=${pageSize}');
+  // }
 }
