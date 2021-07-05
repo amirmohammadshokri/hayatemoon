@@ -18,13 +18,13 @@ export * from './roomkind.interface';
 export * from './state.inteface';
 export * from './add-room.interface';
 export * from './add-ticket.interface';
-<<<<<<< HEAD
+ 
 export * from './add-company.interface';
 export * from './companys.interface'
 
-=======
-export * from './conversation.interface';
->>>>>>> 178479e7041d4b19937708cef1ba556d340883c4
+export * from './conversation.interface'
+ 
+ 
 
 
 
