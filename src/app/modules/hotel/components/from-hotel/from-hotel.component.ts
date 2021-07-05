@@ -5,7 +5,7 @@ import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer, Control,
 import { IAddHotel } from 'src/app/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILocation } from 'src/app/interfaces/location.interface';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 
 @Component({
