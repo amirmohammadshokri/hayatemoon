@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { IConversation } from 'src/app/interfaces';
 import { TicketingService } from 'src/app/services';
 
 @Component({
@@ -11,7 +12,7 @@ import { TicketingService } from 'src/app/services';
 export class ConversationsComponent implements OnInit {
 
   closing: boolean = false;
-  conversasions: any[] = [];
+  conversations: IConversation[] = [];
   ticketId: number;
 
   constructor(private srvTicket: TicketingService, private route: ActivatedRoute, private srvMsg: MessageService, private router: Router) { }
@@ -27,7 +28,7 @@ export class ConversationsComponent implements OnInit {
 
   getConversations(): void {
     this.srvTicket.conversations(3).subscribe(prms => {
-      this.conversasions = prms;
+      this.conversations = prms;
     })
   }
 

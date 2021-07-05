@@ -8,6 +8,13 @@
         </div>
     </p-toolbar>
     <div>
-
+        <div *ngFor="let conversation of conversations" class="conversation">
+            <div>
+                <span>{{conversation.readDate}}</span>
+                <span>{{conversation.saveDate}}</span>
+                <span>{{conversation.senderFullName}}</span>
+            </div>
+            <div [innerHtml]="conversation.text"></div>
+        </div>
     </div>
 </div>
