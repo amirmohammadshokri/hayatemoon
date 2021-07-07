@@ -56,7 +56,7 @@
             <label for="title">آدرس</label>
             <textarea pInputTextarea rows="1"></textarea>
         </div>
-        <div class="p-col-6">
+        <div class="p-col-21">
             <div class="p-grid p-fluid">
                 <div class="p-col-5 p-field">
                     <label for="title">عنوان</label>
@@ -81,12 +81,12 @@
                         <th style="width: 5em;"></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-conatct>
+                <ng-template pTemplate="body" let-conatct let-index="rowIndex" >
                     <tr>
                         <td>{{conatct.title}}</td>
                         <td>{{conatct.value}}</td>
                         <td>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger" pTooltip="حذف"></button>
+                            <button pButton pRipple icon="pi pi-trash" (click)="deleteContact(index)" class="p-button p-button-danger" pTooltip="حذف"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -94,29 +94,29 @@
         </div>
         <div class="p-col-12">
             <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
-                <div class="add-img p-d-flex p-ai-center p-jc-center">
-                    <div class="add-circle p-d-flex p-ai-center p-jc-center">
-                        <img src="assets/layout/images/camera.svg">
-                    </div>
-                    <input type="file" #file accept=".jpg,.png,.jpeg" style="display:none;">
+              <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()" >
+                <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                  <img src="assets/layout/images/camera.svg" >
                 </div>
-                <div class="img p-d-flex p-ai-center p-jc-center">
-                    <div class="main p-d-flex p-ai-center p-jc-center">
-                        <img />
-                    </div>
-                    <div class="tools">
-                        <div class="circle p-d-flex p-ai-center p-jc-center">
-                            <img src="assets/layout/images/bin.svg">
-                        </div>
-                        <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
-                            <p-radioButton name="isMain"></p-radioButton>
-                        </div>
-                    </div>
+                <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
+              </div>
+              <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
+                <div class="main p-d-flex p-ai-center p-jc-center">
+                  <img [src]="img.url" (error)="defaultImg(img)" />
                 </div>
+                <div class="tools">
+                  <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
+                    <img src="assets/layout/images/bin.svg">
+                  </div>
+                  <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                    <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="p-col-12">
-                <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+              <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
             </div>
-        </div>
+          </div>
     </div>
 </div>
