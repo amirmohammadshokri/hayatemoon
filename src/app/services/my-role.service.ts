@@ -15,17 +15,27 @@ export class MyRoleService {
   ) { 
 
     this.userData$ = this.oidcSecurityService.userData$
-    this.userData$.pipe(map(o => o?.role)).subscribe(
-      role => {
-        this.myRoles = role
-      }
-    )
+    // this.userData$.pipe(map(o => o?.role)).subscribe(
+    //   result => {
+    //     this.myRoles = result
 
+    //   }
+   // )
   }
 
-  //checkPermission(role:string): Observable<boolean>{
-   // return this.userData$.pipe
-  //}
+  checkPermissionMyRole(role: string): Observable<boolean>{
+    return this.userData$.pipe(map(o => o?.role.includes(role)) )
+  }
+
+  // checkPermession(){
+  //   this.userData$.pipe(map(res=> res?.scope)).subscribe(res => 
+  //     {
+  //       console.log("resFromService", res.array.forEach(element => {
+  //         console.log("fromForEach", element)
+  //       }))
+  //     }
+  //     )
+  // }
 
 
 }
