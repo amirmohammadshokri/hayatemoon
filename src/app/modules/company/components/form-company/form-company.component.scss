@@ -1,0 +1,68 @@
+.map {
+    height: 100%;
+    min-height: 20em;
+    padding: 0;
+  }
+  
+  .img {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 2.5em;
+    margin-right: 0.5em;
+  
+    .main {
+      overflow: hidden;
+      height: 10em;
+      width: 10em;
+      border-radius: 2em;
+  
+      img {
+        height: 10em;
+      }
+    }
+  
+    .tools {
+      position: absolute;
+      bottom: -1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .circle {
+        height: 2.5em;
+        width: 2.5em;
+        border-radius: 2.5em;
+        background-color: #e8e8e8;
+  
+        img {
+          height: 1.5em;
+        }
+      }
+  
+      .circle:hover {
+        background-color: #dedede;
+      }
+    }
+  }
+  
+  .add-img {
+    height: 10em;
+    width: 10em;
+    border-radius: 2em;
+    background-color: #f3f3f3;
+    cursor: pointer;
+    margin-bottom: 1.5em;
+    margin-right: 0.5em;
+  
+    .add-circle {
+      height: 5em;
+      width: 5em;
+      border-radius: 5em;
+      background-color: #3548bf;
+  
+      img {
+        height: 2.5em;
+      }
+    }
+  }
+  

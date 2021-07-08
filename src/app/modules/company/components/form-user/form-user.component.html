@@ -1,1 +1,61 @@
-<p>form-user works!</p>
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
+            <button pButton pRipple icon="pi pi-plus" label="افزودن کاربر" class="p-button-info p-ml-1"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../"></button>
+        </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2">
+
+        <div class="p-col-4 p-field">
+            <label for="">نام شرکت</label>
+            <p-autoComplete #ss="ngModel" [suggestions]="Companies" [(ngModel)]="selecteCompanies" (completeMethod)="getCompany($event)" field="title" [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+            </p-autoComplete>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">نام</label>
+            <input type="text" #firstName="ngModel" [(ngModel)]="companyUser.firstName" pInputText>
+        </div>
+  
+        <div class="p-col-4 p-field">
+            <label for="title">رمز </label>
+            <input type="password" #password="ngModel" [(ngModel)]="companyUser.password" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">موبایل</label>
+            <input type="text" #mobile="ngModel" [(ngModel)]="companyUser.mobile" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">تلفن</label>
+            <input type="text" #internalPhone="ngModel" [(ngModel)]="companyUser.internalPhone" pInputText>
+        </div>
+   
+        <div class="p-col-4 p-field">
+            <label for="title">ایمیل</label>
+            <input type="email" #email="ngModel" [(ngModel)]="companyUser.email" pInputText>
+        </div>
+
+        <div class="p-col-4 p-field">
+            <label for="title">جنسیت</label>
+            <p-dropdown [options]="gender" #gender="ngModel" [(ngModel)]="companyUser.gender" placeholder="انتخاب جنسیت">
+            </p-dropdown>
+        </div>
+        <!-- <div class="p-col-4 p-field">
+            <label for="title">روت</label>
+            <p-dropdown [options]="routType" #routType="ngModel" [(ngModel)]="companyUser.routType" placeholder="انتخاب روت ">
+            </p-dropdown>
+        </div> -->
+       
+       
+        <div class="p-col-4 p-field">
+            <label for="title">وضعیت </label>
+            <p-dropdown [options]="state1" #typeId="ngModel" [(ngModel)]="companyUser.state"></p-dropdown>
+        </div>
+         
+    
+      
+    </div>
+</div>
