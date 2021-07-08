@@ -4,7 +4,7 @@
         </div>
         <div class="p-toolbar-group-left">
             <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
-            <button pButton pRipple icon="pi pi-plus" label="افزودن شرکت" class="p-button-info p-ml-1"></button>
+            <button disabled="superAdminAlowed" pButton pRipple icon="pi pi-plus" label="افزودن شرکت" class="p-button-info p-ml-1"></button>
             <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../room-kinds"></button>
         </div>
     </p-toolbar>
