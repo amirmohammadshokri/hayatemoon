@@ -152,6 +152,9 @@ export class FormResidenceComponent implements OnInit {
         formData.append(`file`, img.file, img.file.name);
         calls.push(this.srvMedia.upload(formData, 0));
       }
+      if (calls.length === 0) {
+        resolve();
+      }
       forkJoin(calls).subscribe(res => {
         const key = 'mediaId';
         this.residence.mainMediaId = res[this.mainImageIndex][key];

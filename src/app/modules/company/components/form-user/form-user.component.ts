@@ -16,7 +16,7 @@ export class FormUserComponent implements OnInit {
   userId: number;
   companyUser:IAddUsers={};
   gender: SelectItem[];
-  state1: SelectItem[];
+  states: SelectItem[];
   companyType: SelectItem[] = [];
   Companies: any[] = [];
   selecteCompanies: ICompanySearch;
@@ -44,7 +44,7 @@ export class FormUserComponent implements OnInit {
       { value: 0, label: 'مرد' },
       { value: 1, label: 'زن' }
     ]
-    this.state1 = [
+    this.states = [
       { value: 0, label: 'فعال' },
       { value: 1, label: 'غیر فعال' }
     ]

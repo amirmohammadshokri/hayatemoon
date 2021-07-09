@@ -1,5 +1,4 @@
 export interface IAddCompany {
-  id?: Number;
   title?: string;
   type?: number;
   ceoFirstName?: string;

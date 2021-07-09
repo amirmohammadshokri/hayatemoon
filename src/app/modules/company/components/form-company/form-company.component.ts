@@ -25,7 +25,7 @@ export class FormCompanyComponent implements OnInit {
   companyAdd: IAddCompany = { contacts: [], certificatesMediaIds: [] };
   companyId: number;
   ceoBirthDate: any;
-  state1: SelectItem[];
+  states: SelectItem[];
   companyType: SelectItem[] = [];
   locations: any[] = [];
   selectedLocation: ILocation;
@@ -57,7 +57,7 @@ export class FormCompanyComponent implements OnInit {
     })
     // this.myRoleService.checkPermession()
     this.getCompanyType();
-    this.state1 = [
+    this.states = [
       { value: 0, label: 'فعال' },
       { value: 1, label: 'غیر فعال' }
     ]
@@ -67,9 +67,6 @@ export class FormCompanyComponent implements OnInit {
         this.companyId = Number.parseInt(prms.id, 0);
         this.getCompanyById(this.companyId);
       }
-      else {
-
-      }
     });
   }
 
@@ -77,65 +74,40 @@ export class FormCompanyComponent implements OnInit {
     this.saving = true;
     const ceoBirthDate: Date = this.ceoBirthDate?._d;
     const utcCeoBirthDate = new Date(ceoBirthDate.toUTCString());
-    if (this.companyAdd.id > 0) {
-      const obj: IAddCompany = {
-        id: this.companyAdd.id,
-        title: this.companyAdd.title,
-        type: this.companyAdd.type,
-        ceoFirstName: this.companyAdd.ceoFirstName,
-        ceoLastName: this.companyAdd.ceoLastName,
-        ceoNationalCode: this.companyAdd.ceoNationalCode,
-        ceoBirthDate: this.companyAdd.ceoBirthDate,
-        companyNationalCode: this.companyAdd.companyNationalCode,
-        economyCode: this.companyAdd.economyCode,
-        address: this.companyAdd.address,
-        locationId: this.selectedLocation?.locationId,
-        state: this.companyAdd.state
-      };
+    this.companyAdd.ceoBirthDate = utcCeoBirthDate.toISOString();
+    this.companyAdd.locationId = this.selectedLocation?.locationId;
 
-      this.saveImages().then(() => {
-        if (this.companyAdd.id) {
-          this.srvCo.editCompany(this.companyId, obj).subscribe(() => {
-            this.srvMsg.add({ severity: 'success', summary: 'ویرایش شرکت', detail: 'عملیات با موفقیت انجام شد' });
-            this.companyAdd = {};
-            this.router.navigate(['./panel/company/company-list']);
-          }, _ => {
-            this.saving = false;
-          });
-        }
-      });
-
-    }
-    else {
-      this.companyAdd.id = 0;
-      this.companyAdd.ceoBirthDate = utcCeoBirthDate.toISOString();
-      this.companyAdd.locationId = this.selectedLocation?.locationId;
-      console.log(this.companyAdd);
-
-
-      this.saveImages().then(() => {
-
+    this.saveImages().then(() => {
+      if (this.companyId > 0) {
+        this.srvCo.editCompany(this.companyId, { id: this.companyId, company: this.companyAdd }).subscribe(() => {
+          this.srvMsg.add({ severity: 'success', summary: 'ویرایش شرکت', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/company/companys']);
+        }, _ => {
+          this.saving = false;
+        });
+      } else {
         this.srvCo.addCompany({ company: this.companyAdd }).subscribe(() => {
           this.srvMsg.add({ severity: 'success', summary: 'ثبت شرکت ', detail: 'عملیات با موفقیت انجام شد' });
           this.router.navigate(['./panel/company/companys']);
+        }, _ => {
+          this.saving = false;
         });
-      }, _ => {
-        this.saving = false;
-      });
-
-    }
-
+      }
+    });
   }
 
   getCompanyById(id: number): void {
     this.srvCo.getCompany(id).subscribe(res => {
-      this.ceoBirthDate = moment(res.ceoBirthDate, 'jYYYY/jMM/jDD');
+      const date = new Date(res.ceoBirthDate).toLocaleDateString('fa-IR').replace(/([۰-۹])/g, token => String.fromCharCode(token.charCodeAt(0) - 1728));
+      this.ceoBirthDate = moment(date, 'jYYYY/jMM/jDD');
       this.companyAdd = res;
+      this.companyAdd.type = res.type.id;
+      this.companyAdd.state = res.state.id;
       this.selectedLocation = res.location;
       this.images = this.companyAdd.certificatesMediaIds.map(mid => ({
         mediaId: mid,
         file: null,
-        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+        url: `http://beta-api.gozarino.com/v1/web/media/${mid}`
       }));
       // this.mainImageIndex = this.companyAdd.certificatesMediaIds.findIndex(mid => mid === this.companyAdd.certificatesMediaIds);
     });
@@ -183,6 +155,9 @@ export class FormCompanyComponent implements OnInit {
         const formData = new FormData();
         formData.append(`file`, img.file, img.file.name);
         calls.push(this.srvMedia.upload(formData, 0));
+      }
+      if (calls.length === 0) {
+        resolve();
       }
       forkJoin(calls).subscribe(res => {
         const key = 'mediaId';
