@@ -3,7 +3,7 @@
         <div class="p-toolbar-group-right">
         </div>
         <div class="p-toolbar-group-left">
-            <button pButton (click)="submit()" label="بستن تیکت"
+            <button pButton (click)="closeTicket()" label="بستن تیکت"
                 [icon]="(closing?'pi pi-spin pi-spinner':'pi pi-save')"></button>
         </div>
     </p-toolbar>
@@ -22,13 +22,16 @@
             </div>
             <div class="conversation-body" [innerHtml]="conversation.text"></div>
         </div>
-        <div class="p-grid p-fluid p-mt-2">
-            <div class="p-col-1 p-field p-d-flex">
-                <button pButton pRipple icon="pi pi-send"></button>
+        <div class="p-d-flex p-mt-3">
+            <div class="p-ml-1">
+                <button pButton pRipple icon="pi pi-paperclip" class="p-button-secondary" (click)="file.click()"></button>
+                <input type="file" #file (change)="addAttachment($event)" style="display:none;">
             </div>
-            <div class="p-col-11 p-field">
-                <textarea rows="3" placeholder="متن مورد نظر" pInputTextarea autoResize="autoResize"></textarea>
+            <div class="p-ml-2">
+                <button pButton pRipple icon="pi pi-send" (click)="addConversation()"></button>
             </div>
+            <textarea style="width:100%" rows="4" placeholder="توضیحات" pInputTextarea [(ngModel)]="conversation.text"
+                autoResize="autoResize"></textarea>
         </div>
     </div>
 </div>

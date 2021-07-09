@@ -27,6 +27,10 @@ export class TicketingService {
     return this.http.post<any[]>(`${this.url}`, obj);
   }
 
+  addConversation(conId: number, obj: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.url}/${conId}/Conversation`, obj);
+  }
+
   unreadTicketCount(): Observable<number> {
     return this.http.get<number>(`${this.url}/UnRead/Count`);
   }
