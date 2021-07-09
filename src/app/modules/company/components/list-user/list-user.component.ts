@@ -15,10 +15,7 @@ export class ListUserComponent implements OnInit {
   users: IUsers[] = [];
   loading: boolean;
   currentPage: number;
-   
-  // items: IState[];
   item: any;
- 
   showStateDialog: boolean;
   nothingElse: boolean;
 
