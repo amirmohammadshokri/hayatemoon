@@ -46,16 +46,12 @@ export class FormCompanyComponent implements OnInit {
     private srvMsg: MessageService,
     private router: Router,
     private aRoute: ActivatedRoute,
-    private myRoleService: MyRoleService
-
-    // private confirmationService: ConfirmationService,
-  ) { }
+    private myRoleService: MyRoleService) { }
 
   ngOnInit(): void {
     this.myRoleService.checkPermissionMyRole("user").subscribe(res => {
       this.superAdminAlowed = res
     })
-    // this.myRoleService.checkPermession()
     this.getCompanyType();
     this.states = [
       { value: 0, label: 'فعال' },
@@ -109,9 +105,7 @@ export class FormCompanyComponent implements OnInit {
         file: null,
         url: `http://beta-api.gozarino.com/v1/web/media/${mid}`
       }));
-      // this.mainImageIndex = this.companyAdd.certificatesMediaIds.findIndex(mid => mid === this.companyAdd.certificatesMediaIds);
     });
-
   }
 
   getCompanyType(): void {

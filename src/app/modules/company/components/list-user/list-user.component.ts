@@ -47,21 +47,14 @@ export class ListUserComponent implements OnInit {
     this.getUsers(true);
   }
 
-  
+
   getUsers(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
       this.users = [];
     }
     this.loading = true;
-    // let filter = ``;
-    // if (this.item) {
-    //   filter += `&state=${this.item.code}`;
-    // }
-    // if (this.title) {
-    //   filter += `&title=${this.title}`;
-    // }
-    this.sevCo.getUser(3,this.currentPage,15).subscribe(res => {
+    this.sevCo.getUsers(3, this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
@@ -72,8 +65,6 @@ export class ListUserComponent implements OnInit {
   }
 
   confirmDelete(id: number): void {
-    console.log("samiramiramiramir  ");
-    
     this.confirmationService.confirm({
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
       icon: 'pi pi-exclamation-triangle',

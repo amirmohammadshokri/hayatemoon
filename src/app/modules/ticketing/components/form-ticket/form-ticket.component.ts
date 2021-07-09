@@ -28,7 +28,7 @@ export class FormTicketComponent implements OnInit {
     private srvMsg: MessageService) { }
 
   ngOnInit(): void {
-    this.srvCompany.getUsers(1, 1000).subscribe(res => {
+    this.srvCompany.getUsers(3, 1, 1000).subscribe(res => {
       this.users = res;
     });
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {OidcSecurityService} from 'angular-auth-oidc-client'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IUserInfo } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,12 @@ export class MyRoleService {
 
   checkPermissionMyRole(role: string): Observable<boolean>{
     return this.userData$.pipe(map(o => o?.role.includes(role)) )
+  }
+
+  getUserInfo(): Observable<IUserInfo> {
+    return this.userData$.pipe(map(o => {
+      return o;
+    }) )
   }
 
   // checkPermession(){

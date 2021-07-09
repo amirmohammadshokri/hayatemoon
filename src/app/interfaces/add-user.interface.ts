@@ -1,4 +1,4 @@
-export interface IAddUsers{
+export interface IAddUsers {
   companyId?: number,
   firstName?: string;
   lastName?: string;
@@ -9,5 +9,5 @@ export interface IAddUsers{
   gender?: number;
   routType?: number;
   permissions?: number[];
-    state?:number
+  state?: number
 }
