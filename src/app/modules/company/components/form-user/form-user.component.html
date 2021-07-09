@@ -43,18 +43,17 @@
             <p-dropdown [options]="gender" #gender="ngModel" [(ngModel)]="companyUser.gender" placeholder="انتخاب جنسیت">
             </p-dropdown>
         </div>
-        <!-- <div class="p-col-4 p-field">
-            <label for="title">روت</label>
-            <p-dropdown [options]="routType" #routType="ngModel" [(ngModel)]="companyUser.routType" placeholder="انتخاب روت ">
-            </p-dropdown>
-        </div> -->
-       
-       
         <div class="p-col-4 p-field">
             <label for="title">وضعیت </label>
             <p-dropdown [options]="state1" #typeId="ngModel" [(ngModel)]="companyUser.state"></p-dropdown>
         </div>
-         
+        <div class="p-col-4 p-field">
+            <label for="title">مسیر تخصصی</label>
+            <div *ngFor="let category of categories" class="p-field-checkbox">
+                <p-radioButton [inputId]="category.key" name="category" [value]="category" [(ngModel)]="selectedCategory" ></p-radioButton>
+                <label [for]="category.key">{{category.name}}</label>
+            </div>
+        </div>
     
       
     </div>

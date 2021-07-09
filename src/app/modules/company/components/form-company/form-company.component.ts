@@ -7,6 +7,9 @@ import { IAddCompany } from 'src/app/interfaces';
 import { ICompanyType } from 'src/app/interfaces/companyType.interface';
 import { ILocation } from 'src/app/interfaces/location.interface';
 import { CompanyService, MediaService, SearchService } from 'src/app/services';
+import {MyRoleService} from '../../../../services/my-role.service'
+
+
 interface State {
   id: number,
   value: string
@@ -30,6 +33,7 @@ export class FormCompanyComponent implements OnInit {
   contact: any = {};
   saving: boolean;
   submitted: boolean;
+  superAdminAlowed : boolean
 
   images: { mediaId: number, file: File, url: string }[] = [];
   mainImageIndex: number;
@@ -42,12 +46,16 @@ export class FormCompanyComponent implements OnInit {
      private srvMsg: MessageService,
     private router: Router,
     private aRoute: ActivatedRoute,
+    private myRoleService : MyRoleService
 
     // private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
-
+    this.myRoleService.checkPermissionMyRole("user").subscribe(res => {
+     this.superAdminAlowed = res
+    })
+//   this.myRoleService.checkPermession()
     this.getCompanyType();
     this.state1 = [
       { value: 0, label: 'فعال' },
@@ -66,6 +74,7 @@ export class FormCompanyComponent implements OnInit {
   }
 
   submit(): void {
+
     this.saving = true;
     if (this.companyAdd.id > 0) {
       const obj: IAddCompany = {
