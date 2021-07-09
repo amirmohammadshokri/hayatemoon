@@ -24,7 +24,10 @@ export class FormUserComponent implements OnInit {
   contact: any = {};
   saving: boolean;
   submitted: boolean;
+  selectedCategory: any = null;
 
+  categories: any[] = [{name: 'داخلی', key: 0}, {name: 'خارجی', key: 1}, {name: 'داخلی خارحی', key: 1}];
+  
   constructor(
 
     private srvCo: CompanyService,
@@ -32,7 +35,8 @@ export class FormUserComponent implements OnInit {
      private srvMsg: MessageService,
     private router: Router,
     private aRoute: ActivatedRoute,
-  ) { }
+    
+  ) {}
 
   ngOnInit(): void {
 
@@ -44,6 +48,9 @@ export class FormUserComponent implements OnInit {
       { value: 0, label: 'فعال' },
       { value: 1, label: 'غیر فعال' }
     ]
+    this.selectedCategory = this.categories[1];
+
+    
   }
 
   getCompany(event: any): void {
@@ -53,6 +60,23 @@ export class FormUserComponent implements OnInit {
   }
 
   submit(): void {
+   
+    this.saving = true;
+    if (this.userId > 0) {
+      const obj: IAddUsers = {
+        companyId: this.companyUser.companyId,
+        firstName:this.companyUser.firstName,
+        lastName:this.companyUser.lastName,
+        password:this.companyUser.password,
+        mobile:this.companyUser.mobile,
+        internalPhone:this.companyUser.internalPhone,
+        email:this.companyUser.email,
+        //gender:this.gender,
+        routType: this.selectedCategory
+      };
+ 
+    }
+     
   }
 
 }
