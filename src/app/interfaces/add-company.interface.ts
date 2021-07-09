@@ -16,5 +16,6 @@ export interface IAddCompany {
 }
 
 interface IUser {
-  title?: string; value?: string;
+  title?: string;
+  value?: string;
 }

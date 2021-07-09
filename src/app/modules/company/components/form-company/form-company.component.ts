@@ -7,7 +7,7 @@ import { IAddCompany } from 'src/app/interfaces';
 import { ICompanyType } from 'src/app/interfaces/companyType.interface';
 import { ILocation } from 'src/app/interfaces/location.interface';
 import { CompanyService, MediaService, SearchService } from 'src/app/services';
-import {MyRoleService} from '../../../../services/my-role.service'
+import { MyRoleService } from '../../../../services/my-role.service'
 
 
 interface State {
@@ -33,7 +33,7 @@ export class FormCompanyComponent implements OnInit {
   contact: any = {};
   saving: boolean;
   submitted: boolean;
-  superAdminAlowed : boolean
+  superAdminAlowed: boolean
 
   images: { mediaId: number, file: File, url: string }[] = [];
   mainImageIndex: number;
@@ -43,19 +43,19 @@ export class FormCompanyComponent implements OnInit {
     private srvCo: CompanyService,
     private srcSrch: SearchService,
     private srvMedia: MediaService,
-     private srvMsg: MessageService,
+    private srvMsg: MessageService,
     private router: Router,
     private aRoute: ActivatedRoute,
-    private myRoleService : MyRoleService
+    private myRoleService: MyRoleService
 
     // private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
     this.myRoleService.checkPermissionMyRole("user").subscribe(res => {
-     this.superAdminAlowed = res
+      this.superAdminAlowed = res
     })
-//   this.myRoleService.checkPermession()
+    // this.myRoleService.checkPermession()
     this.getCompanyType();
     this.state1 = [
       { value: 0, label: 'فعال' },
@@ -74,8 +74,9 @@ export class FormCompanyComponent implements OnInit {
   }
 
   submit(): void {
-
     this.saving = true;
+    const ceoBirthDate: Date = this.ceoBirthDate?._d;
+    const utcCeoBirthDate = new Date(ceoBirthDate.toUTCString());
     if (this.companyAdd.id > 0) {
       const obj: IAddCompany = {
         id: this.companyAdd.id,
@@ -84,7 +85,7 @@ export class FormCompanyComponent implements OnInit {
         ceoFirstName: this.companyAdd.ceoFirstName,
         ceoLastName: this.companyAdd.ceoLastName,
         ceoNationalCode: this.companyAdd.ceoNationalCode,
-        ceoBirthDate:  this.companyAdd.ceoBirthDate,
+        ceoBirthDate: this.companyAdd.ceoBirthDate,
         companyNationalCode: this.companyAdd.companyNationalCode,
         economyCode: this.companyAdd.economyCode,
         address: this.companyAdd.address,
@@ -101,39 +102,29 @@ export class FormCompanyComponent implements OnInit {
           }, _ => {
             this.saving = false;
           });
-        }  
+        }
       });
- 
+
     }
     else {
       this.companyAdd.id = 0;
-      const obj1: IAddCompany = {
-        id: 0,
-        title: this.companyAdd.title,
-        type: this.companyAdd.type,
-        ceoFirstName: this.companyAdd.ceoFirstName,
-        ceoLastName: this.companyAdd.ceoLastName,
-        ceoNationalCode: this.companyAdd.ceoNationalCode,
-        ceoBirthDate:  this.ceoBirthDate,
-        companyNationalCode: this.companyAdd.companyNationalCode,
-        economyCode: this.companyAdd.economyCode,
-        address: this.companyAdd.address,
-        locationId: this.selectedLocation?.locationId,
-        state: this.companyAdd.state
-      };
-    
+      this.companyAdd.ceoBirthDate = utcCeoBirthDate.toISOString();
+      this.companyAdd.locationId = this.selectedLocation?.locationId;
+      console.log(this.companyAdd);
+
+
       this.saveImages().then(() => {
-        
-        this.srvCo.addCompany(obj1).subscribe(() => {
+
+        this.srvCo.addCompany({ company: this.companyAdd }).subscribe(() => {
           this.srvMsg.add({ severity: 'success', summary: 'ثبت شرکت ', detail: 'عملیات با موفقیت انجام شد' });
-         this.router.navigate(['./panel/company/company']);
-       });
-          }, _ => {
-            this.saving = false;
-          });
-          
-      }
-     
+          this.router.navigate(['./panel/company/companys']);
+        });
+      }, _ => {
+        this.saving = false;
+      });
+
+    }
+
   }
 
   getCompanyById(id: number): void {
@@ -148,7 +139,7 @@ export class FormCompanyComponent implements OnInit {
       }));
       // this.mainImageIndex = this.companyAdd.certificatesMediaIds.findIndex(mid => mid === this.companyAdd.certificatesMediaIds);
     });
-  
+
   }
 
   getCompanyType(): void {
@@ -166,13 +157,13 @@ export class FormCompanyComponent implements OnInit {
   addContact(): void {
     this.companyAdd.contacts.push(
       {
-        value:this.contact.value,
-        title:this.contact.title
+        value: this.contact.value,
+        title: this.contact.title
       }
     );
     this.contact = {};
   }
-  
+
   deleteContact(index: number): void {
     this.companyAdd.contacts.splice(index, 1);
   }
@@ -195,7 +186,7 @@ export class FormCompanyComponent implements OnInit {
       }
       forkJoin(calls).subscribe(res => {
         const key = 'mediaId';
-        
+
         for (let index = 0; index < res.length; index++) {
           this.images.filter(im => !im.mediaId)[index].mediaId = res[index][key];
           this.companyAdd.certificatesMediaIds.push(res[index][key]);
