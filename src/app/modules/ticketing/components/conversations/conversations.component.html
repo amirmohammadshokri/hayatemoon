@@ -9,12 +9,26 @@
     </p-toolbar>
     <div>
         <div *ngFor="let conversation of conversations" class="conversation">
-            <div>
-                <span>{{conversation.readDate}}</span>
-                <span>{{conversation.saveDate}}</span>
+            <div class="conversation-topbar p-d-flex p-ai-center p-px-2">
+                <i class="p-ml-2 pi pi-user-circle"></i>
                 <span>{{conversation.senderFullName}}</span>
+                <span style="flex: 1 auto"></span>
+                <button *ngIf="conversation.attachment" pButton icon="pi pi-paperclip"
+                    class="p-ml-4 p-button-rounded p-button-help p-button-icon p-button-text"></button>
+                <i class="p-ml-2 pi pi-eye"></i>
+                <span>{{conversation.readDate}}</span>
+                <i class="p-ml-2 p-mr-4 pi pi-pencil"></i>
+                <span>{{conversation.saveDate}}</span>
             </div>
-            <div [innerHtml]="conversation.text"></div>
+            <div class="conversation-body" [innerHtml]="conversation.text"></div>
+        </div>
+        <div class="p-grid p-fluid p-mt-2">
+            <div class="p-col-1 p-field">
+                <button pButton pRipple icon="pi pi-send"></button>
+            </div>
+            <div class="p-col-11 p-field">
+                <textarea rows="3" placeholder="متن مورد نظر" pInputTextarea autoResize="autoResize"></textarea>
+            </div>
         </div>
     </div>
 </div>

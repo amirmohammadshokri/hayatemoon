@@ -97,7 +97,6 @@ export class FormTourComponent implements OnInit {
       this.selectedCategories = res.categories;
       this.srvData.thanksMainProgressBar();
     });
-
   }
 
   getCategories(event: any): void {
