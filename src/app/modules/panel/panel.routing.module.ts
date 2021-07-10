@@ -34,6 +34,10 @@ const routes: Routes = [
         path: 'company',
         loadChildren: () => import('../company/company.module').then(m => m.CompanyModule)
       },
+      {
+        path: 'crawler',
+        loadChildren: () => import('../crawler/crawler.module').then(m => m.CrawlerModule)
+      },
     ]
   }
 ];

@@ -1,0 +1,17 @@
+.content {
+  border: 1px solid #545b67;
+  width: 20em;
+  padding: 1em 1em 0 1em;
+  border-radius: 0.5em;
+
+  .content-header {
+    border-bottom: 1px solid #545b67;
+    padding-bottom: 0.2em;
+    margin-bottom: 0.2em;
+  }
+
+  .content-routes {
+    max-height: 20empx;
+    overflow-y: auto;
+  }
+}
