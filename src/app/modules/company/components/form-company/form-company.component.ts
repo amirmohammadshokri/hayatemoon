@@ -39,7 +39,6 @@ export class FormCompanyComponent implements OnInit {
   mainImageIndex: number;
 
   constructor(
-
     private srvCo: CompanyService,
     private srcSrch: SearchService,
     private srvMedia: MediaService,

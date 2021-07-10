@@ -54,6 +54,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
         ]
       },
       {
+        label: 'مدیریت کانال ها', icon: 'fa fa-users', items: [
+          { label: 'لسیت کانال ها', icon: 'pi pi-list', routerLink: ['chanel/chanels'] }
+        ]
+      },
+      {
         label: 'مدیریت شرکت ها', icon: 'fa fa-home', items: [
           { label: 'لسیت شرکت ها', icon: 'pi pi-list', routerLink: ['company/companys'] },
           { label: 'لسیت کاربران شرکت ها', icon: 'pi pi-list', routerLink: ['company/users'] }

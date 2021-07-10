@@ -16,7 +16,6 @@ export class ListCompanyComponent implements OnInit {
   loading: boolean;
   currentPage: number;
   selectedHotel: ICompany;
-  // items: IState[];
   item: any;
   title: string;
   showStateDialog: boolean;
@@ -51,21 +50,14 @@ export class ListCompanyComponent implements OnInit {
     this.getCompanys(true);
   }
 
-  
+
   getCompanys(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
       this.companys = [];
     }
     this.loading = true;
-    // let filter = ``;
-    // if (this.item) {
-    //   filter += `&state=${this.item.code}`;
-    // }
-    // if (this.title) {
-    //   filter += `&title=${this.title}`;
-    // }
-    this.sevCo.getCompanies(this.currentPage,15).subscribe(res => {
+    this.sevCo.getCompanies(this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
@@ -75,8 +67,6 @@ export class ListCompanyComponent implements OnInit {
   }
 
   confirmDelete(id: number): void {
-    console.log("samiramiramiramir  ");
-    
     this.confirmationService.confirm({
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
       icon: 'pi pi-exclamation-triangle',
@@ -95,8 +85,6 @@ export class ListCompanyComponent implements OnInit {
   }
 
   editCompany(id: number): void {
-    console.log('Amir'+id);
-    
     this.router.navigate([`../panel/company/form-company/${id}`]);
   }
 

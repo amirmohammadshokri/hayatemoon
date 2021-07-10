@@ -1,0 +1,28 @@
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+                [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
+                routerLink="../../chanels"></button>
+        </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2">
+        <div class="p-col-8 p-field">
+            <label for="title">عنوان</label>
+            <input type="text" #title="ngModel" [(ngModel)]="chanel.title" pInputText>
+        </div>
+        <div class="p-col-4 p-field">
+            <label for="title">نوع</label>
+            <p-dropdown [options]="types" #typeId="ngModel" [(ngModel)]="chanel.type"
+                placeholder="انتخاب">
+            </p-dropdown>
+        </div>
+        <div class="p-col-12 p-field">
+            <label for="title">توضیحات</label>
+            <textarea pInputTextarea rows="1" [(ngModel)]="chanel.description"></textarea>
+        </div>
+    </div>
+</div>
