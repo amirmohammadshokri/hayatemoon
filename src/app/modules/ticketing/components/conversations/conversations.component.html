@@ -10,7 +10,7 @@
     <div>
         <div *ngFor="let conversation of conversations" class="conversation">
             <div class="conversation-topbar p-d-flex p-ai-center p-px-2">
-                <i class="p-ml-2 pi pi-user-circle"></i>
+                <i class="p-ml-2 pi pi-user"></i>
                 <span>{{conversation.senderFullName}}</span>
                 <span style="flex: 1 auto"></span>
                 <button *ngIf="conversation.attachment" pButton icon="pi pi-paperclip"

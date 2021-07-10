@@ -26,6 +26,7 @@ export * from './conversation.interface'
 export * from './user-info.interface';
 export * from './chanel-list.interface';
 export * from './add-chanel.interface';
+export * from './chanel-content.interface';
 
 
 

@@ -1,0 +1,38 @@
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
+                routerLink="../../chanels"></button>
+        </div>
+    </p-toolbar>
+    <div>
+        <p-confirmDialog header="تایید" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+        <div *ngFor="let content of contents" class="conversation">
+            <div class="conversation-topbar p-d-flex p-ai-center p-px-2">
+                <i class="p-ml-2 pi pi-user"></i>
+                <span>{{content.regCompanyUser.regUser.fullName}} {{content.regCompanyUser.companyTitle}}</span>
+                <span style="flex: 1 auto"></span>
+                <button *ngIf="content.attachment" pButton icon="pi pi-paperclip"
+                    class="p-ml-2 p-button-rounded p-button-help p-button-icon p-button-text"></button>
+                <button pButton icon="pi pi-trash"
+                    class="p-ml-2 p-button-rounded p-button-danger p-button-icon p-button-text"
+                    (click)="confirmDelete(content.id)"></button>
+            </div>
+            <div class="conversation-body" [innerHtml]="content.text"></div>
+        </div>
+        <div class="p-d-flex p-mt-3">
+            <div class="p-ml-1">
+                <button pButton pRipple icon="pi pi-paperclip" class="p-button-secondary"
+                    (click)="file.click()"></button>
+                <input type="file" #file (change)="addAttachment($event)" style="display:none;">
+            </div>
+            <div class="p-ml-2">
+                <button pButton pRipple icon="pi pi-send" (click)="addContent()"></button>
+            </div>
+            <textarea style="width:100%" rows="4" placeholder="توضیحات" pInputTextarea [(ngModel)]="content.text"
+                autoResize="autoResize"></textarea>
+        </div>
+    </div>
+</div>

@@ -34,6 +34,20 @@ export class ChanelService {
     return this.http.get(`${this.url}/Latest?page=${page}&pageSize=${pageSize}`);
   }
 
+  addContent(chanelId: number, obj: any): Observable<any> {
+    return this.http.post(`${this.url}/${chanelId}/Content/New`, obj);
+  }
 
+  getContents(chanelId: number, page: number, pageSize: number): Observable<any> {
+    return this.http.get(`${this.url}/${chanelId}/Content/Latest?page=${page}&pageSize=${pageSize}`);
+  }
+
+  getContentViewers(chanelId: number, contentId: number): Observable<any> {
+    return this.http.get(`${this.url}/${chanelId}/Content/Viewers?id=${contentId}`);
+  }
+
+  deleteContent(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/Content/${id}`);
+  }
 
 }

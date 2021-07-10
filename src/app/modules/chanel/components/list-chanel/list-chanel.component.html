@@ -18,7 +18,7 @@
                 <th *ngFor="let col of columns">
                     {{ col.header }}
                 </th>
-                <th style="width: 8em"></th>
+                <th style="width: 12em"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
@@ -45,6 +45,8 @@
                         (click)="confirmDelete(rowData.id)" pTooltip="حذف"></button>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info p-mr-1"
                         (click)="editChanel(rowData.id)" pTooltip="ویرایش"></button>
+                    <button pButton pRipple icon="pi pi-comment" class="p-button p-button-help p-mr-1"
+                        routerLink="../contents/{{rowData.id}}" pTooltip="پیام ها"></button>
                 </td>
             </tr>
         </ng-template>

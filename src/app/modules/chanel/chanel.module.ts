@@ -13,10 +13,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { ChanelContentsComponent } from './components/chanel-contents/chanel-contents.component';
 
 
 @NgModule({
-  declarations: [ListChanelComponent, FormChanelComponent],
+  declarations: [ListChanelComponent, FormChanelComponent, ChanelContentsComponent],
   imports: [
     CommonModule,
     ChanelRoutingModule,
