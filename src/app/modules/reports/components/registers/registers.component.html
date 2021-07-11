@@ -1,1 +1,44 @@
-<p>registers works!</p>
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+            <div class="p-grid p-fluid">
+                <div class="p-col-6 p-field">
+                    <label for="fromDate">از تاریخ</label>
+                    <dp-date-picker id="fromDate" [(ngModel)]="from" dir="ltr" theme="dp-material" mode="day">
+                    </dp-date-picker>
+                </div>
+                <div class="p-col-6 p-field">
+                    <label for="toDate">تا تاریخ</label>
+                    <dp-date-picker id="toDate" [(ngModel)]="to" dir="ltr" theme="dp-material" mode="day">
+                    </dp-date-picker>
+                </div>
+            </div>
+        </div>
+        <div class="p-toolbar-group-left">
+            <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو"
+                (click)="getRegisters(true)"></button>
+        </div>
+    </p-toolbar>
+    <p-table [columns]="cols" [value]="data" styleClass="p-datatable-striped" [loading]="loading">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 4em">ردیف</th>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+            <tr>
+                <td>
+                    <span class="p-column-title"> ردیف</span>
+                    {{ index + 1 }}
+                </td>
+                <td *ngFor="let col of columns">
+                    <span class="p-column-title"> {{col.header}}</span>
+                    {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

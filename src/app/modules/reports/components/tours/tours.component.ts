@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DataService, ReportService } from 'src/app/services';
+import { DataService, ReportService, TourService } from 'src/app/services';
 import * as moment from 'jalali-moment';
+import { SelectItem } from 'primeng/api';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ToursComponent implements OnInit {
   to: any;
   tours: any[];
   cols: any[];
-  types: any[];
+  types: SelectItem[] = [];
   type: any;
   loading: boolean;
 
@@ -29,11 +30,11 @@ export class ToursComponent implements OnInit {
     }
   }
 
-  constructor(private srvRprt: ReportService, private srvData: DataService) {
+  constructor(private srvRprt: ReportService, private srvData: DataService, private srvTour: TourService) {
     var date = new Date();
     let today = date.toLocaleDateString('fa-IR').replace(/([۰-۹])/g, token => String.fromCharCode(token.charCodeAt(0) - 1728));
     this.to = moment(today, 'jYYYY/jMM/jDD');
-    date.setMonth(date.getMonth() - 1);
+    date.setMonth(date.getMonth() - 6);
     today = date.toLocaleDateString('fa-IR').replace(/([۰-۹])/g, token => String.fromCharCode(token.charCodeAt(0) - 1728));
     this.from = moment(today, 'jYYYY/jMM/jDD');
     this.cols = [
@@ -45,10 +46,16 @@ export class ToursComponent implements OnInit {
       { field: 'location', header: 'محل' },
       { field: 'state', header: 'وضعیت' },
     ];
+
+    this.srvTour.getTourType().subscribe(type => {
+      this.types = type.map(t => ({ value: t.id, label: t.title }));
+      this.type = this.types[0].value;
+      this.getToures(true);
+    })
   }
 
   ngOnInit(): void {
-    this.getToures(true);
+
   }
 
   getToures(firstLoad: boolean) {
@@ -62,7 +69,7 @@ export class ToursComponent implements OnInit {
     const utcFrom = new Date(from.toUTCString());
     const to: Date = this.to?._d;
     const utcTo = new Date(to.toUTCString());
-    this.srvRprt.tour(utcFrom.toISOString(), utcTo.toISOString(), 0, this.currentPage, 15).subscribe(res => {
+    this.srvRprt.tour(utcFrom.toISOString(), utcTo.toISOString(), this.type, this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
