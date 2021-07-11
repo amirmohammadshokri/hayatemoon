@@ -11,10 +11,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+import { FinanceComponent } from './components/finance/finance.component';
 
 
 @NgModule({
-  declarations: [ToursComponent, RegistersComponent],
+  declarations: [ToursComponent, RegistersComponent, FinanceComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,
