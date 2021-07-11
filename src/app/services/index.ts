@@ -20,3 +20,4 @@ export * from './company.service';
 export * from './identity.service';
 export * from './chanel.service';
 export * from './crawler.service';
+export * from './report.service';

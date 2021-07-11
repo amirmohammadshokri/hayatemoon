@@ -38,6 +38,10 @@ const routes: Routes = [
         path: 'crawler',
         loadChildren: () => import('../crawler/crawler.module').then(m => m.CrawlerModule)
       },
+      {
+        path: 'report',
+        loadChildren: () => import('../reports/reports.module').then(m => m.ReportsModule)
+      },
     ]
   }
 ];

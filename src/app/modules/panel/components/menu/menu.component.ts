@@ -69,6 +69,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
           { label: 'لسیت کرولر ها', icon: 'pi pi-list', routerLink: ['crawler/list'] }
         ]
       },
+      {
+        label: 'گزارش ها', icon: 'fa fa-bar-chart', items: [
+          { label: 'تورها', icon: 'pi pi-list', routerLink: ['report/tours'] }
+        ]
+      },
     ];
   }
 
