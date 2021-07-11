@@ -27,7 +27,7 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="title">موبایل</label>
-            <input type="text" #mobile="ngModel" pKeyFilter="num" [(ngModel)]="companyUser.mobile" pInputText>
+            <input type="text" #mob ile="ngModel" pKeyFilter="num" [(ngModel)]="companyUser.mobile" pInputText>
         </div>
         <div class="p-col-4 p-field">
             <label for="title">تلفن</label>
@@ -61,6 +61,10 @@
         <div class="p-col-4">
             <label for="title">مجوز ها</label>
             <p-multiSelect [options]="permissions" [(ngModel)]="companyUser.permissions"></p-multiSelect>
+        </div>
+        <div class="p-col-4">
+            <label for="title">نقش ها</label>
+            <p-multiSelect [options]="roles" [(ngModel)]="companyUser.roles"></p-multiSelect>
         </div>
     </div>
 </div>
