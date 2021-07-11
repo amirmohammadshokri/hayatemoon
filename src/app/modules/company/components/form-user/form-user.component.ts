@@ -23,6 +23,7 @@ export class FormUserComponent implements OnInit {
   saving: boolean;
   submitted: boolean;
   permissions: SelectItem[] = [];
+  roles: SelectItem[] = [];
   routes: any[] = [{ name: 'داخلی', key: 0 }, { name: 'خارجی', key: 1 }, { name: 'داخلی خارجی', key: 2 }];
 
   constructor(
@@ -48,6 +49,7 @@ export class FormUserComponent implements OnInit {
       { value: 1, label: 'غیر فعال' }
     ];
     this.getPermissions();
+    this.getRoles();
   }
 
   getCompany(event: any): void {
@@ -67,6 +69,18 @@ export class FormUserComponent implements OnInit {
       });
     });
   }
+
+  getRoles(): void {
+    this.srvIdentity.getRoles().subscribe(res => {
+      this.roles = res.map(r => ({ label: r.title, value: r.id }));
+      this.aRoute.params.subscribe(prms => {
+        if (prms.id > 0) {
+          this.userId = Number.parseInt(prms.id, 0);
+          this.getUserById();
+        }
+      });
+    });
+   }
 
   getUserById() {
     this.srvCo.getUser(this.userId).subscribe(res => {
