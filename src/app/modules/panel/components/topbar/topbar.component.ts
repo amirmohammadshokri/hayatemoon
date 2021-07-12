@@ -13,8 +13,12 @@ export class TopbarComponent implements OnInit {
 
   avatar = 'assets/user.svg';
   unreadedTicket: number;
+  darkMode: boolean = true;
 
-  constructor(private srvTicket: TicketingService, private srvOidc: OidcSecurityService, private sData: DataService) { }
+  constructor(
+    private srvTicket: TicketingService,
+    private srvOidc: OidcSecurityService,
+    private sData: DataService) { }
 
   ngOnInit(): void {
     $('.search-item').click(() => {
@@ -59,6 +63,54 @@ export class TopbarComponent implements OnInit {
         });
       }
     })
+  }
+
+  changeMode() {
+    $('#loading').css("display", "flex")
+
+    document.head.removeChild(document.getElementById('theme-css'));
+    document.head.removeChild(document.getElementById('layout-css'));
+
+    if (this.darkMode) {
+      let linkTheme: HTMLLinkElement = document.createElement('link');
+      linkTheme.setAttribute('rel', 'stylesheet');
+      linkTheme.setAttribute('id', 'theme-css');
+      linkTheme.setAttribute('href', 'assets/theme/theme-light.css');
+      document.head.appendChild(linkTheme);
+      let linkLayout: HTMLLinkElement = document.createElement('link');
+      linkLayout.setAttribute('rel', 'stylesheet');
+      linkLayout.setAttribute('id', 'layout-css');
+      linkLayout.setAttribute('href', 'assets/theme/layout-light.css');
+      document.head.appendChild(linkLayout);
+
+      $('#layout').removeClass('layout-menu-dark');
+      $('#layout').removeClass('layout-topbar-dark');
+      $('#layout').addClass('layout-menu-light');
+      $('#layout').addClass('layout-topbar-light');
+      setTimeout(() => {
+        $('#loading').css("display", "none")
+      }, 800);
+    } else {
+      let linkTheme: HTMLLinkElement = document.createElement('link');
+      linkTheme.setAttribute('rel', 'stylesheet');
+      linkTheme.setAttribute('id', 'theme-css');
+      linkTheme.setAttribute('href', 'assets/theme/theme-dark.css');
+      document.head.appendChild(linkTheme);
+      let linkLayout: HTMLLinkElement = document.createElement('link');
+      linkLayout.setAttribute('rel', 'stylesheet');
+      linkLayout.setAttribute('id', 'layout-css');
+      linkLayout.setAttribute('href', 'assets/theme/layout-dark.css');
+      document.head.appendChild(linkLayout);
+
+      $('#layout').removeClass('layout-menu-light');
+      $('#layout').removeClass('layout-topbar-light');
+      $('#layout').addClass('layout-menu-dark');
+      $('#layout').addClass('layout-topbar-dark');
+      setTimeout(() => {
+        $('#loading').css("display", "none")
+      }, 800);
+    }
+    this.darkMode = !this.darkMode;
   }
 
   signout(): void {

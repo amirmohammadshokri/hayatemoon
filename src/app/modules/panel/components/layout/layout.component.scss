@@ -1,0 +1,14 @@
+.layout-menu-light {
+  ::ng-deep .dp-picker-input {
+    background: rgb(255, 255, 255) !important;
+    border: 1px solid rgb(212, 214, 217) !important;
+  }
+}
+
+.layout-menu-dark {
+  ::ng-deep .dp-picker-input {
+    color: #eaebec !important;
+    background: #3e4754 !important;
+    border: 1px solid #545b67 !important;
+  }
+}

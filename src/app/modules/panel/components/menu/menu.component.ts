@@ -16,10 +16,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   companyId: number;
   menuIndex: number;
 
-  constructor(
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor(private cdr: ChangeDetectorRef) {
     this.menuItems = [
       { label: 'داشبورد', icon: 'pi pi-home', routerLink: ['dashboard'] },
       {
@@ -87,7 +84,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
     $('.menu-wrapper').mouseleave(() => {
       $('.menu-wrapper').removeClass('layout-sidebar-active');
     });
-
   }
 
   ngAfterViewInit(): void {
