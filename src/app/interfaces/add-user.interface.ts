@@ -9,5 +9,6 @@ export interface IAddUsers {
   gender?: number;
   routType?: number;
   permissions?: number[];
+  roles?: number[];
   state?: number
 }
