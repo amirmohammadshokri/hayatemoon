@@ -19,7 +19,7 @@ export class FormTicketComponent implements OnInit {
     { label: 'متوسط', value: 1 },
     { label: 'زیاد', value: 0 }
   ];
-  users: any[];
+  users: SelectItem[];
 
   constructor(
     private srvCompany: CompanyService,
@@ -29,7 +29,7 @@ export class FormTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.srvCompany.getUsers(3, 1, 1000).subscribe(res => {
-      this.users = res;
+      this.users = res.map(r => ({ label: `${(r.firstName ?? ``)} ${(r.lastName ?? ``)}`, value: r.id }));
     });
   }
 
