@@ -44,11 +44,11 @@
                 placeholder="انتخاب جنسیت">
             </p-dropdown>
         </div>
-        <div class="p-col-4 p-field">
+        <div class="p-col-3 p-field">
             <label for="title">وضعیت </label>
             <p-dropdown [options]="states" #typeId="ngModel" [(ngModel)]="companyUser.state"></p-dropdown>
         </div>
-        <div class="p-col-4">
+        <div class="p-col-3">
             <label for="title">مسیر تخصصی</label>
             <div class="p-d-flex p-ai-center p-mt-3">
                 <div *ngFor="let route of routes" class="p-field-checkbox p-ml-3">
@@ -58,11 +58,11 @@
                 </div>
             </div>
         </div>
-        <div class="p-col-4">
+        <div class="p-col-3">
             <label for="title">مجوز ها</label>
             <p-multiSelect [options]="permissions" [(ngModel)]="companyUser.permissions"></p-multiSelect>
         </div>
-        <div class="p-col-4">
+        <div class="p-col-3">
             <label for="title">نقش ها</label>
             <p-multiSelect [options]="roles" [(ngModel)]="companyUser.roles"></p-multiSelect>
         </div>
