@@ -97,7 +97,8 @@ export class FormUserComponent implements OnInit {
       this.companyUser.companyId = this.selecteCompanies.companyId;
     }
     this.saving = true;
-    if (this.userId) {
+    if (this.userId && this.companyUser.lastName && this.companyUser.password
+      && this.companyUser.mobile) {
       this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
         this.srvMsg.add({ severity: 'success', summary: 'ویرایش کاربر', detail: 'عملیات با موفقیت انجام شد' });
         this.router.navigate(['./panel/company/users']);
