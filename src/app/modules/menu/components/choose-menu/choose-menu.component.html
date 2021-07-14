@@ -1,0 +1,4 @@
+<p-tree [value]="menus" selectionMode="single" [(selection)]="selectedMenu" [filter]="true"
+    emptyMessage="اطلاعاتی یافت نشد" [loading]="loading" (onNodeExpand)="nodeExpand($event)"
+    (onFilter)="searchMenu($event)" (onNodeSelect)="selectMenu($event.node)">
+</p-tree>

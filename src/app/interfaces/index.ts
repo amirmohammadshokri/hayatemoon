@@ -28,6 +28,7 @@ export * from './chanel-list.interface';
 export * from './add-chanel.interface';
 export * from './chanel-content.interface';
 export * from './crawler-route.interface';
+export * from './add-menu.interface';
 
 
 
