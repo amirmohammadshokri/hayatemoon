@@ -12,8 +12,28 @@ export class MenuService {
     this.url = `${this.conf.getConfig('url')}web/menu/`;
   }
 
-  addPlaces(obj: any): Observable<any> {
+  addMenu(obj: any): Observable<any> {
     return this.http.post<any>(`${this.url}new`, obj);
+  }
+
+  editMenu(menuId: number, obj: any): Observable<any> {
+    return this.http.put<any>(`${this.url}${menuId}`, obj);
+  }
+
+  deleteMenu(menuId: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}${menuId}`);
+  }
+
+  getMenu(menuId: number): Observable<any> {
+    return this.http.get<any>(`${this.url}${menuId}`);
+  }
+
+  getMenus(): Observable<any> {
+    return this.http.get<any>(`${this.url}All`);
+  }
+
+  getMenuChildren(menuId: number): Observable<any> {
+    return this.http.get<any>(`${this.url}${menuId}/children`);
   }
 
 }
