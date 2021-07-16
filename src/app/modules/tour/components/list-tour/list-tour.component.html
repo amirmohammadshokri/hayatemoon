@@ -1,12 +1,19 @@
 <div class="card">
   <p-toolbar>
     <div class="p-toolbar-group-right">
-      <div class="p-grid p-fluid">
-        <div class="p-col-6 p-field">
+        <div class="p-grid p-fluid">
+          <div *ngIf="currentUser.role === 'SUPERADMIN'" class="p-col-4 p-field">
+            <label for="">نام شرکت</label>
+            <p-autoComplete #ss="ngModel" [suggestions]="companies" [(ngModel)]="selecteCompanies"
+                (completeMethod)="getCompany($event)" field="title"
+                [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+            </p-autoComplete>
+          </div>
+        <div class="p-col-4 p-field">
           <label for="title"> عنوان تور</label>
           <input type="text" id="title" pInputText [(ngModel)]="title" />
         </div>
-        <div class="p-col-6 p-field">
+        <div class="p-col-4 p-field">
           <label for="state">وضعیت</label>
           <p-dropdown inputId="state" [options]="items" [(ngModel)]="item" placeholder="انتخاب وضعیت"
             optionLabel="name"></p-dropdown>
