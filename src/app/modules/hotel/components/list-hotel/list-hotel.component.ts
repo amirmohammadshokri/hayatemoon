@@ -1,8 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { IUserInfo } from 'src/app/interfaces';
+import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
 import { IHotel } from 'src/app/interfaces/hotel.interface';
 import { IState } from 'src/app/interfaces/state.inteface';
+import { MyRoleService, SearchService } from 'src/app/services';
 import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
@@ -20,8 +23,14 @@ export class ListHotelComponent implements OnInit {
   items: IState[];
   item: any;
   title: string;
+  CompanyId:number;
   showStateDialog: boolean;
   nothingElse: boolean;
+  companies: any[] = [];
+  submitted: boolean;
+  selecteCompanies: ICompanySearch;
+  currentUser: IUserInfo = {};
+  userId: number;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -37,10 +46,18 @@ export class ListHotelComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private srvHotel: HotelService,
     private srvMsg: MessageService,
-    private router: Router
+    private router: Router,
+    private srvRole: MyRoleService,
+    private srcSrch: SearchService,
+
   ) { }
 
   ngOnInit(): void {
+
+    this.srvRole.getUserInfo().subscribe(userInfo => {
+      this.currentUser = userInfo;
+      this.CompanyId= Number.parseInt(this.currentUser.CompanyId);
+    });
     this.items = [
       { code: 0, name: 'فعال' },
       { code: 1, name: 'غیر فعال' },
@@ -53,6 +70,7 @@ export class ListHotelComponent implements OnInit {
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
     this.getHotels(true);
+
   }
 
   changeState(stateId: number): void {
@@ -63,6 +81,13 @@ export class ListHotelComponent implements OnInit {
     }).subscribe(res => {
       this.srvMsg.add({ severity: 'success', summary: 'تغییر وضعیت', detail: 'عملیات با موفقیت انجام شد' });
       this.selectedHotel.state = { id: stateId, title: this.items.find(i => i.code === stateId).name };
+    });
+  }
+
+
+  getCompany(event: any): void {
+    this.srcSrch.getCompanySaerch(event.query).subscribe(res => {
+      this.companies = res;
     });
   }
 
@@ -79,6 +104,12 @@ export class ListHotelComponent implements OnInit {
     if (this.title) {
       filter += `&title=${this.title}`;
     }
+    
+    if (this.currentUser.role === 'SUPERADMIN') {
+      filter += `&regCompanyId=${this.CompanyId}`;
+    }  
+    if(this.currentUser.role === 'SUPERADMIN' || this.selecteCompanies.companyId>0)
+    //تتتتتت
     this.srvHotel.getHotels(filter, this.currentPage).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;

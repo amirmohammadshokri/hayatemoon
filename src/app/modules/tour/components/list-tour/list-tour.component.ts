@@ -1,8 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { IState } from 'src/app/interfaces';
-import { TourService } from 'src/app/services';
+import { IState, IUserInfo } from 'src/app/interfaces';
+import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
+import { MyRoleService, SearchService, TourService } from 'src/app/services';
 
 @Component({
   selector: 'ss-list-tour',
@@ -19,6 +20,11 @@ export class ListTourComponent implements OnInit {
   item: any;
   title: string;
   nothingElse: boolean;
+  CompanyId:number;
+  submitted: boolean;
+  companies: any[] = [];
+  selecteCompanies: ICompanySearch;
+  currentUser: IUserInfo = {};
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -33,9 +39,15 @@ export class ListTourComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     private srvTour: TourService,
-    private router: Router) { }
+    private router: Router,
+    private srvRole: MyRoleService,
+    private srcSrch: SearchService,) { }
 
   ngOnInit(): void {
+    this.srvRole.getUserInfo().subscribe(userInfo => {
+      this.currentUser = userInfo;
+      this.CompanyId= Number.parseInt(this.currentUser.CompanyId);
+    });
     this.items = [
       { code: 0, name: 'فعال' },
       { code: 1, name: 'غیر فعال' },
@@ -49,6 +61,13 @@ export class ListTourComponent implements OnInit {
     ];
     this.getToures(true);
   }
+
+  getCompany(event: any): void {
+    this.srcSrch.getCompanySaerch(event.query).subscribe(res => {
+      this.companies = res;
+    });
+  }
+
 
   getToures(firstLoad: boolean): void {
     if (firstLoad) {
