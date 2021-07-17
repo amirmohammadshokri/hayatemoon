@@ -1,4 +1,5 @@
 export interface IAddUsers {
+  id?:number,
   companyId?: number,
   firstName?: string;
   lastName?: string;

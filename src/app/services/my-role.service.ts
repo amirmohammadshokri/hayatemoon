@@ -19,7 +19,7 @@ export class MyRoleService {
     return this.userData$.pipe(map(o => o?.role.includes(role)))
   }
 
-  getUserInfo(): Observable<IUserInfo> {
+  getUserInfo(): Observable<any> {
     return this.userData$.pipe(map(o => {
       return o;
     }));
