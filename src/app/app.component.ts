@@ -27,7 +27,11 @@ export class AppComponent implements OnInit {
 
     this.userData$ = this.srvOidc.userData$;
     this.srvOidc.checkAuth().subscribe(d => {
-      this.sData.setUserInfo(10);
+      console.log(`test error 1`);
+      console.log(d);
+      setTimeout(() => {
+        this.sData.setUserInfo(10);
+      }, 500);
       if (!d) {
         this.srvOidc.authorize();
       }
