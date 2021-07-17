@@ -1,9 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { IState, IUserInfo } from 'src/app/interfaces';
 import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
-import { MyRoleService, SearchService, TourService } from 'src/app/services';
+import { IdentityService, MyRoleService, SearchService, TourService } from 'src/app/services';
 
 @Component({
   selector: 'ss-list-tour',
@@ -25,6 +25,7 @@ export class ListTourComponent implements OnInit {
   companies: any[] = [];
   selecteCompanies: ICompanySearch;
   currentUser: IUserInfo = {};
+  permissions: SelectItem[] = [];
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -41,11 +42,15 @@ export class ListTourComponent implements OnInit {
     private srvTour: TourService,
     private router: Router,
     private srvRole: MyRoleService,
-    private srcSrch: SearchService,) { }
+    private srcSrch: SearchService,
+    private aRoute: ActivatedRoute,
+    private srvIdentity: IdentityService) { }
 
   ngOnInit(): void {
     this.srvRole.getUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
+       
+      
       this.CompanyId= Number.parseInt(this.currentUser.CompanyId);
     });
     this.items = [
@@ -60,6 +65,15 @@ export class ListTourComponent implements OnInit {
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
     this.getToures(true);
+    this.getPermissions();
+  }
+
+  getPermissions(): void {
+    this.srvIdentity.getPermissions().subscribe(res => {
+      this.permissions = res.map(r => ({ label: r.title, value: r.id }));
+      console.log(this.permissions);
+      
+    });
   }
 
   getCompany(event: any): void {

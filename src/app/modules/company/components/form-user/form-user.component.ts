@@ -39,6 +39,8 @@ export class FormUserComponent implements OnInit {
   ngOnInit(): void {
     this.srvRole.getUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
+      console.log(userInfo);
+      
     });
     this.genders = [
       { value: 0, label: 'مرد' },
@@ -90,28 +92,31 @@ export class FormUserComponent implements OnInit {
     });
   }
 
-  submit(): void {
+  submit(): void {  
+    console.log(this.currentUser.role,"okokokokoko");
     if (this.currentUser.role !== 'SUPERADMIN') {
       this.companyUser.companyId = Number.parseInt(this.currentUser.CompanyId);
-    } else {
+    } 
+    else {
       this.companyUser.companyId = this.selecteCompanies.companyId;
     }
     this.saving = true;
-    if (this.userId && this.companyUser.lastName && this.companyUser.password
-      && this.companyUser.mobile) {
-      this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
-        this.srvMsg.add({ severity: 'success', summary: 'ویرایش کاربر', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/company/users']);
-      }, _ => {
-        this.saving = false;
-      });
-    } else {
-      this.srvCo.addUser({ user: this.companyUser }).subscribe(res => {
-        this.srvMsg.add({ severity: 'success', summary: 'ثبت کاربر', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/company/users']);
-      }, _ => {
-        this.saving = false;
-      });
-    }
+        if(this.companyUser.id>0){
+          this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
+            this.srvMsg.add({ severity: 'success', summary: 'ویرایش کاربر', detail: 'عملیات با موفقیت انجام شد' });
+            this.router.navigate(['./panel/company/users']);
+          }, _ => {
+            this.saving = false;
+          });
+        } else {
+          this.srvCo.addUser({ user: this.companyUser }).subscribe(res => {
+            this.srvMsg.add({ severity: 'success', summary: 'ثبت کاربر', detail: 'عملیات با موفقیت انجام شد' });
+            this.router.navigate(['./panel/company/users']);
+          }, _ => {
+            this.saving = false;
+          });
+        }
+      
+     
   }
 }
