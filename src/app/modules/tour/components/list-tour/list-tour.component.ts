@@ -71,8 +71,6 @@ export class ListTourComponent implements OnInit {
   getPermissions(): void {
     this.srvIdentity.getPermissions().subscribe(res => {
       this.permissions = res.map(r => ({ label: r.title, value: r.id }));
-      console.log(this.permissions);
-      
     });
   }
 

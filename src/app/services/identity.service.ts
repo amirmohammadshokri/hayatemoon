@@ -18,8 +18,6 @@ export class IdentityService {
   }
 
   getRoles(): Observable<any[]> {
-    console.log("amir");
-    
     return this.http.get<any[]>(`${this.url}Role/latest`);
   }
 }

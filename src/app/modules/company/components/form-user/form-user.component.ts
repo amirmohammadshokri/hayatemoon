@@ -38,9 +38,7 @@ export class FormUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.srvRole.getUserInfo().subscribe(userInfo => {
-      this.currentUser = userInfo;
-      console.log(userInfo);
-      
+      this.currentUser = userInfo;   
     });
     this.genders = [
       { value: 0, label: 'مرد' },
@@ -92,8 +90,7 @@ export class FormUserComponent implements OnInit {
     });
   }
 
-  submit(): void {  
-    console.log(this.currentUser.role,"okokokokoko");
+  submit(): void {
     if (this.currentUser.role !== 'SUPERADMIN') {
       this.companyUser.companyId = Number.parseInt(this.currentUser.CompanyId);
     } 

@@ -23,8 +23,6 @@ export class HotelService {
   }
 
   getHotels(filter: string, pageNumber: number): Observable<IHotel[]> {
-    console.log(filter+"amirrrrrrrr");
-    
     return this.http.get<IHotel[]>(`${this.url}Registered/latest?page=${pageNumber}${(filter ? `&${filter}` : ``)}`);
   }
 
