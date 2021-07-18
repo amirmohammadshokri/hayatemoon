@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { LogLevel } from "angular-auth-oidc-client";
+
 export const environment = {
   production: false,
   SSoConfiguration: {
@@ -13,7 +15,10 @@ export const environment = {
     secret: '3FA5DBA3-3EB0-4049-8E58-FDA932F5F0B0',
     responseType: 'code',
     silentRenew: true,
-    silentRenewUrl: 'https://localhost:4200/silent-renew.html'
+    silentRenewUrl: 'https://localhost:4200/silent-renew.html',
+    authority: 'https://beta-identity.gozarino.com',
+    useRefreshToken: true,
+    logLevel: LogLevel.Debug,
   },
 };
 

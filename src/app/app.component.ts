@@ -29,11 +29,10 @@ export class AppComponent implements OnInit {
     this.srvOidc.checkAuth().subscribe(d => {
       console.log(`test error 1`);
       console.log(d);
-      setTimeout(() => {
-        this.sData.setUserInfo(10);
-      }, 500);
       if (!d) {
         this.srvOidc.authorize();
+      } else {
+        this.sData.setUserInfo(10);
       }
     });
 
