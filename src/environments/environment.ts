@@ -7,7 +7,7 @@ import { LogLevel } from "angular-auth-oidc-client";
 export const environment = {
   production: false,
   SSoConfiguration: {
-    stsServer: 'https://beta-identity.gozarino.com',
+    stsServer: 'https://identity.gashtineh.com',
     redirectUrl: 'https://localhost:4200',
     postLogoutRedirectUri: 'https://localhost:4200',
     clientId: 'Gashtineh-adminPanel-client',
@@ -16,7 +16,7 @@ export const environment = {
     responseType: 'code',
     silentRenew: true,
     silentRenewUrl: 'https://localhost:4200/silent-renew.html',
-    authority: 'https://beta-identity.gozarino.com',
+    authority: 'https://identity.gashtineh.com',
     useRefreshToken: true,
     logLevel: LogLevel.Debug,
   },

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   SSoConfiguration: {
-    stsServer: 'https://beta-identity.gozarino.com',
+    stsServer: 'https://identity.gashtineh.com',
     redirectUrl: 'https://localhost:4200',
     postLogoutRedirectUri: 'https://localhost:4200',
     clientId: 'Gashtineh-adminPanel-client',
