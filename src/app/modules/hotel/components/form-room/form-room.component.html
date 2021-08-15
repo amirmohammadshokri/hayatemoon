@@ -25,7 +25,7 @@
       </small>
     </div>
     <div class="p-col-3 p-field">
-      <label for="">انتخاب نوع 3333333</label>
+      <label for="">انتخاب نوع اتاق</label>
       <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="room.kindId"
         (completeMethod)="getRoomkinds($event)" field="title" required
         [ngClass]="{'ng-dirty': (roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)}">
