@@ -64,7 +64,7 @@ export class ListHotelComponent implements OnInit {
       { code: 2, name: 'در انتظار' },
     ];
     this.cols = [
-      { field: 'title', header: 'عنوان هتل' },
+      { field: 'title', header: ' نننننعنوان هتل' },
       { field: 'fullname', header: 'ایجاد کننده' },
       { field: 'state', header: ' تست وضعیت' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
