@@ -56,4 +56,8 @@ export class SearchService {
   getMenu(verb: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}Menu/AutoSuggest?search=${verb}`);
   }
+
+  getTour(verb: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}AutoSuggest/Tour?search=${verb}`);
+  }
 }
