@@ -45,6 +45,10 @@ const routes: Routes = [
       {
         path: 'menu',
         loadChildren: () => import('../menu/menu.module').then(m => m.MenuModule)
+      },
+      {
+        path: 'promotion',
+        loadChildren: () => import('../promotion/promotion.module').then(m => m.PromotionModule)
       }
     ]
   }
