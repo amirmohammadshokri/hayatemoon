@@ -53,4 +53,14 @@ export class FormPromotionTourComponent implements OnInit {
     return sum;
   }
 
+  pay() {
+    const val = {
+      promotions: this.tourPros.map(t => ({
+        promotionId: t.proId,
+        tourId: t.tourId
+      }))
+    }
+    console.log(val);
+  }
+
 }

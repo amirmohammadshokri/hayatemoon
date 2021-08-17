@@ -67,7 +67,7 @@
     <p-fieldset legend="عملیات">
       <h5>مبلغ قابل پرداخت</h5>
       <h6>{{price | number}}</h6>
-      <button pButton pRipple label="پرداخت" class="p-button-success" routerLink="../"></button>
+      <button pButton pRipple label="پرداخت" class="p-button-success" (click)="pay()"></button>
     </p-fieldset>
   </div>
 </div>
