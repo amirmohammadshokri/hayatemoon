@@ -9,7 +9,8 @@ import { FormPromotionTourComponent } from './components/form-promotion-tour/for
 const routes: Routes = [
   { path: 'promotions', component: ListPromotionComponent },
   { path: 'form-promotion/:id', component: FormPromotionComponent },  
-  { path: 'promotion-tour', component: FormPromotionTourComponent }
+  { path: 'promotion-tour', component: FormPromotionTourComponent },
+  { path: 'report-promotion/:id', component: FormPromotionComponent }
 ]
 
 @NgModule({
