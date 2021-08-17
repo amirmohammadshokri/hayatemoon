@@ -69,7 +69,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
       {
         label: 'مدیریت پروموشن ها', icon: 'fa fa-ravelry', items: [
           { label: 'لسیت پروموشن ها', icon: 'pi pi-list', routerLink: ['promotion/promotions'] },
-          { label: 'ارتقا تور', icon: 'pi pi-list', routerLink: ['promotion/promotion-tour'] }
+          { label: 'ارتقا تور', icon: 'pi pi-list', routerLink: ['promotion/promotion-tour'] },
+          { label: 'گزارش پروموشن ها', icon: 'pi pi-list', routerLink: ['promotion/report-promotion'] }
         ]
       },
       {
