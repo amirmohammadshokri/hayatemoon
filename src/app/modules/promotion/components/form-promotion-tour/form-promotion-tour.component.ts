@@ -60,7 +60,9 @@ export class FormPromotionTourComponent implements OnInit {
         tourId: t.tourId
       }))
     }
-    console.log(val);
+    this.srvpro.promotionFactor(val).subscribe(res => {
+      
+    })
   }
 
 }

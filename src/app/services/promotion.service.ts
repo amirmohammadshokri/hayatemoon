@@ -33,6 +33,10 @@ export class PromotionService {
     return this.http.get<any>(`${this.url}/Tour/${id}`);
   }
 
+  promotionFactor(obj: any): Observable<any> {
+    return this.http.post<any>(`${this.url}/Tour/Factor`, obj);
+  }
+
   editpromotion(id: number, obj: any): Observable<any> {
     return this.http.put<any>(`${this.url}/${id}`, obj);
   }
