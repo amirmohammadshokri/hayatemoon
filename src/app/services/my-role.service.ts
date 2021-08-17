@@ -21,8 +21,6 @@ export class MyRoleService {
 
   getUserInfo(): Observable<any> {
     return this.userData$.pipe(map(o => {
-      console.log(o);
-      
       return o;
     }));
   }
