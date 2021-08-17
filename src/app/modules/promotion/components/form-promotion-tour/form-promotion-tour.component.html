@@ -1,63 +1,73 @@
 <div class="card">
-    <p-toolbar>
-      <div class="p-toolbar-group-right">
-        <div class="p-grid p-fluid">
-          <div class="p-col-12 p-field">
-            <div class="p-col-12 p-field">
-                <label for="">نام تور</label>
-                <p-autoComplete [suggestions]="tours" [(ngModel)]="selecteTours"
-                (completeMethod)="getTour($event)" field="title"
-                >
-            </p-autoComplete>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="p-toolbar-group-left">
-        <button pButton pRipple label="اضافه کردن" (click)="getTourById()" icon="pi pi-plus" class="p-button-success"
-           ></button>
-      </div>
-      </p-toolbar>
-      </div>
-
-
+  <p-toolbar>
+    <div class="p-toolbar-group-right">
       <div class="p-grid p-fluid">
-        <div class="p-col-9 p-field">
-            <p-fieldset legend="لیست تور ها ...." [toggleable]="true" >
-                <div class="p-grid p-fluid">
-                    <div class="p-col-2 p-field">
-                      <label for="">ردیف</label>
-                      
-                    </div>
-                    <div class="p-col-2 p-field">
-                      <label for=""> عنوان تور</label>
-                      
-                    </div>
-                    <div class="p-col-2 p-field">
-                      <label for="">تاریخ رفت</label>
-                      
-                    </div>
-                    <div class="p-col-2 p-field">
-                      <label for="">نام هتل</label>
-                      
-                    </div>
-                    <div class="p-col-4 p-field">
-                      <label for="">نوع نردبام</label>
-                      
-                    </div>
-                   
-                    
-                  </div>    
-            </p-fieldset>
-        </div>
-        <div class="p-col-3 p-field">
-            <p-fieldset  legend="عملیات">
-                <h5>مبلغ قابل پرداخت</h5>
-                <h6>15000</h6>
-                <button pButton pRipple label="پرداخت" class="p-button-success"
-                routerLink="../"></button>
-               </p-fieldset>
+        <div class="p-col-12 p-field">
+          <label for="">نام تور</label>
+          <p-autoComplete [suggestions]="tours" [(ngModel)]="selectedTour" (completeMethod)="getTour($event)"
+            field="title">
+          </p-autoComplete>
         </div>
       </div>
-     
-    
+    </div>
+    <div class="p-toolbar-group-left">
+      <button pButton pRipple label="اضافه کردن" (click)="getTourById()" icon="pi pi-plus"
+        class="p-button-success"></button>
+    </div>
+  </p-toolbar>
+</div>
+
+
+<div class="p-grid p-fluid">
+  <div class="p-col-9 p-field">
+    <p-fieldset legend="لیست تورها">
+      <p-table [value]="tourPros" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 4em">ردیف</th>
+            <th style="width: 8em">عنوان تور</th>
+            <th style="width: 8em">تاریخ رفت</th>
+            <th style="width: 8em">نام هتل</th>
+            <th style="width: 8em">نوع نردبام</th>
+            <th style="width: 2em"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-index="rowIndex">
+          <tr>
+            <td>
+              <span class="p-column-title"> ردیف</span>
+              {{ index + 1 }}
+            </td>
+            <td>
+              <span class="p-column-title">عنوان تور</span>
+              {{ rowData.tourTitle }}
+            </td>
+            <td>
+              <span class="p-column-title">تاریخ رفت</span>
+              {{ rowData.startDate }}
+            </td>
+            <td>
+              <span class="p-column-title"> نام هتل</span>
+              {{ rowData.hotelTitle }}
+            </td>
+            <td>
+              <span class="p-column-title">نوع نردبام</span>
+              <p-dropdown [options]="promotions" placeholder="انتخاب" [(ngModel)]="rowData.proId"></p-dropdown>
+            </td>
+            <td>
+              <button pButton pRipple icon="pi pi-times" class="p-button-text p-button-danger"
+                (click)="removeTour(index)" pTooltip="حذف"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-fieldset>
+  </div>
+  <div class="p-col-3 p-field">
+    <p-fieldset legend="عملیات">
+      <h5>مبلغ قابل پرداخت</h5>
+      <h6>{{price | number}}</h6>
+      <button pButton pRipple label="پرداخت" class="p-button-success" routerLink="../"></button>
+    </p-fieldset>
+  </div>
+</div>

@@ -13,7 +13,6 @@ export class PromotionService {
     this.url = `${this.conf.getConfig('url')}web/Promotion`;
   }
 
-
   promotions(page: number, pageSize: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/Latest${page ? `?page=${page}&pageSize=${pageSize}` : ``}`);
   }
@@ -23,8 +22,6 @@ export class PromotionService {
   }
 
   addpromotion(obj: any): Observable<any> {
-    console.log(obj);
-    
     return this.http.post<any>(`${this.url}`, obj);
   }
 
@@ -33,7 +30,7 @@ export class PromotionService {
   }
 
   getpromotionTourById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.url}/'Tour'/${id}`);
+    return this.http.get<any>(`${this.url}/Tour/${id}`);
   }
 
   editpromotion(id: number, obj: any): Observable<any> {
