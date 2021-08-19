@@ -21,7 +21,7 @@ export class ReportService {
     return this.http.get<any[]>(`${this.url}Tour/Latest?from=${from}&to=${to}&tourType=${tourType}&page=${page}&pageSize=${pageSize}`);
   }
 
-  finance(from: string, to: string, promotionId: number, page: number, pageSize: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}Promotion/Tour/Finance/Latest?from=${from}&to=${to}&promotionId=${promotionId}&page=${page}&pageSize=${pageSize}`);
+  finance(from: string, to: string, promotionId: number,status:number, page: number, pageSize: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}Promotion/Tour/Finance/Latest?from=${from}&to=${to}&promotionId=${promotionId}&status=${status}&page=${page}&pageSize=${pageSize}`);
   }
 }

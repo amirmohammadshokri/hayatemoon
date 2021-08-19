@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { FinanceComponent } from './components/finance/finance.component';
+import { FieldsetModule } from 'primeng/fieldset';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -25,7 +29,11 @@ import { FinanceComponent } from './components/finance/finance.component';
     DropdownModule,
     FormsModule,
     ButtonModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    FieldsetModule,
+    AutoCompleteModule,
+    DynamicDialogModule,
+    DialogModule
   ]
 })
 export class ReportsModule { }

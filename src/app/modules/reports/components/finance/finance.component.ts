@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import * as moment from 'jalali-moment';
 import { SelectItem } from 'primeng/api';
+import { IState } from 'src/app/interfaces';
 import { DataService, PromotionService, ReportService } from 'src/app/services';
 
 @Component({
@@ -18,7 +19,8 @@ export class FinanceComponent implements OnInit {
   promotions: SelectItem[] = [];
   promotionId: any;
   loading: boolean;
-
+  item: any;
+  items: IState[];
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
@@ -42,8 +44,9 @@ export class FinanceComponent implements OnInit {
       { field: 'startDate', header: 'تاریخ آغاز' },
       { field: 'endDate', header: 'تاریخ پایان' },
       { field: 'price', header: 'قیمت' },
-      { field: 'location', header: 'محل' },
+      { field: 'status', header: 'وضعیت' },
       { field: 'companyType', header: 'نوع شرکت' },
+      { field: 'tour', header: 'عنوان تور' },
     ];
 
     this.srvPro.promotions(null, null).subscribe(type => {
@@ -54,7 +57,12 @@ export class FinanceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.items = [
+      { code: 0, name: 'فعال' },
+      { code: 1, name: 'غیر فعال' },
+      { code: 2, name: 'در انتظار' },
+      { code: 3, name: 'غیر فعال شده' }
+    ];
   }
 
   getData(firstLoad: boolean) {
@@ -64,11 +72,13 @@ export class FinanceComponent implements OnInit {
       this.data = [];
     }
     this.srvData.showMainProgressBarForMe();
+ 
+
     const from: Date = this.from?._d;
     const utcFrom = new Date(from.toUTCString());
     const to: Date = this.to?._d;
     const utcTo = new Date(to.toUTCString());
-    this.srvRprt.finance(utcFrom.toISOString(), utcTo.toISOString(), 0, this.currentPage, 15).subscribe(res => {
+    this.srvRprt.finance(utcFrom.toISOString(), utcTo.toISOString(), this.promotionId,this.item.code, this.currentPage,15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
@@ -77,8 +87,9 @@ export class FinanceComponent implements OnInit {
         startDate: r.startDate,
         endDate: r.endDate,
         price: r.price,
-        location: r.location.title,
+        loca: r.location.title,
         title: r.title,
+        tour:r.tour.title,
         companyType: r.companyType.title
       })));
       this.loading = false;

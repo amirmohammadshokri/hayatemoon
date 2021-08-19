@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DataService, ReportService, TourService } from 'src/app/services';
+import { DataService, PromotionService, ReportService, TourService } from 'src/app/services';
 import * as moment from 'jalali-moment';
 import { SelectItem } from 'primeng/api';
 
@@ -19,6 +19,9 @@ export class ToursComponent implements OnInit {
   types: SelectItem[] = [];
   type: any;
   loading: boolean;
+  selectedPromotion: any;
+  promotions: any[] = [];
+ 
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -30,7 +33,7 @@ export class ToursComponent implements OnInit {
     }
   }
 
-  constructor(private srvRprt: ReportService, private srvData: DataService, private srvTour: TourService) {
+  constructor(private srvRprt: ReportService, private srvData: DataService, private srvTour: TourService,private srvPromotion:PromotionService) {
     var date = new Date();
     let today = date.toLocaleDateString('fa-IR').replace(/([۰-۹])/g, token => String.fromCharCode(token.charCodeAt(0) - 1728));
     this.to = moment(today, 'jYYYY/jMM/jDD');
@@ -57,7 +60,7 @@ export class ToursComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
+ 
   getToures(firstLoad: boolean) {
     this.loading = true;
     if (firstLoad) {

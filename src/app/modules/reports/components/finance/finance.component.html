@@ -2,19 +2,24 @@
     <p-toolbar>
         <div class="p-toolbar-group-right">
             <div class="p-grid p-fluid">
-                <div class="p-col-4 p-field">
+                <div class="p-col-3 p-field">
                     <label for="fromDate">از تاریخ</label>
                     <dp-date-picker id="fromDate" [(ngModel)]="from" dir="ltr" theme="dp-material" mode="day">
                     </dp-date-picker>
                 </div>
-                <div class="p-col-4 p-field">
+                <div class="p-col-3 p-field">
                     <label for="toDate">تا تاریخ</label>
                     <dp-date-picker id="toDate" [(ngModel)]="to" dir="ltr" theme="dp-material" mode="day">
                     </dp-date-picker>
                 </div>
-                <div class="p-col-4 p-field">
+                <div class="p-col-3 p-field">
                     <label for="state">نوع</label>
                     <p-dropdown inputId="state" [options]="promotions" [(ngModel)]="promotionId" placeholder="انتخاب"></p-dropdown>
+                </div>
+                <div class="p-col-3 p-field">
+                    <label for="state">وضعیت</label>
+                    <p-dropdown inputId="state" [options]="items" [(ngModel)]="item" placeholder="انتخاب وضعیت"
+                      optionLabel="name"></p-dropdown>
                 </div>
             </div>
         </div>
