@@ -1,7 +1,8 @@
 import { state } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { PromotionService, SearchService, TourService } from 'src/app/services';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'ss-form-promotion-tour',
@@ -19,7 +20,8 @@ export class FormPromotionTourComponent implements OnInit {
 
   constructor(
     private srcSrch: SearchService,
-    private srvpro: PromotionService) { }
+    private srvpro: PromotionService,
+    @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     this.srvpro.getpromotions(null, 1).subscribe(res => {
@@ -61,7 +63,7 @@ export class FormPromotionTourComponent implements OnInit {
       }))
     }
     this.srvpro.promotionFactor(val).subscribe(res => {
-      
+      this.document.location.href = 'https://getway.gashtineh.com/Payment/PreFactor?resNum=';
     })
   }
 
