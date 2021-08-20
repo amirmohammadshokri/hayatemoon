@@ -12,7 +12,7 @@ import { DataService, TicketingService } from 'src/app/services';
 export class TopbarComponent implements OnInit {
 
   avatar = 'assets/user.svg';
-  unreadedTicket: number;
+  unreadedTicket: number = 0;
   darkMode: boolean = true;
 
   constructor(
@@ -28,16 +28,6 @@ export class TopbarComponent implements OnInit {
     $(document).click((e) => {
       if (e.target.className !== 'p-inputtext p-component' && e.target.className !== 'topbar-icon pi pi-search') {
         $('.search-item').removeClass('active-topmenuitem');
-      }
-    });
-
-    $('#user').click(() => {
-      $('.user-profile').toggleClass('active-topmenuitem fadeInDown');
-    });
-
-    $(document).click((e) => {
-      if (e.target.id !== 'user' && e.target.id !== 'user-img') {
-        $('.user-profile').removeClass('active-topmenuitem fadeInDown');
       }
     });
 
@@ -60,9 +50,24 @@ export class TopbarComponent implements OnInit {
       if (res > 0) {
         this.srvTicket.unreadTicketCount().subscribe(count => {
           this.unreadedTicket = count;
+          this.setUserEvent();
         });
+      } else {
+        this.setUserEvent();
       }
     })
+  }
+
+  setUserEvent() {
+    $('#user').click(() => {
+      $('.user-profile').toggleClass('active-topmenuitem fadeInDown');
+    });
+
+    $(document).click((e) => {
+      if (e.target.id !== 'user' && e.target.id !== 'user-img') {
+        $('.user-profile').removeClass('active-topmenuitem fadeInDown');
+      }
+    });
   }
 
   changeMode() {

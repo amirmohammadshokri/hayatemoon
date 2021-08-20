@@ -31,16 +31,14 @@
           </ul>
         </li>
         <li class="topbar-item user-profile">
-          <a class="p-d-flex" id="user" pBadge [value]="unreadedTicket" severity="danger" style="font-size: 2rem">
+          <a *ngIf="unreadedTicket > 0" class="p-d-flex" id="user" pBadge [value]="unreadedTicket" severity="danger"
+            style="font-size: 2rem">
+            <img id="user-img" [src]="avatar" (error)="defaultAvatar()" />
+          </a>
+          <a *ngIf="unreadedTicket == 0" class="p-d-flex" id="user">
             <img id="user-img" [src]="avatar" (error)="defaultAvatar()" />
           </a>
           <ul class="fadeInDown">
-            <li routerLink="profile">
-              <a><span>پروفایل</span></a>
-            </li>
-            <li>
-              <a><span>تنظیمات</span></a>
-            </li>
             <li routerLink="ticket/tickets">
               <a>
                 <span>تیکت ها</span>
