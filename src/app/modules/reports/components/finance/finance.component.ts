@@ -85,10 +85,10 @@ export class FinanceComponent implements OnInit {
         startDate: r.startDate,
         endDate: r.endDate,
         price: r.price,
-        loca: r.location.title,
         title: r.title,
         tour: r.tour.title,
-        companyType: r.companyType.title
+        companyType: r.companyType.title,
+        status:r.status.title
       })));
       this.loading = false;
       this.srvData.thanksMainProgressBar();
