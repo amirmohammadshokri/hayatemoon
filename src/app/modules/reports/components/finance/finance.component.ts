@@ -19,7 +19,7 @@ export class FinanceComponent implements OnInit {
   promotions: SelectItem[] = [];
   promotionId: any;
   loading: boolean;
-  item: any;
+  item: any = 0;
   items: IState[];
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -72,13 +72,11 @@ export class FinanceComponent implements OnInit {
       this.data = [];
     }
     this.srvData.showMainProgressBarForMe();
- 
-
     const from: Date = this.from?._d;
     const utcFrom = new Date(from.toUTCString());
     const to: Date = this.to?._d;
     const utcTo = new Date(to.toUTCString());
-    this.srvRprt.finance(utcFrom.toISOString(), utcTo.toISOString(), this.promotionId,this.item.code, this.currentPage,15).subscribe(res => {
+    this.srvRprt.finance(utcFrom.toISOString(), utcTo.toISOString(), this.promotionId, this.item.code, this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
@@ -89,7 +87,7 @@ export class FinanceComponent implements OnInit {
         price: r.price,
         loca: r.location.title,
         title: r.title,
-        tour:r.tour.title,
+        tour: r.tour.title,
         companyType: r.companyType.title
       })));
       this.loading = false;

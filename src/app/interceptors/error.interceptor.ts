@@ -14,6 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 403) {
+        this.srvData.thanksMainProgressBar();
         this.router.navigate(['./pages/access']);
       } else {
         const error = err.error.title || err.error.error || err.error?.detail || err.statusText;

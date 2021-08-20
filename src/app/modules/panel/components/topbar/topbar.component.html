@@ -44,7 +44,8 @@
             <li routerLink="ticket/tickets">
               <a>
                 <span>تیکت ها</span>
-                <p-badge [ngStyle]="{'font-size': '2em'}" styleClass="p-mr-2" [value]="unreadedTicket" severity="danger"></p-badge>
+                <p-badge [ngStyle]="{'font-size': '2em'}" styleClass="p-mr-2" [value]="unreadedTicket"
+                  severity="danger"></p-badge>
               </a>
             </li>
             <li (click)="signout()">
@@ -54,7 +55,8 @@
         </li>
       </ul>
       <a class="layout-rightpanel-button" (click)="changeMode()">
-        <i class="pi pi-circle-on"></i>
+        <i *ngIf="!darkMode" class="pi pi-moon"></i>
+        <i *ngIf="darkMode" class="pi pi-sun"></i>
       </a>
     </div>
   </div>
