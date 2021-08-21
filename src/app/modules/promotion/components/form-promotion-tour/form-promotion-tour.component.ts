@@ -48,7 +48,9 @@ export class FormPromotionTourComponent implements OnInit {
   }
 
   changePromotion(rowData) {
-    rowData.price = (this.rawPromotions.find(p => p.id == rowData.proId)?.price ?? 0);
+    const pro = this.rawPromotions.find(p => p.id == rowData.proId);
+    rowData.price = (pro?.price ?? 0);
+    rowData.desc = pro?.description;
   }
 
   get price() {
@@ -67,7 +69,7 @@ export class FormPromotionTourComponent implements OnInit {
       }))
     }
     this.srvpro.promotionFactor(val).subscribe(res => {
-      this.document.location.href = 'https://getway.gashtineh.com/Payment/PreFactor?resNum='+res;
+      this.document.location.href = 'https://getway.gashtineh.com/Payment/PreFactor?resNum=' + res;
     })
   }
 
