@@ -18,6 +18,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { FormPromotionTourComponent } from './components/form-promotion-tour/form-promotion-tour.component';
 import {FieldsetModule} from 'primeng/fieldset';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
@@ -38,7 +39,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     TagModule,
     ToolbarModule,
     FieldsetModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    InputTextareaModule
   
   ],
   providers: [

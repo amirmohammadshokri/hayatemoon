@@ -3,4 +3,5 @@ export interface IPromotion{
     title?:string;
     price?:number;
     state?: { id?: number, title?: string };
+    description?:string;
 }

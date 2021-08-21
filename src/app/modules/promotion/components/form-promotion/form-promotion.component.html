@@ -28,11 +28,15 @@
               ثبت قیمت اجباری می باشد
             </small>
           </div>
+         
           <div *ngIf="promotionId>=0" class="p-col-4 p-field">
             <label for="title">وضعیت پروموشن</label>
             <p-dropdown [options]="states" #typeId="ngModel" [(ngModel)]="promotions.state"></p-dropdown>
         </div>
-     
+      <div class="p-col-12 p-field">
+            <label for="">توضیحات</label>
+            <textarea [rows]="3" [cols]="30" [(ngModel)]="promotions.description"  pInputTextarea autoResize="autoResize"></textarea>
+          </div>
         </div>  
       </div>
     </div>

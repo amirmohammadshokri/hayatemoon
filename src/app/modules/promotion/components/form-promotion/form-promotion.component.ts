@@ -45,7 +45,7 @@ export class FormPromotionComponent implements OnInit {
     this.srvPromotion.getpromotionById(this.promotionId).subscribe(res => {
       this.promotions = {
         title:res.title,
-        price:res.priceو
+        price:res.price
    
       };
       this.srvData.thanksMainProgressBar();
