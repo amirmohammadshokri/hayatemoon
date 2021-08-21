@@ -1,9 +1,7 @@
-import { state } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { PromotionService, SearchService, TourService } from 'src/app/services';
+import { PromotionService, SearchService } from 'src/app/services';
 import { DOCUMENT } from '@angular/common';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'ss-form-promotion-tour',
@@ -47,6 +45,10 @@ export class FormPromotionTourComponent implements OnInit {
 
   removeTour(i) {
     this.tourPros.splice(i, 1);
+  }
+
+  changePromotion(rowData) {
+    rowData.price = (this.rawPromotions.find(p => p.id == rowData.proId)?.price ?? 0);
   }
 
   get price() {

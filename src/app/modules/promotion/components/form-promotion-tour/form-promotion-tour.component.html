@@ -28,6 +28,7 @@
             <th style="width: 8em">عنوان تور</th>
             <th style="width: 8em">تاریخ رفت</th>
             <th style="width: 8em">نام هتل</th>
+            <th style="width: 4em">قیمت</th>
             <th style="width: 8em">نوع نردبام</th>
             <th style="width: 2em"></th>
           </tr>
@@ -51,8 +52,13 @@
               {{ rowData.hotelTitle }}
             </td>
             <td>
+              <span class="p-column-title"> قیمت</span>
+              {{ rowData.price | number}}
+            </td>
+            <td>
               <span class="p-column-title">نوع نردبام</span>
-              <p-dropdown [options]="promotions" placeholder="انتخاب" [(ngModel)]="rowData.proId"></p-dropdown>
+              <p-dropdown [options]="promotions" placeholder="انتخاب" [(ngModel)]="rowData.proId"
+                (onChange)="changePromotion(rowData)"></p-dropdown>
             </td>
             <td>
               <button pButton pRipple icon="pi pi-times" class="p-button-text p-button-danger"
