@@ -22,8 +22,14 @@
           </div>
           <div class="p-col-4 p-field">
             <label for="">قیمت</label>
-            <input #price="ngModel" type="" [(ngModel)]="promotions.price" pInputText required
+
+        
+            <p-inputNumber #price="ngModel" [(ngModel)]="promotions.price" suffix=" تومان" required
               [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}">
+            </p-inputNumber>
+
+            <!-- <input #price="ngModel" type="" [(ngModel)]="promotions.price" pInputText required
+              [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}"> -->
             <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">
               ثبت قیمت اجباری می باشد
             </small>

@@ -21,12 +21,12 @@ export class AdvertisingService {
     return this.http.post(`${this.url}`, obj);
   }
 
-  getPageType(page: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.url}/PageType/Latest?page=${page}&pageSize=${pageSize}`);
+  getPageType(): Observable<any> {
+    return this.http.get(`${this.url}/PageType/Latest`);
   }
 
-  getPositionType(page: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.url}/PositionType/Latest?page=${page}&pageSize=${pageSize}`);
+  getPositionType(): Observable<any> {
+    return this.http.get(`${this.url}/PositionType/Latest`);
   }
 
 

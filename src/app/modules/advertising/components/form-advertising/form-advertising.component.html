@@ -1,1 +1,102 @@
-<p>form-advertising works!</p>
+<div class="card">
+
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button   pButton pRipple class="p-button-success p-ml-1"  label="ذخیره"
+                ></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../advertising"></button>
+        </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2">
+      <div class="p-col-12">
+        <div class="p-grid p-fluid">
+          <div class="p-col-4 p-field">
+            <label for="">نام شهر</label>
+            <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
+              (completeMethod)="getLocations($event)" field="title">
+            </p-autoComplete>
+           
+          </div>
+          <div class="p-col-4 p-field">
+            <label for="">انتخاب صفحه</label>
+            <p-dropdown [options]="pageTypes" #typeId="ngModel" [(ngModel)]="advertising.pageType" required
+            placeholder="انتخاب صفحه"
+            ></p-dropdown>
+          <!-- <small *ngIf="(typeId.invalid && submitted) || (typeId.dirty && typeId.invalid)" class="p-error">
+            نوع هتل حتما باید انتخاب شود
+          </small> -->
+          </div>
+          <div class="p-col-4 p-field">
+            <label for="title">انتخاب جایگاه</label>
+             <p-dropdown [options]="positionTypes" #typeId="ngModel" [(ngModel)]="advertising.positionType" required
+                placeholder="انتخاب جایگاه"
+            ></p-dropdown>
+          </div>
+          <div class="p-col-4 p-field">
+            <label for="">تاریخ شروع</label>
+            <dp-date-picker #fromDt="ngModel" id="startDate" [(ngModel)]="startDate" dir="ltr" theme="dp-material"
+        mode="daytime" 
+>
+      </dp-date-picker>
+          </div>
+          <div class="p-col-4 p-field">
+            <label for="title"> تاریخ پایان</label>
+            <dp-date-picker #fromDt="ngModel" id="endDate" [(ngModel)]="endDate" dir="ltr" theme="dp-material"
+        mode="daytime" 
+       >
+      </dp-date-picker>
+          </div>
+          <div class="p-col-4 p-field">
+            <label for="">لینک</label>
+               <input  type="" [(ngModel)]="advertising.link" pInputText>
+            
+          </div>
+         
+          <div  class="p-col-4 p-field">
+            <label for="title">وضعیت </label>
+            <p-dropdown [options]="states" #typeId="ngModel" [(ngModel)]="advertising.state"></p-dropdown>
+        </div>
+            <div   class="p-col-6 p-field">
+            <label for="title">عکس </label>
+            <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+                <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()" >
+                  <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                    <img src="assets/layout/images/camera.svg" >
+                  </div>
+                  <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
+                </div>
+                <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
+                  <div class="main p-d-flex p-ai-center p-jc-center">
+                    <img [src]="img.url" (error)="defaultImg(img)" />
+                  </div>
+                  <div class="tools">
+                    <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
+                      <img src="assets/layout/images/bin.svg">
+                    </div>
+                    <!-- <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                      <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="p-col-12">
+                <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+              </div>
+           </div>
+           <div  class="p-col-6 p-field">
+            <label for="title">توضیحات </label>
+          
+            <textarea [rows]="3" [cols]="30" [(ngModel)]="advertising.description"  pInputTextarea autoResize="autoResize"></textarea>
+           </div>
+          
+      <!-- <div class="p-col-12 p-field">
+            <label for="">توضیحات</label>
+            <textarea [rows]="3" [cols]="30" [(ngModel)]="promotions.description"  pInputTextarea autoResize="autoResize"></textarea>
+          </div> -->
+        </div>  
+      </div>
+    </div>
+  </div>
+  

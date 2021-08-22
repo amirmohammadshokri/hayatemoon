@@ -21,6 +21,9 @@ import { TagModule } from 'primeng/tag';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ConfirmationService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+ 
 
 
 @NgModule({
@@ -47,6 +50,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
     KeyFilterModule,
     DpDatePickerModule,
     MultiSelectModule
+  ],
+  providers: [
+    ConfirmationService,
+    DialogService
   ]
 })
 export class AdvertisingModule { }

@@ -62,6 +62,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
         ]
       },
       {
+        label: 'مدیریت تبلیغات', icon: 'fa fa-list', items: [
+          { label: 'لسیت تبلیغات ها', icon: 'pi pi-list', routerLink: ['advertising/advertisings'] }
+        ]
+      },
+      {
         label: 'مدیریت کرولر ها', icon: 'fa fa-ravelry', items: [
           { label: 'لسیت کرولر ها', icon: 'pi pi-list', routerLink: ['crawler/list'] }
         ]
@@ -79,11 +84,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
         ]
       },
      
-      {
-        label: 'مدیریت تبلیغات', icon: 'fa fa-list', items: [
-          { label: 'لسیت تبلیغات ها', icon: 'pi pi-list', routerLink: ['advertising/advertisings'] }
-        ]
-      },
+     
       {
         label: 'گزارش ها', icon: 'fa fa-bar-chart', items: [
           { label: 'تورها', icon: 'pi pi-list', routerLink: ['report/tours'] },
