@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
-import { forkJoin } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService, SelectItem } from 'primeng/api';
 import { IAddAdvertising } from 'src/app/interfaces/add-advertising.interface';
-import { SearchService,DataService, MediaService } from 'src/app/services';
+import { SearchService, DataService, MediaService } from 'src/app/services';
 import { AdvertisingService } from 'src/app/services/advertising.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AdvertisingService } from 'src/app/services/advertising.service';
   styleUrls: ['./form-advertising.component.scss']
 })
 export class FormAdvertisingComponent implements OnInit {
-  advertising:IAddAdvertising={};
+  advertising: IAddAdvertising = { state: 0 };
   locations: any[] = [];
   selectedLocation: any;
   pageTypes: SelectItem[] = [];
@@ -19,23 +19,40 @@ export class FormAdvertisingComponent implements OnInit {
   startDate: any;
   endDate: any;
   states: SelectItem[];
-  images: { mediaId: number, file: File, url: string }[] = [];
+  image: { mediaId: number, file: File, url: string };
   mainImageIndex: number;
   saving: boolean;
+  adsId: number;
 
-  constructor(private srvAds:AdvertisingService,private srvData: DataService,private srvSrch:SearchService,private srvMedia: MediaService,) {}
+  constructor(
+    private srvAds: AdvertisingService,
+    private srvData: DataService,
+    private srvSrch: SearchService,
+    private aRoute: ActivatedRoute,
+    private router: Router,
+    private srvMsg: MessageService,
+    private srvMedia: MediaService) { }
 
   ngOnInit(): void {
+    this.aRoute.params.subscribe(prms => {
+      if (prms.id > 0) {
+        this.adsId = Number.parseInt(prms.id, 0);
+        this.getAdverticment();
+      }
+    });
     this.states = [
       { value: 0, label: 'فعال' },
       { value: 1, label: 'غیر فعال' },
       { value: 2, label: 'در حالت انتظار' }
     ]
-   this.getPageType();
-   this.getPositionType();
+    this.getPageType();
+    this.getPositionType();
   }
 
-  
+  getAdverticment() {
+    throw new Error('Method not implemented.');
+  }
+
   getLocations(event: any): void {
     this.srvData.showMainProgressBarForMe();
     this.srvSrch.getLocation(event.query).subscribe(res => {
@@ -43,11 +60,13 @@ export class FormAdvertisingComponent implements OnInit {
       this.srvData.thanksMainProgressBar();
     });
   }
+
   getPageType(): void {
     this.srvAds.getPageType().subscribe(res => {
       this.pageTypes = res.map(t => ({ label: t.title, value: t.id }));
     });
   }
+
   getPositionType(): void {
     this.srvAds.getPositionType().subscribe(res => {
       this.positionTypes = res.map(t => ({ label: t.title, value: t.id }));
@@ -56,28 +75,18 @@ export class FormAdvertisingComponent implements OnInit {
 
   saveImages(): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      if (this.images.length === 0) {
+      // if image not selected or is previous is saved return
+      if (!this.image || this.image.mediaId) {
         resolve();
       }
-      const calls = [];
-      for (const img of this.images.filter(im => !im.mediaId)) {
-        const formData = new FormData();
-        formData.append(`file`, img.file, img.file.name);
-        calls.push(this.srvMedia.upload(formData, 0));
-      }
-      if (calls.length === 0) {
-        resolve();
-      }
-      forkJoin(calls).subscribe(res => {
-        const key = 'mediaId';
-       
-      
-          this.images.filter(im => !im.mediaId)[0].mediaId = res[0][key];
-          // this.advertising.mediaId.push(res[0][key]);
-     
+      const formData = new FormData();
+      formData.append(`file`, this.image.file, this.image.file.name);
+      this.srvMedia.upload(formData, 0).subscribe(res => {
+        this.image.mediaId = res.mediaId;
+        this.advertising.mediaId = res.mediaId;
         resolve();
       }, () => {
-        // this.saving = false;
+        this.saving = false;
         reject();
       });
     });
@@ -87,21 +96,50 @@ export class FormAdvertisingComponent implements OnInit {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (event: any) => {
-        this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
+        this.image = { mediaId: null, url: event.target.result, file: e.target.files[0] };
       };
       reader.readAsDataURL(e.target.files[0]);
     }
   }
 
-  deleteImage(img: any, id: number): void {
-    this.images.splice(id, 1);
+  deleteImage(): void {
+    this.image = null;
     this.advertising.mediaId = this.advertising.mediaId;
-     
   }
-  
+
   defaultImg(row: any): void {
     row.url = 'assets/no-image.png';
   }
 
- 
+  async submit() {
+    this.saving = true;
+    const startDate: Date = this.startDate?._d;
+    const utcstartDate = new Date(startDate.toUTCString());
+    this.advertising.startDate = utcstartDate.toISOString();
+
+    const endDate: Date = this.endDate?._d;
+    const utcendDate = new Date(endDate.toUTCString());
+    this.advertising.endDate = utcendDate.toISOString();
+    this.advertising.destLocationId = this.selectedLocation?.locationId;
+
+    await this.saveImages();
+    console.log(this.advertising);
+
+    if (this.adsId > 0) {
+      this.srvAds.editAdvertising(this.adsId, this.advertising).subscribe(() => {
+        this.srvMsg.add({ severity: 'success', summary: 'ویرایش تبلیغات', detail: 'عملیات با موفقیت انجام شد' });
+        this.router.navigate(['./panel/advertising/advertisings']);
+      }, _ => {
+        this.saving = false;
+      });
+    } else {
+      this.srvAds.addAdvertising(this.advertising).subscribe(() => {
+        this.srvMsg.add({ severity: 'success', summary: 'ثبت تبلیغات ', detail: 'عملیات با موفقیت انجام شد' });
+        this.router.navigate(['./panel/advertising/advertisings']);
+      }, _ => {
+        this.saving = false;
+      });
+    }
+  }
+
 }
