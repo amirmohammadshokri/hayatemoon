@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'jalali-moment';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddAdvertising } from 'src/app/interfaces/add-advertising.interface';
 import { SearchService, DataService, MediaService } from 'src/app/services';
@@ -50,7 +51,24 @@ export class FormAdvertisingComponent implements OnInit {
   }
 
   getAdverticment() {
-    throw new Error('Method not implemented.');
+    this.srvData.showMainProgressBarForMe();
+    this.srvAds.getAdvertisingById(this.adsId).subscribe(ads => {
+      this.image = {
+        mediaId: ads.mediaId,
+        file: null,
+        url: `http://beta-api.gozarino.com/v1/web/media/${ads.mediaId}`
+      }
+      this.selectedLocation = ads.destLocation;
+      this.startDate = moment(ads.startDate, 'jYYYY/jMM/jDD');
+      this.endDate = moment(ads.endDate, 'jYYYY/jMM/jDD');
+      this.advertising = {
+        description: ads.description,
+        link: ads.link,
+        mediaId: ads.mediaId,
+        positionType: ads.positionType.id
+      }
+      this.srvData.thanksMainProgressBar();
+    })
   }
 
   getLocations(event: any): void {

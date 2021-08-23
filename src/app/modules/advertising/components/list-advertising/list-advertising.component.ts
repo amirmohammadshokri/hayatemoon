@@ -35,29 +35,34 @@ export class ListAdvertisingComponent implements OnInit {
     private srvMsg: MessageService,
     private router: Router,
     private srvData: DataService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cols = [
-      { field: 'title', header: 'تاریخ شروع' },
-      { field: 'price', header: 'تاریخ پایان' },
+      { field: 'startDate', header: 'تاریخ شروع' },
+      { field: 'endDate', header: 'تاریخ پایان' },
       { field: 'fullname', header: 'کاربر ایجاد کننده' }
     ];
     this.getAdvertising(true);
   }
- 
+
   getAdvertising(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
       this.Advertisings = [];
     }
     this.loading = true;
-  
-    this.srvAds.getAdvertising( this.currentPage,15).subscribe(res => {
+
+    this.srvAds.getAdvertising(this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
-      this.Advertisings.push(...res);
+      this.Advertisings.push(...res.map(r => ({
+        id: r.id,
+        startDate: r.startDate,
+        endDate: r.endDate,
+        fullname: r.regCompanyUser.regUser.fullName
+      })));
       this.loading = false;
     });
   }
