@@ -65,7 +65,9 @@ export class FormAdvertisingComponent implements OnInit {
         description: ads.description,
         link: ads.link,
         mediaId: ads.mediaId,
-        positionType: ads.positionType.id
+        positionType: ads.positionType.id,
+        state: ads.state.id,
+        pageType: ads.pageType
       }
       this.srvData.thanksMainProgressBar();
     })

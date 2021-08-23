@@ -3,7 +3,7 @@
     <div class="p-toolbar-group-right">
     </div>
     <div class="p-toolbar-group-left">
-      <button pButton pRipple class="p-button-success p-ml-1" label="ذخیره" (click)="submit()"></button>
+      <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" label="ذخیره" (click)="submit()"></button>
       <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
         routerLink="../../advertisings"></button>
     </div>
