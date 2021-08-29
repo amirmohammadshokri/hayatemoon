@@ -274,8 +274,7 @@ export class FromHotelComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.hotel.title && this.hotel.typeId && this.selectedRate &&
-      this.selectedLocation && this.hotel.address) {
+    if (this.hotel.title ) {
       this.saving = true;
       this.hotel.rate = this.selectedRate;
       this.hotel.locationId = this.selectedLocation?.locationId;
@@ -296,7 +295,7 @@ export class FromHotelComponent implements OnInit {
             this.saving = false;
           });
         } else {
-          this.srvHotel.addHotel(this.hotel).subscribe(res => {
+          this.srvHotel.addHotel(this.hotel).subscribe(res => {     
             this.saving = false;
             this.srvMsg.add({ severity: 'success', summary: 'ثبت اطلاعات', detail: 'ثبت اطلاعات با موفقیت انجام شد .' });
             this.router.navigate(['./panel/hotel/hotels']);

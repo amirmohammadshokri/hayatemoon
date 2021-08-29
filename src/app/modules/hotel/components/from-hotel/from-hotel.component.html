@@ -85,7 +85,7 @@
         </div>
         <div class="p-col-12 p-field">
           <label for="">توضیحات</label>
-          <textarea pInputTextarea rows="1" [(ngModel)]="hotel.description"></textarea>
+          <textarea pInputTextarea autoResize="autoResize" rows="1" [(ngModel)]="hotel.description"></textarea>
         </div>
       </div>
     </div>
@@ -160,6 +160,9 @@
       </p-table>
     </div>
     <div class="p-col-12">
+      <div class="p-col-12">
+        <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+      </div>
       <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
         <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()" >
           <div class="add-circle p-d-flex p-ai-center p-jc-center">
@@ -181,8 +184,6 @@
           </div>
         </div>
       </div>
-      <div class="p-col-12">
-        <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
-      </div>
+      
     </div>
   </div>
