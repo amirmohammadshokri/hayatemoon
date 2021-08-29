@@ -23,6 +23,7 @@ export class ListHotelComponent implements OnInit {
   items: IState[];
   item: any;
   title: string;
+  role: string;
   CompanyId:number;
   showStateDialog: boolean;
   nothingElse: boolean;
@@ -53,7 +54,6 @@ export class ListHotelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.srvRole.getUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
       this.CompanyId= Number.parseInt(this.currentUser.CompanyId);
@@ -64,9 +64,9 @@ export class ListHotelComponent implements OnInit {
       { code: 2, name: 'در انتظار' },
     ];
     this.cols = [
-      { field: 'title', header: ' نننننعنوان هتل' },
+      { field: 'title', header: ' عنوان هتل' },
       { field: 'fullname', header: 'ایجاد کننده' },
-      { field: 'state', header: ' تست وضعیت' },
+      { field: 'state', header: ' وضعیت' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
     this.getHotels(true);
@@ -109,7 +109,6 @@ export class ListHotelComponent implements OnInit {
       filter += `&regCompanyId=${this.CompanyId}`;
     }  
     if(this.currentUser.role === 'SUPERADMIN' || this.selecteCompanies.companyId>0)
-    //تتتتتت
     this.srvHotel.getHotels(filter, this.currentPage).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
