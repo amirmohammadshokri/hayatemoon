@@ -27,6 +27,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
+import {InputMaskModule} from 'primeng/inputmask';
 
 @NgModule({
   declarations: [FormResidencefacilitieskindComponent, ListResidencefacilitieskindComponent,
@@ -52,7 +53,8 @@ import { TagModule } from 'primeng/tag';
     FieldsetModule,
     TooltipModule,
     DialogModule,
-    TagModule
+    TagModule,
+    InputMaskModule
   ],
   providers: [
     ConfirmationService,

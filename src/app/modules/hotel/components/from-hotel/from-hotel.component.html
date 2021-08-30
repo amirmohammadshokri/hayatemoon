@@ -62,26 +62,29 @@
                 </div>
                 <div class="p-col-6 p-field">
                     <label for="">تلفن</label>
-                    <input type="text" #phone="ngModel" id="phone" pInputText [(ngModel)]="hotel.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+                    <p-inputMask style="text-align: right;"  mask="999-99999999" #phone="ngModel" id="phone"   [(ngModel)]="hotel.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}" ></p-inputMask>
                     <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
             ثبت تلفن اجباری می باشد.
           </small>
                 </div>
                 <div class="p-col-12 p-field">
                     <label for="">آدرس</label>
-                    <textarea pInputTextarea rows="1" #address="ngModel" id="address" [(ngModel)]="hotel.address" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+                    <textarea pInputTextarea rows="2" #address="ngModel" id="address" [(ngModel)]="hotel.address" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
                     <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
             ثبت آدرس اجباری می باشد.
           </small>
                 </div>
                 <div class="p-col-12 p-field">
-                    <label for="">توضیحات</label>
-                    <textarea pInputTextarea autoResize="autoResize" rows="1" [(ngModel)]="hotel.description"></textarea>
+                 <div style="height: 20px;"></div>
                 </div>
             </div>
         </div>
         <div class="p-col-6">
             <div class="map" leaflet (leafletMapReady)="onMapReady($event)" [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>
+        </div>
+        <div class="p-col-12 p-field">
+            <label for="">توضیحات</label>
+            <textarea pInputTextarea autoResize="autoResize" rows="1" [(ngModel)]="hotel.description"></textarea>
         </div>
         <div class="p-col-3 p-field">
             <label for="latitude">latitude</label>
@@ -97,11 +100,14 @@
         ثبت longitude اجباری می باشد.
       </small>
         </div>
+     
         <div class="p-col-6 p-field">
             <label for="">امکانات هتل</label>
             <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
             </p-autoComplete>
         </div>
+        <p-fieldset legend="اماکن">
+            <div class="p-grid p-fluid">
         <div class="p-col-6">
             <div class="p-grid p-fluid">
                 <div class="p-col-4 p-field">
@@ -143,8 +149,13 @@
                     </tr>
                 </ng-template>
             </p-table>
-        </div>
+        </div>  </div>
+        </p-fieldset>
+            
         <div class="p-col-12">
+            <p-fieldset legend="تصاویر">
+
+          
             <div class="p-col-12">
                 <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
             </div>
@@ -169,6 +180,6 @@
                     </div>
                 </div>
             </div>
-
+        </p-fieldset>
         </div>
     </div>

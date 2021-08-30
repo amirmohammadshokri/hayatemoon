@@ -33,17 +33,17 @@
           </small>
         </div>
         <div class="p-col-4 p-field">
+
           <label for="">تلفن</label>
-          <input #phone="ngModel" type="" [(ngModel)]="residence.phone" pInputText required
-            [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+          <p-inputMask style="text-align: right;"  mask="999-99999999" #phone="ngModel" id="phone"   [(ngModel)]="residence.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}" ></p-inputMask>
           <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
-            ثبت تلفن اجباری می باشد
-          </small>
+  ثبت تلفن اجباری می باشد.
+</small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">ساعت ورود از</label>
-          <input #fromEntranceHour="ngModel" type="time" [(ngModel)]="residence.fromEntranceHour" pInputText required
-            [ngClass]="{'ng-dirty': (fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)}">
+          <p-inputMask #fromEntranceHour="ngModel" type="text" style="text-align: right;" mask="99:99"     [(ngModel)]="residence.fromEntranceHour" required
+            [ngClass]="{'ng-dirty': (fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)}"> </p-inputMask>
           <small *ngIf="(fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)"
             class="p-error">
             ساعت ورود را وارد کنید
@@ -51,21 +51,21 @@
         </div>
         <div class="p-col-4 p-field">
           <label for="">تا ساعت</label>
-          <input #toEntranceHour="ngModel" type="time" [(ngModel)]="residence.toEntranceHour" pInputText required
-            [ngClass]="{'ng-dirty': (toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)}">
-          <small *ngIf="(toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)"
-            class="p-error">
-            ساعت پایان را وارد کنید
-          </small>
+          <p-inputMask #toEntranceHour="ngModel" type="text" style="text-align: right;" mask="99:99"     [(ngModel)]="residence.toEntranceHour" required
+          [ngClass]="{'ng-dirty': (toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)}"> </p-inputMask>
+        <small *ngIf="(toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)"
+          class="p-error">
+          تا ساعت را وارد کنید
+        </small>
         </div>
         <div class="p-col-4 p-field">
           <label for="">ساعت خروج</label>
-          <input #leavingHour="ngModel" type="time" [(ngModel)]="residence.leavingHour" pInputText required
-            [ngClass]="{'ng-dirty': (leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)}">
-          <small *ngIf="(leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)"
-            class="p-error">
-            ساعت خروج را وارد کنید
-          </small>
+          <p-inputMask #leavingHour="ngModel" type="text" style="text-align: right;" mask="99:99"     [(ngModel)]="residence.leavingHour" required
+          [ngClass]="{'ng-dirty': (leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)}"> </p-inputMask>
+        <small *ngIf="(leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)"
+          class="p-error">
+          ساعت خروج را وارد کنید
+        </small>
         </div>
         <div class="p-col-12 p-field">
           <label for="">آدرس</label>

@@ -30,6 +30,7 @@ export class FormRoomfacilitieskindComponent implements OnInit {
   ngOnInit(): void {
     this.sComm.getIcons().subscribe(icons => {
       this.icons = icons;
+      
     });
     this.route.params.subscribe(prms => {
       if (prms.id > 0) {

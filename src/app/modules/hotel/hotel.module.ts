@@ -32,6 +32,8 @@ import { FormRoomComponent } from './components/form-room/form-room.component';
 import { ListRoomComponent } from './components/list-room/list-room.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DividerModule } from 'primeng/divider';
+import { FieldsetModule } from 'primeng/fieldset';
+import {InputMaskModule} from 'primeng/inputmask';
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
@@ -61,7 +63,9 @@ import { DividerModule } from 'primeng/divider';
     TooltipModule,
     TagModule,
     KeyFilterModule,
-    DividerModule
+    DividerModule,
+    FieldsetModule,
+    InputMaskModule
   ],
   providers: [
     ConfirmationService,
