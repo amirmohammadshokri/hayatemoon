@@ -56,16 +56,7 @@
         انتخاب مسیر برگشت اجباری است
       </small>
     </div>
-    <div class="p-col-3 p-field">
-      <label for="dayDuration">چند روز</label>
-      <input #dayDuration="ngModel" type="text" id="dayDuration" pInputText pKeyFilter="num"
-        [(ngModel)]="tour.dayDuration" required
-        [ngClass]="{'ng-dirty': (dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)}">
-      <small *ngIf="(dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)" class="p-error">
-        تعداد روزهای تور را وارد کنید
-      </small>
-    </div>
-    <div class="p-col-3 p-field">
+     <div class="p-col-3 p-field">
       <label for="nightDuration">چند شب</label>
       <input #nightDuration="ngModel" type="text" id="nightDuration" pInputText pKeyFilter="num"
         [(ngModel)]="tour.nightDuration" required
@@ -76,8 +67,18 @@
       </small>
     </div>
     <div class="p-col-3 p-field">
+      <label for="dayDuration">چند روز</label>
+      <input #dayDuration="ngModel" type="text" id="dayDuration" pInputText pKeyFilter="num"
+        [(ngModel)]="tour.dayDuration" required
+        [ngClass]="{'ng-dirty': (dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)}">
+      <small *ngIf="(dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)" class="p-error">
+        تعداد روزهای تور را وارد کنید
+      </small>
+    </div>
+   
+    <div class="p-col-3 p-field">
       <label for="fromDate">از تاریخ</label>
-      <dp-date-picker #fromDt="ngModel" id="fromDate" [(ngModel)]="fromDate" dir="ltr" theme="dp-material"
+      <dp-date-picker #fromDt="ngModel"  id="fromDate" [(ngModel)]="fromDate" dir="ltr"  (ngModelChange)="close()" theme="dp-material"
         mode="daytime" required
         [ngClass]="{'ng-dirty': (fromDt.invalid && submitted) || (fromDt.dirty && fromDt.invalid)}">
       </dp-date-picker>
@@ -134,7 +135,7 @@
     </div>
     <div class="p-col-12 p-field">
       <label for="">توضیحات</label>
-      <textarea pInputTextarea rows="1" [(ngModel)]="tour.description"></textarea>
+      <textarea pInputTextarea  autoResize="autoResize" rows="1" [(ngModel)]="tour.description"></textarea>
     </div>
     <div class="p-col-12">
       <p-fieldset>
@@ -157,6 +158,11 @@
             <label for="">تخفیف</label>
             <p-inputNumber [(ngModel)]="tour.price.disCountPrice" suffix=" تومان">
             </p-inputNumber>
+          </div> 
+          <div  >
+          
+            
+           <h1 style="margin-top: 30px">+</h1>
           </div>
           <div class="p-col-2 p-field">
             <label for="">نوع ارز</label>
@@ -168,8 +174,8 @@
             <p-inputNumber [(ngModel)]="tour.price.currencyPrice">
             </p-inputNumber>
           </div>
-          <div class="p-col-4 p-field">
-            <label for="">قیمت نمایشی</label>
+          <div class="p-col-3 p-field">
+            <label for="">قیمت کل نمایشی به تومان</label>
             <p-inputNumber [(ngModel)]="tour.price.netPrice" suffix="تومان">
             </p-inputNumber>
           </div>
@@ -177,30 +183,34 @@
       </p-fieldset>
     </div>
     <div class="p-col-12">
-      <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
-        <div class="add-img p-d-flex p-ai-center p-jc-center">
-          <div class="add-circle p-d-flex p-ai-center p-jc-center">
-            <img src="assets/layout/images/camera.svg" (click)="file.click()">
-          </div>
-          <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
-        </div>
-        <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
-          <div class="main p-d-flex p-ai-center p-jc-center">
-            <img [src]="img.url" (error)="defaultImg(img)"/>
-          </div>
-          <div class="tools">
-            <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
-              <img src="assets/layout/images/bin.svg">
-            </div>
-            <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
-              <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p-fieldset legend="تصاویر">
+
+    
       <div class="p-col-12">
-        <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+          <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
       </div>
-    </div>
+      <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+          <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()">
+              <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                  <img src="assets/layout/images/camera.svg">
+              </div>
+              <input type="file" #file accept=".jpg,.png,.jpeg" multiple="multiple" (change)="addImage($event)" style="display:none;">
+          </div>
+          <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
+              <div class="main p-d-flex p-ai-center p-jc-center">
+                  <img [src]="img.url" (error)="defaultImg(img)" />
+              </div>
+              <div class="tools">
+                  <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
+                      <img src="assets/layout/images/bin.svg">
+                  </div>
+                  <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                      <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </p-fieldset>
+  </div>
   </div>
 </div>

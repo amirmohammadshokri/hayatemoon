@@ -5,6 +5,10 @@ import { IAddTour } from 'src/app/interfaces';
 import { CurrencyService, DataService, MediaService, SearchService, TourService, VehiclesService } from 'src/app/services';
 import * as moment from 'jalali-moment';
 import { forkJoin } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ViewChild } from '@angular/core';
+import { DatePickerComponent } from 'ng2-jalali-date-picker/date-picker/date-picker.component';
+ 
 
 @Component({
   selector: 'ss-form-tour',
@@ -30,11 +34,14 @@ export class FormTourComponent implements OnInit {
   hotels: any[] = [];
   selectedHotel: any;
   selectedRoom: any[];
+  required: boolean = false;
   rooms: any[] = [];
   images: { mediaId: number, file: File, url: string }[] = [];
   currencies: SelectItem[] = [];
   mainImageIndex: number;
   tourId: number;
+  @ViewChild('dateComponent') dateComponent: DatePickerComponent;
+  
 
   constructor(
     private srvData: DataService,
@@ -107,6 +114,17 @@ export class FormTourComponent implements OnInit {
     });
   }
 
+
+  close() {
+console.log('dddddddddddddddddddddssssssssssssssssss');
+
+    if (this.dateComponent) {
+      this.dateComponent.api.close();
+   
+  }
+}
+ 
+ 
   getHotels(event: any): void {
     this.srvData.showMainProgressBarForMe();
     this.srvSrch.getHotel(event.query).subscribe(res => {
@@ -159,15 +177,15 @@ export class FormTourComponent implements OnInit {
     row.url = 'assets/no-image.png';
   }
 
-  addImage(e: any): void {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
+  // addImage(e: any): void {
+  //   if (e.target.files && e.target.files[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = (event: any) => {
+  //       this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
+  //     };
+  //     reader.readAsDataURL(e.target.files[0]);
+  //   }
+  // }
 
   submit(): void {
     if (this.tour.title && this.tour?.tourType > -1 && this.fromLocation &&
@@ -225,20 +243,25 @@ export class FormTourComponent implements OnInit {
         resolve();
       }
       const calls = [];
-      for (const img of this.images.filter(im => !im.mediaId)) {
+      // just save new images else return
+      const newImages = this.images.filter(im => !im.mediaId);
+      if (newImages.length == 0) {
+        resolve();
+      }
+      for (const img of newImages) {
         const formData = new FormData();
         formData.append(`file`, img.file, img.file.name);
         calls.push(this.srvMedia.upload(formData, 0));
       }
-      if (calls.length === 0) {
-        resolve();
-      }
       forkJoin(calls).subscribe(res => {
         const key = 'mediaId';
-        this.tour.mainImageId = res[this.mainImageIndex][key];
         for (let index = 0; index < res.length; index++) {
-          this.images.filter(im => !im.mediaId)[index].mediaId = res[index][key];
+          newImages[index].mediaId = res[index][key];
           this.tour.tourMediaIds.push(res[index][key]);
+        }
+        // after all image contain mediaId set main media Id
+        if (this.mainImageIndex) {
+          this.tour.mainImageId = this.images[this.mainImageIndex][key];
         }
         resolve();
       }, () => {
@@ -248,9 +271,20 @@ export class FormTourComponent implements OnInit {
     });
   }
 
+  addImage(e: any): void {
+    for (let index = 0; index < e.target.files.length; index++) {
+      const file = e.target.files[index];
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.images.push({ mediaId: null, url: event.target.result, file: file });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   deleteImage(img: any, id: number): void {
     this.images.splice(id, 1);
-    this.tour.tourMediaIds = this.tour.tourMediaIds.filter(id => id !== img.mediaId);
+    this.tour.tourMediaIds = this.tour.tourMediaIds.filter(m => m !== img.mediaId);
     if (this.tour.mainImageId === img.mediaId) {
       this.tour.mainImageId = 0;
     }
