@@ -47,7 +47,7 @@
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">نام شهر</label>
-                    <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+                    <p-autoComplete placeholder="جستجو" #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
                     </p-autoComplete>
                     <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
                         انتخاب شهر اجباری است
@@ -63,7 +63,7 @@
                 </div>
                 <div class="p-col-6 p-field">
                     <label for="">تلفن</label>
-                    <p-inputMask style="text-align: right;" mask="999-99999999" #phone="ngModel" id="phone" [(ngModel)]="hotel.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+                    <p-inputMask dir="ltr" mask="999-99999999" #phone="ngModel" id="phone" [(ngModel)]="hotel.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
                     </p-inputMask>
                     <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
                         ثبت تلفن اجباری می باشد.
@@ -84,15 +84,9 @@
         <div class="p-col-6">
             <div class="map" leaflet (leafletMapReady)="onMapReady($event)" [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>
         </div>
-        <!-- <div class="p-col-6 p-field">
-            <label for="">امکانات هتل</label>
-            <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds"
-                (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
-            </p-autoComplete>
-        </div> -->
         <div class="p-col-6 p-field">
             <label for="">امکانات هتل</label>
-            <p-multiSelect [options]="facilities" [(ngModel)]="facilitiesKinds" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>
+            <p-multiSelect placeholder="انتخاب" [options]="facilities" [(ngModel)]="facilitiesKinds" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>
         </div>
         <div class="p-col-3 p-field">
             <label for="latitude">latitude</label>
@@ -118,9 +112,6 @@
                     <div class="p-grid p-fluid">
                         <div class="p-col-4 p-field">
                             <label for="">اماکن</label>
-                            <!-- <p-autoComplete [suggestions]="places" [(ngModel)]="place.title"
-                                (completeMethod)="getPlaces($event)" field="title">
-                            </p-autoComplete> -->
                             <p-dropdown [options]="places" [(ngModel)]="place.title" optionLabel="title" [filter]="true" filterBy="title" placeholder="انتخاب"></p-dropdown>
                         </div>
                         <div class="p-col-4 p-field">

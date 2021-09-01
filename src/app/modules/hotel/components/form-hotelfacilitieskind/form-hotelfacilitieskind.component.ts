@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddhotelfacilitieskind } from 'src/app/interfaces/add-hotelfacilitieskind.interface';
-import { IHotelfacilitieskind } from 'src/app/interfaces/hotelfacilitieskind.interface';
 import { HotelService } from 'src/app/services';
 import { CommonServiece } from 'src/app/services/common.service';
 
@@ -13,7 +12,7 @@ import { CommonServiece } from 'src/app/services/common.service';
 })
 export class FormHotelfacilitieskindComponent implements OnInit {
 
-  hotelfacilitieskind: IAddhotelfacilitieskind = {};
+  hotelfacilitieskind: IAddhotelfacilitieskind = {fontIconId: 'fa fa-th'};
   icons: SelectItem[];
   romfacilitieskindId: number;
   fontIconId: string;
@@ -42,8 +41,8 @@ export class FormHotelfacilitieskindComponent implements OnInit {
         this.getHotelFacilitiesById(this.romfacilitieskindId);
       }
     });
-
   }
+
   getHotelFacilitiesById(id: number): void {
     this.srvHotel.getHotelfacilitieskindById(id).subscribe(cou => {
       this.hotelfacilitieskind = cou;
