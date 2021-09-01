@@ -126,13 +126,13 @@ export class FormResidenceComponent implements OnInit {
       this.images = res.mediaIds.map(id => ({
         mediaId: id,
         file: null,
-        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+        url: `https://api.gashtineh.com/v1/web/media/${id}`
       }));
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.residence.mainMediaId);
       this.srvData.thanksMainProgressBar();
     });
   }
-
+ 
   getVehicles(): void {
     this.srvData.showMainProgressBarForMe();
     this.srvVehicle.getVehicles().subscribe(res => {

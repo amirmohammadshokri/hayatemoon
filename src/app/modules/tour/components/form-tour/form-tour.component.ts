@@ -40,6 +40,7 @@ export class FormTourComponent implements OnInit {
   currencies: SelectItem[] = [];
   mainImageIndex: number;
   tourId: number;
+  routes: any[] = [{ name: 'داخلی', key: true }, { name: 'خارجی', key: false }];
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;
   
 
@@ -96,7 +97,7 @@ export class FormTourComponent implements OnInit {
       this.images = res.mediaIds.map(id => ({
         mediaId: id,
         file: null,
-        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+        url: `https://api.gashtineh.com/v1/web/media/${id}`
       }));
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.tour.mainImageId);
       this.selectedHotel = res.hotel;

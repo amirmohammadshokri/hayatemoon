@@ -68,17 +68,17 @@
         </small>
         </div>
         <div class="p-col-12 p-field">
-          <label for="">آدرس</label>
-          <textarea #address="ngModel" pInputTextarea [(ngModel)]="residence.address" rows="1" required
-            [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
-          <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
-            آدرس را وارد کنید
-          </small>
+          <label for="title">قوانین اقامتگاه</label>
+          <p-chips [(ngModel)]="residence.rules"></p-chips>
         </div>
-        <div class="p-col-12 p-field">
-          <label for="">توضیحات</label>
-          <textarea pInputTextarea [(ngModel)]="residence.description" rows="2"></textarea>
+        <div class="p-col-12  p-field">
+          <label for="">امکانات اقامتگاه</label>
+          <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)"
+            field="title" [multiple]="true">
+          </p-autoComplete>
         </div>
+      
+      
       </div>
     </div>
     <div class="p-col-6">
@@ -86,14 +86,16 @@
         [leafletLayersControl]="layersControl"></div>
     </div>
     <div class="p-col-12 p-field">
-      <label for="title">قوانین اقامتگاه</label>
-      <p-chips [(ngModel)]="residence.rules"></p-chips>
+      <label for="">آدرس</label>
+      <textarea #address="ngModel" pInputTextarea [(ngModel)]="residence.address" rows="1" required
+        [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+      <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
+        آدرس را وارد کنید
+      </small>
     </div>
-    <div class="p-col-12  p-field">
-      <label for="">امکانات اقامتگاه</label>
-      <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)"
-        field="title" [multiple]="true">
-      </p-autoComplete>
+    <div class="p-col-12 p-field">
+      <label for="">توضیحات</label>
+      <textarea pInputTextarea autoResize="autoResize"   [(ngModel)]="residence.description" rows="2"></textarea>
     </div>
     <div class="p-col-12">
       <p-fieldset legend="اماکن">
@@ -162,7 +164,7 @@
           </div>
         </ng-template>
         <div class="p-grid p-fluid">
-          <div class="p-col-4 p-field">
+          <div class="p-col-2 p-field">
             <label for="">قیمت پایه</label>
             <p-inputNumber [(ngModel)]="residence.prices.price" suffix=" تومان">
             </p-inputNumber>
@@ -187,9 +189,32 @@
           </div>
           <div class="p-col-2 p-field">
             <label for="">روز قبل از تعطیلات رسمی</label>
-            <p-inputNumber [(ngModel)]="residence.prices.holiday" suffix=" %" placeholder="%" [min]="0" [max]="100"
+            <p-inputNumber    [(ngModel)]="residence.prices.holiday" suffix=" %" placeholder="%" [min]="0" [max]="100"
               mode="decimal" [minFractionDigits]="2">
             </p-inputNumber>
+          </div>
+          <div class="p-col-12">
+            <div class="p-grid p-field">
+            <div class="p-col-2 p-field">
+              
+            </div>
+            <div class="p-col-2 p-field">
+              <label for="">{{residence.prices.price+(residence.prices.price*((residence.prices.thursdayPercent)/100))}}</label>
+           
+            </div>
+            <div class="p-col-2 p-field">
+              <label for="">{{residence.prices.price+(residence.prices.price*((residence.prices.fridayPercent)/100))}}</label>
+          
+            </div>
+            <div class="p-col-2 p-field">
+              <label for="">{{residence.prices.price+(residence.prices.price*((residence.prices.beforeHoliday)/100))}}</label>
+               
+            </div>
+            <div class="p-col-2 p-field">
+              <label for="">{{residence.prices.price+(residence.prices.price*((residence.prices.holiday)/100))}}</label>
+              
+            </div>
+            </div>
           </div>
           <div class="p-col-12" *ngFor="let role of residence.prices.priceRules;let i = index">
             <div class="p-grid p-field">

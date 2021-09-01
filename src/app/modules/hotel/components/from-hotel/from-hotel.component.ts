@@ -143,7 +143,7 @@ export class FromHotelComponent implements OnInit {
       this.images = hotel.mediaIds.map(mid => ({
         mediaId: mid,
         file: null,
-        url: `http://beta-api.gozarino.com/v1/web/media/${id}`
+        url: `https://api.gashtineh.com/v1/web/media/${id}`
       }));
       this.mainImageIndex = hotel.mediaIds.findIndex(mid => mid === this.hotel.mainMediaId);
     });

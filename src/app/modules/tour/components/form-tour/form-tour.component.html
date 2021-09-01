@@ -29,8 +29,13 @@
       </small>
     </div>
     <div class="p-col-3 p-field-checkbox">
-      <p-checkbox [(ngModel)]="tour.isForeign" [binary]="true"></p-checkbox>
-      <label for="isForeign">خارجی</label>
+      <div class="p-d-flex p-ai-center p-mt-3">
+          <div *ngFor="let route of routes" class="p-field-checkbox p-ml-3">
+              <p-radioButton [inputId]="route.key" name="route" [value]="route.key"
+                  [(ngModel)]="tour.isForeign"></p-radioButton>
+              <label [for]="route.key">{{route.name}}</label>
+          </div>
+      </div>
     </div>
     <div class="p-col-3 p-field-checkbox">
       <p-checkbox [(ngModel)]="tour.isInstallments" [binary]="true"></p-checkbox>
