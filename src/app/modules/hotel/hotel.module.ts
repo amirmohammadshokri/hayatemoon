@@ -33,7 +33,8 @@ import { ListRoomComponent } from './components/list-room/list-room.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DividerModule } from 'primeng/divider';
 import { FieldsetModule } from 'primeng/fieldset';
-import {InputMaskModule} from 'primeng/inputmask';
+import { InputMaskModule } from 'primeng/inputmask';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
@@ -65,7 +66,8 @@ import {InputMaskModule} from 'primeng/inputmask';
     KeyFilterModule,
     DividerModule,
     FieldsetModule,
-    InputMaskModule
+    InputMaskModule,
+    MultiSelectModule
   ],
   providers: [
     ConfirmationService,

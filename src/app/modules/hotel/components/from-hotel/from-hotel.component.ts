@@ -90,6 +90,7 @@ export class FromHotelComponent implements OnInit {
   ngOnInit(): void {
     this.getHotelType();
     this.getVehicles();
+    this.getFacilities({ query: '' });
     this.aRoute.params.subscribe(prms => {
       if (prms.id > 0) {
         this.hotelId = Number.parseInt(prms.id, 0);
@@ -162,6 +163,8 @@ export class FromHotelComponent implements OnInit {
   }
 
   getFacilities(event: any): void {
+    console.log(`hi`, event);
+
     this.srvSrch.getHotelFacilitiesKind(event.query).subscribe(res => {
       this.facilities = res;
     });
