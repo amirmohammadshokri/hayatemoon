@@ -118,8 +118,10 @@
                     <div class="p-grid p-fluid">
                         <div class="p-col-4 p-field">
                             <label for="">اماکن</label>
-                            <p-autoComplete [suggestions]="places" [(ngModel)]="place.title" (completeMethod)="getPlaces($event)" field="title">
-                            </p-autoComplete>
+                            <!-- <p-autoComplete [suggestions]="places" [(ngModel)]="place.title"
+                                (completeMethod)="getPlaces($event)" field="title">
+                            </p-autoComplete> -->
+                            <p-dropdown [options]="places" [(ngModel)]="place.title" optionLabel="title" [filter]="true" filterBy="title" placeholder="انتخاب"></p-dropdown>
                         </div>
                         <div class="p-col-4 p-field">
                             <label for="">وسیله نقلیه</label>

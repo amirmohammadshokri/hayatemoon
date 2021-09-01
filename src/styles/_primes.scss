@@ -322,11 +322,12 @@
     }
 }
 
-.p-multiselect-label {
-    display: flex !important;
-    flex-wrap: wrap;
-}
-
-.p-multiselect.p-multiselect-chip .p-multiselect-token {
-    margin-bottom: 0.25rem;
+.p-multiselect-chip {
+    .p-multiselect-label {
+        display: flex !important;
+        flex-wrap: wrap;
+    }
+    .p-multiselect-token {
+        margin-bottom: 0.25rem;
+    }
 }
