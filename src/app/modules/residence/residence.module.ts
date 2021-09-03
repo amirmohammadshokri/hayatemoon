@@ -28,6 +28,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import {InputMaskModule} from 'primeng/inputmask';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [FormResidencefacilitieskindComponent, ListResidencefacilitieskindComponent,
@@ -54,7 +55,8 @@ import {InputMaskModule} from 'primeng/inputmask';
     TooltipModule,
     DialogModule,
     TagModule,
-    InputMaskModule
+    InputMaskModule,
+    MultiSelectModule
   ],
   providers: [
     ConfirmationService,

@@ -128,7 +128,7 @@ console.log('dddddddddddddddddddddssssssssssssssssss');
  
   getHotels(event: any): void {
     this.srvData.showMainProgressBarForMe();
-    this.srvSrch.getHotel(event.query).subscribe(res => {
+    this.srvSrch.getHotel().subscribe(res => {
       this.hotels = res;
       this.srvData.thanksMainProgressBar();
     });

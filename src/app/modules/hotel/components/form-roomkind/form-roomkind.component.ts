@@ -12,7 +12,7 @@ import { CommonServiece } from 'src/app/services/common.service';
   styleUrls: ['./form-roomkind.component.scss']
 })
 export class FormRoomkindComponent implements OnInit {
-  roomkind: IAddrookind = {};
+  roomkind: IAddrookind ={fontIconId: 'fa fa-th'};
   icons: SelectItem[];
   roomkindId: number;
   fontIconId: string;

@@ -65,8 +65,9 @@
                 </div>
                 <div class="p-col-12  p-field">
                     <label for="">امکانات اقامتگاه</label>
-                    <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
-                    </p-autoComplete>
+                    <p-multiSelect placeholder="انتخاب" [options]="facilities" [(ngModel)]="facilitiesKinds" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>
+                    <!-- <p-autoComplete [suggestions]="facilities" [(ngModel)]="facilitiesKinds" (completeMethod)="getFacilities($event)" field="title" [multiple]="true"> -->
+                    <!-- </p-autoComplete> -->
                 </div>
 
 
@@ -179,22 +180,22 @@
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price+(residence.prices.price*((residence.prices.thursdayPercent)/100)) | number}}
+                  {{residence.prices.price-(residence.prices.price*((residence.prices.thursdayPercent)/100)) | number}}
                 </label>
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price+(residence.prices.price*((residence.prices.fridayPercent)/100)) | number}}
+                  {{residence.prices.price-(residence.prices.price*((residence.prices.fridayPercent)/100)) | number}}
                 </label>
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price+(residence.prices.price*((residence.prices.beforeHoliday)/100)) | number}}
+                  {{residence.prices.price-(residence.prices.price*((residence.prices.beforeHoliday)/100)) | number}}
                 </label>
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price+(residence.prices.price*((residence.prices.holiday)/100)) | number}}
+                  {{residence.prices.price-(residence.prices.price*((residence.prices.holiday)/100)) | number}}
                 </label>
                             </div>
                         </div>

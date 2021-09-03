@@ -67,6 +67,7 @@ export class FormResidenceComponent implements OnInit {
   residenceId: number;
   submitted: boolean;
 
+
   constructor(
     private srvData: DataService,
     private srvResidence: ResidenceService,
@@ -86,6 +87,7 @@ export class FormResidenceComponent implements OnInit {
         this.getResidence();
       }
     });
+    this.getFacilities({ query: '' });
   }
 
   getResidence(): void {
@@ -196,12 +198,19 @@ export class FormResidenceComponent implements OnInit {
   }
 
   getFacilities(event: any): void {
-    this.srvData.showMainProgressBarForMe();
-    this.srvSrch.getHotelFacilitiesKind(event.query).subscribe(res => {
+    this.srvSrch.getResidenceFacilitiesKind(event.query).subscribe(res => {
       this.facilities = res;
-      this.srvData.thanksMainProgressBar();
     });
   }
+
+
+  // getFacilities(event: any): void {
+  //   this.srvData.showMainProgressBarForMe();
+  //   this.srvSrch.getHotelFacilitiesKind(event.query).subscribe(res => {
+  //     this.facilities = res;
+  //     this.srvData.thanksMainProgressBar();
+  //   });
+  // }
 
   getPlaces(event: any): void {
     this.srvSrch.getPlaces(event.query).subscribe(res => {

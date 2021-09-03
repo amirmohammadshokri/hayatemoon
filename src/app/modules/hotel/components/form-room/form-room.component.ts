@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { IAddRoom } from 'src/app/interfaces';
 import { DataService, HotelService, SearchService } from 'src/app/services';
 import * as _ from 'lodash';
@@ -14,8 +14,9 @@ export class FormRoomComponent implements OnInit {
 
   rooms: IAddRoom[] = [{ breakFast: false, dinner: false, extraService: false, lunch: false, facilitiesKindIds: [] }];
   roomId: number;
-  hotels: any[] = [];
-  roomkinds: any[] = [];
+  // hotels: any[] = [];
+  hotels: SelectItem[] = [];
+  roomkinds: SelectItem[] = []; 
   facilities: any[] = [];
   saving: boolean;
   submitted: boolean;
@@ -37,6 +38,9 @@ export class FormRoomComponent implements OnInit {
         this.getRoom();
       }
     });
+    this.getHotels();
+    this.getRoomkinds();
+    this.getFacilities({ query: '' });
   }
 
   submit(): void {
@@ -75,15 +79,14 @@ export class FormRoomComponent implements OnInit {
     });
   }
 
-  getHotels(event: any): void {
-    this.srvSrch.getHotel(event.query).subscribe(res => {
-      this.hotels = res;
+  getHotels(): void {
+    this.srvSrch.getHotel().subscribe(res => {
+      this.hotels = res.map(h=>({label:h.title,value:h.id}));
     });
   }
-
-  getRoomkinds(event: any): void {
-    this.srvSrch.getHotelRoom(event.query).subscribe(res => {
-      this.roomkinds = res;
+  getRoomkinds(): void {
+    this.srvSrch.getHotelRoomKind().subscribe(res => {
+      this.roomkinds =  res.map(t => ({ label: t.title, value: t.kindId }));
     });
   }
 

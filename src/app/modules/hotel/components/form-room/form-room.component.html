@@ -16,20 +16,25 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب هتل</label>
-      <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="room.hotelId"
+      <!-- <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="room.hotelId"
         (completeMethod)="getHotels($event)" field="title" required
         [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
       </p-autoComplete>
-      <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
+      <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error" >
         انتخاب هتل اجباری است
-      </small>
+      </small> -->
+      <p-dropdown #hotel="ngModel" [options]="hotels"  [filter]="true" placeholder="انتخاب" [(ngModel)]="room.hotelId" field="title" required
+      [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
+      </p-dropdown>
+       <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error" >
+        انتخاب هتل اجباری است
+      </small>  
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب نوع اتاق</label>
-      <p-autoComplete #roomkind="ngModel" [suggestions]="roomkinds" [(ngModel)]="room.kindId"
-        (completeMethod)="getRoomkinds($event)" field="title" required
-        [ngClass]="{'ng-dirty': (roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)}">
-      </p-autoComplete>
+      <p-dropdown #roomkind="ngModel" [options]="roomkinds"  [filter]="true" placeholder="انتخاب" [(ngModel)]="room.kindId" field="title" required
+      [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
+      </p-dropdown>
       <small *ngIf="(roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)" class="p-error">
         انتخاب نوع اتاق اجباری است.
       </small>
@@ -60,9 +65,12 @@
     </div>
     <div class="p-col-6 p-field">
       <label for="">امکانات اتاق</label>
-      <p-autoComplete [suggestions]="facilities" [(ngModel)]="room.facilitiesKindIds"
+
+      <p-multiSelect placeholder="انتخاب" [options]="facilities" [(ngModel)]="room.facilitiesKindIds" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>
+  
+      <!-- <p-autoComplete [suggestions]="facilities" [(ngModel)]="room.facilitiesKindIds"
         (completeMethod)="getFacilities($event)" field="title" [multiple]="true">
-      </p-autoComplete>
+      </p-autoComplete> -->
     </div>
     <div class="p-col-12 p-field">
       <label for="">توضیحات</label>

@@ -13,7 +13,7 @@ import { ResidenceService } from 'src/app/services/residence.service';
 export class FormResidencefacilitieskindComponent implements OnInit {
 
 
-  residencefacilitieskind: IAddResidencefacilitieskind = {};
+  residencefacilitieskind: IAddResidencefacilitieskind = {fontIconId: 'fa fa-th'};
   icons: SelectItem[];
   residencefacilitieskindId: number;
   fontIconId: string;

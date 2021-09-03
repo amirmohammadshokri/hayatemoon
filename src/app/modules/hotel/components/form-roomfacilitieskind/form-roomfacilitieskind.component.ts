@@ -12,7 +12,7 @@ import { CommonServiece } from 'src/app/services/common.service';
 })
 export class FormRoomfacilitieskindComponent implements OnInit {
 
-  roomfacilitieskind: IAddroomfacilitieskind = {};
+  roomfacilitieskind: IAddroomfacilitieskind = {fontIconId: 'fa fa-th'};
   icons: SelectItem[];
   roomfacilitieskindId: number;
   fontIconId: string;
