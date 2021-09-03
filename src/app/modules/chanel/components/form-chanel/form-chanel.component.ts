@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService, SelectItem } from 'primeng/api';
 import { IAddChanel } from 'src/app/interfaces';
-import { ChanelService } from 'src/app/services';
+import {  ChanelService, IdentityService } from 'src/app/services';
 
 @Component({
   selector: 'ss-form-chanel',
@@ -13,18 +13,19 @@ export class FormChanelComponent implements OnInit {
 
   saving: boolean;
   chanel: IAddChanel = {};
-  types: SelectItem[] = [
-    { label: 'فعال', value: 0 }
-  ];
+  
+  types: SelectItem[] = [];
   chanelId: number;
 
   constructor(
     private srvChnl: ChanelService,
+    private sevIdentity:IdentityService,
     private srvMsg: MessageService,
     private router: Router,
     private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+this.getTypeRole();
     this.aRoute.params.subscribe(prms => {
       if (prms.id > 0) {
         this.chanelId = Number.parseInt(prms.id, 0);
@@ -32,6 +33,14 @@ export class FormChanelComponent implements OnInit {
       }
     });
   }
+
+  getTypeRole(): void {
+    this.sevIdentity.getRoles().subscribe(res => {
+      this.types = res.map(t => ({ label: t.title, value: t.id }));
+    });
+  }
+
+
 
   getChanel(): void {
     this.srvChnl.getChanel(this.chanelId).subscribe(res => {

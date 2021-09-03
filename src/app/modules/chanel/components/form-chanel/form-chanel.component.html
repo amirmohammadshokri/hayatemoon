@@ -16,9 +16,11 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="title">نوع</label>
-            <p-dropdown [options]="types" #typeId="ngModel" [(ngModel)]="chanel.type"
-                placeholder="انتخاب">
+
+            <p-dropdown [options]="types" #typeId="ngModel" [(ngModel)]="chanel.type"  placeholder="انتخاب نوع ">
             </p-dropdown>
+        
+          
         </div>
         <div class="p-col-12 p-field">
             <label for="title">توضیحات</label>

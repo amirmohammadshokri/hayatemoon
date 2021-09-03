@@ -11,7 +11,7 @@
   <div class="p-grid p-fluid p-mt-2">
     <div *ngIf="!placeId" class="p-col-12 p-field">
       <label for="title">عنوان</label>
-      <p-chips #list="ngModel" [(ngModel)]="titleList" required
+      <p-chips #list="ngModel" [(ngModel)]="titleList" required  placeholder="لطفا بعد وارد کردن عنوان اینتر را فشار دهید"
         [ngClass]="{'ng-dirty': (list.invalid && submitted) || (list.dirty && list.invalid)}">
       </p-chips>
       <small *ngIf="(list.invalid && submitted) || (list.dirty && list.invalid)" class="p-error">

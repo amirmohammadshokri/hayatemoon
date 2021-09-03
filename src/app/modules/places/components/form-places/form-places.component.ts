@@ -49,7 +49,9 @@ export class FormPlacesComponent implements OnInit {
         });
       }
     } else {
-      if (this.titleList.length > 0) {
+console.log(this.titleList );
+
+      if (this.titleList.length>0) {
         this.saving = true;
         this.srvPlace.addPlace({ titleList: this.titleList }).subscribe(res => {
           this.saving = false;
