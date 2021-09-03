@@ -41,6 +41,7 @@ export class FormTourComponent implements OnInit {
   mainImageIndex: number;
   tourId: number;
   routes: any[] = [{ name: 'داخلی', key: true }, { name: 'خارجی', key: false }];
+  tourTypesId:number;
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;
   
 
@@ -58,7 +59,7 @@ export class FormTourComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTourType();
-    this.getVehicles();
+    //this.getVehicles();
     this.getCurrency();
     this.route.params.subscribe(prms => {
       if (prms.id > 0) {
@@ -117,8 +118,6 @@ export class FormTourComponent implements OnInit {
 
 
   close() {
-console.log('dddddddddddddddddddddssssssssssssssssss');
-
     if (this.dateComponent) {
       this.dateComponent.api.close();
    
@@ -150,12 +149,29 @@ console.log('dddddddddddddddddddddssssssssssssssssss');
     });
   }
 
-  getVehicles(): void {
+  changeTourType(id:number){
+    let a:number=id;
+    this.getVehicles(a);
+  }
+
+  private getVehicles(id:number): void {
     this.srvData.showMainProgressBarForMe();
-    this.srvVehicle.getVehicles().subscribe(res => {
-      this.vehicels = res;
-      this.srvData.thanksMainProgressBar();
+    if(id===3){
+        this.srvVehicle.getVehicles().subscribe(res => {
+          console.log(res);
+        this.vehicels = res;
+        this.srvData.thanksMainProgressBar();
+      });
+    }
+    else{
+        this.srvVehicle.getVehicles().subscribe(res => {
+          console.log(res);
+          
+        this.vehicels = res.filter(i=>i.vehicleId===id);
+        this.srvData.thanksMainProgressBar();
     });
+    }
+  
   }
 
   getLocations(event: any): void {
