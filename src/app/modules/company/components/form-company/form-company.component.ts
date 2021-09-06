@@ -71,7 +71,10 @@ export class FormCompanyComponent implements OnInit {
     const utcCeoBirthDate = new Date(ceoBirthDate.toUTCString());
     this.companyAdd.ceoBirthDate = utcCeoBirthDate.toISOString();
     this.companyAdd.locationId = this.selectedLocation?.locationId;
-
+    if(this.contact.value !="" && this.contact.value!=null ){
+     this.contact.value=this.contact.value.replace('-',''); 
+    }
+    
     this.saveImages().then(() => {
       if (this.companyId > 0) {
         this.srvCo.editCompany(this.companyId, { id: this.companyId, company: this.companyAdd }).subscribe(() => {

@@ -26,6 +26,8 @@ import { TagModule } from 'primeng/tag';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { InputMaskModule } from 'primeng/inputmask';
+
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
     TagModule,
     KeyFilterModule,
     DpDatePickerModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputMaskModule
+
   ],
   providers: [
     ConfirmationService,

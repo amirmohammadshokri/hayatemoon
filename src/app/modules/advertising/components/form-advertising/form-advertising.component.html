@@ -14,7 +14,7 @@
         <div class="p-col-4 p-field">
           <label for="">نام شهر</label>
           <p-autoComplete [suggestions]="locations" [(ngModel)]="selectedLocation"
-            (completeMethod)="getLocations($event)" field="title">
+          placeholder="جستجو..."  (completeMethod)="getLocations($event)" field="title">
           </p-autoComplete>
         </div>
         <div class="p-col-4 p-field">

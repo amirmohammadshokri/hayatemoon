@@ -49,7 +49,7 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="">نام شهر</label>
-            <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation"
+            <p-autoComplete #ss="ngModel"  placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="selectedLocation"
                 (completeMethod)="getLocations($event)" field="title"
                 [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
             </p-autoComplete>
@@ -70,7 +70,8 @@
                 </div>
                 <div class="p-col-5 p-field">
                     <label for="title">تلفن</label>
-                    <input type="text" pInputText pKeyFilter="num" [(ngModel)]="contact.value">
+                    <p-inputMask dir="ltr" mask="999-99999999" #phone="ngModel" id="phone" pKeyFilter="num" [(ngModel)]="contact.value">
+                    </p-inputMask>
                 </div>
                 <div class="p-col-2 p-field">
                     <label for="">&ensp;</label>

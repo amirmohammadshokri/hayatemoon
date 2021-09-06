@@ -21,7 +21,7 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="tourType">نوع تور</label>
-      <p-dropdown #tourType="ngModel" [options]="tourTypes" [(ngModel)]="tour.tourType" required
+      <p-dropdown #tourType="ngModel" [options]="tourTypes" (onChange)="changeTourType(tour.tourType)" [(ngModel)]="tour.tourType" required
         placeholder="انتخاب نوع تور"
         [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}"></p-dropdown>
       <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
@@ -43,7 +43,7 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">از مسیر</label>
-      <p-autoComplete #fromLoc="ngModel" [suggestions]="locations" [(ngModel)]="fromLocation"
+      <p-autoComplete #fromLoc="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="fromLocation"
         (completeMethod)="getLocations($event)" field="title" required
         [ngClass]="{'ng-dirty': (fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)}">
       </p-autoComplete>
@@ -53,7 +53,7 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">به مسیر</label>
-      <p-autoComplete #toLoc="ngModel" [suggestions]="locations" [(ngModel)]="toLocation"
+      <p-autoComplete #toLoc="ngModel"  placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="toLocation"
         (completeMethod)="getLocations($event)" field="title" required
         [ngClass]="{'ng-dirty': (toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)}">
       </p-autoComplete>
@@ -102,7 +102,7 @@
     </div>
     <div class="p-col-6 p-field">
       <label for="">دسته بندی</label>
-      <p-autoComplete #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategories"
+      <p-autoComplete  placeholder="جستجو..." #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategories"
         (completeMethod)="getCategories($event)" field="title" [multiple]="true" required
         [ngClass]="{'ng-dirty': (category.invalid && submitted) || (category.dirty && category.invalid)}">
       </p-autoComplete>

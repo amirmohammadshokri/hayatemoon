@@ -300,6 +300,8 @@ export class FormResidenceComponent implements OnInit {
       && this.residence.toEntranceHour && this.residence.leavingHour && this.residence.address) {
       this.saving = true;
       this.residence.locationId = this.selectedLocation?.locationId;
+      this.residence.phone=this.residence.phone.replace('-','');
+      
       this.residence.isAdmin = true;
       if (this.selectedPosition) {
         this.residence.latitude = this.selectedPosition.lat;

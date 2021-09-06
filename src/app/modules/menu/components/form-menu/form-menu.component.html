@@ -18,7 +18,7 @@
             <input type="text" name="link" id="link" pInputText [(ngModel)]="menu.link">
         </div>
         <div class="p-col-12 p-lg-6 p p-field">
-            <label for="image">تصویر</label>
+            <label for="image">آیکون منو</label>
             <div class="p-d-flex">
                 <input id="image" dir="ltr" pInputText disabled [value]="imageFile?.name" />
                 <input type="file" #image (change)="setImage(image.files)" style="display:none;">

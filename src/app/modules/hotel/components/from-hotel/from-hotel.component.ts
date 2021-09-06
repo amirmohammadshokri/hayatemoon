@@ -100,6 +100,26 @@ export class FromHotelComponent implements OnInit {
     });
   }
 
+  setMapAddress( selectedLocation: ILocation):void{
+    let idLocation=-selectedLocation.locationId;
+    this.options={
+      layers: [this.streetMaps, this.tehran],
+      zoom: 15,
+      center: latLng([Number.parseFloat(selectedLocation.latitude),Number.parseFloat(selectedLocation.longitude) ])
+    }
+    this.tehran=marker([Number.parseFloat(selectedLocation.latitude),Number.parseFloat(selectedLocation.longitude) ], {
+      icon: icon({
+        iconSize: [25, 41],
+        iconAnchor: [13, 41],
+        iconUrl: 'leaflet/marker-icon.png',
+        iconRetinaUrl: 'leaflet/marker-icon-2x.png',
+        shadowUrl: 'leaflet/marker-shadow.png'
+      }),
+      draggable: true
+    });
+   
+  }
+
   confirmDelete(id: number): void {
     this.confirmationService.confirm({
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
@@ -282,11 +302,12 @@ export class FromHotelComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.hotel.title) {
+    if (this.hotel.title && this.hotel.typeId && this.selectedRate && this.selectedLocation && this.hotel.address) {
       this.saving = true;
       this.hotel.rate = this.selectedRate;
       this.hotel.locationId = this.selectedLocation?.locationId;
       this.hotel.isAdmin = true;
+      this.hotel.phone=this.hotel.phone.replace('-','');
       if (this.selectedPosition) {
         this.hotel.latitude = this.selectedPosition.lat;
         this.hotel.longitude = this.selectedPosition.lng;

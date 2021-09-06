@@ -21,7 +21,7 @@
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">نام شهر</label>
-                    <p-autoComplete #ss="ngModel" [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+                    <p-autoComplete #ss="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
                     </p-autoComplete>
                     <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
             انتخاب شهر اجباری است
