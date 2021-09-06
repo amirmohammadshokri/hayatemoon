@@ -46,8 +46,11 @@ export class SearchService {
   }
 
   getHotelRooms(hotelId: number, verb: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoomKind?search=${verb}${hotelId ? `&hotelId=${hotelId}` : ``}`);
+    return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoom?search=${verb}${hotelId ? `&hotelId=${hotelId}` : ``}`);
   }
+  // getHotelRooms(hotelId: number, verb: string): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoomKind?search=${verb}${hotelId ? `&hotelId=${hotelId}` : ``}`);
+  // }
 
   getHotelRoom(verb: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoomKind?search=${verb}`);

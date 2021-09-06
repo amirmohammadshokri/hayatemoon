@@ -120,7 +120,8 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب هتل</label>
-      <p-autoComplete #hotel="ngModel" [suggestions]="hotels" [(ngModel)]="selectedHotel"
+
+      <p-autoComplete #hotel="ngModel" placeholder="جستجو..." (onChange)="onHotelChange()"  [suggestions]="hotels" [(ngModel)]="selectedHotel"
         (completeMethod)="getHotels($event)" field="title" required
         [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
       </p-autoComplete>
@@ -130,13 +131,16 @@
     </div>
     <div class="p-col-3 p-field">
       <label for="">انتخاب اتاق</label>
-      <p-autoComplete #room="ngModel" [suggestions]="rooms" [(ngModel)]="selectedRoom"
+  
+      <p-multiSelect placeholder="انتخاب" (onChange)="onRoomChange($event)" [options]="rooms" [(ngModel)]="selectedRoom" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>   
+
+      <!-- <p-autoComplete #room="ngModel" [suggestions]="rooms" [(ngModel)]="selectedRoom"
         (completeMethod)="getRooms($event)" field="title" required  [multiple]="true"
         [ngClass]="{'ng-dirty': (room.invalid && submitted) || (room.dirty && room.invalid)}">
       </p-autoComplete>
       <small *ngIf="(room.invalid && submitted) || (room.dirty && room.invalid)" class="p-error">
         انتخاب اتاق اجباری است
-      </small>
+      </small> -->
     </div>
     <div class="p-col-12 p-field">
       <label for="">توضیحات</label>

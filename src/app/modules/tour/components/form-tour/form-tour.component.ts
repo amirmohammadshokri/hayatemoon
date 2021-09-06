@@ -36,6 +36,7 @@ export class FormTourComponent implements OnInit {
   selectedRoom: any[];
   required: boolean = false;
   rooms: any[] = [];
+  facilitiesKinds: any[] = [];
   images: { mediaId: number, file: File, url: string }[] = [];
   currencies: SelectItem[] = [];
   mainImageIndex: number;
@@ -61,12 +62,25 @@ export class FormTourComponent implements OnInit {
     this.getTourType();
     //this.getVehicles();
     this.getCurrency();
+    this.getRooms({ query: '' });
     this.route.params.subscribe(prms => {
       if (prms.id > 0) {
         this.tourId = Number.parseInt(prms.id, 0);
         this.getTour();
       }
     });
+  }
+
+
+  onHotelChange():void{
+    console.log('66666666666666666666666666');
+  }
+
+  onRoomChange(e){
+    if(this.selectedRoom.length>1)
+      {
+        this.srvMsg.add({ severity: 'success', summary: 'توجه', detail: 'شما بیش از یک اتاق استفاده کردید .تست. .' })
+      }
   }
 
   getTour(): void {
@@ -136,7 +150,7 @@ export class FormTourComponent implements OnInit {
   getRooms(event: any): void {
     this.srvData.showMainProgressBarForMe();
     this.srvSrch.getHotelRooms(null, event.query).subscribe(res => {
-      this.rooms = res;
+      this.rooms = res; 
       this.srvData.thanksMainProgressBar();
     });
   }
@@ -165,8 +179,6 @@ export class FormTourComponent implements OnInit {
     }
     else{
         this.srvVehicle.getVehicles().subscribe(res => {
-          console.log(res);
-          
         this.vehicels = res.filter(i=>i.vehicleId===id);
         this.srvData.thanksMainProgressBar();
     });

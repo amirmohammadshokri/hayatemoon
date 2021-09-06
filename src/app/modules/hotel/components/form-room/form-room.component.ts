@@ -38,7 +38,7 @@ export class FormRoomComponent implements OnInit {
         this.getRoom();
       }
     });
-    this.getHotels();
+    this.getHotels({ query: '' });
     this.getRoomkinds();
     this.getFacilities({ query: '' });
   }
@@ -79,7 +79,9 @@ export class FormRoomComponent implements OnInit {
     });
   }
 
-  getHotels(): void {
+
+
+  getHotels(event: any): void {
     this.srvSrch.getHotel().subscribe(res => {
       this.hotels = res.map(h=>({label:h.title,value:h.id}));
     });
