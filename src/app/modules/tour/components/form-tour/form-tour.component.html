@@ -1,225 +1,191 @@
 <div class="card">
-  <p-toolbar>
-    <div class="p-toolbar-group-right">
-      <button [disabled]="saving" pButton pRipple label="ارسال جهت تایید"
-        [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success" (click)="submit()">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button [disabled]="saving" pButton pRipple label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success" (click)="submit()">
       </button>
-    </div>
-    <div class="p-toolbar-group-left">
-      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="/panel/tour/tours">
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary p-mr-1" routerLink="/panel/tour/tours">
       </button>
-    </div>
-  </p-toolbar>
-  <div class="p-grid p-fluid p-mt-2">
-    <div class="p-col-3 p-field">
-      <label for="title">عنوان تور</label>
-      <input #title="ngModel" id="title" type="text" required pInputText [(ngModel)]="tour.title"
-        [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
-      <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+        </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2">
+        <div class="p-col-3 p-field">
+            <label for="title">عنوان تور</label>
+            <input #title="ngModel" id="title" type="text" required pInputText [(ngModel)]="tour.title" [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+            <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
         ثبت عنوان تور اجباری است
       </small>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="tourType">نوع تور</label>
-      <p-dropdown #tourType="ngModel" [options]="tourTypes" (onChange)="changeTourType(tour.tourType)" [(ngModel)]="tour.tourType" required
-        placeholder="انتخاب نوع تور"
-        [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}"></p-dropdown>
-      <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="tourType">نوع تور</label>
+            <p-dropdown #tourType="ngModel" [options]="tourTypes" (onChange)="changeTourType(tour.tourType)" [(ngModel)]="tour.tourType" required placeholder="انتخاب نوع تور" [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}"></p-dropdown>
+            <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
         نوع تور حتما باید انتخاب شود
       </small>
-    </div>
-    <div class="p-col-3 p-field-checkbox">
-      <div class="p-d-flex p-ai-center p-mt-3">
-          <div *ngFor="let route of routes" class="p-field-checkbox p-ml-3">
-              <p-radioButton [inputId]="route.key" name="route" [value]="route.key"
-                  [(ngModel)]="tour.isForeign"></p-radioButton>
-              <label [for]="route.key">{{route.name}}</label>
-          </div>
-      </div>
-    </div>
-    <div class="p-col-3 p-field-checkbox">
-      <p-checkbox [(ngModel)]="tour.isInstallments" [binary]="true"></p-checkbox>
-      <label for="isInstallments">اقساطی</label>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="">از مسیر</label>
-      <p-autoComplete #fromLoc="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="fromLocation"
-        (completeMethod)="getLocations($event)" field="title" required
-        [ngClass]="{'ng-dirty': (fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)}">
-      </p-autoComplete>
-      <small *ngIf="(fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)" class="p-error">
+        </div>
+        <div class="p-col-3 p-field-checkbox">
+            <div class="p-d-flex p-ai-center p-mt-3">
+                <div *ngFor="let route of routes" class="p-field-checkbox p-ml-3">
+                    <p-radioButton [inputId]="route.key" name="route" [value]="route.key" [(ngModel)]="tour.isForeign">
+                    </p-radioButton>
+                    <label [for]="route.key">{{route.name}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-3 p-field-checkbox">
+            <p-checkbox [(ngModel)]="tour.isInstallments" [binary]="true"></p-checkbox>
+            <label for="isInstallments">اقساطی</label>
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="">از مسیر</label>
+            <p-autoComplete #fromLoc="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="fromLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)}">
+            </p-autoComplete>
+            <small *ngIf="(fromLoc.invalid && submitted) || (fromLoc.dirty && fromLoc.invalid)" class="p-error">
         انتخاب مسیر رفت اجباری است
       </small>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="">به مسیر</label>
-      <p-autoComplete #toLoc="ngModel"  placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="toLocation"
-        (completeMethod)="getLocations($event)" field="title" required
-        [ngClass]="{'ng-dirty': (toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)}">
-      </p-autoComplete>
-      <small *ngIf="(toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)" class="p-error">
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="">به مسیر</label>
+            <p-autoComplete #toLoc="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="toLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)}">
+            </p-autoComplete>
+            <small *ngIf="(toLoc.invalid && submitted) || (toLoc.dirty && toLoc.invalid)" class="p-error">
         انتخاب مسیر برگشت اجباری است
       </small>
-    </div>
-     <div class="p-col-3 p-field">
-      <label for="nightDuration">چند شب</label>
-      <input #nightDuration="ngModel" type="text" id="nightDuration" pInputText pKeyFilter="num"
-        [(ngModel)]="tour.nightDuration" required
-        [ngClass]="{'ng-dirty': (nightDuration.invalid && submitted) || (nightDuration.dirty && nightDuration.invalid)}">
-      <small *ngIf="(nightDuration.invalid && submitted) || (nightDuration.dirty && nightDuration.invalid)"
-        class="p-error">
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="nightDuration">چند شب</label>
+            <input #nightDuration="ngModel" type="text" id="nightDuration" pInputText pKeyFilter="num" [(ngModel)]="tour.nightDuration" required [ngClass]="{'ng-dirty': (nightDuration.invalid && submitted) || (nightDuration.dirty && nightDuration.invalid)}">
+            <small *ngIf="(nightDuration.invalid && submitted) || (nightDuration.dirty && nightDuration.invalid)" class="p-error">
         تعداد شب های تور را وارد کنید
       </small>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="dayDuration">چند روز</label>
-      <input #dayDuration="ngModel" type="text" id="dayDuration" pInputText pKeyFilter="num"
-        [(ngModel)]="tour.dayDuration" required
-        [ngClass]="{'ng-dirty': (dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)}">
-      <small *ngIf="(dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)" class="p-error">
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="dayDuration">چند روز</label>
+            <input #dayDuration="ngModel" type="text" id="dayDuration" pInputText pKeyFilter="num" [(ngModel)]="tour.dayDuration" required [ngClass]="{'ng-dirty': (dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)}">
+            <small *ngIf="(dayDuration.invalid && submitted) || (dayDuration.dirty && dayDuration.invalid)" class="p-error">
         تعداد روزهای تور را وارد کنید
       </small>
-    </div>
-   
-    <div class="p-col-3 p-field">
-      <label for="fromDate">از تاریخ</label>
-      <dp-date-picker #fromDt="ngModel"  id="fromDate" [(ngModel)]="fromDate" dir="ltr"  (ngModelChange)="close()" theme="dp-material"
-        mode="daytime" required
-        [ngClass]="{'ng-dirty': (fromDt.invalid && submitted) || (fromDt.dirty && fromDt.invalid)}">
-      </dp-date-picker>
-      <small *ngIf="(fromDt.invalid && submitted)" class="p-error">
+        </div>
+
+        <div class="p-col-3 p-field">
+            <label for="fromDate">از تاریخ</label>
+            <dp-date-picker #fromDt="ngModel" id="fromDate" [(ngModel)]="fromDate" dir="ltr" (ngModelChange)="close()" theme="dp-material" mode="daytime" required [ngClass]="{'ng-dirty': (fromDt.invalid && submitted) || (fromDt.dirty && fromDt.invalid)}">
+            </dp-date-picker>
+            <small *ngIf="(fromDt.invalid && submitted)" class="p-error">
         تاریخ و زمان آغاز را انتخاب کنید
       </small>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="toDate">تا تاریخ</label>
-      <dp-date-picker #toDt="ngModel" id="toDate" [(ngModel)]="toDate" dir="ltr" theme="dp-material" mode="daytime"
-        required [ngClass]="{'ng-dirty': (toDt.invalid && submitted) || (toDt.dirty && toDt.invalid)}">
-      </dp-date-picker>
-      <small *ngIf="(toDt.invalid && submitted)" class="p-error">
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="toDate">تا تاریخ</label>
+            <dp-date-picker #toDt="ngModel" id="toDate" [(ngModel)]="toDate" dir="ltr" theme="dp-material" mode="daytime" required [ngClass]="{'ng-dirty': (toDt.invalid && submitted) || (toDt.dirty && toDt.invalid)}">
+            </dp-date-picker>
+            <small *ngIf="(toDt.invalid && submitted)" class="p-error">
         تاریخ و زمان پایان را انتخاب کنید
       </small>
-    </div>
-    <div class="p-col-6 p-field">
-      <label for="">دسته بندی</label>
-      <p-autoComplete  placeholder="جستجو..." #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategories"
-        (completeMethod)="getCategories($event)" field="title" [multiple]="true" required
-        [ngClass]="{'ng-dirty': (category.invalid && submitted) || (category.dirty && category.invalid)}">
-      </p-autoComplete>
-      <small *ngIf="(category.invalid && submitted) || (category.dirty && category.invalid)" class="p-error">
+        </div>
+        <div class="p-col-6 p-field">
+            <label for="">دسته بندی</label>
+            <p-autoComplete placeholder="جستجو..." #category="ngModel" [suggestions]="categories" [(ngModel)]="selectedCategories" (completeMethod)="getCategories($event)" field="title" [multiple]="true" required [ngClass]="{'ng-dirty': (category.invalid && submitted) || (category.dirty && category.invalid)}">
+            </p-autoComplete>
+            <small *ngIf="(category.invalid && submitted) || (category.dirty && category.invalid)" class="p-error">
         انتخاب دسته بندی اجباری است
       </small>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="">وسیله نقلیه رفت</label>
-      <p-multiSelect [options]="vehicels" [(ngModel)]="goVehicels" optionLabel="title" display="chip"></p-multiSelect>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="">وسیله نقلیه برگشت</label>
-      <p-multiSelect [options]="vehicels" [(ngModel)]="backVehicels" optionLabel="title" display="chip"></p-multiSelect>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="">انتخاب هتل</label>
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="">وسیله نقلیه رفت</label>
+            <p-multiSelect [options]="vehicels" [(ngModel)]="goVehicels" optionLabel="title" display="chip"></p-multiSelect>
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="">وسیله نقلیه برگشت</label>
+            <p-multiSelect [options]="vehicels" [(ngModel)]="backVehicels" optionLabel="title" display="chip"></p-multiSelect>
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="">انتخاب هتل</label>
 
-      <p-autoComplete #hotel="ngModel" placeholder="جستجو..." (onChange)="onHotelChange()"  [suggestions]="hotels" [(ngModel)]="selectedHotel"
-        (completeMethod)="getHotels($event)" field="title" required
-        [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
-      </p-autoComplete>
-      <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
+            <p-autoComplete #hotel="ngModel" placeholder="جستجو..." (onChange)="onHotelChange()" [suggestions]="hotels" [(ngModel)]="selectedHotel" (completeMethod)="getHotels($event)" field="title" required [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
+            </p-autoComplete>
+            <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
         انتخاب هتل اجباری است
       </small>
-    </div>
-    <div class="p-col-3 p-field">
-      <label for="">انتخاب اتاق</label>
-  
-      <p-multiSelect placeholder="انتخاب" (onChange)="onRoomChange($event)" [options]="rooms" [(ngModel)]="selectedRoom" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>   
-
-      <!-- <p-autoComplete #room="ngModel" [suggestions]="rooms" [(ngModel)]="selectedRoom"
-        (completeMethod)="getRooms($event)" field="title" required  [multiple]="true"
-        [ngClass]="{'ng-dirty': (room.invalid && submitted) || (room.dirty && room.invalid)}">
-      </p-autoComplete>
-      <small *ngIf="(room.invalid && submitted) || (room.dirty && room.invalid)" class="p-error">
-        انتخاب اتاق اجباری است
-      </small> -->
-    </div>
-    <div class="p-col-12 p-field">
-      <label for="">توضیحات</label>
-      <textarea pInputTextarea  autoResize="autoResize" rows="1" [(ngModel)]="tour.description"></textarea>
-    </div>
-    <div class="p-col-12">
-      <p-fieldset>
-        <ng-template pTemplate="header">
-          <div class="p-d-flex p-ai-center">
-            <span>قیمت</span>
-          </div>
-        </ng-template>
-        <div class="p-grid p-fluid">
-          <div class="p-col-2 p-field">
-            <label for="">قیمت</label>
-            <p-inputNumber #price="ngModel" [(ngModel)]="tour.price.price" suffix=" تومان" required
-              [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}">
-            </p-inputNumber>
-            <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">
+        </div>
+        <div class="p-col-3 p-field">
+            <label for="">انتخاب اتاق</label>
+            <p-multiSelect placeholder="انتخاب" (onChange)="onRoomChange($event)" [options]="rooms" [(ngModel)]="selectedRoom" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>
+        </div>
+        <div class="p-col-12 p-field">
+            <label for="">توضیحات</label>
+            <textarea pInputTextarea autoResize="autoResize" rows="1" [(ngModel)]="tour.description"></textarea>
+        </div>
+        <div class="p-col-12">
+            <p-fieldset>
+                <ng-template pTemplate="header">
+                    <div class="p-d-flex p-ai-center">
+                        <span>قیمت</span>
+                    </div>
+                </ng-template>
+                <div class="p-grid p-fluid">
+                    <div class="p-col-2 p-field">
+                        <label for="">قیمت</label>
+                        <p-inputNumber #price="ngModel" [(ngModel)]="tour.price.price" suffix=" تومان" required [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}">
+                        </p-inputNumber>
+                        <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">
               لطفا قیمت را وارد کنید
             </small>
-          </div>
-          <div class="p-col-2 p-field">
-            <label for="">تخفیف</label>
-            <p-inputNumber [(ngModel)]="tour.price.disCountPrice" suffix=" تومان">
-            </p-inputNumber>
-          </div> 
-          <div  >
-          
-            
-           <h1 style="margin-top: 30px">+</h1>
-          </div>
-          <div class="p-col-2 p-field">
-            <label for="">نوع ارز</label>
-            <p-dropdown [options]="currencies"  placeholder="انتخاب" [(ngModel)]="tour.price.currencyPriceType">
-            </p-dropdown>
-          </div>
-          <div class="p-col-2 p-field">
-            <label for="">قیمت ارزی</label>
-            <p-inputNumber [(ngModel)]="tour.price.currencyPrice">
-            </p-inputNumber>
-          </div>
-          <div class="p-col-3 p-field">
-            <label for="">قیمت کل نمایشی به تومان</label>
-            <p-inputNumber [(ngModel)]="tour.price.netPrice" suffix="تومان">
-            </p-inputNumber>
-          </div>
+                    </div>
+                    <div class="p-col-2 p-field">
+                        <label for="">تخفیف</label>
+                        <p-inputNumber [(ngModel)]="tour.price.disCountPrice" suffix=" تومان">
+                        </p-inputNumber>
+                    </div>
+                    <div>
+                        <h1 style="margin-top: 30px">+</h1>
+                    </div>
+                    <div class="p-col-2 p-field">
+                        <label for="">نوع ارز</label>
+                        <p-dropdown [options]="currencies" placeholder="انتخاب" [(ngModel)]="tour.price.currencyPriceType">
+                        </p-dropdown>
+                    </div>
+                    <div class="p-col-2 p-field">
+                        <label for="">قیمت ارزی</label>
+                        <p-inputNumber [(ngModel)]="tour.price.currencyPrice">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-col-3 p-field">
+                        <label for="">قیمت کل نمایشی به تومان</label>
+                        <p-inputNumber [(ngModel)]="tour.price.netPrice" suffix="تومان">
+                        </p-inputNumber>
+                    </div>
+                </div>
+            </p-fieldset>
         </div>
-      </p-fieldset>
+        <div class="p-col-12">
+            <p-fieldset legend="تصاویر">
+                <div class="p-col-12">
+                    <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
+                </div>
+                <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+                    <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()">
+                        <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                            <img src="assets/layout/images/camera.svg">
+                        </div>
+                        <input type="file" #file accept=".jpg,.png,.jpeg" multiple="multiple" (change)="addImage($event)" style="display:none;">
+                    </div>
+                    <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
+                        <div class="main p-d-flex p-ai-center p-jc-center">
+                            <img [src]="img.url" (error)="defaultImg(img)" />
+                        </div>
+                        <div class="tools">
+                            <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
+                                <img src="assets/layout/images/bin.svg">
+                            </div>
+                            <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
+                                <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
     </div>
-    <div class="p-col-12">
-      <p-fieldset legend="تصاویر">
-
-    
-      <div class="p-col-12">
-          <p>یک تصویر را به عنوان تصویر شاخص انتخاب کنید.</p>
-      </div>
-      <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
-          <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()">
-              <div class="add-circle p-d-flex p-ai-center p-jc-center">
-                  <img src="assets/layout/images/camera.svg">
-              </div>
-              <input type="file" #file accept=".jpg,.png,.jpeg" multiple="multiple" (change)="addImage($event)" style="display:none;">
-          </div>
-          <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
-              <div class="main p-d-flex p-ai-center p-jc-center">
-                  <img [src]="img.url" (error)="defaultImg(img)" />
-              </div>
-              <div class="tools">
-                  <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage(img,i)">
-                      <img src="assets/layout/images/bin.svg">
-                  </div>
-                  <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
-                      <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </p-fieldset>
-  </div>
-  </div>
 </div>

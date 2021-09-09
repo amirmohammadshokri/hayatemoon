@@ -1,12 +1,12 @@
 <div class="card">
     <p-toolbar>
         <div class="p-toolbar-group-right">
-            <button [disabled]="saving" pButton pRipple label="ارسال جهت تایید" (click)="submit()" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success">
-      </button>
         </div>
         <div class="p-toolbar-group-left">
-            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="/panel/residence/residence">
-      </button>
+            <button [disabled]="saving" pButton pRipple label="ذخیره" (click)="submit()" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success">
+            </button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary p-mr-1" routerLink="/panel/residence/residence">
+            </button>
         </div>
     </p-toolbar>
     <div class="p-grid p-fluid p-mt-2">
@@ -16,48 +16,49 @@
                     <label for="title">نام اقامتگاه</label>
                     <input #title="ngModel" type="text" id="title" pInputText [(ngModel)]="residence.title" required [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
                     <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
-            ثبت عنوان اجباری می باشد.
-          </small>
+                        ثبت عنوان اجباری می باشد.
+                    </small>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">نام شهر</label>
                     <p-autoComplete #ss="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
                     </p-autoComplete>
                     <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
-            انتخاب شهر اجباری است
-          </small>
+                        انتخاب شهر اجباری است
+                    </small>
                 </div>
                 <div class="p-col-4 p-field">
 
                     <label for="">تلفن</label>
-                    <p-inputMask dir="ltr" mask="999-99999999" #phone="ngModel" id="phone" [(ngModel)]="residence.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}"></p-inputMask>
+                    <p-inputMask dir="ltr" mask="999-99999999" #phone="ngModel" id="phone" [(ngModel)]="residence.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+                    </p-inputMask>
                     <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
-            ثبت تلفن اجباری می باشد.
-          </small>
+                        ثبت تلفن اجباری می باشد.
+                    </small>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">ساعت ورود از</label>
                     <p-inputMask #fromEntranceHour="ngModel" type="text" dir="ltr" mask="99:99" [(ngModel)]="residence.fromEntranceHour" required [ngClass]="{'ng-dirty': (fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)}">
                     </p-inputMask>
                     <small *ngIf="(fromEntranceHour.invalid && submitted) || (fromEntranceHour.dirty && fromEntranceHour.invalid)" class="p-error">
-            ساعت ورود را وارد کنید
-          </small>
+                        ساعت ورود را وارد کنید
+                    </small>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">تا ساعت</label>
                     <p-inputMask #toEntranceHour="ngModel" type="text" dir="ltr" mask="99:99" [(ngModel)]="residence.toEntranceHour" required [ngClass]="{'ng-dirty': (toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)}">
                     </p-inputMask>
                     <small *ngIf="(toEntranceHour.invalid && submitted) || (toEntranceHour.dirty && toEntranceHour.invalid)" class="p-error">
-            تا ساعت را وارد کنید
-          </small>
+                        تا ساعت را وارد کنید
+                    </small>
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">ساعت خروج</label>
                     <p-inputMask #leavingHour="ngModel" type="text" dir="ltr" mask="99:99" [(ngModel)]="residence.leavingHour" required [ngClass]="{'ng-dirty': (leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)}">
                     </p-inputMask>
                     <small *ngIf="(leavingHour.invalid && submitted) || (leavingHour.dirty && leavingHour.invalid)" class="p-error">
-            ساعت خروج را وارد کنید
-          </small>
+                        ساعت خروج را وارد کنید
+                    </small>
                 </div>
                 <div class="p-col-12 p-field">
                     <label for="title">قوانین اقامتگاه</label>
@@ -80,8 +81,8 @@
             <label for="">آدرس</label>
             <textarea #address="ngModel" pInputTextarea [(ngModel)]="residence.address" rows="1" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
             <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
-        آدرس را وارد کنید
-      </small>
+                آدرس را وارد کنید
+            </small>
         </div>
         <div class="p-col-12 p-field">
             <label for="">توضیحات</label>
@@ -99,7 +100,8 @@
                             </div>
                             <div class="p-col-4 p-field">
                                 <label for="">وسیله نقلیه</label>
-                                <p-dropdown [options]="vehicles" placeholder="انتخاب" [(ngModel)]="place.vehicleId"></p-dropdown>
+                                <p-dropdown [options]="vehicles" placeholder="انتخاب" [(ngModel)]="place.vehicleId">
+                                </p-dropdown>
                             </div>
                             <div class="p-col-4 p-field">
                                 <label for="">دقیقه</label>
@@ -144,8 +146,9 @@
                         <span>قیمت</span>
                         <button [disabled]="saving" *ngIf="residenceId" style="width: auto;" pButton label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success p-mr-2" (click)="savePrice()"></button>
                         <button [disabled]="saving" style="width: auto;" pButton label="افزودن" icon="pi pi-plus" class="p-mr-2" (click)="addPrice()"></button>
-                        <i class="p-mr-2" style="font-size: 0.8em;">اگر می خواهید یک روز یا بازه ی زمانی خاصی را قیمت گزاری کنید ،از
-              این دکمه استفاده کنید .</i>
+                        <i class="p-mr-2" style="font-size: 0.8em;">اگر می خواهید یک روز یا بازه ی زمانی خاصی را قیمت
+                            گزاری کنید ،از
+                            این دکمه استفاده کنید .</i>
                     </div>
                 </ng-template>
                 <div class="p-grid p-fluid">
@@ -180,23 +183,27 @@
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price-(residence.prices.price*((residence.prices.thursdayPercent)/100)) | number}}
-                </label>
+                                    {{residence.prices.price-(residence.prices.price*((residence.prices.thursdayPercent)/100))
+                                    | number}}
+                                </label>
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price-(residence.prices.price*((residence.prices.fridayPercent)/100)) | number}}
-                </label>
+                                    {{residence.prices.price-(residence.prices.price*((residence.prices.fridayPercent)/100))
+                                    | number}}
+                                </label>
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price-(residence.prices.price*((residence.prices.beforeHoliday)/100)) | number}}
-                </label>
+                                    {{residence.prices.price-(residence.prices.price*((residence.prices.beforeHoliday)/100))
+                                    | number}}
+                                </label>
                             </div>
                             <div class="p-col-2 p-field">
                                 <label for="">
-                  {{residence.prices.price-(residence.prices.price*((residence.prices.holiday)/100)) | number}}
-                </label>
+                                    {{residence.prices.price-(residence.prices.price*((residence.prices.holiday)/100)) |
+                                    number}}
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -245,7 +252,8 @@
                                     <img src="assets/layout/images/bin.svg">
                                 </div>
                                 <div class="circle p-d-flex p-ai-center p-jc-center p-mr-2">
-                                    <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex"></p-radioButton>
+                                    <p-radioButton name="isMain" [value]="i" [(ngModel)]="mainImageIndex">
+                                    </p-radioButton>
                                 </div>
                             </div>
                         </div>

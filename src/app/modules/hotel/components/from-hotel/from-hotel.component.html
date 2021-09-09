@@ -1,11 +1,11 @@
 <div class="card">
     <p-toolbar>
         <div class="p-toolbar-group-right">
-            <button [disabled]="saving" pButton pRipple label="ارسال جهت تایید" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success" (click)="submit()">
-            </button>
         </div>
         <div class="p-toolbar-group-left">
-            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="/panel/hotel/hotels">
+            <button [disabled]="saving" pButton pRipple label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')" class="p-button-success" (click)="submit()">
+            </button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary p-mr-1" routerLink="/panel/hotel/hotels">
             </button>
         </div>
     </p-toolbar>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="p-col-4 p-field">
                     <label for="">نام شهر</label>
-                    <p-autoComplete placeholder="جستجو" #ss="ngModel" (onSelect)="setMapAddress(selectedLocation)" [suggestions]="locations"  [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+                    <p-autoComplete placeholder="جستجو" #ss="ngModel" (onSelect)="setMapAddress(selectedLocation)" [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" required [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
                     </p-autoComplete>
                     <small *ngIf="(ss.invalid && submitted) || (ss.dirty && ss.invalid)" class="p-error">
                         انتخاب شهر اجباری است

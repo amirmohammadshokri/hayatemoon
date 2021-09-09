@@ -35,6 +35,7 @@ import { DividerModule } from 'primeng/divider';
 import { FieldsetModule } from 'primeng/fieldset';
 import { InputMaskModule } from 'primeng/inputmask';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [FromHotelComponent, ListHotelComponent, ListRoomkindComponent,
@@ -67,7 +68,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DividerModule,
     FieldsetModule,
     InputMaskModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ConfirmPopupModule
   ],
   providers: [
     ConfirmationService,

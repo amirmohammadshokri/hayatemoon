@@ -16,7 +16,7 @@ export class FormRoomComponent implements OnInit {
   roomId: number;
   // hotels: any[] = [];
   hotels: SelectItem[] = [];
-  roomkinds: SelectItem[] = []; 
+  roomkinds: SelectItem[] = [];
   facilities: any[] = [];
   saving: boolean;
   submitted: boolean;
@@ -79,16 +79,14 @@ export class FormRoomComponent implements OnInit {
     });
   }
 
-
-
   getHotels(event: any): void {
     this.srvSrch.getHotel().subscribe(res => {
-      this.hotels = res.map(h=>({label:h.title,value:h.id}));
+      this.hotels = res.map(h => ({ label: h.title, value: h.id }));
     });
   }
   getRoomkinds(): void {
     this.srvSrch.getHotelRoomKind().subscribe(res => {
-      this.roomkinds =  res.map(t => ({ label: t.title, value: t.kindId }));
+      this.roomkinds = res.map(t => ({ label: t.title, value: t.kindId }));
     });
   }
 
@@ -99,7 +97,34 @@ export class FormRoomComponent implements OnInit {
   }
 
   addRoom(): void {
-    this.rooms.push({ breakFast: false, dinner: false, extraService: false, lunch: false, facilitiesKindIds: [] });
+    this.confirmationService.confirm({
+      target: event.target,
+      message: 'اتاق جدید با اطلاعات اتاق اول پر شود؟',
+      icon: 'pi pi-question-circle',
+      acceptLabel: 'بله',
+      rejectLabel: 'خیر',
+      accept: () => {
+        this.rooms.push({
+          breakFast: this.rooms[0].breakFast,
+          dinner: this.rooms[0].dinner,
+          extraService: this.rooms[0].extraService,
+          lunch: this.rooms[0].lunch,
+          facilitiesKindIds: this.rooms[0].facilitiesKindIds,
+          adult: this.rooms[0].adult,
+          child: this.rooms[0].child,
+          description: this.rooms[0].description,
+          hotelId: this.rooms[0].hotelId,
+          kindId: this.rooms[0].kindId
+        });
+      },
+      reject: () => {
+        this.rooms.push({ breakFast: false, dinner: false, extraService: false, lunch: false, facilitiesKindIds: [] });
+      }
+    });
+  }
+
+  removeRoom(index: number) {
+    this.rooms.splice(index, 1);
   }
 
 }

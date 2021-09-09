@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { HotelService, MediaService, SearchService, VehiclesService } from 'src/app/services';
-import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer, Control, Util } from 'leaflet';
+import { icon, LatLng, latLng, Map, marker, point, polyline, tileLayer } from 'leaflet';
 import { IAddHotel } from 'src/app/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILocation } from 'src/app/interfaces/location.interface';
-import { forkJoin, Subject } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -30,9 +30,6 @@ export class FromHotelComponent implements OnInit {
     draggable: true
   });
 
-  // Path from paradise to tehran
-  route = polyline([]);
-
   // Layers control object with our two base layers and the three overlay layers
   layersControl = {
     baseLayers: {
@@ -51,6 +48,7 @@ export class FromHotelComponent implements OnInit {
     center: latLng([35.68490811606957, 51.38854980468751])
   };
 
+  map: Map;
   selectedPosition: any;
   saving: boolean;
   submitted: boolean;
@@ -100,24 +98,13 @@ export class FromHotelComponent implements OnInit {
     });
   }
 
-  setMapAddress( selectedLocation: ILocation):void{
-    let idLocation=-selectedLocation.locationId;
-    this.options={
-      layers: [this.streetMaps, this.tehran],
-      zoom: 15,
-      center: latLng([Number.parseFloat(selectedLocation.latitude),Number.parseFloat(selectedLocation.longitude) ])
-    }
-    this.tehran=marker([Number.parseFloat(selectedLocation.latitude),Number.parseFloat(selectedLocation.longitude) ], {
-      icon: icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 41],
-        iconUrl: 'leaflet/marker-icon.png',
-        iconRetinaUrl: 'leaflet/marker-icon-2x.png',
-        shadowUrl: 'leaflet/marker-shadow.png'
-      }),
-      draggable: true
-    });
-   
+  setMapAddress(loc: ILocation): void {
+    var lat = (+loc.latitude);
+    var lng = (+loc.longitude);
+    var newLatLng = new LatLng(lat, lng);
+    this.tehran.setLatLng(newLatLng);
+
+    this.map.panTo(new LatLng(lat, lng));
   }
 
   confirmDelete(id: number): void {
@@ -202,13 +189,7 @@ export class FromHotelComponent implements OnInit {
   }
 
   onMapReady(map: Map): void {
-    if (this.route.getBounds().isValid()) {
-      map.fitBounds(this.route.getBounds(), {
-        padding: point(24, 24),
-        maxZoom: 30,
-        animate: true
-      });
-    }
+    this.map = map;
     this.tehran.on('dragend', (event) => {
       const mark = event.target;
       const position = mark.getLatLng();
@@ -307,7 +288,7 @@ export class FromHotelComponent implements OnInit {
       this.hotel.rate = this.selectedRate;
       this.hotel.locationId = this.selectedLocation?.locationId;
       this.hotel.isAdmin = true;
-      this.hotel.phone=this.hotel.phone.replace('-','');
+      this.hotel.phone = this.hotel.phone.replace('-', '');
       if (this.selectedPosition) {
         this.hotel.latitude = this.selectedPosition.lat;
         this.hotel.longitude = this.selectedPosition.lng;
