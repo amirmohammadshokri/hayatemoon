@@ -207,7 +207,7 @@ export class FormTourComponent implements OnInit {
         this.tour.vehicles.push({ type: 1, vehicleId: vehicle.vehicleId });
       });
       this.tour.hotelId = this.selectedHotel.id;
-      this.tour.hotelRooms = this.selectedRoom.map(r => r.kindId);
+      this.tour.hotelRooms = this.selectedRoom.map(r => r.hotelRoomId);
       this.tour.tourCategories = this.selectedCategories.map(c => c.id);
 
       this.saveImages().then(() => {
