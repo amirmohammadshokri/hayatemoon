@@ -153,25 +153,16 @@ export class FormTourComponent implements OnInit {
   }
 
   changeTourType(id: number) {
-    let a: number = id;
-    this.getVehicles(a);
+    this.getVehicles(id);
   }
 
   private getVehicles(id: number): void {
     this.srvData.showMainProgressBarForMe();
-    if (id === 3) {
-      this.srvVehicle.getVehicles().subscribe(res => {
-        this.vehicels = res;
-        this.srvData.thanksMainProgressBar();
-      });
-    }
-    else {
-      this.srvVehicle.getVehicles().subscribe(res => {
-        this.vehicels = res.filter(i => i.vehicleId === id);
-        this.srvData.thanksMainProgressBar();
-      });
-    }
-
+    this.srvVehicle.getVehicles().subscribe(res => {
+      // 3 id is all of cars so show all cars and dont filter
+      this.vehicels = (id == 3 ? res : res.filter(i => i.vehicleId === id));
+      this.srvData.thanksMainProgressBar();
+    });
   }
 
   getLocations(event: any): void {
@@ -193,16 +184,6 @@ export class FormTourComponent implements OnInit {
   defaultImg(row: any): void {
     row.url = 'assets/no-image.png';
   }
-
-  // addImage(e: any): void {
-  //   if (e.target.files && e.target.files[0]) {
-  //     const reader = new FileReader();
-  //     reader.onload = (event: any) => {
-  //       this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
-  //     };
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   }
-  // }
 
   submit(): void {
     if (this.tour.title && this.tour?.tourType > -1 && this.fromLocation &&
