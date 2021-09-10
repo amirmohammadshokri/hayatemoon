@@ -5,10 +5,9 @@ import { IAddTour } from 'src/app/interfaces';
 import { CurrencyService, DataService, MediaService, SearchService, TourService, VehiclesService } from 'src/app/services';
 import * as moment from 'jalali-moment';
 import { forkJoin } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { DatePickerComponent } from 'ng2-jalali-date-picker/date-picker/date-picker.component';
- 
+
 
 @Component({
   selector: 'ss-form-tour',
@@ -42,9 +41,9 @@ export class FormTourComponent implements OnInit {
   mainImageIndex: number;
   tourId: number;
   routes: any[] = [{ name: 'داخلی', key: true }, { name: 'خارجی', key: false }];
-  tourTypesId:number;
+  tourTypesId: number;
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;
-  
+
 
   constructor(
     private srvData: DataService,
@@ -60,9 +59,7 @@ export class FormTourComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTourType();
-    //this.getVehicles();
     this.getCurrency();
-    this.getRooms({ query: '' });
     this.route.params.subscribe(prms => {
       if (prms.id > 0) {
         this.tourId = Number.parseInt(prms.id, 0);
@@ -71,16 +68,10 @@ export class FormTourComponent implements OnInit {
     });
   }
 
-
-  onHotelChange():void{
-    console.log('66666666666666666666666666');
-  }
-
-  onRoomChange(e){
-    if(this.selectedRoom.length>1)
-      {
-        this.srvMsg.add({ severity: 'success', summary: 'توجه', detail: 'شما بیش از یک اتاق استفاده کردید .تست. .' })
-      }
+  onRoomChange(e) {
+    if (this.selectedRoom.length > 1) {
+      this.srvMsg.add({ severity: 'success', summary: 'توجه', detail: 'شما بیش از یک اتاق استفاده کردید .تست. .' })
+    }
   }
 
   getTour(): void {
@@ -91,7 +82,6 @@ export class FormTourComponent implements OnInit {
         isInstallments: res.isInstallments,
         title: res.title,
         tourType: res.type.id,
-        // vehicles: IVehicle[],
         dayDuration: res.dayDuration,
         nightDuration: res.nightDuration,
         tourMediaIds: res.mediaIds,
@@ -134,11 +124,10 @@ export class FormTourComponent implements OnInit {
   close() {
     if (this.dateComponent) {
       this.dateComponent.api.close();
-   
+    }
   }
-}
- 
- 
+
+
   getHotels(event: any): void {
     this.srvData.showMainProgressBarForMe();
     this.srvSrch.getHotel().subscribe(res => {
@@ -147,10 +136,10 @@ export class FormTourComponent implements OnInit {
     });
   }
 
-  getRooms(event: any): void {
+  getRooms(): void {
     this.srvData.showMainProgressBarForMe();
-    this.srvSrch.getHotelRooms(null, event.query).subscribe(res => {
-      this.rooms = res; 
+    this.srvSrch.getHotelRooms(this.selectedHotel.id, '').subscribe(res => {
+      this.rooms = res;
       this.srvData.thanksMainProgressBar();
     });
   }
@@ -163,27 +152,26 @@ export class FormTourComponent implements OnInit {
     });
   }
 
-  changeTourType(id:number){
-    let a:number=id;
+  changeTourType(id: number) {
+    let a: number = id;
     this.getVehicles(a);
   }
 
-  private getVehicles(id:number): void {
+  private getVehicles(id: number): void {
     this.srvData.showMainProgressBarForMe();
-    if(id===3){
-        this.srvVehicle.getVehicles().subscribe(res => {
-          console.log(res);
+    if (id === 3) {
+      this.srvVehicle.getVehicles().subscribe(res => {
         this.vehicels = res;
         this.srvData.thanksMainProgressBar();
       });
     }
-    else{
-        this.srvVehicle.getVehicles().subscribe(res => {
-        this.vehicels = res.filter(i=>i.vehicleId===id);
+    else {
+      this.srvVehicle.getVehicles().subscribe(res => {
+        this.vehicels = res.filter(i => i.vehicleId === id);
         this.srvData.thanksMainProgressBar();
-    });
+      });
     }
-  
+
   }
 
   getLocations(event: any): void {

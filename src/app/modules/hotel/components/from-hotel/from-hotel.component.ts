@@ -104,7 +104,13 @@ export class FromHotelComponent implements OnInit {
     var newLatLng = new LatLng(lat, lng);
     this.tehran.setLatLng(newLatLng);
 
+    // zoom on location
     this.map.panTo(new LatLng(lat, lng));
+
+    // set hotel
+    this.selectedPosition = { lat, lng };
+    this.hotel.latitude = lat;
+    this.hotel.longitude = lng;
   }
 
   confirmDelete(id: number): void {
@@ -283,7 +289,7 @@ export class FromHotelComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.hotel.title && this.hotel.typeId && this.selectedRate && this.selectedLocation && this.hotel.address) {
+    if (this.hotel.title && this.hotel.typeId >= 0 && this.selectedRate && this.selectedLocation && this.hotel.address) {
       this.saving = true;
       this.hotel.rate = this.selectedRate;
       this.hotel.locationId = this.selectedLocation?.locationId;
