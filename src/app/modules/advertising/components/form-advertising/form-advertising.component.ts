@@ -143,7 +143,6 @@ export class FormAdvertisingComponent implements OnInit {
     this.advertising.destLocationId = this.selectedLocation?.locationId;
 
     await this.saveImages();
-    console.log(this.advertising);
 
     if (this.adsId > 0) {
       this.srvAds.editAdvertising(this.adsId, this.advertising).subscribe(() => {

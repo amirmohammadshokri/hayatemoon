@@ -21,6 +21,16 @@ export class TopbarComponent implements OnInit {
     private sData: DataService) { }
 
   ngOnInit(): void {
+    $('#user').click(() => {
+      $('.user-profile').toggleClass('active-topmenuitem fadeInDown');
+    });
+
+    $(document).click((e) => {
+      if (e.target.id !== 'user' && e.target.id !== 'user-img') {
+        $('.user-profile').removeClass('active-topmenuitem fadeInDown');
+      }
+    });
+
     $('.search-item').click(() => {
       $('.search-item').addClass('active-topmenuitem');
     });
@@ -50,25 +60,11 @@ export class TopbarComponent implements OnInit {
       if (res > 0) {
         this.srvTicket.unreadTicketCount().subscribe(count => {
           this.unreadedTicket = count;
-          this.setUserEvent();
         });
-      } else {
-        this.setUserEvent();
       }
     })
   }
 
-  setUserEvent() {
-    $('#user').click(() => {
-      $('.user-profile').toggleClass('active-topmenuitem fadeInDown');
-    });
-
-    $(document).click((e) => {
-      if (e.target.id !== 'user' && e.target.id !== 'user-img') {
-        $('.user-profile').removeClass('active-topmenuitem fadeInDown');
-      }
-    });
-  }
 
   changeMode() {
     $('#loading').css("display", "flex")

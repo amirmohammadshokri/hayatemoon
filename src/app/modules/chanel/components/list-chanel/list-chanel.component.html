@@ -6,11 +6,10 @@
         </div>
         <div class="p-toolbar-group-left">
             <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو"></button>
-            <button pButton pRipple label="ثبت کانال جدید" icon="pi pi-plus" class="p-button-success"
-                routerLink="../chanel/new"></button>
+            <button pButton pRipple label="ثبت کانال جدید" icon="pi pi-plus" class="p-button-success" routerLink="../chanel/new"></button>
         </div>
     </p-toolbar>
-    <p-confirmDialog header="تایید" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <p-table [columns]="cols" [value]="chanels" styleClass="p-datatable-striped" [loading]="loading">
         <ng-template pTemplate="header" let-columns>
             <tr>
@@ -24,29 +23,22 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
             <tr>
                 <td>
-                    <span class="p-column-title"> ردیف</span>
-                    {{ index + 1 }}
+                    <span class="p-column-title"> ردیف</span> {{ index + 1 }}
                 </td>
                 <td>
-                    <span class="p-column-title"> عنوان </span>
-                    {{ rowData.title }}
+                    <span class="p-column-title"> عنوان </span> {{ rowData.title }}
                 </td>
                 <td>
-                    <span class="p-column-title">توضیحات</span>
-                    {{ rowData.description }}
+                    <span class="p-column-title">توضیحات</span> {{ rowData.description }}
                 </td>
                 <td>
-                    <span class="p-column-title">تعداد اعضاء</span>
-                    {{ rowData.memberCount }}
+                    <span class="p-column-title">تعداد اعضاء</span> {{ rowData.memberCount }}
 
                 </td>
                 <td>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-                        (click)="confirmDelete(rowData.id)" pTooltip="حذف"></button>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info p-mr-1"
-                        (click)="editChanel(rowData.id)" pTooltip="ویرایش"></button>
-                    <button pButton pRipple icon="pi pi-comment" class="p-button p-button-help p-mr-1"
-                        routerLink="../contents/{{rowData.id}}" pTooltip="پیام ها"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger" (click)="confirmDelete(rowData.id)" pTooltip="حذف"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info p-mr-1" (click)="editChanel(rowData.id)" pTooltip="ویرایش"></button>
+                    <button pButton pRipple icon="pi pi-comment" class="p-button p-button-help p-mr-1" routerLink="../contents/{{rowData.id}}" pTooltip="پیام ها"></button>
                 </td>
             </tr>
         </ng-template>

@@ -24,11 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     
-    
     this.userData$ = this.srvOidc.userData$;
-    console.log(this.srvOidc.userData$,'ffffff');
-    
     this.srvOidc.checkAuth().subscribe(d => {
       if (!d) {
         this.srvOidc.authorize();

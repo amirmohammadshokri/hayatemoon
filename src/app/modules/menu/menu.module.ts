@@ -16,9 +16,13 @@ import { GalleriaModule } from 'primeng/galleria';
 import { TreeModule } from 'primeng/tree';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { MenuRolesComponent } from './components/menu-roles/menu-roles.component';
+import { MenuRoleAccessComponent } from './components/menu-role-access/menu-role-access.component';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
-  declarations: [ListMenuComponent, FormMenuComponent, ChooseMenuComponent],
+  declarations: [ListMenuComponent, FormMenuComponent, ChooseMenuComponent, MenuRolesComponent, MenuRoleAccessComponent],
   imports: [
     CommonModule,
     MenuRoutingModule,
@@ -30,7 +34,9 @@ import { ButtonModule } from 'primeng/button';
     GalleriaModule,
     TreeModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    ContextMenuModule,
+    DialogModule
   ],
   providers: [
     ConfirmationService,

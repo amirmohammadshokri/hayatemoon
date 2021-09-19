@@ -9,31 +9,43 @@ import { AppConfig } from '../app.config';
 export class MenuService {
   url: string;
   constructor(private http: HttpClient, private conf: AppConfig) {
-    this.url = `${this.conf.getConfig('url')}web/menu/`;
+    this.url = `${this.conf.getConfig('url')}web/`;
   }
 
   addMenu(obj: any): Observable<any> {
-    return this.http.post<any>(`${this.url}new`, obj);
+    return this.http.post<any>(`${this.url}menu/new`, obj);
   }
 
   editMenu(menuId: number, obj: any): Observable<any> {
-    return this.http.put<any>(`${this.url}${menuId}`, obj);
+    return this.http.put<any>(`${this.url}menu/${menuId}`, obj);
   }
 
   deleteMenu(menuId: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}${menuId}`);
+    return this.http.delete<any>(`${this.url}menu/${menuId}`);
   }
 
   getMenu(menuId: number): Observable<any> {
-    return this.http.get<any>(`${this.url}${menuId}`);
+    return this.http.get<any>(`${this.url}menu/${menuId}`);
   }
 
   getMenus(): Observable<any> {
-    return this.http.get<any>(`${this.url}All`);
+    return this.http.get<any>(`${this.url}menu/All`);
   }
 
   getMenuChildren(menuId: number): Observable<any> {
-    return this.http.get<any>(`${this.url}${menuId}/children`);
+    return this.http.get<any>(`${this.url}menu/${menuId}/children`);
+  }
+
+  setMenuRole(obj: any): Observable<any> {
+    return this.http.post<any>(`${this.url}MenuRole`, obj);
+  }
+
+  getMenuRoles(): Observable<any> {
+    return this.http.get<any>(`${this.url}MenuRole/Latest`);
+  }
+
+  setCompanyMenuRole(obj: any): Observable<any> {
+    return this.http.post<any>(`${this.url}Company/MenuRole`, obj);
   }
 
 }

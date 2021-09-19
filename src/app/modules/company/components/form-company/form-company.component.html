@@ -3,10 +3,8 @@
         <div class="p-toolbar-group-right">
         </div>
         <div class="p-toolbar-group-left">
-            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
-                [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
-            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
-                routerLink="../../companys"></button>
+            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../companys"></button>
         </div>
     </p-toolbar>
     <div class="p-grid p-fluid p-mt-2">
@@ -16,8 +14,7 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="title">نوع</label>
-            <p-dropdown [options]="companyType" #typeId="ngModel" [(ngModel)]="companyAdd.type"
-                placeholder="انتخاب نوع شرکت">
+            <p-dropdown [options]="companyType" #typeId="ngModel" [(ngModel)]="companyAdd.type" placeholder="انتخاب نوع شرکت">
             </p-dropdown>
         </div>
         <div class="p-col-4 p-field">
@@ -30,18 +27,16 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="title">کد ملی مدیرعامل</label>
-            <input type="text" #ceoNationalCode="ngModel" pKeyFilter="num" [maxlength]="10" [minLength]="10"
-                [(ngModel)]="companyAdd.ceoNationalCode" pInputText>
+            <input type="text" #ceoNationalCode="ngModel" pKeyFilter="num" [maxlength]="10" [minLength]="10" [(ngModel)]="companyAdd.ceoNationalCode" pInputText>
         </div>
         <div class="p-col-4 p-field">
-            <label for="title"> تاریخ تولد</label>
+            <label for="ceoBirthDate"> تاریخ تولد</label>
             <dp-date-picker id="ceoBirthDate" [(ngModel)]="ceoBirthDate" dir="ltr" theme="dp-material" mode="day">
             </dp-date-picker>
         </div>
         <div class="p-col-4 p-field">
             <label for="title">شناسه ملی شرکت</label>
-            <input type="text" #companyNationalCode="ngModel" pKeyFilter="num"
-                [(ngModel)]="companyAdd.companyNationalCode" pInputText>
+            <input type="text" #companyNationalCode="ngModel" pKeyFilter="num" [(ngModel)]="companyAdd.companyNationalCode" pInputText>
         </div>
         <div class="p-col-4 p-field">
             <label for="title">کد اقتصادی شرکت</label>
@@ -49,9 +44,7 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="">نام شهر</label>
-            <p-autoComplete #ss="ngModel"  placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="selectedLocation"
-                (completeMethod)="getLocations($event)" field="title"
-                [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
+            <p-autoComplete #ss="ngModel" placeholder="جستجو..." [suggestions]="locations" [(ngModel)]="selectedLocation" (completeMethod)="getLocations($event)" field="title" [ngClass]="{'ng-dirty': (ss.invalid && submitted) || (ss.dirty && ss.invalid)}">
             </p-autoComplete>
         </div>
         <div class="p-col-4 p-field">
@@ -93,8 +86,7 @@
                         <td>{{conatct.title}}</td>
                         <td>{{conatct.value}}</td>
                         <td>
-                            <button pButton pRipple icon="pi pi-trash" (click)="deleteContact(index)"
-                                class="p-button p-button-danger" pTooltip="حذف"></button>
+                            <button pButton pRipple icon="pi pi-trash" (click)="deleteContact(index)" class="p-button p-button-danger" pTooltip="حذف"></button>
                         </td>
                     </tr>
                 </ng-template>

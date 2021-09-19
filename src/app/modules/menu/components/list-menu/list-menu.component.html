@@ -1,14 +1,13 @@
 <div class="card">
     <p-toolbar>
-      <div class="p-toolbar-group-right">
-      </div>
-      <div class="p-toolbar-group-left">
-        <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو" (click)="getData()"></button>
-        <button pButton pRipple label="جدید" icon="pi pi-plus" class="p-button-success p-ml-0"
-        routerLink="../form/new"></button>
-      </div>
+        <div class="p-toolbar-group-right">
+        </div>
+        <div class="p-toolbar-group-left">
+            <button pButton icon="pi pi-search" class="p-button-help p-ml-2" label="جستجو" (click)="getData()"></button>
+            <button pButton pRipple label="جدید" icon="pi pi-plus" class="p-button-success p-ml-0" routerLink="../form/new"></button>
+        </div>
     </p-toolbar>
-    <p-confirmDialog header="تایید" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <p-treeTable [value]="data" [loading]="loading" (onNodeExpand)="onNodeExpand($event)">
         <ng-template pTemplate="header">
             <tr>
@@ -25,21 +24,16 @@
                     <div class="visibility-sm">
                         /
                         <span>{{rowData.link}}</span>
-                        <button style="float: left;" pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-                            (click)="confirmDelete(rowData.menuId)"></button>
-                        <button style="float: left;" pButton pRipple icon="pi pi-pencil"
-                            class="p-button p-button-warning p-ml-1" (click)="edit(rowData.menuId)"></button>
+                        <button style="float: left;" pButton pRipple icon="pi pi-trash" class="p-button p-button-danger" (click)="confirmDelete(rowData.menuId)"></button>
+                        <button style="float: left;" pButton pRipple icon="pi pi-pencil" class="p-button p-button-warning p-ml-1" (click)="edit(rowData.menuId)"></button>
                     </div>
                 </td>
                 <td class="priority-2">{{rowData?.link}}</td>
                 <td class="priority-2">
-                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-                        (click)="confirmDelete(rowData.menuId)"></button>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-warning"
-                        (click)="edit(rowData.menuId)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger" (click)="confirmDelete(rowData.menuId)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-warning" (click)="edit(rowData.menuId)"></button>
                 </td>
             </tr>
         </ng-template>
     </p-treeTable>
-  </div>
-  
+</div>

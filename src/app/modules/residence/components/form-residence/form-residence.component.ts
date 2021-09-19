@@ -319,8 +319,6 @@ export class FormResidenceComponent implements OnInit {
       // save images
       this.saveImages().then(() => {
         if (this.residenceId > 0) {
-          console.log('بزرگتر');
-          
           this.residence.id = this.residenceId;
           const rules = [];
           this.residence.rules.forEach(rule => {
@@ -342,8 +340,6 @@ export class FormResidenceComponent implements OnInit {
             this.saving = false;
           });
         } else {
-          console.log('کوچیکتر');
-
           this.srvResidence.addResidence(this.residence).subscribe(() => {
             this.srvMsg.add({ severity: 'success', summary: 'ثبت اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
             this.saving = false;

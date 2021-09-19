@@ -34,7 +34,6 @@ export class PromotionService {
   }
 
   promotionFactor(obj: any): Observable<any> {
-    console.log(obj);
     return this.http.post<any>(`${this.url}/Tour/Factor`, obj);
   }
 

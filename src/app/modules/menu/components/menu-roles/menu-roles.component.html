@@ -1,0 +1,22 @@
+<p-tree [value]="menus" [contextMenu]="cm" selectionMode="single" [(selection)]="selectedMenu" [emptyMessage]="'اطلاعاتی وجود ندارد'"></p-tree>
+<p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-contextMenu #cm [model]="contextItems"></p-contextMenu>
+<p-dialog [header]="(dialogMenu.title?'ویرایش':'ثبت') + ' منو'" [(visible)]="display" [modal]="true">
+    <div class="p-grid p-fluid">
+        <div class="p-col-12 p-field">
+            <label for="title">عنوان</label>
+            <input id="title" type="text" pInputText [(ngModel)]="dialogMenu.title">
+        </div>
+        <div class="p-col-12 p-field">
+            <label for="code">کد</label>
+            <input id="code" type="text" pInputText [(ngModel)]="dialogMenu.code">
+        </div>
+        <div class="p-col-12 p-field">
+            <label for="url">آدرس</label>
+            <input id="url" type="text" dir="ltr" pInputText [(ngModel)]="dialogMenu.url">
+        </div>
+        <div class="p-col-12">
+            <button pButton label="ثبت"></button>
+        </div>
+    </div>
+</p-dialog>
