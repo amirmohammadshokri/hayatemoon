@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 :root {
     --surface-a: #ffffff;
     --surface-b: #FCFCFC;
@@ -16,7 +15,9 @@
     --primary-color-text: #FFFFFF;
 }
 
+
 /* Add your customizations of the theme variables here */
+
 * {
     box-sizing: border-box;
 }
@@ -382,7 +383,6 @@ p-calendar.ng-dirty.ng-invalid>.p-calendar>.p-inputtext {
 }
 
 @media screen and (max-width: 769px) {
-
     .p-datepicker table th,
     .p-datepicker table td {
         padding: 0;
@@ -2950,17 +2950,14 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
     .p-orderlist {
         flex-direction: column;
     }
-
     .p-orderlist .p-orderlist-controls {
         padding: 1rem;
         flex-direction: row;
     }
-
     .p-orderlist .p-orderlist-controls .p-button {
         margin-right: 0.5rem;
         margin-bottom: 0;
     }
-
     .p-orderlist .p-orderlist-controls .p-button:last-child {
         margin-right: 0;
     }
@@ -3182,33 +3179,26 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
     .p-picklist {
         flex-direction: column;
     }
-
     .p-picklist .p-picklist-buttons {
         padding: 1rem;
         flex-direction: row;
     }
-
     .p-picklist .p-picklist-buttons .p-button {
         margin-right: 0.5rem;
         margin-bottom: 0;
     }
-
     .p-picklist .p-picklist-buttons .p-button:last-child {
         margin-right: 0;
     }
-
     .p-picklist .p-picklist-transfer-buttons .pi-angle-right:before {
         content: "";
     }
-
     .p-picklist .p-picklist-transfer-buttons .pi-angle-double-right:before {
         content: "";
     }
-
     .p-picklist .p-picklist-transfer-buttons .pi-angle-left:before {
         content: "";
     }
-
     .p-picklist .p-picklist-transfer-buttons .pi-angle-double-left:before {
         content: "";
     }
@@ -3261,7 +3251,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
-    margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox .p-indeterminate .p-checkbox-icon {
@@ -4732,7 +4722,6 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
     .p-menubar {
         position: relative;
     }
-
     .p-menubar .p-menubar-button {
         display: flex;
         width: 2rem;
@@ -4741,18 +4730,15 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
         border-radius: 50%;
         transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
     }
-
     .p-menubar .p-menubar-button:hover {
         color: #83888F;
         background: rgba(70, 77, 242, 0.2);
     }
-
     .p-menubar .p-menubar-button:focus {
         outline: 0 none;
         outline-offset: 0;
         box-shadow: 0 0 0 0.2rem #777BF1;
     }
-
     .p-menubar .p-menubar-root-list {
         position: absolute;
         display: none;
@@ -4762,21 +4748,17 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
         box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
         width: 100%;
     }
-
     .p-menubar .p-menubar-root-list .p-menu-separator {
         border-top: 1px solid #D4D6D9;
         margin: 0.25rem 0;
     }
-
     .p-menubar .p-menubar-root-list .p-submenu-icon {
         font-size: 0.875rem;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem {
         width: 100%;
         position: static;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link {
         padding: 0.75rem 1rem;
         color: #69707A;
@@ -4784,92 +4766,72 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
         transition: box-shadow 0.2s;
         user-select: none;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link .p-menuitem-text {
         color: #69707A;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link .p-menuitem-icon {
         color: #83888F;
         margin-left: 0.5rem;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link .p-submenu-icon {
         color: #83888F;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link:not(.p-disabled):hover {
         background: rgba(70, 77, 242, 0.2);
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
         color: #69707A;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link:not(.p-disabled):hover .p-menuitem-icon {
         color: #83888F;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link:not(.p-disabled):hover .p-submenu-icon {
         color: #83888F;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link:focus {
         outline: 0 none;
         outline-offset: 0;
         box-shadow: inset 0 0 0 0.15rem #777BF1;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link>.p-submenu-icon {
         margin-left: auto;
         transition: transform 0.2s;
     }
-
     .p-menubar .p-menubar-root-list>.p-menuitem.p-menuitem-active>.p-menuitem-link>.p-submenu-icon {
         transform: rotate(-180deg);
     }
-
     .p-menubar .p-menubar-root-list .p-submenu-list {
         width: 100%;
         position: static;
         box-shadow: none;
         border: 0 none;
     }
-
     .p-menubar .p-menubar-root-list .p-submenu-list .p-submenu-icon {
         transition: transform 0.2s;
         transform: rotate(90deg);
     }
-
     .p-menubar .p-menubar-root-list .p-submenu-list .p-menuitem-active>.p-menuitem-link>.p-submenu-icon {
         transform: rotate(-90deg);
     }
-
     .p-menubar .p-menubar-root-list .p-menuitem {
         width: 100%;
         position: static;
     }
-
     .p-menubar .p-menubar-root-list ul li a {
         padding-left: 2.25rem;
     }
-
     .p-menubar .p-menubar-root-list ul li ul li a {
         padding-left: 3.75rem;
     }
-
     .p-menubar .p-menubar-root-list ul li ul li ul li a {
         padding-left: 5.25rem;
     }
-
     .p-menubar .p-menubar-root-list ul li ul li ul li ul li a {
         padding-left: 6.75rem;
     }
-
     .p-menubar .p-menubar-root-list ul li ul li ul li ul li ul li a {
         padding-left: 8.25rem;
     }
-
     .p-menubar.p-menubar-mobile-active .p-menubar-root-list {
         display: flex;
         flex-direction: column;
@@ -5824,5 +5786,6 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
     background-color: #D32F2F;
     color: #ffffff;
 }
+
 
 /* Add your customizations of the theme styles here */

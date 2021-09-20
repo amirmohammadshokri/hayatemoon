@@ -3368,7 +3368,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
-    margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox .p-indeterminate .p-checkbox-icon {

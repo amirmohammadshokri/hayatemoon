@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MenuItem, TreeNode } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService, TreeNode } from 'primeng/api';
 import { IMenu, IMenuRole } from 'src/app/interfaces';
 import { DataService, MenuService } from 'src/app/services';
 
@@ -20,6 +20,7 @@ export class MenuRolesComponent implements OnInit {
 
   constructor(
     private srvMenu: MenuService,
+    private srvMsg: MessageService,
     private srvData: DataService,
     private srvConfirmation: ConfirmationService) { }
 
@@ -137,6 +138,7 @@ export class MenuRolesComponent implements OnInit {
   }
 
   save() {
+    this.saving = true
     const obj = {
       menuRoles: this.menus.map(m => ({
         parent: {
@@ -151,10 +153,11 @@ export class MenuRolesComponent implements OnInit {
         }))
       }))
     };
-    console.log(JSON.stringify(obj));
-
     this.srvMenu.setMenuRole(obj).subscribe(res => {
-
+      this.saving = false
+      this.srvMsg.add({severity: 'success',summary:'ثبت منو',detail: 'عملیات با موفقیت انجام شد'})
+    }, () => {
+      this.saving = false
     });
   }
 

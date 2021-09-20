@@ -19,7 +19,8 @@ import { ButtonModule } from 'primeng/button';
 import { MenuRolesComponent } from './components/menu-roles/menu-roles.component';
 import { MenuRoleAccessComponent } from './components/menu-role-access/menu-role-access.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [ListMenuComponent, FormMenuComponent, ChooseMenuComponent, MenuRolesComponent, MenuRoleAccessComponent],
@@ -36,7 +37,8 @@ import {DialogModule} from 'primeng/dialog';
     InputTextModule,
     ButtonModule,
     ContextMenuModule,
-    DialogModule
+    DialogModule,
+    DropdownModule
   ],
   providers: [
     ConfirmationService,

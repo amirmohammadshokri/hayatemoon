@@ -1,1 +1,13 @@
-<p>menu-role-access works!</p>
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
+            <p-dropdown [options]="companyTypes" [(ngModel)]="companyType" placeholder="نوع شرکت" (onChange)="getData()"></p-dropdown>
+        </div>
+        <div class="p-toolbar-group-left">
+            <button [disabled]="saving" pButton pRipple class="p-button-success" (click)="save()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
+        </div>
+    </p-toolbar>
+    <p-tree styleClass="p-mt-2" [value]="menus" selectionMode="checkbox" [(selection)]="selectedMenus" [emptyMessage]="'اطلاعاتی وجود ندارد'"></p-tree>
+    <p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle">
+    </p-confirmDialog>
+</div>
