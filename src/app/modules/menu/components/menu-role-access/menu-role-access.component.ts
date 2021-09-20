@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectItem } from 'primeng/api';
+import { CompanyService } from 'src/app/services';
 
 @Component({
   selector: 'ss-menu-role-access',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuRoleAccessComponent implements OnInit {
 
-  constructor() { }
+  companyTypes: SelectItem[];
+
+  constructor(private srvCo: CompanyService) { }
 
   ngOnInit(): void {
+    this.getCompanyType();
+  }
+
+  getCompanyType(): void {
+    this.srvCo.getCompanyTypes().subscribe(res => {
+      this.companyTypes = res.map(t => ({ label: t.title, value: t.id }));
+    });
   }
 
 }

@@ -14,7 +14,9 @@ export class MenuRolesComponent implements OnInit {
   selectedMenu: TreeNode;
   contextItems: MenuItem[] = [];
   display: boolean;
+  saving: boolean;
   dialogMenu: IMenu = {};
+  editMenuRole: boolean;
 
   constructor(
     private srvMenu: MenuService,
@@ -27,21 +29,13 @@ export class MenuRolesComponent implements OnInit {
         label: 'جدید',
         icon: 'pi pi-plus',
         command: () => {
-          if (this.selectedMenu.children) {
-            this.dialogMenu = {};
-            this.display = true;
-          }
+          this.addMenu();
         }
       }, {
         label: 'ویرایش',
         icon: 'pi pi-pencil',
         command: () => {
-          this.dialogMenu = {
-            title: this.selectedMenu.data.title,
-            code: this.selectedMenu.data.code,
-            url: this.selectedMenu.data.url
-          }
-          this.display = true;
+          this.editMenu();
         }
       }, {
         label: 'حذف',
@@ -51,25 +45,40 @@ export class MenuRolesComponent implements OnInit {
         }
       }
     ];
-    this.srvData.showMainProgressBarForMe()
+    this.getData();
+  }
+
+  private addMenu() {
+    if (this.selectedMenu.children) {
+      this.dialogMenu = {};
+      this.display = true;
+    }
+  }
+
+  private editMenu() {
+    this.editMenuRole = true;
+    this.dialogMenu = this.selectedMenu.data;
+    this.display = true;
+  }
+
+  private getData() {
+    this.srvData.showMainProgressBarForMe();
     this.srvMenu.getMenuRoles().subscribe((res: IMenuRole[]) => {
-      this.srvData.thanksMainProgressBar()
+      this.srvData.thanksMainProgressBar();
       res.forEach(mainMenu => {
         let parent: TreeNode = {
           label: mainMenu.parent.title,
           icon: mainMenu.parent.icon,
           data: mainMenu.parent,
-          key: mainMenu.parent.menuRoleId.toString(),
           children: mainMenu.childs.map(c => ({
             label: c.title,
             icon: c.icon,
             data: c,
-            key: c.menuRoleId.toString(),
           }))
-        }
+        };
         this.menus.push(parent);
       });
-    })
+    });
   }
 
   confirmDelete(): void {
@@ -79,32 +88,74 @@ export class MenuRolesComponent implements OnInit {
       acceptLabel: 'بله',
       rejectLabel: 'نه',
       accept: () => {
-        console.log(this.removeItem(this.selectedMenu.key, { children: this.menus }));
-
+        const parent = this.findParent(null, { children: this.menus })
+        const menuIndex = parent.children.indexOf(this.selectedMenu);
+        parent.children.splice(menuIndex, 1);
       }
     });
   }
 
-  removeItem(id, tree: TreeNode) {
-    if (tree.key === id) {
-      let path = [tree.label];
-      return { result: tree, path };
+  findParent(parent: TreeNode, tree: TreeNode): TreeNode {
+    if (tree == this.selectedMenu) {
+      return parent;
     } else {
-      for (let child of tree.children) {
-        let tmp = this.removeItem(id, child);
-        if (!!tmp) {
-          tmp.path.unshift(tree.label);
-          return tmp;
+      for (let index = 0; index < tree.children?.length; index++) {
+        const child = tree.children[index];
+        let parent = this.findParent(tree, child);
+        if (!!parent) {
+          return parent;
         }
       }
-      return {};
     }
   }
 
-  addMenu() {
-    if (this.selectedMenu.children) {
-
+  addToGrid() {
+    this.display = false
+    if (this.editMenuRole) {
+      this.selectedMenu.label = this.dialogMenu.title;
+    } else {
+      if (this.selectedMenu) {
+        this.selectedMenu.children.push({
+          data: this.dialogMenu,
+          label: this.dialogMenu.title
+        })
+      } else {
+        this.menus.push({
+          label: this.dialogMenu.title,
+          data: this.dialogMenu,
+          children: []
+        })
+      }
     }
+    this.editMenuRole = false;
+  }
+
+  addToRoot() {
+    this.selectedMenu = null;
+    this.dialogMenu = {};
+    this.display = true;
+  }
+
+  save() {
+    const obj = {
+      menuRoles: this.menus.map(m => ({
+        parent: {
+          title: m.data.title,
+          code: m.data.code,
+          url: m.data.url
+        },
+        childs: m.children.map(c => ({
+          title: c.data.title,
+          code: c.data.code,
+          url: c.data.url
+        }))
+      }))
+    };
+    console.log(JSON.stringify(obj));
+
+    this.srvMenu.setMenuRole(obj).subscribe(res => {
+
+    });
   }
 
 }
