@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MessageService, SelectItem, TreeNode } from 'primeng/api';
 import { IMenuRole } from 'src/app/interfaces';
 import { CompanyService, DataService, MenuService } from 'src/app/services';
@@ -20,10 +20,20 @@ export class MenuRoleAccessComponent implements OnInit {
     private srvCo: CompanyService,
     private srvData: DataService,
     private srvMsg: MessageService,
+    private cdt: ChangeDetectorRef,
     private srvMenu: MenuService) { }
 
   ngOnInit(): void {
     this.getCompanyType();
+  }
+
+  private expandRecursive(node: TreeNode, isExpand: boolean) {
+    node.expanded = isExpand;
+    if (node.children) {
+      node.children.forEach(childNode => {
+        this.expandRecursive(childNode, isExpand);
+      });
+    }
   }
 
   getCompanyType(): void {
@@ -34,24 +44,46 @@ export class MenuRoleAccessComponent implements OnInit {
 
   getData() {
     this.menus = [];
+    this.selectedMenus = [];
     this.srvData.showMainProgressBarForMe();
-    this.srvMenu.getMenuRoles().subscribe((res: IMenuRole[]) => {
+    this.srvMenu.getMenuRoles(this.companyType).subscribe((res: IMenuRole[]) => {
       this.srvData.thanksMainProgressBar();
       res.forEach(mainMenu => {
         let parent: TreeNode = {
           label: mainMenu.parent.title,
-          icon: mainMenu.parent.icon,
+          icon: mainMenu.parent.iconMediaId,
           data: mainMenu.parent,
           key: mainMenu.parent.menuRoleId.toString(),
           children: mainMenu.childs.map(c => ({
             label: c.title,
-            icon: c.icon,
+            icon: c.iconMediaId,
             data: c,
             key: c.menuRoleId.toString()
           }))
         };
         this.menus.push(parent);
+
+        if (mainMenu.childs.filter(c => c.isSelected).length > 0) {
+          parent = {
+            label: mainMenu.parent.title,
+            icon: mainMenu.parent.iconMediaId,
+            data: mainMenu.parent,
+            key: mainMenu.parent.menuRoleId.toString(),
+            children: mainMenu.childs.filter(c => c.isSelected).map(c => ({
+              label: c.title,
+              icon: c.iconMediaId,
+              data: c,
+              key: c.menuRoleId.toString()
+            }))
+          };
+          this.selectedMenus = [...this.selectedMenus, parent];
+        }
       });
+
+      // this.menus.forEach(node => {
+      //   this.expandRecursive(node, true);
+      // });
+
     });
   }
 

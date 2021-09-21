@@ -14,4 +14,6 @@ export interface IMenu {
     code?: string;
     url?: string;
     saveDate?: string;
+    iconMediaId?: string;
+    isSelected?: boolean;
 }

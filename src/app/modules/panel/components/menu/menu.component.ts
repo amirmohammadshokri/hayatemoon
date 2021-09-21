@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { MenuItem, SelectItem } from 'primeng/api';
+import { MenuService, MyRoleService } from 'src/app/services';
 
 @Component({
   selector: 'ss-menu',
@@ -16,86 +16,28 @@ export class MenuComponent implements OnInit, AfterViewInit {
   companyId: number;
   menuIndex: number;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    this.menuItems = [
-      { label: 'داشبورد', icon: 'pi pi-home', routerLink: ['dashboard'] },
-      {
-        label: 'مدیریت هتل', icon: 'fa fa-hotel', items: [
-          { label: 'لسیت هتل ها', icon: 'pi pi-list', routerLink: ['hotel/hotels'] },
-          { label: 'امکانات هتل ', icon: 'pi pi-list', routerLink: ['hotel/hotel-facilitieskinds'] },
-          { label: 'امکانات اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-facilitieskinds'] },
-          { label: 'لیست اتاق ها', icon: 'pi pi-list', routerLink: ['hotel/rooms'] },
-          { label: 'انوع اتاق', icon: 'pi pi-list', routerLink: ['hotel/room-kinds'] }
-        ]
-      },
-      {
-        label: 'مدیریت اقامتگاه', icon: 'fa fa-cutlery', items: [
-          { label: 'لسیت اقامتگاه ها', icon: 'pi pi-list', routerLink: ['residence/residence'] },
-          { label: 'لیست امکانات اقامتگاه ', icon: 'pi pi-list', routerLink: ['residence/residence-facilitieskinds'] },
-          { label: 'لیست تقویم', icon: 'pi pi-list', routerLink: ['residence/calendar'] },
-        ]
-      },
-      {
-        label: 'مدیریت اماکن', icon: 'fa fa-map-marker', items: [
-          { label: 'لسیت اماکن', icon: 'pi pi-list', routerLink: ['places/places'] }
-        ]
-      },
-      {
-        label: 'مدیریت تور', icon: 'fa fa-globe', items: [
-          { label: 'لسیت تورها', icon: 'pi pi-list', routerLink: ['tour/tours'] }
-        ]
-      },
-      {
-        label: 'مدیریت تیکت ها', icon: 'fa fa-comments', items: [
-          { label: 'لسیت تیکت ها', icon: 'pi pi-list', routerLink: ['ticket/tickets'] }
-        ]
-      },
-      {
-        label: 'مدیریت کانال ها', icon: 'fa fa-bullhorn', items: [
-          { label: 'لسیت کانال ها', icon: 'pi pi-list', routerLink: ['chanel/chanels'] }
-        ]
-      },
-      {
-        label: 'مدیریت شرکت ها', icon: 'fa fa-home', items: [
-          { label: 'لسیت شرکت ها', icon: 'pi pi-list', routerLink: ['company/companys'] },
-          { label: 'لسیت کاربران شرکت ها', icon: 'pi pi-list', routerLink: ['company/users'] }
-        ]
-      },
-      {
-        label: 'مدیریت تبلیغات', icon: 'fa fa-list', items: [
-          { label: 'لسیت تبلیغات ها', icon: 'pi pi-list', routerLink: ['advertising/advertisings'] }
-        ]
-      },
-      {
-        label: 'مدیریت کرولر ها', icon: 'fa fa-ravelry', items: [
-          { label: 'لسیت کرولر ها', icon: 'pi pi-list', routerLink: ['crawler/list'] }
-        ]
-      },
-      {
-        label: 'مدیریت پروموشن ها', icon: 'fa fa-ravelry', items: [
-          { label: 'لسیت پروموشن ها', icon: 'pi pi-list', routerLink: ['promotion/promotions'] },
-          { label: 'ارتقا تور', icon: 'pi pi-list', routerLink: ['promotion/promotion-tour'] }
-        ]
-      },
-      {
-        label: 'مدیریت منو ها', icon: 'fa fa-list', items: [
-          { label: 'لسیت منو ها', icon: 'pi pi-list', routerLink: ['menu/list'] }
-        ]
-      },
-      {
-        label: 'مدیریت دسترسی منوها', icon: 'fa fa-list', items: [
-          { label: 'ثبت منو های سیستم', icon: 'pi pi-list', routerLink: ['menu/menu-role'] },
-          { label: 'دسترسی منوها', icon: 'pi pi-list', routerLink: ['menu/menu-role-access'] }
-        ]
-      },
-      {
-        label: 'گزارش ها', icon: 'fa fa-bar-chart', items: [
-          { label: 'تورها', icon: 'pi pi-list', routerLink: ['report/tours'] },
-          { label: 'کاربران', icon: 'pi pi-list', routerLink: ['report/registers'] },
-          { label: 'مالی', icon: 'pi pi-list', routerLink: ['report/finance'] }
-        ]
-      }
-    ];
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private srvMenu: MenuService,
+    private srvRole: MyRoleService) {
+    this.srvRole.getUserInfo().subscribe(user => {
+      this.srvMenu.getMenuRoles(user.CompanyTypeId).subscribe(res => {
+        res.forEach(mainMenu => {
+          if (mainMenu.childs.filter(c => c.isSelected).length > 0) {
+            let parent: MenuItem = {
+              label: mainMenu.parent.title,
+              icon: mainMenu.parent.iconMediaId,
+              items: mainMenu.childs.filter(c => c.isSelected).map(c => ({
+                label: c.title,
+                icon: c.iconMediaId,
+                routerLink: [c.url]
+              }))
+            };
+            this.menuItems = [...this.menuItems, parent];
+          }
+        });
+      })
+    })
   }
 
   ngOnInit(): void {

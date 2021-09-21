@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService, TreeNode } from 'primeng/api';
 import { IMenu, IMenuRole } from 'src/app/interfaces';
-import { DataService, MenuService } from 'src/app/services';
+import { CommonServiece, DataService, MenuService } from 'src/app/services';
 
 @Component({
   selector: 'ss-menu-roles',
@@ -17,11 +17,13 @@ export class MenuRolesComponent implements OnInit {
   saving: boolean;
   dialogMenu: IMenu = {};
   editMenuRole: boolean;
+  icons: any;
 
   constructor(
     private srvMenu: MenuService,
     private srvMsg: MessageService,
     private srvData: DataService,
+    private srvCom: CommonServiece,
     private srvConfirmation: ConfirmationService) { }
 
   ngOnInit(): void {
@@ -47,6 +49,15 @@ export class MenuRolesComponent implements OnInit {
       }
     ];
     this.getData();
+
+    this.getIcons();
+  }
+
+
+  private getIcons() {
+    this.srvCom.getIcons().subscribe(icons => {
+      this.icons = icons;
+    });
   }
 
   private addMenu() {
@@ -64,16 +75,16 @@ export class MenuRolesComponent implements OnInit {
 
   private getData() {
     this.srvData.showMainProgressBarForMe();
-    this.srvMenu.getMenuRoles().subscribe((res: IMenuRole[]) => {
+    this.srvMenu.getMenuRoles(-1).subscribe((res: IMenuRole[]) => {
       this.srvData.thanksMainProgressBar();
       res.forEach(mainMenu => {
         let parent: TreeNode = {
           label: mainMenu.parent.title,
-          icon: mainMenu.parent.icon,
+          icon: mainMenu.parent.iconMediaId,
           data: mainMenu.parent,
           children: mainMenu.childs.map(c => ({
             label: c.title,
-            icon: c.icon,
+            icon: c.iconMediaId,
             data: c,
           }))
         };
@@ -114,16 +125,19 @@ export class MenuRolesComponent implements OnInit {
     this.display = false
     if (this.editMenuRole) {
       this.selectedMenu.label = this.dialogMenu.title;
+      this.selectedMenu.icon = this.dialogMenu.iconMediaId;
     } else {
       if (this.selectedMenu) {
         this.selectedMenu.children.push({
           data: this.dialogMenu,
-          label: this.dialogMenu.title
+          label: this.dialogMenu.title,
+          icon: this.dialogMenu.iconMediaId,
         })
       } else {
         this.menus.push({
           label: this.dialogMenu.title,
           data: this.dialogMenu,
+          icon: this.dialogMenu.iconMediaId,
           children: []
         })
       }
@@ -144,18 +158,22 @@ export class MenuRolesComponent implements OnInit {
         parent: {
           title: m.data.title,
           code: m.data.code,
-          url: m.data.url
+          url: m.data.url,
+          iconMediaId: m.data.iconMediaId
         },
         childs: m.children.map(c => ({
           title: c.data.title,
           code: c.data.code,
-          url: c.data.url
+          url: c.data.url,
+          iconMediaId: c.data.iconMediaId
         }))
       }))
     };
+    console.log(JSON.stringify(obj));
+
     this.srvMenu.setMenuRole(obj).subscribe(res => {
       this.saving = false
-      this.srvMsg.add({severity: 'success',summary:'ثبت منو',detail: 'عملیات با موفقیت انجام شد'})
+      this.srvMsg.add({ severity: 'success', summary: 'ثبت منو', detail: 'عملیات با موفقیت انجام شد' })
     }, () => {
       this.saving = false
     });

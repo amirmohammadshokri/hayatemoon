@@ -40,8 +40,8 @@ export class MenuService {
     return this.http.post<any>(`${this.url}MenuRole`, obj);
   }
 
-  getMenuRoles(): Observable<any> {
-    return this.http.get<any>(`${this.url}MenuRole/Latest`);
+  getMenuRoles(companyType: number): Observable<any> {
+    return this.http.get<any>(`${this.url}MenuRole/Latest${(companyType >= 0 ? `?companyType=${companyType}` : '')}`);
   }
 
   setCompanyMenuRole(obj: any): Observable<any> {

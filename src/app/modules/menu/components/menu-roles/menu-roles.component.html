@@ -18,9 +18,26 @@
             <label for="title">عنوان</label>
             <input id="title" type="text" pInputText [(ngModel)]="dialogMenu.title">
         </div>
-        <div class="p-col-12 p-field">
+        <div class="p-col-6 p-field">
             <label for="code">کد</label>
             <input id="code" type="text" pInputText [(ngModel)]="dialogMenu.code">
+        </div>
+        <div class="p-col-6  p-field">
+            <label for="icon">آیکون </label>
+            <p-dropdown [options]="icons" [(ngModel)]="dialogMenu.iconMediaId" [filter]="true" filterBy="value" placeholder="انتخاب">
+                <ng-template pTemplate="selectedItem">
+                    <div *ngIf="dialogMenu.iconMediaId">
+                        <i style="font-size: 1.3em;" [class]="dialogMenu.iconMediaId"></i>
+                        <span class="p-mr-2">{{dialogMenu.iconMediaId}}</span>
+                    </div>
+                </ng-template>
+                <ng-template let-icon pTemplate="item">
+                    <div>
+                        <i style="font-size: 1.3em;" [class]="icon.value"></i>
+                        <span class="p-mr-2">{{icon.label}}</span>
+                    </div>
+                </ng-template>
+            </p-dropdown>
         </div>
         <div class="p-col-12 p-field">
             <label for="url">آدرس</label>
