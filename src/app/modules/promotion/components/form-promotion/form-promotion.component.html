@@ -4,47 +4,37 @@
         <div class="p-toolbar-group-right">
         </div>
         <div class="p-toolbar-group-left">
-            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
-                [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
+            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
             <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../promotions"></button>
         </div>
     </p-toolbar>
     <div class="p-grid p-fluid p-mt-2">
-      <div class="p-col-12">
-        <div class="p-grid p-fluid">
-          <div class="p-col-4 p-field">
-            <label for="title">نام پروموشن</label>
-            <input #title="ngModel" type="text" id="title" pInputText [(ngModel)]="promotions.title" required
-              [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
-            <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
-              ثبت نام پروموشن اجباری می باشد.
-            </small>
-          </div>
-          <div class="p-col-4 p-field">
-            <label for="">قیمت</label>
-
-        
-            <p-inputNumber #price="ngModel" [(ngModel)]="promotions.price" suffix=" تومان" required
-              [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}">
-            </p-inputNumber>
-
-            <!-- <input #price="ngModel" type="" [(ngModel)]="promotions.price" pInputText required
-              [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}"> -->
-            <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">
-              ثبت قیمت اجباری می باشد
-            </small>
-          </div>
-         
-          <div *ngIf="promotionId>=0" class="p-col-4 p-field">
-            <label for="title">وضعیت پروموشن</label>
-            <p-dropdown [options]="states" #typeId="ngModel" [(ngModel)]="promotions.state"></p-dropdown>
+        <div class="p-col-12">
+            <div class="p-grid p-fluid">
+                <div [class]="'p-field ' + (promotionId>=0?'p-col-4':'p-col-8')">
+                    <label for="title">نام پروموشن</label>
+                    <input #title="ngModel" type="text" id="title" pInputText [(ngModel)]="promotions.title" required [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+                    <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+            ثبت نام پروموشن اجباری می باشد.
+          </small>
+                </div>
+                <div class="p-col-4 p-field">
+                    <label for="">قیمت</label>
+                    <p-inputNumber #price="ngModel" [(ngModel)]="promotions.price" suffix=" تومان" required [ngClass]="{'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid)}">
+                    </p-inputNumber>
+                    <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">
+            ثبت قیمت اجباری می باشد
+          </small>
+                </div>
+                <div *ngIf="promotionId>=0" class="p-col-4 p-field">
+                    <label for="title">وضعیت پروموشن</label>
+                    <p-dropdown [options]="states" #typeId="ngModel" [(ngModel)]="promotions.state"></p-dropdown>
+                </div>
+                <div class="p-col-12 p-field">
+                    <label for="">توضیحات</label>
+                    <textarea [rows]="3" [cols]="30" [(ngModel)]="promotions.description" pInputTextarea autoResize="autoResize"></textarea>
+                </div>
+            </div>
         </div>
-      <div class="p-col-12 p-field">
-            <label for="">توضیحات</label>
-            <textarea [rows]="3" [cols]="30" [(ngModel)]="promotions.description"  pInputTextarea autoResize="autoResize"></textarea>
-          </div>
-        </div>  
-      </div>
     </div>
-  </div>
-  
+</div>

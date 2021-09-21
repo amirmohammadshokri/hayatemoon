@@ -25,13 +25,16 @@
                     <p-dropdown [options]="positionTypes" [(ngModel)]="advertising.positionType" required placeholder="انتخاب جایگاه"></p-dropdown>
                 </div>
                 <div class="p-col-3 p-field">
-                    <label for="">تاریخ شروع</label>
-                    <dp-date-picker id="startDate" [(ngModel)]="startDate" dir="ltr" theme="dp-material" mode="day">
+                    <label for="start">تاریخ شروع</label>
+                    <dp-date-picker #start="ngModel" id="start" [(ngModel)]="startDate" dir="ltr" theme="dp-material" mode="day" required [ngClass]="{'ng-dirty': (start.invalid && submitted) || (start.dirty && start.invalid)}">
                     </dp-date-picker>
+                    <small *ngIf="(start.invalid && submitted)" class="p-error">
+                        انتخاب تاریخ شروع اجباری است
+                    </small>
                 </div>
                 <div class="p-col-3 p-field">
-                    <label for="title"> تاریخ پایان</label>
-                    <dp-date-picker id="endDate" [(ngModel)]="endDate" dir="ltr" theme="dp-material" mode="day">
+                    <label for="end"> تاریخ پایان</label>
+                    <dp-date-picker id="end" [(ngModel)]="endDate" dir="ltr" theme="dp-material" mode="day">
                     </dp-date-picker>
                 </div>
                 <div class="p-col-3 p-field">

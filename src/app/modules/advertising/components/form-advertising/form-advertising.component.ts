@@ -23,6 +23,7 @@ export class FormAdvertisingComponent implements OnInit {
   image: { mediaId: number, file: File, url: string };
   mainImageIndex: number;
   saving: boolean;
+  submitted: boolean =false;
   adsId: number;
 
   constructor(
@@ -93,26 +94,6 @@ export class FormAdvertisingComponent implements OnInit {
     });
   }
 
-  saveImages(): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      // if image not selected or is previous is saved return
-      if (!this.image || this.image.mediaId) {
-        this.srvMsg.add({ severity: 'warn', summary: 'ثبت تبلیغات ', detail: 'انتخاب تصویر الزامی است' });
-        reject();
-      }
-      const formData = new FormData();
-      formData.append(`file`, this.image.file, this.image.file.name);
-      this.srvMedia.upload(formData, 0).subscribe(res => {
-        this.image.mediaId = res.mediaId;
-        this.advertising.mediaId = res.mediaId;
-        resolve();
-      }, () => {
-        this.saving = false;
-        reject();
-      });
-    });
-  }
-
   addImage(e: any): void {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
@@ -133,37 +114,59 @@ export class FormAdvertisingComponent implements OnInit {
   }
 
   submit() {
-    this.saving = true;
     if (this.startDate) {
+      this.saving = true;
       const startDate: Date = this.startDate?._d;
       const utcstartDate = new Date(startDate.toUTCString());
       this.advertising.startDate = utcstartDate.toISOString();
-    }
 
-    if (this.endDate) {
-      const endDate: Date = this.endDate?._d;
-      const utcendDate = new Date(endDate.toUTCString());
-      this.advertising.endDate = utcendDate.toISOString();
-    }
-
-    this.advertising.destLocationId = this.selectedLocation?.locationId;
-
-    this.saveImages().then(() => {
-      if (this.adsId > 0) {
-        this.srvAds.editAdvertising(this.adsId, this.advertising).subscribe(() => {
-          this.srvMsg.add({ severity: 'success', summary: 'ویرایش تبلیغات', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['./panel/advertising/advertisings']);
-        }, _ => {
-          this.saving = false;
-        });
-      } else {
-        this.srvAds.addAdvertising(this.advertising).subscribe(() => {
-          this.srvMsg.add({ severity: 'success', summary: 'ثبت تبلیغات ', detail: 'عملیات با موفقیت انجام شد' });
-          this.router.navigate(['./panel/advertising/advertisings']);
-        }, _ => {
-          this.saving = false;
-        });
+      if (this.endDate) {
+        const endDate: Date = this.endDate?._d;
+        const utcendDate = new Date(endDate.toUTCString());
+        this.advertising.endDate = utcendDate.toISOString();
       }
+
+      this.advertising.destLocationId = this.selectedLocation?.locationId;
+
+      this.saveImages().then(() => {
+        if (this.adsId > 0) {
+          this.srvAds.editAdvertising(this.adsId, this.advertising).subscribe(() => {
+            this.srvMsg.add({ severity: 'success', summary: 'ویرایش تبلیغات', detail: 'عملیات با موفقیت انجام شد' });
+            this.router.navigate(['./panel/advertising/advertisings']);
+          }, _ => {
+            this.saving = false;
+          });
+        } else {
+          this.srvAds.addAdvertising(this.advertising).subscribe(() => {
+            this.srvMsg.add({ severity: 'success', summary: 'ثبت تبلیغات ', detail: 'عملیات با موفقیت انجام شد' });
+            this.router.navigate(['./panel/advertising/advertisings']);
+          }, _ => {
+            this.saving = false;
+          });
+        }
+      });
+    }
+    this.submitted = true;
+  }
+
+  saveImages(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      // if image not selected or is previous is saved return
+      if (!this.image || this.image.mediaId) {
+        this.srvMsg.add({ severity: 'warn', summary: 'ثبت تبلیغات ', detail: 'انتخاب تصویر الزامی است' });
+        this.saving = false;
+        reject();
+      }
+      const formData = new FormData();
+      formData.append(`file`, this.image.file, this.image.file.name);
+      this.srvMedia.upload(formData, 0).subscribe(res => {
+        this.image.mediaId = res.mediaId;
+        this.advertising.mediaId = res.mediaId;
+        resolve();
+      }, () => {
+        this.saving = false;
+        reject();
+      });
     });
   }
 

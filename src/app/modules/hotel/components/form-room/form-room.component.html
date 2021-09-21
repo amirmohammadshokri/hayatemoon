@@ -22,16 +22,16 @@
             <p-dropdown #hotel="ngModel" [options]="hotels" [filter]="true" placeholder="انتخاب" [(ngModel)]="room.hotelId" field="title" required [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
             </p-dropdown>
             <small *ngIf="(hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)" class="p-error">
-        انتخاب هتل اجباری است
-      </small>
+                انتخاب هتل اجباری است
+            </small>
         </div>
         <div class="p-col-3 p-field">
             <label for="">انتخاب نوع اتاق</label>
             <p-dropdown #roomkind="ngModel" [options]="roomkinds" [filter]="true" placeholder="انتخاب" [(ngModel)]="room.kindId" field="title" required [ngClass]="{'ng-dirty': (hotel.invalid && submitted) || (hotel.dirty && hotel.invalid)}">
             </p-dropdown>
             <small *ngIf="(roomkind.invalid && submitted) || (roomkind.dirty && roomkind.invalid)" class="p-error">
-        انتخاب نوع اتاق اجباری است.
-      </small>
+                انتخاب نوع اتاق اجباری است.
+            </small>
         </div>
         <div class="p-col-3 p-field">
             <label for="adult{{i}}">ظرفیت بزرگسال</label>

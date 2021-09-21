@@ -17,7 +17,8 @@
             <button pButton pRipple label="ثبت پروموشن جدید" icon="pi pi-plus" class="p-button-success" routerLink="../form-promotion/new"></button>
         </div>
     </p-toolbar>
-    <p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle">
+    </p-confirmDialog>
     <p-table [columns]="cols" [value]="promotions" styleClass="p-datatable-striped" [loading]="loading">
         <ng-template pTemplate="header" let-columns>
             <tr>
@@ -25,7 +26,7 @@
                 <th *ngFor="let col of columns">
                     {{ col.header }}
                 </th>
-                <th style="width: 12em"></th>
+                <th style="width: 8em"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-index="rowIndex">
