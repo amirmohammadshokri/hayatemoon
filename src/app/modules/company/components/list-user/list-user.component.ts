@@ -1,8 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
 import { IUsers } from 'src/app/interfaces/users.interface';
-import { CompanyService } from 'src/app/services';
+import { CompanyService, MyRoleService, SearchService } from 'src/app/services';
 
 @Component({
   selector: 'ss-list-user',
@@ -18,6 +19,9 @@ export class ListUserComponent implements OnInit {
   item: any;
   showStateDialog: boolean;
   nothingElse: boolean;
+  companies: ICompanySearch[] = [];
+  selecteCompanies: ICompanySearch;
+  isSuperAdmin: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -31,12 +35,24 @@ export class ListUserComponent implements OnInit {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private sevCo: CompanyService,
+    private srvCo: CompanyService,
+    private srvRole: MyRoleService,
+    private srcSrch: SearchService,
     private srvMsg: MessageService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.srvRole.getUserInfo().subscribe(userInfo => {
+      if (userInfo.role == 'SUPERADMIN') {
+        this.isSuperAdmin = true;
+      }
+      this.srvCo.getCompany(userInfo.CompanyId).subscribe(co => {
+        this.selecteCompanies = co;
+        this.getUsers(true);
+      })
+    });
+
     this.cols = [
       { field: 'userName', header: 'نام کاربری' },
       { field: 'firstName', header: 'نام' },
@@ -44,9 +60,13 @@ export class ListUserComponent implements OnInit {
       { field: 'internalPhone', header: ' تلفن داخلی ' },
       { field: 'email', header: 'ایمیل' }
     ];
-    this.getUsers(true);
   }
 
+  getCompany(event: any): void {
+    this.srcSrch.getCompanySaerch(event.query).subscribe(res => {
+      this.companies = res;
+    });
+  }
 
   getUsers(firstLoad: boolean): void {
     if (firstLoad) {
@@ -54,7 +74,7 @@ export class ListUserComponent implements OnInit {
       this.users = [];
     }
     this.loading = true;
-    this.sevCo.getUsers(3, this.currentPage, 15).subscribe(res => {
+    this.srvCo.getUsers(this.selecteCompanies.companyId, this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
@@ -77,7 +97,8 @@ export class ListUserComponent implements OnInit {
   }
 
   deleteUsers(id: number): void {
-    this.sevCo.deleteUser(id).subscribe(() => {
+    this.srvCo.deleteUser(id).subscribe(() => {
+      this.srvMsg.add({ severity: 'success', summary: 'حذف کاربر', detail: 'عملیات با موفقیت انجام شد' })
       this.getUsers(true);
     });
   }

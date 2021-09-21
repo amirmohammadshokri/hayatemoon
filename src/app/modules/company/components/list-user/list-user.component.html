@@ -1,7 +1,10 @@
 <div class="card">
     <p-toolbar>
         <div class="p-toolbar-group-right">
-            <div class="p-grid p-fluid">
+            <div *ngIf="isSuperAdmin">
+                <label class="p-ml-2">شرکت : </label>
+                <p-autoComplete [suggestions]="companies" [(ngModel)]="selecteCompanies" placeholder="انتخاب شرکت" (completeMethod)="getCompany($event)" field="title" (onSelect)="getUsers(true)">
+                </p-autoComplete>
             </div>
         </div>
         <div class="p-toolbar-group-left">

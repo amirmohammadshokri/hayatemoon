@@ -32,11 +32,11 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="title">موبایل</label>
-            <input type="text" #mobile="ngModel" pKeyFilter="num" [(ngModel)]="companyUser.mobile" pInputText>
+            <input type="text" #mobile="ngModel" [maxlength]="11" pKeyFilter="num" [(ngModel)]="companyUser.mobile" pInputText>
         </div>
         <div class="p-col-4 p-field">
-            <label for="title">تلفن</label>
-            <input type="text" #internalPhone="ngModel" pKeyFilter="num" [(ngModel)]="companyUser.internalPhone" pInputText>
+            <label for="title">تلفن داخلی</label>
+            <input type="text" #internalPhone="ngModel" [maxlength]="25" pKeyFilter="num" [(ngModel)]="companyUser.internalPhone" pInputText>
         </div>
         <div class="p-col-4 p-field">
             <label for="title">ایمیل</label>

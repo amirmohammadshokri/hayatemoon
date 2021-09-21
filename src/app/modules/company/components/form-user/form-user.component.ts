@@ -91,6 +91,7 @@ export class FormUserComponent implements OnInit {
   }
 
   submit(): void {
+
     if (this.companyUser.firstName && this.selecteCompanies && this.companyUser.password) {
       this.saving = true;
       if (this.currentUser.role !== 'SUPERADMIN') {
