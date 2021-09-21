@@ -97,7 +97,8 @@ export class FormAdvertisingComponent implements OnInit {
     return new Promise(async (resolve, reject) => {
       // if image not selected or is previous is saved return
       if (!this.image || this.image.mediaId) {
-        resolve();
+        this.srvMsg.add({ severity: 'warn', summary: 'ثبت تبلیغات ', detail: 'انتخاب تصویر الزامی است' });
+        reject();
       }
       const formData = new FormData();
       formData.append(`file`, this.image.file, this.image.file.name);
@@ -131,34 +132,39 @@ export class FormAdvertisingComponent implements OnInit {
     row.url = 'assets/no-image.png';
   }
 
-  async submit() {
+  submit() {
     this.saving = true;
-    const startDate: Date = this.startDate?._d;
-    const utcstartDate = new Date(startDate.toUTCString());
-    this.advertising.startDate = utcstartDate.toISOString();
+    if (this.startDate) {
+      const startDate: Date = this.startDate?._d;
+      const utcstartDate = new Date(startDate.toUTCString());
+      this.advertising.startDate = utcstartDate.toISOString();
+    }
 
-    const endDate: Date = this.endDate?._d;
-    const utcendDate = new Date(endDate.toUTCString());
-    this.advertising.endDate = utcendDate.toISOString();
+    if (this.endDate) {
+      const endDate: Date = this.endDate?._d;
+      const utcendDate = new Date(endDate.toUTCString());
+      this.advertising.endDate = utcendDate.toISOString();
+    }
+
     this.advertising.destLocationId = this.selectedLocation?.locationId;
 
-    await this.saveImages();
-
-    if (this.adsId > 0) {
-      this.srvAds.editAdvertising(this.adsId, this.advertising).subscribe(() => {
-        this.srvMsg.add({ severity: 'success', summary: 'ویرایش تبلیغات', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/advertising/advertisings']);
-      }, _ => {
-        this.saving = false;
-      });
-    } else {
-      this.srvAds.addAdvertising(this.advertising).subscribe(() => {
-        this.srvMsg.add({ severity: 'success', summary: 'ثبت تبلیغات ', detail: 'عملیات با موفقیت انجام شد' });
-        this.router.navigate(['./panel/advertising/advertisings']);
-      }, _ => {
-        this.saving = false;
-      });
-    }
+    this.saveImages().then(() => {
+      if (this.adsId > 0) {
+        this.srvAds.editAdvertising(this.adsId, this.advertising).subscribe(() => {
+          this.srvMsg.add({ severity: 'success', summary: 'ویرایش تبلیغات', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/advertising/advertisings']);
+        }, _ => {
+          this.saving = false;
+        });
+      } else {
+        this.srvAds.addAdvertising(this.advertising).subscribe(() => {
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت تبلیغات ', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/advertising/advertisings']);
+        }, _ => {
+          this.saving = false;
+        });
+      }
+    });
   }
 
 }

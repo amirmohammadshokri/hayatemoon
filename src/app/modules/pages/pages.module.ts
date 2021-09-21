@@ -4,6 +4,7 @@ import { PagesRoutingModule } from './pages.routing.module';
 import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessdeniedComponent } from './components/accessdenied/accessdenied.component';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -11,7 +12,8 @@ import { AccessdeniedComponent } from './components/accessdenied/accessdenied.co
   declarations: [ErrorComponent, NotfoundComponent, AccessdeniedComponent],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    ButtonModule
   ]
 })
 export class PagesModule { }

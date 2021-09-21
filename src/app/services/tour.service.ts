@@ -22,6 +22,10 @@ export class TourService {
     return this.http.get<any>(`${this.url}/Registered/${id}`);
   }
 
+  deleteTour(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
+  }
+
   addTour(obj: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.url}`, obj);
   }

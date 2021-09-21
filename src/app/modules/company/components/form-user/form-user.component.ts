@@ -38,7 +38,7 @@ export class FormUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.srvRole.getUserInfo().subscribe(userInfo => {
-      this.currentUser = userInfo;   
+      this.currentUser = userInfo;
     });
     this.genders = [
       { value: 0, label: 'مرد' },
@@ -80,7 +80,7 @@ export class FormUserComponent implements OnInit {
         }
       });
     });
-   }
+  }
 
   getUserById() {
     this.srvCo.getUser(this.userId).subscribe(res => {
@@ -91,29 +91,30 @@ export class FormUserComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.currentUser.role !== 'SUPERADMIN') {
-      this.companyUser.companyId = Number.parseInt(this.currentUser.CompanyId);
-    } 
-    else {
-      this.companyUser.companyId = this.selecteCompanies.companyId;
+    if (this.companyUser.firstName && this.selecteCompanies && this.companyUser.password) {
+      this.saving = true;
+      if (this.currentUser.role !== 'SUPERADMIN') {
+        this.companyUser.companyId = Number.parseInt(this.currentUser.CompanyId);
+      } else {
+        this.companyUser.companyId = this.selecteCompanies?.companyId;
+      }
+      if (this.companyUser.id > 0) {
+        this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
+          this.srvMsg.add({ severity: 'success', summary: 'ویرایش کاربر', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/company/users']);
+        }, _ => {
+          this.saving = false;
+        });
+      } else {
+        this.srvCo.addUser({ user: this.companyUser }).subscribe(res => {
+          this.srvMsg.add({ severity: 'success', summary: 'ثبت کاربر', detail: 'عملیات با موفقیت انجام شد' });
+          this.router.navigate(['./panel/company/users']);
+        }, _ => {
+          this.saving = false;
+        });
+      }
     }
-    this.saving = true;
-        if(this.companyUser.id>0){
-          this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
-            this.srvMsg.add({ severity: 'success', summary: 'ویرایش کاربر', detail: 'عملیات با موفقیت انجام شد' });
-            this.router.navigate(['./panel/company/users']);
-          }, _ => {
-            this.saving = false;
-          });
-        } else {
-          this.srvCo.addUser({ user: this.companyUser }).subscribe(res => {
-            this.srvMsg.add({ severity: 'success', summary: 'ثبت کاربر', detail: 'عملیات با موفقیت انجام شد' });
-            this.router.navigate(['./panel/company/users']);
-          }, _ => {
-            this.saving = false;
-          });
-        }
-      
-     
+    this.submitted = true;
+
   }
 }

@@ -1,9 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, SelectItem } from 'primeng/api';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { IState, IUserInfo } from 'src/app/interfaces';
 import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
-import { IdentityService, MyRoleService, SearchService, TourService } from 'src/app/services';
+import { DataService, IdentityService, MyRoleService, SearchService, TourService } from 'src/app/services';
 
 @Component({
   selector: 'ss-list-tour',
@@ -20,7 +20,7 @@ export class ListTourComponent implements OnInit {
   item: any;
   title: string;
   nothingElse: boolean;
-  CompanyId:number;
+  CompanyId: number;
   submitted: boolean;
   companies: any[] = [];
   selecteCompanies: ICompanySearch;
@@ -43,16 +43,16 @@ export class ListTourComponent implements OnInit {
     private router: Router,
     private srvRole: MyRoleService,
     private srcSrch: SearchService,
-    private aRoute: ActivatedRoute,
+    private srvMsg: MessageService,
+    private srvData: DataService,
     private srvIdentity: IdentityService) { }
 
   ngOnInit(): void {
     this.srvRole.getUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
-       
-      
-      this.CompanyId= Number.parseInt(this.currentUser.CompanyId);
+      this.CompanyId = Number.parseInt(this.currentUser.CompanyId);
     });
+
     this.items = [
       { code: 0, name: 'فعال' },
       { code: 1, name: 'غیر فعال' },
@@ -110,7 +110,12 @@ export class ListTourComponent implements OnInit {
       acceptLabel: 'بله',
       rejectLabel: 'نه',
       accept: () => {
-
+        this.srvData.showMainProgressBarForMe()
+        this.srvTour.deleteTour(id).subscribe(() => {
+          this.srvData.thanksMainProgressBar()
+          this.srvMsg.add({ severity: 'success', summary: 'حذف تور', detail: 'عملیات با موفقیت انجام شد' })
+          this.getToures(true)
+        })
       }
     });
   }

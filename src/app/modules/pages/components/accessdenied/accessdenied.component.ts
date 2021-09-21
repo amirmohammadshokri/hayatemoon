@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'ss-accessdenied',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessdeniedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private srvOidc: OidcSecurityService) { }
 
   ngOnInit(): void {
+  }
+
+  signOut() {
+    this.srvOidc.logoff()
   }
 
 }

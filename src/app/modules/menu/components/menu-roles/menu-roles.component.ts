@@ -169,8 +169,6 @@ export class MenuRolesComponent implements OnInit {
         }))
       }))
     };
-    console.log(JSON.stringify(obj));
-
     this.srvMenu.setMenuRole(obj).subscribe(res => {
       this.saving = false
       this.srvMsg.add({ severity: 'success', summary: 'ثبت منو', detail: 'عملیات با موفقیت انجام شد' })

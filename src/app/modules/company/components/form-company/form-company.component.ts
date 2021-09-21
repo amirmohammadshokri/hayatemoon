@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'jalali-moment';
-import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { forkJoin } from 'rxjs';
 import { IAddCompany } from 'src/app/interfaces';
-import { ICompanyType } from 'src/app/interfaces/companyType.interface';
 import { ILocation } from 'src/app/interfaces/location.interface';
 import { CompanyService, MediaService, SearchService } from 'src/app/services';
 import { MyRoleService } from '../../../../services/my-role.service'
-
+import * as moment from 'jalali-moment';
 
 interface State {
   id: number,
@@ -67,14 +65,17 @@ export class FormCompanyComponent implements OnInit {
 
   submit(): void {
     this.saving = true;
-    const ceoBirthDate: Date = this.ceoBirthDate?._d;
-    const utcCeoBirthDate = new Date(ceoBirthDate.toUTCString());
-    this.companyAdd.ceoBirthDate = utcCeoBirthDate.toISOString();
-    this.companyAdd.locationId = this.selectedLocation?.locationId;
-    if(this.contact.value !="" && this.contact.value!=null ){
-     this.contact.value=this.contact.value.replace('-',''); 
+    if (this.ceoBirthDate) {
+      const ceoBirthDate: Date = this.ceoBirthDate?._d;
+      const utcCeoBirthDate = new Date(ceoBirthDate.toUTCString());
+      this.companyAdd.ceoBirthDate = utcCeoBirthDate.toISOString();
     }
-    
+
+    this.companyAdd.locationId = this.selectedLocation?.locationId;
+    if (this.contact.value != "" && this.contact.value != null) {
+      this.contact.value = this.contact.value.replace('-', '');
+    }
+
     this.saveImages().then(() => {
       if (this.companyId > 0) {
         this.srvCo.editCompany(this.companyId, { id: this.companyId, company: this.companyAdd }).subscribe(() => {

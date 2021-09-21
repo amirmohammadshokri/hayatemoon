@@ -1,42 +1,45 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { MenuItem, SelectItem } from 'primeng/api';
-import { MenuService, MyRoleService } from 'src/app/services';
+import { DataService, MenuService, MyRoleService } from 'src/app/services';
 
 @Component({
   selector: 'ss-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit, AfterViewInit {
+export class MenuComponent implements OnInit {
 
-  showMenu: boolean;
   menuItems: MenuItem[] = [];
-  databases: SelectItem[] = [];
   companyId: number;
-  menuIndex: number;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private srvMenu: MenuService,
+    private srvData: DataService,
     private srvRole: MyRoleService) {
     this.srvRole.getUserInfo().subscribe(user => {
-      this.srvMenu.getMenuRoles(user.CompanyTypeId).subscribe(res => {
-        res.forEach(mainMenu => {
-          if (mainMenu.childs.filter(c => c.isSelected).length > 0) {
-            let parent: MenuItem = {
-              label: mainMenu.parent.title,
-              icon: mainMenu.parent.iconMediaId,
-              items: mainMenu.childs.filter(c => c.isSelected).map(c => ({
-                label: c.title,
-                icon: c.iconMediaId,
-                routerLink: [c.url]
-              }))
-            };
-            this.menuItems = [...this.menuItems, parent];
-          }
-        });
-      })
+      if (!!user) {
+        this.srvData.showMainProgressBarForMe()
+        this.srvMenu.getMenuRoles(user.CompanyTypeId).subscribe(res => {
+          this.srvData.thanksMainProgressBar()
+          res.forEach(mainMenu => {
+            if (mainMenu.childs.filter(c => c.isSelected).length > 0) {
+              let parent: MenuItem = {
+                label: mainMenu.parent.title,
+                icon: mainMenu.parent.iconMediaId,
+                items: mainMenu.childs.filter(c => c.isSelected).map(c => ({
+                  label: c.title,
+                  icon: c.iconMediaId,
+                  routerLink: [c.url]
+                }))
+              };
+              this.menuItems = [...this.menuItems, parent];
+            }
+          });
+          this.setActiveMenu();
+        })
+      }
     })
   }
 
@@ -50,8 +53,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.headerMenuClick(this.menuIndex);
+  setActiveMenu(): void {
+    let activeMenu = JSON.parse(localStorage.getItem('activeMenu'))
+    if (activeMenu) {
+      this.headerMenuClick(activeMenu.i);
+      this.itemMenuClick(activeMenu.i, activeMenu.j)
+    }
   }
 
   headerMenuClick(index: number): void {
@@ -65,6 +72,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
         $('#headerMenu_' + i).removeClass('active-menuitem');
       }
     }
+    this.cdr.detectChanges();
   }
 
   itemMenuClick(i: number, j: number): void {
@@ -76,6 +84,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
     $('[id^=itemMenu_]').removeClass('active-menuitem');
     $('#itemMenu_' + i + '' + j).toggleClass('active-menuitem');
     this.cdr.detectChanges();
+
+    localStorage.setItem('activeMenu', JSON.stringify({ i, j }))
   }
 
 }

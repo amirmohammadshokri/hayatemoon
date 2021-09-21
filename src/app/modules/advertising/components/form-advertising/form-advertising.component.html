@@ -1,77 +1,73 @@
 <div class="card">
-  <p-toolbar>
-    <div class="p-toolbar-group-right">
-    </div>
-    <div class="p-toolbar-group-left">
-      <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" label="ذخیره" (click)="submit()"></button>
-      <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary"
-        routerLink="../../advertisings"></button>
-    </div>
-  </p-toolbar>
-  <div class="p-grid p-fluid p-mt-2">
-    <div class="p-col-12">
-      <div class="p-grid p-fluid">
-        <div class="p-col-4 p-field">
-          <label for="">نام شهر</label>
-          <p-autoComplete [suggestions]="locations" [(ngModel)]="selectedLocation"
-          placeholder="جستجو..."  (completeMethod)="getLocations($event)" field="title">
-          </p-autoComplete>
+    <p-toolbar>
+        <div class="p-toolbar-group-right">
         </div>
-        <div class="p-col-4 p-field">
-          <label for="">انتخاب صفحه</label>
-          <p-dropdown [options]="pageTypes" [(ngModel)]="advertising.pageType" required placeholder="انتخاب صفحه">
-          </p-dropdown>
+        <div class="p-toolbar-group-left">
+            <button [disabled]="saving" pButton pRipple class="p-button-success p-ml-1" label="ذخیره" [icon]="'pi ' +(saving?'pi-spin pi-spinner':'pi-save')" (click)="submit()"></button>
+            <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../advertisings"></button>
         </div>
-        <div class="p-col-4 p-field">
-          <label for="title">انتخاب جایگاه</label>
-          <p-dropdown [options]="positionTypes" [(ngModel)]="advertising.positionType" required
-            placeholder="انتخاب جایگاه"></p-dropdown>
-        </div>
-        <div class="p-col-3 p-field">
-          <label for="">تاریخ شروع</label>
-          <dp-date-picker id="startDate" [(ngModel)]="startDate" dir="ltr" theme="dp-material" mode="day">
-          </dp-date-picker>
-        </div>
-        <div class="p-col-3 p-field">
-          <label for="title"> تاریخ پایان</label>
-          <dp-date-picker id="endDate" [(ngModel)]="endDate" dir="ltr" theme="dp-material" mode="day">
-          </dp-date-picker>
-        </div>
-        <div class="p-col-3 p-field">
-          <label for="">لینک</label>
-          <input type="" [(ngModel)]="advertising.link" pInputText>
-        </div>
-        <div class="p-col-3 p-field">
-          <label for="title">وضعیت </label>
-          <p-dropdown [options]="states" [(ngModel)]="advertising.state"></p-dropdown>
-        </div>
-        <div class="p-col-12 p-field">
-          <label for="title">توضیحات </label>
-          <textarea [rows]="3" [cols]="30" [(ngModel)]="advertising.description" pInputTextarea
-            autoResize="autoResize"></textarea>
-        </div>
-        <div class="p-col-12 p-field">
-          <label for="title">تصویر </label>
-          <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
-            <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()">
-              <div class="add-circle p-d-flex p-ai-center p-jc-center">
-                <img src="assets/layout/images/camera.svg">
-              </div>
-              <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
-            </div>
-            <div *ngIf="image" class="img p-d-flex p-ai-center p-jc-center">
-              <div class="main p-d-flex p-ai-center p-jc-center">
-                <img [src]="image.url" (error)="defaultImg(image)" />
-              </div>
-              <div class="tools">
-                <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage()">
-                  <img src="assets/layout/images/bin.svg">
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2">
+        <div class="p-col-12">
+            <div class="p-grid p-fluid">
+                <div class="p-col-4 p-field">
+                    <label for="">نام شهر</label>
+                    <p-autoComplete [suggestions]="locations" [(ngModel)]="selectedLocation" placeholder="جستجو..." (completeMethod)="getLocations($event)" field="title">
+                    </p-autoComplete>
                 </div>
-              </div>
+                <div class="p-col-4 p-field">
+                    <label for="">انتخاب صفحه</label>
+                    <p-dropdown [options]="pageTypes" [(ngModel)]="advertising.pageType" required placeholder="انتخاب صفحه">
+                    </p-dropdown>
+                </div>
+                <div class="p-col-4 p-field">
+                    <label for="title">انتخاب جایگاه</label>
+                    <p-dropdown [options]="positionTypes" [(ngModel)]="advertising.positionType" required placeholder="انتخاب جایگاه"></p-dropdown>
+                </div>
+                <div class="p-col-3 p-field">
+                    <label for="">تاریخ شروع</label>
+                    <dp-date-picker id="startDate" [(ngModel)]="startDate" dir="ltr" theme="dp-material" mode="day">
+                    </dp-date-picker>
+                </div>
+                <div class="p-col-3 p-field">
+                    <label for="title"> تاریخ پایان</label>
+                    <dp-date-picker id="endDate" [(ngModel)]="endDate" dir="ltr" theme="dp-material" mode="day">
+                    </dp-date-picker>
+                </div>
+                <div class="p-col-3 p-field">
+                    <label for="">لینک</label>
+                    <input type="" [(ngModel)]="advertising.link" pInputText>
+                </div>
+                <div class="p-col-3 p-field">
+                    <label for="title">وضعیت </label>
+                    <p-dropdown [options]="states" [(ngModel)]="advertising.state"></p-dropdown>
+                </div>
+                <div class="p-col-12 p-field">
+                    <label for="title">توضیحات </label>
+                    <textarea [rows]="3" [cols]="30" [(ngModel)]="advertising.description" pInputTextarea autoResize="autoResize"></textarea>
+                </div>
+                <div class="p-col-12 p-field">
+                    <label for="title">تصویر </label>
+                    <div class="p-col-12 p-d-flex p-flex-wrap p-jc-center p-jc-lg-start">
+                        <div class="add-img p-d-flex p-ai-center p-jc-center" (click)="file.click()">
+                            <div class="add-circle p-d-flex p-ai-center p-jc-center">
+                                <img src="assets/layout/images/camera.svg">
+                            </div>
+                            <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
+                        </div>
+                        <div *ngIf="image" class="img p-d-flex p-ai-center p-jc-center">
+                            <div class="main p-d-flex p-ai-center p-jc-center">
+                                <img [src]="image.url" (error)="defaultImg(image)" />
+                            </div>
+                            <div class="tools">
+                                <div class="circle p-d-flex p-ai-center p-jc-center" (click)="deleteImage()">
+                                    <img src="assets/layout/images/bin.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
