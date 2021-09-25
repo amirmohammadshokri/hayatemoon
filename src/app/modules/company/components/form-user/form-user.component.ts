@@ -91,7 +91,6 @@ export class FormUserComponent implements OnInit {
   }
 
   submit(): void {
-
     if (this.companyUser.firstName && this.selecteCompanies && this.companyUser.password) {
       this.saving = true;
       if (this.currentUser.role !== 'SUPERADMIN') {
@@ -103,14 +102,14 @@ export class FormUserComponent implements OnInit {
         this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
           this.srvMsg.add({ severity: 'success', summary: 'ویرایش کاربر', detail: 'عملیات با موفقیت انجام شد' });
           this.router.navigate(['./panel/company/users']);
-        }, _ => {
+        }, () => {
           this.saving = false;
         });
       } else {
         this.srvCo.addUser({ user: this.companyUser }).subscribe(res => {
           this.srvMsg.add({ severity: 'success', summary: 'ثبت کاربر', detail: 'عملیات با موفقیت انجام شد' });
           this.router.navigate(['./panel/company/users']);
-        }, _ => {
+        }, () => {
           this.saving = false;
         });
       }
