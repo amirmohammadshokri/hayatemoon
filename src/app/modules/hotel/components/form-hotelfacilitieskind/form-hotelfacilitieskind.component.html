@@ -12,8 +12,8 @@
             <label for="title">عنوان</label>
             <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="hotelfacilitieskind.title" required [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
             <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
-        ثبت عنوان اجباری می باشد.
-      </small>
+                ثبت عنوان اجباری می باشد.
+            </small>
         </div>
         <div class="p-col-6 p-field">
             <label for="icon">آیکون </label>

@@ -70,8 +70,8 @@
                     </small>
                 </div>
                 <div class="p-col-12 p-field">
-                    <label for="">آدرس</label>
-                    <textarea pInputTextarea rows="2" #address="ngModel" id="address" [(ngModel)]="hotel.address" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+                    <label for="address">آدرس</label>
+                    <textarea pInputTextarea rows="2" autoResize="autoResize" #address="ngModel" id="address" [(ngModel)]="hotel.address" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
                     <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
                         ثبت آدرس اجباری می باشد.
                     </small>
