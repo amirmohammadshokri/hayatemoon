@@ -48,8 +48,14 @@ export class FormUserComponent implements OnInit {
       { value: 0, label: 'فعال' },
       { value: 1, label: 'غیر فعال' }
     ];
-    this.getPermissions();
-    this.getRoles();
+    this.aRoute.params.subscribe(prms => {
+      if (prms.id > 0) {
+        this.userId = Number.parseInt(prms.id, 0);
+        this.getUserById();
+        this.getPermissions();
+        this.getRoles();
+      }
+    });
   }
 
   getCompany(event: any): void {
@@ -61,24 +67,12 @@ export class FormUserComponent implements OnInit {
   getPermissions(): void {
     this.srvIdentity.getPermissions().subscribe(res => {
       this.permissions = res.map(r => ({ label: r.title, value: r.id }));
-      this.aRoute.params.subscribe(prms => {
-        if (prms.id > 0) {
-          this.userId = Number.parseInt(prms.id, 0);
-          this.getUserById();
-        }
-      });
     });
   }
 
   getRoles(): void {
     this.srvIdentity.getRoles().subscribe(res => {
       this.roles = res.map(r => ({ label: r.title, value: r.id }));
-      this.aRoute.params.subscribe(prms => {
-        if (prms.id > 0) {
-          this.userId = Number.parseInt(prms.id, 0);
-          this.getUserById();
-        }
-      });
     });
   }
 

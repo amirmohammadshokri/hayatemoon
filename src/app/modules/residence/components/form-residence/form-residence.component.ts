@@ -31,9 +31,6 @@ export class FormResidenceComponent implements OnInit {
     draggable: true
   });
 
-  // Path from paradise to tehran
-  route = polyline([]);
-
   // Layers control object with our two base layers and the three overlay layers
   layersControl = {
     baseLayers: {
@@ -51,7 +48,7 @@ export class FormResidenceComponent implements OnInit {
     zoom: 10,
     center: latLng([35.68490811606957, 51.38854980468751])
   };
-  mainImageIndex: number;
+  mainImageIndex: number = 0;
   selectedPosition: any;
   saving: boolean;
   residence: IAddResidence = { mediaIds: [], places: [], prices: {} };
@@ -131,45 +128,16 @@ export class FormResidenceComponent implements OnInit {
         url: `https://api.gashtineh.com/v1/web/media/${id}`
       }));
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.residence.mainMediaId);
+      this.mainImageIndex = (this.mainImageIndex >= 0 ? this.mainImageIndex : 0)
       this.srvData.thanksMainProgressBar();
     });
   }
- 
+
   getVehicles(): void {
     this.srvData.showMainProgressBarForMe();
     this.srvVehicle.getVehicles().subscribe(res => {
       this.vehicles = res.map(r => ({ label: r.title, value: r.vehicleId }));
       this.srvData.thanksMainProgressBar();
-    });
-  }
-
-  saveImages(): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      if (this.images.length === 0) {
-        resolve();
-      }
-      const calls = [];
-      const newImages = this.images.filter(im => !im.mediaId);
-      if (!newImages || newImages.length == 0) {
-        resolve();
-      }
-      const formData = new FormData();
-      for (const img of newImages) {
-        formData.append(`file`, img.file, img.file.name);
-        calls.push(this.srvMedia.upload(formData, 5));
-      }
-      forkJoin(calls).subscribe(res => {
-        const key = 'mediaId';
-        this.residence.mainMediaId = res[this.mainImageIndex][key];
-        for (let index = 0; index < res.length; index++) {
-          newImages[index].mediaId = res[index][key];
-          this.residence.mediaIds.push(res[index][key]);
-        }
-        resolve();
-      }, () => {
-        this.saving = false;
-        reject();
-      });
     });
   }
 
@@ -182,13 +150,6 @@ export class FormResidenceComponent implements OnInit {
   }
 
   onMapReady(map: Map): void {
-    if (this.route.getBounds().isValid()) {
-      map.fitBounds(this.route.getBounds(), {
-        padding: point(24, 24),
-        maxZoom: 15,
-        animate: true
-      });
-    }
     this.tehran.on('dragend', (event) => {
       const mark = event.target;
       const position = mark.getLatLng();
@@ -203,15 +164,6 @@ export class FormResidenceComponent implements OnInit {
       this.facilities = res;
     });
   }
-
-
-  // getFacilities(event: any): void {
-  //   this.srvData.showMainProgressBarForMe();
-  //   this.srvSrch.getHotelFacilitiesKind(event.query).subscribe(res => {
-  //     this.facilities = res;
-  //     this.srvData.thanksMainProgressBar();
-  //   });
-  // }
 
   getPlaces(event: any): void {
     this.srvSrch.getPlaces(event.query).subscribe(res => {
@@ -297,13 +249,44 @@ export class FormResidenceComponent implements OnInit {
     this.residence.places.splice(index, 1);
   }
 
+
+  saveImages(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      if (this.images.length === 0) {
+        resolve();
+      } else {
+        const calls = [];
+        const newImages = this.images.filter(im => !im.mediaId);
+        if (!newImages || newImages.length == 0) {
+          resolve();
+        }
+        for (const img of newImages) {
+          const formData = new FormData();
+          formData.append(`file`, img.file, img.file.name);
+          calls.push(this.srvMedia.upload(formData, 0));
+        }
+        forkJoin(calls).subscribe(res => {
+          const key = 'mediaId';
+          for (let index = 0; index < res.length; index++) {
+            newImages[index].mediaId = res[index][key];
+            this.residence.mediaIds.push(res[index][key]);
+          }
+          resolve();
+        }, () => {
+          this.saving = false;
+          reject();
+        });
+      }
+    });
+  }
+
   submit(): void {
     if (this.residence.title && this.selectedLocation && this.residence.phone && this.residence.fromEntranceHour
       && this.residence.toEntranceHour && this.residence.leavingHour && this.residence.address) {
       this.saving = true;
       this.residence.locationId = this.selectedLocation?.locationId;
-      this.residence.phone=this.residence.phone.replace('-','');
-      
+      this.residence.phone = this.residence.phone.replace('-', '');
+
       this.residence.isAdmin = true;
       if (this.selectedPosition) {
         this.residence.latitude = this.selectedPosition.lat;
@@ -320,6 +303,7 @@ export class FormResidenceComponent implements OnInit {
       this.residence.facilitiesKindIds = this.facilitiesKinds.map(f => f.kindId);
       // save images
       this.saveImages().then(() => {
+        this.residence.mainMediaId = this.residence.mediaIds[this.mainImageIndex];
         if (this.residenceId > 0) {
           this.residence.id = this.residenceId;
           const rules = [];
@@ -333,7 +317,8 @@ export class FormResidenceComponent implements OnInit {
           });
           const residence = _.cloneDeep(this.residence);
           residence.rules = rules;
-          residence.mainMediaId = (residence.mainMediaId ?? 0);
+          console.log(residence);
+
           this.srvResidence.editResidence(residence).subscribe(() => {
             this.srvMsg.add({ severity: 'success', summary: 'ویرایش اقامتگاه', detail: 'عملیات با موفقیت انجام شد' });
             this.saving = false;

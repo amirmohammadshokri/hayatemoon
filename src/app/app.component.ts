@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { EventTypes, OidcSecurityService, PublicEventsService } from 'angular-auth-oidc-client';
+import { EventTypes, OidcConfigService, OidcSecurityService, PublicEventsService } from 'angular-auth-oidc-client';
 import { PrimeNGConfig } from 'primeng/api';
 import { filter } from 'rxjs/operators';
 import { DataService } from './services/data.service';
