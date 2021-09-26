@@ -30,7 +30,7 @@
                 <div class="p-col-4 p-field">
 
                     <label for="">تلفن</label>
-                    <p-inputMask dir="ltr" mask="999-99999999" #phone="ngModel" id="phone" [(ngModel)]="residence.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+                    <p-inputMask dir="ltr" mask="999-9999?99999" #phone="ngModel" id="phone" [(ngModel)]="residence.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
                     </p-inputMask>
                     <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
                         ثبت تلفن اجباری می باشد.
@@ -79,7 +79,7 @@
         </div>
         <div class="p-col-12 p-field">
             <label for="">آدرس</label>
-            <textarea #address="ngModel" pInputTextarea [(ngModel)]="residence.address" rows="1" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
+            <textarea #address="ngModel" pInputTextarea autoResize="autoResize" [(ngModel)]="residence.address" rows="1" required [ngClass]="{'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid)}"></textarea>
             <small *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid)" class="p-error">
                 آدرس را وارد کنید
             </small>
@@ -241,7 +241,7 @@
                             <div class="add-circle p-d-flex p-ai-center p-jc-center">
                                 <img src="assets/layout/images/camera.svg">
                             </div>
-                            <input type="file" #file accept=".jpg,.png,.jpeg" (change)="addImage($event)" style="display:none;">
+                            <input type="file" #file accept=".jpg,.png,.jpeg" multiple="multiple" (change)="addImage($event)" style="display:none;">
                         </div>
                         <div class="img p-d-flex p-ai-center p-jc-center" *ngFor="let img of images;let i = index">
                             <div class="main p-d-flex p-ai-center p-jc-center">

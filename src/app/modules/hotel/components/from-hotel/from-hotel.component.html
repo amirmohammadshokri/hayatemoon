@@ -63,7 +63,7 @@
                 </div>
                 <div class="p-col-6 p-field">
                     <label for="">تلفن</label>
-                    <p-inputMask dir="ltr" mask="999-99999999" #phone="ngModel" id="phone" [(ngModel)]="hotel.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
+                    <p-inputMask dir="ltr" mask="999-9999?99999" #phone="ngModel" id="phone" [(ngModel)]="hotel.phone" required [ngClass]="{'ng-dirty': (phone.invalid && submitted) || (phone.dirty && phone.invalid)}">
                     </p-inputMask>
                     <small *ngIf="(phone.invalid && submitted) || (phone.dirty && phone.invalid)" class="p-error">
                         ثبت تلفن اجباری می باشد.

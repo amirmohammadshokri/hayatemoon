@@ -149,19 +149,20 @@ export class FormResidenceComponent implements OnInit {
         resolve();
       }
       const calls = [];
-      for (const img of this.images.filter(im => !im.mediaId)) {
-        const formData = new FormData();
-        formData.append(`file`, img.file, img.file.name);
-        calls.push(this.srvMedia.upload(formData, 0));
-      }
-      if (calls.length === 0) {
+      const newImages = this.images.filter(im => !im.mediaId);
+      if (!newImages || newImages.length == 0) {
         resolve();
+      }
+      const formData = new FormData();
+      for (const img of newImages) {
+        formData.append(`file`, img.file, img.file.name);
+        calls.push(this.srvMedia.upload(formData, 5));
       }
       forkJoin(calls).subscribe(res => {
         const key = 'mediaId';
         this.residence.mainMediaId = res[this.mainImageIndex][key];
         for (let index = 0; index < res.length; index++) {
-          this.images.filter(im => !im.mediaId)[index].mediaId = res[index][key];
+          newImages[index].mediaId = res[index][key];
           this.residence.mediaIds.push(res[index][key]);
         }
         resolve();
@@ -247,12 +248,13 @@ export class FormResidenceComponent implements OnInit {
   }
 
   addImage(e: any): void {
-    if (e.target.files && e.target.files[0]) {
+    for (let index = 0; index < e.target.files.length; index++) {
+      const file = e.target.files[index];
       const reader = new FileReader();
       reader.onload = (event: any) => {
-        this.images.push({ mediaId: null, url: event.target.result, file: e.target.files[0] });
+        this.images.push({ mediaId: null, url: event.target.result, file: file });
       };
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(file);
     }
   }
 

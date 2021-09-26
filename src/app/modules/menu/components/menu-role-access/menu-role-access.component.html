@@ -7,7 +7,18 @@
             <button [disabled]="saving" pButton pRipple class="p-button-success" (click)="save()" label="ذخیره" [icon]="(saving?'pi pi-spin pi-spinner':'pi pi-save')"></button>
         </div>
     </p-toolbar>
-    <p-tree styleClass="p-mt-2" [value]="menus" selectionMode="checkbox" [(selection)]="selectedMenus" [emptyMessage]="'اطلاعاتی وجود ندارد'"></p-tree>
-    <p-confirmDialog header="تایید" rejectButtonStyleClass="p-button-text" icon="pi pi-exclamation-triangle">
-    </p-confirmDialog>
+    <div class="p-grid p-fluid p-mt-4 p-mr-2">
+        <div class="p-col-12" *ngFor="let menu of menus;let i = index">
+            <div class="p-field-checkbox">
+                <p-checkbox [inputId]="'menu' + i" binary="true" [(ngModel)]="menu.parent.isSelected" (onChange)="setChild(menu)"></p-checkbox>
+                <label [for]="'menu' + i">{{menu.parent.title}}</label>
+            </div>
+            <div class="p-grid p-fluid p-mt-2 p-mr-4">
+                <div class="p-col-12 p-field-checkbox" *ngFor="let child of menu.childs;let j = index">
+                    <p-checkbox [inputId]="'child' + j" binary="true" [(ngModel)]="child.isSelected"></p-checkbox>
+                    <label [for]="'child' + j">{{child.title}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
