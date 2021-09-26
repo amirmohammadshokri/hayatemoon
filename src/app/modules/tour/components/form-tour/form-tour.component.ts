@@ -160,7 +160,7 @@ export class FormTourComponent implements OnInit {
     this.srvData.showMainProgressBarForMe();
     this.srvVehicle.getVehicles().subscribe(res => {
       // 3 id is all of cars so show all cars and dont filter
-      this.vehicels = (id == 3 ? res : res.filter(i => i.vehicleId === id));
+      this.vehicels = (id == 3 ? res : res.filter(i => i.tourType.id === id));
       this.srvData.thanksMainProgressBar();
     });
   }
