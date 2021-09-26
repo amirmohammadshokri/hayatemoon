@@ -48,6 +48,7 @@ export class FormResidenceComponent implements OnInit {
     zoom: 10,
     center: latLng([35.68490811606957, 51.38854980468751])
   };
+  map: Map;
   mainImageIndex: number = 0;
   selectedPosition: any;
   saving: boolean;
@@ -149,7 +150,23 @@ export class FormResidenceComponent implements OnInit {
     });
   }
 
+  setMapAddress(): void {
+    var lat = (+this.selectedLocation.latitude);
+    var lng = (+this.selectedLocation.longitude);
+    var newLatLng = new LatLng(lat, lng);
+    this.tehran.setLatLng(newLatLng);
+
+    // zoom on location
+    this.map.panTo(new LatLng(lat, lng));
+
+    // set hotel
+    this.selectedPosition = { lat, lng };
+    this.residence.latitude = lat;
+    this.residence.longitude = lng;
+  }
+
   onMapReady(map: Map): void {
+    this.map = map;
     this.tehran.on('dragend', (event) => {
       const mark = event.target;
       const position = mark.getLatLng();
@@ -210,7 +227,6 @@ export class FormResidenceComponent implements OnInit {
     }
   }
 
-
   deleteImage(img: any, id: number): void {
     this.images.splice(id, 1);
     this.residence.mediaIds = this.residence.mediaIds.filter(id => id !== img.mediaId);
@@ -248,7 +264,6 @@ export class FormResidenceComponent implements OnInit {
   removePlace(index: number): void {
     this.residence.places.splice(index, 1);
   }
-
 
   saveImages(): Promise<void> {
     return new Promise(async (resolve, reject) => {
