@@ -10,7 +10,7 @@
     <div class="p-grid p-fluid p-mt-2">
         <div *ngIf="currentUser.role === 'SUPERADMIN'" class="p-col-12 p-field">
             <label for="company">نام شرکت</label>
-            <p-autoComplete #company="ngModel" [suggestions]="companies" [(ngModel)]="selecteCompanies" placeholder="جستجو" (completeMethod)="getCompany($event)" field="title" required [ngClass]="{'ng-dirty': (company.invalid && submitted) || (company.dirty && company.invalid)}">
+            <p-autoComplete #company="ngModel" [suggestions]="companies" [(ngModel)]="selecteCompany" placeholder="جستجو" (completeMethod)="getCompany($event)" field="title" required [ngClass]="{'ng-dirty': (company.invalid && submitted) || (company.dirty && company.invalid)}">
             </p-autoComplete>
             <small *ngIf="(company.invalid && submitted) || (company.dirty && company.invalid)" class="p-error">
                 شرکت باید انتخاب شود

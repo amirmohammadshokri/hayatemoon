@@ -80,7 +80,7 @@ export class FormRoomComponent implements OnInit {
   }
 
   getHotels(event: any): void {
-    this.srvSrch.getHotel().subscribe(res => {
+    this.srvSrch.getHotel(event.query).subscribe(res => {
       this.hotels = res.map(h => ({ label: h.title, value: h.id }));
     });
   }

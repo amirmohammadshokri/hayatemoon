@@ -41,16 +41,13 @@ export class SearchService {
     return this.http.get<any[]>(`${this.url}AutoSuggest/TourCategoryKind?search=${verb}`);
   }
 
-  getHotel(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}AutoSuggest/Hotel`);
+  getHotel(verb: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}AutoSuggest/Hotel?search=${verb}`);
   }
 
   getHotelRooms(hotelId: number, verb: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoom?search=${verb}${hotelId ? `&hotelId=${hotelId}` : ``}`);
   }
-  // getHotelRooms(hotelId: number, verb: string): Observable<any[]> {
-  //   return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoomKind?search=${verb}${hotelId ? `&hotelId=${hotelId}` : ``}`);
-  // }
 
   getHotelRoom(verb: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}AutoSuggest/HotelRoomKind?search=${verb}`);
