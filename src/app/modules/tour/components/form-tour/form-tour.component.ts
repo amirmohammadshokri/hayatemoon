@@ -97,8 +97,8 @@ export class FormTourComponent implements OnInit {
         vehicles: []
       };
       this.getVehicles();
-      this.fromDate = moment(res.startDate, 'jYYYY/jMM/jDD  HH:mm');
-      this.toDate = moment(res.endDate, 'jYYYY/jMM/jDD  HH:mm');
+      this.fromDate = moment(res.startDate, 'YYYY/MM/DD  HH:mm');
+      this.toDate = moment(res.endDate, 'YYYY/MM/DD  HH:mm');
       this.fromLocation = res.fromLocation;
       this.toLocation = res.toLocation;
       this.images = res.mediaIds.map(id => ({
@@ -206,6 +206,9 @@ export class FormTourComponent implements OnInit {
       this.tour.hotelRooms = this.selectedRoom.map(r => r.hotelRoomId);
       this.tour.tourCategories = this.selectedCategories.map(c => c.id);
 
+      // after all image contain mediaId set main media Id
+      this.tour.mainImageId = this.images[this.mainImageIndex]['mediaId'];
+
       this.saveImages().then(() => {
         if (this.tourId > 0) {
           this.tour.tourId = this.tourId;
@@ -253,9 +256,6 @@ export class FormTourComponent implements OnInit {
             newImages[index].mediaId = res[index][key];
             this.tour.tourMediaIds.push(res[index][key]);
           }
-          // after all image contain mediaId set main media Id
-          this.tour.mainImageId = this.images[this.mainImageIndex][key];
-
           resolve();
         }, () => {
           this.saving = false;
