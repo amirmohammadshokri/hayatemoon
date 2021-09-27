@@ -20,4 +20,17 @@ export class VehiclesService {
   getVehicles(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}latest`);
   }
+  getVehicle(page: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}latest?page=${page}`);
+  }
+
+  deleteVehicles(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}${id}`);
+  }
+
+  getVehiclesById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}${id}`);
+  }
+
+   
 }

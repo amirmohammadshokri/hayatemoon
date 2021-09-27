@@ -1,0 +1,51 @@
+<div class="card">
+    <p-toolbar>
+      <div class="p-toolbar-group-right">
+      </div>
+      <div class="p-toolbar-group-left">
+        <button pButton pRipple class="p-button-success p-ml-1" (click)="submit()" label="ذخیره"
+          icon="pi pi-save"></button>
+        <button pButton pRipple icon="pi pi-arrow-left" class="p-button-secondary" routerLink="../../vehicels"></button>
+      </div>
+    </p-toolbar>
+    <div class="p-grid p-fluid p-mt-2">
+        <div class="p-col-6 p-field">
+            <label for="tourType">نوع تور</label>
+            <p-dropdown #tourType="ngModel" [options]="tourTypes" [(ngModel)]="addVehicles.tourType" required placeholder="انتخاب نوع تور" [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}">
+            </p-dropdown>
+            <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
+                نوع تور حتما باید انتخاب شود
+            </small>
+          </div>
+      <div class="p-col-6 p-field">
+        <label for="title">عنوان</label>
+        <input type="text" #title="ngModel" id="title" pInputText [(ngModel)]="addVehicles.title" required
+        [ngClass]="{'ng-dirty': (title.invalid && submitted) || (title.dirty && title.invalid)}">
+      <small *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid)" class="p-error">
+        ثبت عنوان وسیه نقلیه اجباری می باشد.
+      </small>
+      
+      </div>
+      <div class="p-col-6 p-field">
+        <label for="icon">آیکون منو</label>
+        <p-dropdown [options]="icons" [(ngModel)]="addVehicles.fontIconId" [filter]="true" filterBy="value"
+          placeholder="یه آیکون انتخاب کن">
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="addVehicles.fontIconId">
+              <i style="font-size: 1.3em;" [class]="addVehicles.fontIconId"></i>
+              <span class="p-mr-2">{{addVehicles.fontIconId}}</span>
+            </div>
+          </ng-template>
+          <ng-template let-icon pTemplate="item">
+            <div>
+              <i style="font-size: 1.3em;" [class]="icon.value"></i>
+              <span class="p-mr-2">{{icon.label}}</span>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+     
+  
+    </div>
+  </div>
+  
