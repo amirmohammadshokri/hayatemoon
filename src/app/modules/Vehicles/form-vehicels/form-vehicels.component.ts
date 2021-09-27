@@ -11,14 +11,14 @@ import { CommonServiece, DataService, TourService, VehiclesService } from 'src/a
 })
 export class FormVehicelsComponent implements OnInit {
 
-  addVehicles: IVehicles ={fontIconId: 'fa fa-th'};
+  addVehicles: IVehicles = { fontIconId: 'fa fa-th' };
   icons: SelectItem[];
   vehicleId: number;
   fontIconId: string;
   saving: boolean;
   submitted: boolean;
   tourTypes: SelectItem[] = [];
-  
+
 
   constructor(
     private srvData: DataService,
@@ -37,21 +37,20 @@ export class FormVehicelsComponent implements OnInit {
     });
     this.getTourType();
     this.route.params.subscribe(prms => {
-      if (prms.id > 0) {
-        this.vehicleId = Number.parseInt(prms.id, 0);
-        this.getVehiclesById(this.vehicleId);
+      this.vehicleId = +prms.id;
+      if (this.vehicleId > 0) {
+        this.getVehiclesById();
       }
     });
-    
   }
-  getVehiclesById(id: number): void {
-    this.srvVehicles.getVehiclesById(id).subscribe(cou => {
-      console.log('cou',cou.tourType.id);
+
+  getVehiclesById(): void {
+    this.srvVehicles.getVehiclesById(this.vehicleId).subscribe(cou => {
       this.addVehicles = {
-        id:cou.vehicleId,
-        title:cou.title,
+        id: cou.vehicleId,
+        title: cou.title,
         tourType: cou.tourType.id,
-        fontIconId:cou.fontIconId
+        fontIconId: cou.fontIconId
       };
     });
   }
@@ -64,40 +63,17 @@ export class FormVehicelsComponent implements OnInit {
     });
   }
 
-
   submit(): void {
     if (this.addVehicles.title) {
       this.saving = true;
-    if (this.addVehicles.id > 0) {
-      console.log('amiiiiiir',this.addVehicles.id);
-      
-      // const obj: IVehicles = {
-      //   id: this.addVehicles.id,
-      //   fontIconId: this.addVehicles.fontIconId,
-      //   title: this.addVehicles.title,
-      //   tourType:this.addVehicles.tourType   
-      //    };
       this.srvVehicles.addVehicle(this.addVehicles).subscribe(() => {
         this.sMsg.add({ severity: 'success', summary: 'وسیله نقلیه', detail: 'عملیات با موفقیت انجام شد' });
         this.router.navigate(['./panel/vehicels/vehicels']);
-
+      }, () => {
+        this.saving = false;
       });
     }
-    else {
-      this.addVehicles.id = 0;
-      // const obj1: IVehicles = {
-      //   id: 0,
-      //   fontIconId: this.addVehicles.fontIconId,
-      //   title: this.addVehicles.title
-      // };
-      this.srvVehicles.addVehicle(this.addVehicles).subscribe(() => {
-        this.sMsg.add({ severity: 'success', summary: 'ثبت وسیه نقلیه  ', detail: 'عملیات با موفقیت انجام شد' });
-        this.addVehicles = {};
-        this.router.navigate(['./panel/vehicels/vehicels']);
-      });
-    }
+    this.submitted = true;
   }
-  this.submitted=true;
-}
 
 }

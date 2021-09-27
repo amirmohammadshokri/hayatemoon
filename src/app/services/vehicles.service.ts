@@ -13,15 +13,16 @@ export class VehiclesService {
     this.url = `${this.conf.getConfig('url')}web/Vehicles/`;
   }
 
-  addVehicle(obj:any): Observable<any> {
-    return this.http.post<any>(`${this.url}`,obj);
+  addVehicle(obj: any): Observable<any> {
+    return this.http.post<any>(`${this.url}`, obj);
   }
 
   getVehicles(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}latest`);
   }
+
   getVehicle(page: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}latest?page=${page}`);
+    return this.http.get<any[]>(`${this.url}latest?pageSize=15&page=${page}`);
   }
 
   deleteVehicles(id: number): Observable<any> {
@@ -32,5 +33,4 @@ export class VehiclesService {
     return this.http.get<any>(`${this.url}${id}`);
   }
 
-   
 }

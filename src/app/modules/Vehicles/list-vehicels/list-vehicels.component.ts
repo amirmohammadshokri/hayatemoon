@@ -57,8 +57,6 @@ export class ListVehicelsComponent implements OnInit {
   }
 
   confirmDelete(id: number): void {
-    console.log('aaaaaaa',id);
-    
     this.confirmationService.confirm({
       message: 'آیا از حذف این ردیف اطمینان دارید؟',
       icon: 'pi pi-exclamation-triangle',
@@ -77,8 +75,6 @@ export class ListVehicelsComponent implements OnInit {
   }
 
   editVehicels(id: number): void {
-    this.router.navigate(['./panel/vehicels/vehicels']);
-
     this.router.navigate([`../panel/vehicels/form-vehicels/${id}`]);
   }
 
