@@ -22,6 +22,10 @@ export class MenuComponent implements OnInit {
       if (!!user) {
         this.srvData.showMainProgressBarForMe()
         this.srvMenu.getMenuRoles(user.CompanyTypeId).subscribe(res => {
+          let accesAds = false;
+          this.srvRole.getUserInfo().subscribe(user => {
+            accesAds = (user.Permissions as string[]).indexOf('Ads') > -1
+          })
           this.srvData.thanksMainProgressBar()
           res.forEach(mainMenu => {
             if (mainMenu.childs.filter(c => c.isSelected).length > 0) {
@@ -34,7 +38,13 @@ export class MenuComponent implements OnInit {
                   routerLink: [c.url]
                 }))
               };
-              this.menuItems = [...this.menuItems, parent];
+              if (mainMenu.parent.code == 'Ads') {
+                if (accesAds) {
+                  this.menuItems = [...this.menuItems, parent];
+                }
+              } else {
+                this.menuItems = [...this.menuItems, parent];
+              }
             }
           });
           this.setActiveMenu();

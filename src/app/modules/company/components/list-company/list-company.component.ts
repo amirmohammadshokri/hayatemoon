@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ICompany } from 'src/app/interfaces/companys.interface';
-import { CompanyService } from 'src/app/services';
+import { CompanyService, MyRoleService } from 'src/app/services';
 
 @Component({
   selector: 'ss-list-company',
@@ -20,6 +20,7 @@ export class ListCompanyComponent implements OnInit {
   title: string;
   showStateDialog: boolean;
   nothingElse: boolean;
+  editAccess: boolean;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -35,6 +36,7 @@ export class ListCompanyComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private sevCo: CompanyService,
     private srvMsg: MessageService,
+    private srvRole: MyRoleService,
     private router: Router
   ) { }
 
@@ -48,6 +50,10 @@ export class ListCompanyComponent implements OnInit {
       { field: 'saveDate', header: 'تاریخ ذخیره' }
     ];
     this.getCompanys(true);
+
+    this.srvRole.getUserInfo().subscribe(user => {
+      this.editAccess = (user.Permissions as string[]).indexOf('EditCompanyProfile') > -1
+    })
   }
 
 

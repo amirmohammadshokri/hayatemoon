@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { IState, IUserInfo } from 'src/app/interfaces';
 import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
@@ -26,6 +27,8 @@ export class ListTourComponent implements OnInit {
   selecteCompanies: ICompanySearch;
   currentUser: IUserInfo = {};
   permissions: SelectItem[] = [];
+  editTourAccess: boolean = false;
+  deleteTourAccess: boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -41,6 +44,7 @@ export class ListTourComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private srvTour: TourService,
     private router: Router,
+    private srvOidc: OidcSecurityService,
     private srvRole: MyRoleService,
     private srcSrch: SearchService,
     private srvMsg: MessageService,
@@ -64,6 +68,12 @@ export class ListTourComponent implements OnInit {
       { field: 'state', header: 'وضعیت' },
       { field: 'createdDate', header: 'تاریخ ایجاد' }
     ];
+
+    this.srvOidc.userData$.subscribe(user => {
+      this.editTourAccess = (user.Permissions as string[]).indexOf('EditTour') > -1
+      this.deleteTourAccess = (user.Permissions as string[]).indexOf('DeleteTour') > -1
+    })
+
     this.getToures(true);
     this.getPermissions();
   }

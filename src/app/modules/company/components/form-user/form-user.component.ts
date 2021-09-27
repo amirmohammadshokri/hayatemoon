@@ -19,7 +19,7 @@ export class FormUserComponent implements OnInit {
   genders: SelectItem[];
   states: SelectItem[];
   companies: any[] = [];
-  selecteCompanies: ICompanySearch;
+  selecteCompany: ICompanySearch;
   saving: boolean;
   submitted: boolean;
   permissions: SelectItem[] = [];
@@ -51,9 +51,11 @@ export class FormUserComponent implements OnInit {
     this.aRoute.params.subscribe(prms => {
       if (prms.id > 0) {
         this.userId = Number.parseInt(prms.id, 0);
-        this.getUserById();
-        this.getPermissions();
         this.getRoles();
+        this.getPermissions();
+        setTimeout(() => {
+          this.getUserById();
+        }, 500);
       }
     });
   }
@@ -79,18 +81,19 @@ export class FormUserComponent implements OnInit {
   getUserById() {
     this.srvCo.getUser(this.userId).subscribe(res => {
       this.companyUser = res;
+      this.selecteCompany = { companyId: res.regCompanyUser.companyId, title: res.regCompanyUser.companyTitle };
       this.companyUser.state = res.state.id;
       this.companyUser.routType = res.routType.id;
     });
   }
 
   submit(): void {
-    if (this.companyUser.firstName && this.selecteCompanies && this.companyUser.password) {
+    if (this.companyUser.firstName && this.selecteCompany && this.companyUser.password) {
       this.saving = true;
       if (this.currentUser.role !== 'SUPERADMIN') {
         this.companyUser.companyId = Number.parseInt(this.currentUser.CompanyId);
       } else {
-        this.companyUser.companyId = this.selecteCompanies?.companyId;
+        this.companyUser.companyId = this.selecteCompany?.companyId;
       }
       if (this.companyUser.id > 0) {
         this.srvCo.edituser(this.userId, { id: this.userId, user: this.companyUser }).subscribe(res => {
@@ -109,6 +112,6 @@ export class FormUserComponent implements OnInit {
       }
     }
     this.submitted = true;
-
   }
+
 }
