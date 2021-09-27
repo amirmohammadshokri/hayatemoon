@@ -38,7 +38,7 @@ export class FormTourComponent implements OnInit {
   facilitiesKinds: any[] = [];
   images: { mediaId: number, file: File, url: string }[] = [];
   currencies: SelectItem[] = [];
-  mainImageIndex: number;
+  mainImageIndex: number = 0;
   tourId: number;
   routes: any[] = [{ name: 'داخلی', key: true }, { name: 'خارجی', key: false }];
   tourTypesId: number;
@@ -61,16 +61,16 @@ export class FormTourComponent implements OnInit {
     this.getTourType();
     this.getCurrency();
     this.route.params.subscribe(prms => {
-      if (prms.id > 0) {
-        this.tourId = Number.parseInt(prms.id, 0);
+      this.tourId = +prms.id
+      if (this.tourId > 0) {
         this.getTour();
       }
     });
   }
 
   onRoomChange(e) {
-    if (this.selectedRoom.length > 1) {
-      this.srvMsg.add({ severity: 'success', summary: 'توجه', detail: 'شما بیش از یک اتاق استفاده کردید .تست. .' })
+    if (this.selectedRoom?.length > 1) {
+      this.srvMsg.add({ severity: 'success', summary: 'توجه', detail: 'شما بیش از یک اتاق استفاده کردید' })
     }
   }
 
@@ -93,8 +93,10 @@ export class FormTourComponent implements OnInit {
           netPrice: res.prices.netPrice,
           disCountPrice: res.prices.disCountPrice
         },
-        description: res.description
+        description: res.description,
+        vehicles: []
       };
+      this.getVehicles();
       this.fromDate = moment(res.startDate, 'jYYYY/jMM/jDD  HH:mm');
       this.toDate = moment(res.endDate, 'jYYYY/jMM/jDD  HH:mm');
       this.fromLocation = res.fromLocation;
@@ -105,10 +107,16 @@ export class FormTourComponent implements OnInit {
         url: `https://api.gashtineh.com/v1/web/media/${id}`
       }));
       this.mainImageIndex = res.mediaIds.findIndex(id => id === this.tour.mainImageId);
+      this.mainImageIndex = (this.mainImageIndex > -1 ? this.mainImageIndex : 0)
       this.selectedHotel = res.hotel;
-      this.selectedRoom = res.hotelRooms;
+      this.getRooms()
       this.selectedCategories = res.categories;
-      this.srvData.thanksMainProgressBar();
+      setTimeout(() => {
+        this.goVehicels = res.vehicles?.find(v => v.type?.id == 0)?.vehicles;
+        this.backVehicels = res.vehicles?.find(v => v.type?.id == 1)?.vehicles;
+        this.selectedRoom = res.hotelRooms?.map(r => ({ hotelRoomId: r.id, title: r.title }));
+        this.srvData.thanksMainProgressBar();
+      }, 500);
     });
   }
 
@@ -120,17 +128,9 @@ export class FormTourComponent implements OnInit {
     });
   }
 
-
-  close() {
-    if (this.dateComponent) {
-      this.dateComponent.api.close();
-    }
-  }
-
-
   getHotels(event: any): void {
     this.srvData.showMainProgressBarForMe();
-    this.srvSrch.getHotel().subscribe(res => {
+    this.srvSrch.getHotel(event.query).subscribe(res => {
       this.hotels = res;
       this.srvData.thanksMainProgressBar();
     });
@@ -152,15 +152,11 @@ export class FormTourComponent implements OnInit {
     });
   }
 
-  changeTourType(id: number) {
-    this.getVehicles(id);
-  }
-
-  private getVehicles(id: number): void {
+  getVehicles(): void {
     this.srvData.showMainProgressBarForMe();
     this.srvVehicle.getVehicles().subscribe(res => {
       // 3 id is all of cars so show all cars and dont filter
-      this.vehicels = (id == 3 ? res : res.filter(i => i.tourType.id === id));
+      this.vehicels = (this.tour.tourType == 3 ? res : res.filter(i => i.tourType.id === this.tour.tourType));
       this.srvData.thanksMainProgressBar();
     });
   }
@@ -239,33 +235,33 @@ export class FormTourComponent implements OnInit {
     return new Promise(async (resolve, reject) => {
       if (this.images.length === 0) {
         resolve();
-      }
-      const calls = [];
-      // just save new images else return
-      const newImages = this.images.filter(im => !im.mediaId);
-      if (newImages.length == 0) {
-        resolve();
-      }
-      for (const img of newImages) {
-        const formData = new FormData();
-        formData.append(`file`, img.file, img.file.name);
-        calls.push(this.srvMedia.upload(formData, 0));
-      }
-      forkJoin(calls).subscribe(res => {
-        const key = 'mediaId';
-        for (let index = 0; index < res.length; index++) {
-          newImages[index].mediaId = res[index][key];
-          this.tour.tourMediaIds.push(res[index][key]);
+      } else {
+        const calls = [];
+        // just save new images else return
+        const newImages = this.images.filter(im => !im.mediaId);
+        if (newImages.length == 0) {
+          resolve();
         }
-        // after all image contain mediaId set main media Id
-        if (this.mainImageIndex) {
+        for (const img of newImages) {
+          const formData = new FormData();
+          formData.append(`file`, img.file, img.file.name);
+          calls.push(this.srvMedia.upload(formData, 0));
+        }
+        forkJoin(calls).subscribe(res => {
+          const key = 'mediaId';
+          for (let index = 0; index < res.length; index++) {
+            newImages[index].mediaId = res[index][key];
+            this.tour.tourMediaIds.push(res[index][key]);
+          }
+          // after all image contain mediaId set main media Id
           this.tour.mainImageId = this.images[this.mainImageIndex][key];
-        }
-        resolve();
-      }, () => {
-        this.saving = false;
-        reject();
-      });
+
+          resolve();
+        }, () => {
+          this.saving = false;
+          reject();
+        });
+      }
     });
   }
 

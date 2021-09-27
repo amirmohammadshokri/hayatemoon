@@ -19,7 +19,7 @@
         </div>
         <div class="p-col-3 p-field">
             <label for="tourType">نوع تور</label>
-            <p-dropdown #tourType="ngModel" [options]="tourTypes" (onChange)="changeTourType(tour.tourType)" [(ngModel)]="tour.tourType" required placeholder="انتخاب نوع تور" [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}">
+            <p-dropdown #tourType="ngModel" [options]="tourTypes" (onChange)="getVehicles()" [(ngModel)]="tour.tourType" required placeholder="انتخاب نوع تور" [ngClass]="{'ng-dirty': (tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)}">
             </p-dropdown>
             <small *ngIf="(tourType.invalid && submitted) || (tourType.dirty && tourType.invalid)" class="p-error">
                 نوع تور حتما باید انتخاب شود
@@ -71,7 +71,7 @@
 
         <div class="p-col-3 p-field">
             <label for="fromDate">از تاریخ</label>
-            <dp-date-picker #fromDt="ngModel" id="fromDate" [(ngModel)]="fromDate" dir="ltr" (ngModelChange)="close()" theme="dp-material" mode="daytime" required [ngClass]="{'ng-dirty': (fromDt.invalid && submitted) || (fromDt.dirty && fromDt.invalid)}">
+            <dp-date-picker #fromDt="ngModel" id="fromDate" [(ngModel)]="fromDate" dir="ltr" theme="dp-material" mode="daytime" required [ngClass]="{'ng-dirty': (fromDt.invalid && submitted) || (fromDt.dirty && fromDt.invalid)}">
             </dp-date-picker>
             <small *ngIf="(fromDt.invalid && submitted)" class="p-error">
                 تاریخ و زمان آغاز را انتخاب کنید
@@ -141,7 +141,7 @@
                         </p-inputNumber>
                     </div>
                     <div>
-                        <h1 style="margin-top: 30px">+</h1>
+                        <h1 class="p-mt-5">+</h1>
                     </div>
                     <div class="p-col-2 p-field">
                         <label for="">نوع ارز</label>
