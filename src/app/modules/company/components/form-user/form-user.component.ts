@@ -49,10 +49,10 @@ export class FormUserComponent implements OnInit {
       { value: 1, label: 'غیر فعال' }
     ];
     this.aRoute.params.subscribe(prms => {
+      this.getRoles();
+      this.getPermissions();
       if (prms.id > 0) {
         this.userId = Number.parseInt(prms.id, 0);
-        this.getRoles();
-        this.getPermissions();
         setTimeout(() => {
           this.getUserById();
         }, 500);

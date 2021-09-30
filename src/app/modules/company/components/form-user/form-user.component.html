@@ -24,25 +24,32 @@
             </small>
         </div>
         <div class="p-col-4 p-field">
+            <label for="lastName">نام خانوادگی</label>
+            <input type="text" #lastName="ngModel" [(ngModel)]="companyUser.lastName" pInputText required [ngClass]="{'ng-dirty': (lastName.invalid && submitted) || (lastName.dirty && lastName.invalid)}">
+            <small *ngIf="(lastName.invalid && submitted) || (lastName.dirty && lastName.invalid)" class="p-error">
+                ورود نام خانوادگی اجباری است
+            </small>
+        </div>
+        <div class="p-col-4 p-field">
             <label for="password">رمز </label>
             <input type="password" #password="ngModel" [(ngModel)]="companyUser.password" pInputText required [ngClass]="{'ng-dirty': (password.invalid && submitted) || (password.dirty && password.invalid)}">
             <small *ngIf="(password.invalid && submitted) || (password.dirty && password.invalid)" class="p-error">
                 ورود رمز عبور اجباری است
             </small>
         </div>
-        <div class="p-col-4 p-field">
+        <div class="p-col-6 p-lg-3 p-field">
             <label for="title">موبایل</label>
             <input type="text" #mobile="ngModel" [maxlength]="11" pKeyFilter="num" [(ngModel)]="companyUser.mobile" pInputText>
         </div>
-        <div class="p-col-4 p-field">
+        <div class="p-col-6 p-lg-3 p-field">
             <label for="title">تلفن داخلی</label>
             <input type="text" #internalPhone="ngModel" [maxlength]="25" pKeyFilter="num" [(ngModel)]="companyUser.internalPhone" pInputText>
         </div>
-        <div class="p-col-4 p-field">
+        <div class="p-col-6 p-lg-3 p-field">
             <label for="title">ایمیل</label>
             <input type="email" #email="ngModel" [(ngModel)]="companyUser.email" pInputText>
         </div>
-        <div class="p-col-4 p-field">
+        <div class="p-col-6 p-lg-3 p-field">
             <label for="title">جنسیت</label>
             <p-dropdown [options]="genders" #gender="ngModel" [(ngModel)]="companyUser.gender" placeholder="انتخاب جنسیت">
             </p-dropdown>
