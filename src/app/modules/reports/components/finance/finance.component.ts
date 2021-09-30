@@ -59,7 +59,7 @@ export class FinanceComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       { code: 0, name: 'فعال' },
-      { code: 1, name: 'غیر فعال' },
+      { code: 1, name: 'حذف شده' },
       { code: 2, name: 'در انتظار' },
       { code: 3, name: 'غیر فعال شده' }
     ];

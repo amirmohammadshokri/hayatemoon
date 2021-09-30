@@ -59,7 +59,7 @@ export class ListTourComponent implements OnInit {
 
     this.items = [
       { code: 0, name: 'فعال' },
-      { code: 1, name: 'غیر فعال' },
+      { code: 3, name: 'غیر فعال' },
       { code: 2, name: 'در انتظار' }
     ];
     this.cols = [
