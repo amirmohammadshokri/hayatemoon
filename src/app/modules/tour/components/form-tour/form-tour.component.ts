@@ -207,7 +207,9 @@ export class FormTourComponent implements OnInit {
       this.tour.tourCategories = this.selectedCategories.map(c => c.id);
 
       // after all image contain mediaId set main media Id
-      this.tour.mainImageId = this.images[this.mainImageIndex]['mediaId'];
+      if (this.images.length > 0) {
+        this.tour.mainImageId = this.images[this.mainImageIndex]['mediaId'];
+      }
 
       this.saveImages().then(() => {
         if (this.tourId > 0) {
