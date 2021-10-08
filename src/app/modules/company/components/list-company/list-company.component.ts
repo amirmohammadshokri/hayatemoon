@@ -2,7 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ICompany } from 'src/app/interfaces/companys.interface';
-import { CompanyService, MyRoleService } from 'src/app/services';
+import { ICompanySearch } from 'src/app/interfaces/companySearch.interface';
+import { CompanyService, MyRoleService, SearchService } from 'src/app/services';
 
 @Component({
   selector: 'ss-list-company',
@@ -21,6 +22,9 @@ export class ListCompanyComponent implements OnInit {
   showStateDialog: boolean;
   nothingElse: boolean;
   editAccess: boolean;
+  isSuperAdmin: boolean;
+  companies: ICompanySearch[] = [];
+  selecteCompanies: ICompanySearch;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -37,10 +41,12 @@ export class ListCompanyComponent implements OnInit {
     private sevCo: CompanyService,
     private srvMsg: MessageService,
     private srvRole: MyRoleService,
+    private srcSrch:SearchService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+  
     this.cols = [
       { field: 'title', header: 'عنوان شرکت' },
       { field: 'fullname', header: 'ایجاد کننده' },
@@ -51,23 +57,36 @@ export class ListCompanyComponent implements OnInit {
     ];
     this.getCompanys(true);
 
+   
+
     this.srvRole.getUserInfo().subscribe(user => {
-      this.editAccess = (user.Permissions as string[]).indexOf('EditCompanyProfile') > -1
+      this.editAccess = (user.Permissions as string[]).indexOf('EditCompanyProfile') > -1;
+      if (user.role == 'SUPERADMIN') {
+        this.isSuperAdmin = true;
+      }
     })
+  }
+
+  getCompanyBySearch(event: any): void {
+    this.srcSrch.getCompanySaerch(event.query).subscribe(res => {
+      this.companys = res;
+    });
   }
 
 
   getCompanys(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
-      this.companys = [];
+      this.companies = [];
     }
     this.loading = true;
-    this.sevCo.getCompanies(this.currentPage, 15).subscribe(res => {
+    
+    
+    this.sevCo.getCompanies(this.selecteCompanies.companyId,this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
-      this.companys.push(...res);
+      this.companies.push(...res);
       this.loading = false;
     });
   }
