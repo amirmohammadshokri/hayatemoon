@@ -112,8 +112,12 @@
             </small>
         </div>
         <div class="p-col-3 p-field">
-            <label for="">انتخاب اتاق</label>
-            <p-multiSelect placeholder="انتخاب" (onChange)="onRoomChange($event)" [options]="rooms" [(ngModel)]="selectedRoom" [itemSize]="1000" display="chip" optionLabel="title"></p-multiSelect>
+            <label for="room">انتخاب اتاق</label>
+            <p-multiSelect required #room="ngModel" placeholder="انتخاب" (onChange)="onRoomChange($event)" [options]="rooms" [(ngModel)]="selectedRoom" [itemSize]="1000" display="chip" optionLabel="title" [ngClass]="{'ng-dirty': (room.invalid && submitted) || (room.dirty && room.invalid)}">
+            </p-multiSelect>
+            <small *ngIf="(room.invalid && submitted) || (room.dirty && room.invalid)" class="p-error">
+                انتخاب اتاق اجباری است
+            </small>
         </div>
         <div class="p-col-12 p-field">
             <label for="">توضیحات</label>

@@ -46,7 +46,7 @@ export class ListResidenceComponent implements OnInit {
         name: 'فعال'
       },
       {
-        code: 1,
+        code: 3,
         name: 'غیر فعال'
       },
       {

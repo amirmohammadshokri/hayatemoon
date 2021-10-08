@@ -52,7 +52,7 @@ export class FormCompanyComponent implements OnInit {
     this.getCompanyType();
     this.states = [
       { value: 0, label: 'فعال' },
-      { value: 1, label: 'غیر فعال' }
+      { value: 3, label: 'غیر فعال' }
     ]
 
     this.aRoute.params.subscribe(prms => {

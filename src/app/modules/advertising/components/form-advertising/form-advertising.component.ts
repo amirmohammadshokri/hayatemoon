@@ -44,7 +44,7 @@ export class FormAdvertisingComponent implements OnInit {
     });
     this.states = [
       { value: 0, label: 'فعال' },
-      { value: 1, label: 'غیر فعال' },
+      { value: 3, label: 'غیر فعال' },
       { value: 2, label: 'در حالت انتظار' }
     ]
     this.getPageType();
