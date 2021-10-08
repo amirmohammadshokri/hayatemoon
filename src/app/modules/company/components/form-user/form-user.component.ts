@@ -88,7 +88,7 @@ export class FormUserComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.companyUser.firstName && this.selecteCompany && this.companyUser.password) {
+    if (this.companyUser.firstName && this.selecteCompany) {
       this.saving = true;
       if (this.currentUser.role !== 'SUPERADMIN') {
         this.companyUser.companyId = Number.parseInt(this.currentUser.CompanyId);

@@ -32,10 +32,11 @@
         </div>
         <div class="p-col-4 p-field">
             <label for="password">رمز </label>
-            <input type="password" #password="ngModel" [(ngModel)]="companyUser.password" pInputText required [ngClass]="{'ng-dirty': (password.invalid && submitted) || (password.dirty && password.invalid)}">
-            <small *ngIf="(password.invalid && submitted) || (password.dirty && password.invalid)" class="p-error">
+            <input type="password" #password="ngModel" [(ngModel)]="companyUser.password" pInputText >
+            <!-- required [ngClass]="{'ng-dirty': (password.invalid && submitted) || (password.dirty && password.invalid)}" -->
+            <!-- <small *ngIf="(password.invalid && submitted) || (password.dirty && password.invalid)" class="p-error">
                 ورود رمز عبور اجباری است
-            </small>
+            </small> -->
         </div>
         <div class="p-col-6 p-lg-3 p-field">
             <label for="title">موبایل</label>

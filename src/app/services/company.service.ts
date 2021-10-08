@@ -17,8 +17,8 @@ export class CompanyService {
     return this.http.post(`${this.url}`, obj);
   }
 
-  getCompanies(page: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.url}/Latest?page=${page}&pageSize=${pageSize}`);
+  getCompanies(companyId: number,page: number, pageSize: number): Observable<any> {
+    return this.http.get(`${this.url}/Latest?companyId=${companyId}&page=${page}&pageSize=${pageSize}`);
   }
 
   getCompanyTypes(): Observable<any> {
