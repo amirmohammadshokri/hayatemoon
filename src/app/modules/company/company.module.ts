@@ -56,7 +56,6 @@ import { InputMaskModule } from 'primeng/inputmask';
     DpDatePickerModule,
     MultiSelectModule,
     InputMaskModule
-
   ],
   providers: [
     ConfirmationService,

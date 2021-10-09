@@ -3,7 +3,7 @@
         <div class="p-toolbar-group-right">
             <div *ngIf="isSuperAdmin">
                 <label class="p-ml-2">شرکت : </label>
-                <p-autoComplete [suggestions]="companies" [(ngModel)]="selecteCompanies" placeholder="انتخاب شرکت" (completeMethod)="getCompanyBySearch($event)"  (onSelect)="getCompanys(true)">
+                <p-autoComplete [suggestions]="companies" [(ngModel)]="selecteCompany" placeholder="انتخاب شرکت" field="title" (completeMethod)="getCompanyBySearch($event)" (onSelect)="getCompanys(true)">
                 </p-autoComplete>
             </div>
         </div>
@@ -36,7 +36,6 @@
                 </td>
                 <td>
                     <span class="p-column-title"> شرکت نام</span> {{ rowData.regCompanyUser.companyTitle }}
-
                 </td>
                 <td>
                     <span class="p-column-title"> مدیرعامل نام</span> {{ rowData.ceoFirstName }}
@@ -44,7 +43,6 @@
                 <td>
                     <span class="p-column-title"> مدیرعامل نام خانوادگی</span> {{ rowData.ceoLastName }}
                 </td>
-
                 <td>
                     <span class="p-column-title"> تاریخ ایجاد</span> {{ rowData.saveDate }}
                 </td>

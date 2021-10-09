@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppConfig } from '../app.config';
@@ -17,8 +17,14 @@ export class CompanyService {
     return this.http.post(`${this.url}`, obj);
   }
 
-  getCompanies(companyId: number,page: number, pageSize: number): Observable<any> {
-    return this.http.get(`${this.url}/Latest?companyId=${companyId}&page=${page}&pageSize=${pageSize}`);
+  getCompanies(companyId: number, page: number, pageSize: number): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString())
+    if (companyId > 0) {
+      params = params.append('companyId', companyId.toString())
+    }
+    return this.http.get(`${this.url}/Latest`,{ params });
   }
 
   getCompanyTypes(): Observable<any> {

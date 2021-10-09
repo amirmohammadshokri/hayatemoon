@@ -24,7 +24,7 @@ export class ListCompanyComponent implements OnInit {
   editAccess: boolean;
   isSuperAdmin: boolean;
   companies: ICompanySearch[] = [];
-  selecteCompanies: ICompanySearch;
+  selecteCompany: ICompanySearch;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -41,12 +41,12 @@ export class ListCompanyComponent implements OnInit {
     private sevCo: CompanyService,
     private srvMsg: MessageService,
     private srvRole: MyRoleService,
-    private srcSrch:SearchService,
+    private srcSrch: SearchService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-  
+
     this.cols = [
       { field: 'title', header: 'عنوان شرکت' },
       { field: 'fullname', header: 'ایجاد کننده' },
@@ -55,9 +55,8 @@ export class ListCompanyComponent implements OnInit {
       { field: 'ceoLastName', header: 'نام خانوادگی مدیرعامل' },
       { field: 'saveDate', header: 'تاریخ ذخیره' }
     ];
-    this.getCompanys(true);
 
-   
+    this.getCompanys(true);
 
     this.srvRole.getUserInfo().subscribe(user => {
       this.editAccess = (user.Permissions as string[]).indexOf('EditCompanyProfile') > -1;
@@ -69,24 +68,21 @@ export class ListCompanyComponent implements OnInit {
 
   getCompanyBySearch(event: any): void {
     this.srcSrch.getCompanySaerch(event.query).subscribe(res => {
-      this.companys = res;
+      this.companies = res;
     });
   }
-
 
   getCompanys(firstLoad: boolean): void {
     if (firstLoad) {
       this.currentPage = 1;
-      this.companies = [];
+      this.companys = [];
     }
     this.loading = true;
-    
-    
-    this.sevCo.getCompanies(this.selecteCompanies.companyId,this.currentPage, 15).subscribe(res => {
+    this.sevCo.getCompanies(this.selecteCompany?.companyId, this.currentPage, 15).subscribe(res => {
       if (res.length === 0) {
         this.nothingElse = true;
       }
-      this.companies.push(...res);
+      this.companys.push(...res);
       this.loading = false;
     });
   }
@@ -105,6 +101,7 @@ export class ListCompanyComponent implements OnInit {
 
   deleteCompany(id: number): void {
     this.sevCo.deleteCompany(id).subscribe(() => {
+      this.srvMsg.add({ severity: 'success', summary: 'حذف شرکت', detail: 'حذف با موفقیت انجام شد' })
       this.getCompanys(true);
     });
   }
