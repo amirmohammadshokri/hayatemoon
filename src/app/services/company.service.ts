@@ -22,7 +22,7 @@ export class CompanyService {
       .set('page', page.toString())
       .set('pageSize', pageSize.toString())
     if (companyId > 0) {
-      params = params.append('companyId', companyId.toString())
+      params = params.append('id', companyId.toString())
     }
     return this.http.get(`${this.url}/Latest`,{ params });
   }
